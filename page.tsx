@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis } from './lib/types';
+import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode } from './lib/types';
 import {
   createInitialState,
   selectChampion,
@@ -20,6 +20,7 @@ import LanguageToggle from './components/LanguageToggle';
 import PositionFilter from './components/PositionFilter';
 import AIControlPanel from './components/AIControlPanel';
 import AIAnalysisPanel from './components/AIAnalysisPanel';
+import SeriesSetup from './components/SeriesSetup';
 import { generateAIAnalysis } from './lib/ai-analysis';
 
 export default function LOLBPPage() {
@@ -39,6 +40,16 @@ export default function LOLBPPage() {
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
   const [autoPlay, setAutoPlay] = useState(true);
   const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 无畏征召 (Fearless Draft) 状态
+  const [fearlessMode, setFearlessMode] = useState(false);
+  const [seriesState, setSeriesState] = useState<SeriesState>({
+    format: 'bo3',
+    currentGame: 1,
+    gameRecords: [],
+    fearlessPool: new Set(),
+  });
+  const [historySelectMode, setHistorySelectMode] = useState<HistorySelectMode>('off');
 
   // 加载英雄数据
   useEffect(() => {
@@ -97,6 +108,15 @@ export default function LOLBPPage() {
     return result;
   }, [champions, searchTerm, selectedPosition]);
 
+  // 合并当局usedChampions和无畏征召池
+  const allUsedChampions = useMemo(() => {
+    const combined = new Set(bpState.usedChampions);
+    if (fearlessMode) {
+      seriesState.fearlessPool.forEach(id => combined.add(id));
+    }
+    return combined;
+  }, [bpState.usedChampions, fearlessMode, seriesState.fearlessPool]);
+
   // 获取当前步骤信息
   const currentStep = getCurrentStep(bpState);
   const phaseDesc = getPhaseDescription(bpState.currentStep, language);
@@ -115,11 +135,11 @@ export default function LOLBPPage() {
 
   // AI 随机选择（占位，后续优化为真正AI）
   const getRandomChampion = useCallback(() => {
-    const available = champions.filter(c => !bpState.usedChampions.has(c.id));
+    const available = champions.filter(c => !allUsedChampions.has(c.id));
     if (available.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * available.length);
     return available[randomIndex];
-  }, [champions, bpState.usedChampions]);
+  }, [champions, allUsedChampions]);
 
   // AI 分析生成（当BP状态变化或AI模式开启时）
   useEffect(() => {
@@ -222,7 +242,14 @@ export default function LOLBPPage() {
 
   // 处理英雄选择
   const handleChampionSelect = (champion: Champion) => {
-    if (bpState.usedChampions.has(champion.id)) return;
+    // 如果在历史选择模式，添加到历史记录
+    if (historySelectMode !== 'off') {
+      handleAddToHistory(champion);
+      return;
+    }
+
+    // 正常BP模式
+    if (allUsedChampions.has(champion.id)) return;
     if (isBPComplete(bpState)) return;
     setBpState(selectChampion(bpState, champion));
   };
@@ -240,6 +267,107 @@ export default function LOLBPPage() {
     setAiAnalysis(null);
   };
 
+  // 无畏征召：保存进度到localStorage
+  const handleSaveSeries = () => {
+    const data = {
+      format: seriesState.format,
+      currentGame: seriesState.currentGame,
+      gameRecords: seriesState.gameRecords,
+      fearlessPool: Array.from(seriesState.fearlessPool),
+    };
+    localStorage.setItem('lol-fearless-series', JSON.stringify(data));
+    alert(language === 'zh' ? '进度已保存！' : 'Progress saved!');
+  };
+
+  // 无畏征召：从localStorage加载进度
+  const handleLoadSeries = () => {
+    const saved = localStorage.getItem('lol-fearless-series');
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        setSeriesState({
+          format: data.format,
+          currentGame: data.currentGame,
+          gameRecords: data.gameRecords,
+          fearlessPool: new Set(data.fearlessPool),
+        });
+        setFearlessMode(true);
+        alert(language === 'zh' ? '进度已加载！' : 'Progress loaded!');
+      } catch {
+        alert(language === 'zh' ? '加载失败，数据格式错误' : 'Load failed, invalid data');
+      }
+    } else {
+      alert(language === 'zh' ? '没有保存的进度' : 'No saved progress');
+    }
+  };
+
+  // 无畏征召：重置系列赛
+  const handleResetSeries = () => {
+    if (confirm(language === 'zh' ? '确定要重置整个系列赛吗？' : 'Reset the entire series?')) {
+      setSeriesState({
+        format: seriesState.format,
+        currentGame: 1,
+        gameRecords: [],
+        fearlessPool: new Set(),
+      });
+      setBpState(createInitialState());
+      setHistorySelectMode('off');
+    }
+  };
+
+  // 无畏征召：添加英雄到历史记录
+  const handleAddToHistory = (champion: Champion) => {
+    if (historySelectMode === 'off') return;
+
+    const targetGame = seriesState.currentGame - 1; // 添加到"之前"的局
+    if (targetGame < 1) return;
+
+    // 检查是否已在池中
+    if (seriesState.fearlessPool.has(champion.id)) return;
+
+    const existingRecord = seriesState.gameRecords.find(r => r.gameNumber === targetGame);
+    const newRecords = [...seriesState.gameRecords];
+
+    if (existingRecord) {
+      const recordIndex = newRecords.findIndex(r => r.gameNumber === targetGame);
+      if (historySelectMode === 'blue') {
+        if (existingRecord.bluePicks.length >= 5) return; // 每队最多5个
+        newRecords[recordIndex] = {
+          ...existingRecord,
+          bluePicks: [...existingRecord.bluePicks, champion.id],
+        };
+      } else {
+        if (existingRecord.redPicks.length >= 5) return;
+        newRecords[recordIndex] = {
+          ...existingRecord,
+          redPicks: [...existingRecord.redPicks, champion.id],
+        };
+      }
+    } else {
+      // 创建新记录
+      newRecords.push({
+        gameNumber: targetGame,
+        bluePicks: historySelectMode === 'blue' ? [champion.id] : [],
+        redPicks: historySelectMode === 'red' ? [champion.id] : [],
+      });
+      // 按局数排序
+      newRecords.sort((a, b) => a.gameNumber - b.gameNumber);
+    }
+
+    // 更新fearlessPool
+    const newPool = new Set<string>();
+    newRecords.forEach(r => {
+      r.bluePicks.forEach(id => newPool.add(id));
+      r.redPicks.forEach(id => newPool.add(id));
+    });
+
+    setSeriesState({
+      ...seriesState,
+      gameRecords: newRecords,
+      fearlessPool: newPool,
+    });
+  };
+
   return (
     <div className="min-h-screen text-white">
       {/* 语言切换 */}
@@ -252,16 +380,33 @@ export default function LOLBPPage() {
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center pt-6 pb-4"
+        className="text-center pt-4 sm:pt-6 pb-3 sm:pb-4 px-4"
       >
-        <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
           {language === 'zh' ? 'LOL Ban/Pick 工具' : 'LOL Ban/Pick Tool'}
         </h1>
-        <p className="text-gray-400 mt-2 text-sm">
-          {language === 'zh' ? '正规比赛BP规则 · Tournament Rules' : 'Tournament BP Rules'}
+        <p className="text-gray-400 mt-1.5 sm:mt-2 text-xs sm:text-sm">
+          {language === 'zh' ? '正规比赛BP规则' : 'Tournament BP Rules'}
           {version && <span className="ml-2 text-gray-500">v{version}</span>}
         </p>
       </motion.div>
+
+      {/* 无畏征召设置 */}
+      <div className="max-w-2xl mx-auto px-4">
+        <SeriesSetup
+          language={language}
+          seriesState={seriesState}
+          onSeriesStateChange={setSeriesState}
+          fearlessMode={fearlessMode}
+          onFearlessModeChange={setFearlessMode}
+          historySelectMode={historySelectMode}
+          onHistorySelectModeChange={setHistorySelectMode}
+          onSave={handleSaveSeries}
+          onLoad={handleLoadSeries}
+          onReset={handleResetSeries}
+          champions={champions}
+        />
+      </div>
 
       {/* AI 控制面板 */}
       <div className="max-w-2xl mx-auto px-4">
@@ -344,10 +489,12 @@ export default function LOLBPPage() {
       ) : (
         <ChampionGrid
           champions={filteredChampions}
-          usedChampions={bpState.usedChampions}
+          usedChampions={allUsedChampions}
           onSelect={handleChampionSelect}
-          disabled={isBPComplete(bpState)}
+          disabled={isBPComplete(bpState) && historySelectMode === 'off'}
           language={language}
+          fearlessPool={fearlessMode ? seriesState.fearlessPool : undefined}
+          historySelectMode={historySelectMode}
         />
       )}
 

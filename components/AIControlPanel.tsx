@@ -53,12 +53,12 @@ export default function AIControlPanel({
     aiMode === 'both';
 
   return (
-    <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-xl p-4 border border-purple-500/30 mb-4">
+    <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-xl p-3 sm:p-4 border border-purple-500/30 mb-4">
       {/* 标题 */}
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <span className="text-lg">🤖</span>
-          <h3 className="text-white font-bold">
+          <h3 className="text-white font-bold text-sm sm:text-base">
             {language === 'zh' ? 'AI 模式' : 'AI Mode'}
           </h3>
         </div>
@@ -66,7 +66,7 @@ export default function AIControlPanel({
         {/* Auto Play 开关 */}
         {aiMode !== 'off' && (
           <label className="flex items-center gap-2 cursor-pointer">
-            <span className="text-sm text-gray-400">
+            <span className="text-xs sm:text-sm text-gray-400">
               {language === 'zh' ? '自动执行' : 'Auto Play'}
             </span>
             <div
@@ -84,7 +84,7 @@ export default function AIControlPanel({
       </div>
 
       {/* 模式选择按钮 */}
-      <div className="grid grid-cols-4 gap-2 mb-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
         {modes.map((mode) => (
           <motion.button
             key={mode.id}
@@ -92,7 +92,7 @@ export default function AIControlPanel({
             whileTap={{ scale: 0.98 }}
             onClick={() => onModeChange(mode.id)}
             className={`
-              px-3 py-2 rounded-lg text-sm font-medium transition-all
+              px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all
               ${aiMode === mode.id
                 ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'}

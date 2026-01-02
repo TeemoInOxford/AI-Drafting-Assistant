@@ -38,7 +38,7 @@ export default function TeamPanel({
       <motion.div
         key={`${action}-${index}`}
         className={`
-          relative w-12 h-12 md:w-14 md:h-14 rounded-lg overflow-hidden
+          relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden
           ${isBan ? 'border-2 border-red-500/50' : 'border-2 border-green-500/50'}
           ${isCurrentSlot ? 'ring-2 ring-yellow-400 animate-pulse' : ''}
           ${champion ? '' : 'bg-white/10'}
@@ -78,7 +78,7 @@ export default function TeamPanel({
   return (
     <motion.div
       className={`
-        p-4 rounded-xl backdrop-blur-sm
+        p-3 sm:p-4 rounded-xl backdrop-blur-sm
         ${team === 'blue'
           ? 'bg-blue-500/10 border border-blue-500/30'
           : 'bg-red-500/10 border border-red-500/30'}
@@ -88,21 +88,21 @@ export default function TeamPanel({
       animate={{ opacity: 1, x: 0 }}
     >
       {/* 队伍名称 */}
-      <h3 className={`text-lg font-bold mb-3 ${team === 'blue' ? 'text-blue-400' : 'text-red-400'}`}>
+      <h3 className={`text-base sm:text-lg font-bold mb-2 sm:mb-3 ${team === 'blue' ? 'text-blue-400' : 'text-red-400'}`}>
         {teamName}
         {isActive && (
-          <span className="ml-2 text-yellow-400 text-sm animate-pulse">
+          <span className="ml-2 text-yellow-400 text-xs sm:text-sm animate-pulse">
             {language === 'zh' ? '(当前)' : '(Active)'}
           </span>
         )}
       </h3>
 
       {/* Ban区域 */}
-      <div className="mb-4">
-        <p className="text-xs text-gray-400 mb-2">
+      <div className="mb-3 sm:mb-4">
+        <p className="text-[10px] sm:text-xs text-gray-400 mb-1.5 sm:mb-2">
           {language === 'zh' ? '禁用 (Bans)' : 'Bans'}
         </p>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-1.5 sm:gap-2 flex-wrap">
           {bans.map((champ, idx) =>
             renderSlot(
               champ,
@@ -116,10 +116,10 @@ export default function TeamPanel({
 
       {/* Pick区域 */}
       <div>
-        <p className="text-xs text-gray-400 mb-2">
+        <p className="text-[10px] sm:text-xs text-gray-400 mb-1.5 sm:mb-2">
           {language === 'zh' ? '选择 (Picks)' : 'Picks'}
         </p>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-1.5 sm:gap-2 flex-wrap">
           {picks.map((champ, idx) =>
             renderSlot(
               champ,

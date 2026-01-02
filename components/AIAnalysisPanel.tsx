@@ -35,20 +35,20 @@ export default function AIAnalysisPanel({
   return (
     <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl border border-slate-600/30 overflow-hidden">
       {/* 标题栏 */}
-      <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 px-4 py-3 border-b border-slate-600/30">
-        <div className="flex items-center justify-between">
+      <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 px-3 sm:px-4 py-2 sm:py-3 border-b border-slate-600/30">
+        <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🧠</span>
-            <h3 className="text-white font-bold">
+            <span className="text-lg sm:text-xl">🧠</span>
+            <h3 className="text-white font-bold text-sm sm:text-base">
               {language === 'zh' ? 'AI 分析助手' : 'AI Draft Assistant'}
             </h3>
           </div>
           {analysis && (
-            <div className="flex items-center gap-2">
-              <span className="text-gray-400 text-sm">
-                {language === 'zh' ? '当前预测胜率' : 'Predicted Win Rate'}:
+            <div className="flex items-center gap-1 sm:gap-2">
+              <span className="text-gray-400 text-xs sm:text-sm">
+                {language === 'zh' ? '预测胜率' : 'Win Rate'}:
               </span>
-              <span className={`text-lg font-bold ${
+              <span className={`text-base sm:text-lg font-bold ${
                 analysis.currentWinRate >= 55 ? 'text-green-400' :
                 analysis.currentWinRate >= 45 ? 'text-yellow-400' : 'text-red-400'
               }`}>
@@ -59,7 +59,7 @@ export default function AIAnalysisPanel({
         </div>
       </div>
 
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* 思考状态 */}
         <AnimatePresence>
           {isThinking && (
@@ -67,20 +67,20 @@ export default function AIAnalysisPanel({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex items-center justify-center gap-3 py-8"
+              className="flex items-center justify-center gap-2 sm:gap-3 py-6 sm:py-8"
             >
               <div className="flex gap-1">
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}
-                    className="w-3 h-3 bg-purple-400 rounded-full"
+                    className="w-2 h-2 sm:w-3 sm:h-3 bg-purple-400 rounded-full"
                     animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.2 }}
                   />
                 ))}
               </div>
-              <span className="text-purple-300">
-                {language === 'zh' ? 'AI 正在分析最佳选择...' : 'AI analyzing optimal choices...'}
+              <span className="text-purple-300 text-sm sm:text-base">
+                {language === 'zh' ? 'AI 正在分析...' : 'AI analyzing...'}
               </span>
             </motion.div>
           )}
@@ -109,7 +109,7 @@ export default function AIAnalysisPanel({
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   className={`
-                    flex items-center gap-3 p-3 rounded-lg
+                    flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg
                     ${index === 0
                       ? 'bg-gradient-to-r from-green-900/40 to-emerald-900/40 border border-green-500/30'
                       : 'bg-white/5 border border-white/10'}
@@ -117,7 +117,7 @@ export default function AIAnalysisPanel({
                 >
                   {/* 排名 */}
                   <div className={`
-                    w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm
+                    w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0
                     ${index === 0 ? 'bg-green-500 text-white' :
                       index === 1 ? 'bg-gray-500 text-white' :
                       index === 2 ? 'bg-amber-700 text-white' :
@@ -128,30 +128,30 @@ export default function AIAnalysisPanel({
 
                   {/* 英雄名称和理由 */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className={`font-bold ${index === 0 ? 'text-green-300' : 'text-white'}`}>
+                    <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+                      <span className={`font-bold text-sm sm:text-base ${index === 0 ? 'text-green-300' : 'text-white'}`}>
                         {rec.champion}
                       </span>
                       {index === 0 && (
-                        <span className="text-xs bg-green-500/30 text-green-300 px-2 py-0.5 rounded">
+                        <span className="text-[10px] sm:text-xs bg-green-500/30 text-green-300 px-1.5 sm:px-2 py-0.5 rounded">
                           {language === 'zh' ? '最佳' : 'BEST'}
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400 mt-1 truncate">
+                    <p className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1 line-clamp-1 sm:line-clamp-none">
                       {rec.reason}
                     </p>
                   </div>
 
                   {/* 胜率 */}
-                  <div className="text-right">
-                    <div className={`text-lg font-bold ${
+                  <div className="text-right flex-shrink-0">
+                    <div className={`text-sm sm:text-lg font-bold ${
                       rec.winRate && rec.winRate >= 55 ? 'text-green-400' :
                       rec.winRate && rec.winRate >= 50 ? 'text-yellow-400' : 'text-orange-400'
                     }`}>
                       {rec.winRate}%
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-[10px] sm:text-xs text-gray-500 hidden sm:block">
                       {language === 'zh' ? '预测胜率' : 'Win Rate'}
                     </div>
                   </div>
@@ -161,8 +161,8 @@ export default function AIAnalysisPanel({
 
             {/* 警告信息 */}
             {analysis.warnings.length > 0 && (
-              <div className="space-y-2 mt-4">
-                <h4 className="text-sm font-bold text-yellow-400 flex items-center gap-2">
+              <div className="space-y-1.5 sm:space-y-2 mt-3 sm:mt-4">
+                <h4 className="text-xs sm:text-sm font-bold text-yellow-400 flex items-center gap-1.5 sm:gap-2">
                   <span>⚠️</span>
                   {language === 'zh' ? '警告' : 'Warnings'}
                 </h4>
@@ -173,7 +173,7 @@ export default function AIAnalysisPanel({
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     className={`
-                      text-sm p-2 rounded-lg
+                      text-xs sm:text-sm p-1.5 sm:p-2 rounded-lg
                       ${warning.type === 'danger' ? 'bg-red-900/30 text-red-300 border border-red-500/30' :
                         warning.type === 'warning' ? 'bg-yellow-900/30 text-yellow-300 border border-yellow-500/30' :
                         'bg-blue-900/30 text-blue-300 border border-blue-500/30'}
@@ -187,14 +187,14 @@ export default function AIAnalysisPanel({
 
             {/* 洞察信息 */}
             {analysis.insights.length > 0 && (
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <h4 className="text-sm font-bold text-blue-400 flex items-center gap-2 mb-2">
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">
+                <h4 className="text-xs sm:text-sm font-bold text-blue-400 flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                   <span>💡</span>
                   {language === 'zh' ? '洞察' : 'Insights'}
                 </h4>
-                <ul className="text-xs text-gray-400 space-y-1">
+                <ul className="text-[10px] sm:text-xs text-gray-400 space-y-1">
                   {analysis.insights.map((insight, index) => (
-                    <li key={index} className="flex items-start gap-2">
+                    <li key={index} className="flex items-start gap-1.5 sm:gap-2">
                       <span className="text-blue-400">•</span>
                       {insight}
                     </li>

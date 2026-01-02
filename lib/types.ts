@@ -104,3 +104,24 @@ export interface DDragonChampionData {
     };
   }>;
 }
+
+// 无畏征召 (Fearless Draft) 相关类型
+export type SeriesFormat = 'bo1' | 'bo3' | 'bo5';
+
+// 单局比赛记录
+export interface GameRecord {
+  gameNumber: number;
+  bluePicks: string[];  // 蓝方选择的英雄ID
+  redPicks: string[];   // 红方选择的英雄ID
+}
+
+// 系列赛状态
+export interface SeriesState {
+  format: SeriesFormat;
+  currentGame: number;
+  gameRecords: GameRecord[];  // 之前各局的记录
+  fearlessPool: Set<string>;  // 所有已用英雄（不可再选）
+}
+
+// 历史选择模式
+export type HistorySelectMode = 'off' | 'blue' | 'red';
