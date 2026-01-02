@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation } from './lib/types';
+import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis } from './lib/types';
 import {
   createInitialState,
   selectChampion,
@@ -19,6 +19,8 @@ import ControlBar from './components/ControlBar';
 import LanguageToggle from './components/LanguageToggle';
 import PositionFilter from './components/PositionFilter';
 import AIControlPanel from './components/AIControlPanel';
+import AIAnalysisPanel from './components/AIAnalysisPanel';
+import { generateAIAnalysis } from './lib/ai-analysis';
 
 export default function LOLBPPage() {
   const [language, setLanguage] = useState<Language>('zh');
@@ -34,6 +36,7 @@ export default function LOLBPPage() {
   const [aiMode, setAiMode] = useState<AIControlMode>('off');
   const [aiThinking, setAiThinking] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
+  const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
   const [autoPlay, setAutoPlay] = useState(true);
   const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -118,6 +121,26 @@ export default function LOLBPPage() {
     return available[randomIndex];
   }, [champions, bpState.usedChampions]);
 
+  // AI 分析生成（当BP状态变化或AI模式开启时）
+  useEffect(() => {
+    if (aiMode === 'off' || loading || champions.length === 0 || isBPComplete(bpState)) {
+      setAiAnalysis(null);
+      return;
+    }
+
+    // 生成AI分析
+    if (currentStep) {
+      const analysis = generateAIAnalysis(
+        bpState,
+        champions,
+        currentStep.action,
+        currentStep.team,
+        language
+      );
+      setAiAnalysis(analysis);
+    }
+  }, [aiMode, bpState.currentStep, champions.length, loading, language]);
+
   // AI 自动操作逻辑
   useEffect(() => {
     if (aiTimeoutRef.current) {
@@ -140,11 +163,26 @@ export default function LOLBPPage() {
     aiTimeoutRef.current = setTimeout(() => {
       const champion = getRandomChampion();
 
-      if (champion) {
+      if (champion && aiAnalysis && aiAnalysis.recommendations.length > 0) {
+        // 使用分析中的第一个推荐
+        const topRec = aiAnalysis.recommendations[0];
+        const matchedChamp = champions.find(
+          c => c.enName === topRec.champion || c.zhName === topRec.champion
+        ) || champion;
+
+        setAiRecommendation(topRec);
+        setAiThinking(false);
+
+        if (autoPlay) {
+          aiTimeoutRef.current = setTimeout(() => {
+            setBpState(prev => selectChampion(prev, matchedChamp));
+          }, 500);
+        }
+      } else if (champion) {
         const recommendation: AIRecommendation = {
-          champion: champion.enName,
+          champion: language === 'zh' ? champion.zhName : champion.enName,
           score: Math.floor(Math.random() * 30) + 70,
-          reason: 'AI random selection (placeholder)',
+          reason: language === 'zh' ? 'AI随机选择（占位）' : 'AI random selection (placeholder)',
           winRate: Math.floor(Math.random() * 20) + 45
         };
 
@@ -166,13 +204,20 @@ export default function LOLBPPage() {
         clearTimeout(aiTimeoutRef.current);
       }
     };
-  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion]);
+  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion, aiAnalysis, language]);
 
   // 处理AI模式切换
   const handleAIModeChange = (mode: AIControlMode) => {
     setAiMode(mode);
     setAiThinking(false);
     setAiRecommendation(null);
+    // 如果开启AI，立即生成分析
+    if (mode !== 'off' && currentStep && champions.length > 0) {
+      const analysis = generateAIAnalysis(bpState, champions, currentStep.action, currentStep.team, language);
+      setAiAnalysis(analysis);
+    } else {
+      setAiAnalysis(null);
+    }
   };
 
   // 处理英雄选择
@@ -192,6 +237,7 @@ export default function LOLBPPage() {
     setBpState(createInitialState());
     setAiThinking(false);
     setAiRecommendation(null);
+    setAiAnalysis(null);
   };
 
   return (
@@ -244,6 +290,20 @@ export default function LOLBPPage() {
         currentStep={currentStep}
         language={language}
       />
+
+      {/* AI 分析面板 */}
+      {aiMode !== 'off' && (
+        <div className="max-w-4xl mx-auto px-4 my-4">
+          <AIAnalysisPanel
+            language={language}
+            analysis={aiAnalysis}
+            isThinking={aiThinking}
+            currentTeam={currentTeam}
+            currentAction={currentStep?.action || 'ban'}
+            isAIEnabled={true}
+          />
+        </div>
+      )}
 
       {/* 控制栏 */}
       <ControlBar

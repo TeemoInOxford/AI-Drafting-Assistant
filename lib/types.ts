@@ -75,6 +75,20 @@ export interface AIRecommendation {
   winRate?: number;
 }
 
+// AI 完整分析结果
+export interface AIAnalysis {
+  recommendations: AIRecommendation[];
+  currentWinRate: number; // 当前阵容预测胜率
+  warnings: AIWarning[];
+  insights: string[];
+}
+
+// AI 警告
+export interface AIWarning {
+  type: 'danger' | 'warning' | 'info';
+  message: string;
+}
+
 // DDragon API响应类型
 export interface DDragonChampionData {
   type: string;
