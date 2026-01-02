@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, Language, BPState, Position } from './lib/types';
+import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation } from './lib/types';
 import {
   createInitialState,
   selectChampion,
@@ -18,6 +18,7 @@ import PhaseIndicator from './components/PhaseIndicator';
 import ControlBar from './components/ControlBar';
 import LanguageToggle from './components/LanguageToggle';
 import PositionFilter from './components/PositionFilter';
+import AIControlPanel from './components/AIControlPanel';
 
 export default function LOLBPPage() {
   const [language, setLanguage] = useState<Language>('zh');
@@ -28,6 +29,13 @@ export default function LOLBPPage() {
   const [version, setVersion] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
+
+  // AI 模式状态
+  const [aiMode, setAiMode] = useState<AIControlMode>('off');
+  const [aiThinking, setAiThinking] = useState(false);
+  const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // 加载英雄数据
   useEffect(() => {
@@ -86,6 +94,87 @@ export default function LOLBPPage() {
     return result;
   }, [champions, searchTerm, selectedPosition]);
 
+  // 获取当前步骤信息
+  const currentStep = getCurrentStep(bpState);
+  const phaseDesc = getPhaseDescription(bpState.currentStep, language);
+
+  // 获取当前回合的队伍
+  const currentTeam = currentStep?.team || 'blue';
+
+  // 判断是否是AI的回合
+  const isAITurn = useMemo(() => {
+    if (aiMode === 'off') return false;
+    if (aiMode === 'both') return true;
+    if (aiMode === 'blue' && currentTeam === 'blue') return true;
+    if (aiMode === 'red' && currentTeam === 'red') return true;
+    return false;
+  }, [aiMode, currentTeam]);
+
+  // AI 随机选择（占位，后续优化为真正AI）
+  const getRandomChampion = useCallback(() => {
+    const available = champions.filter(c => !bpState.usedChampions.has(c.id));
+    if (available.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * available.length);
+    return available[randomIndex];
+  }, [champions, bpState.usedChampions]);
+
+  // AI 自动操作逻辑
+  useEffect(() => {
+    if (aiTimeoutRef.current) {
+      clearTimeout(aiTimeoutRef.current);
+      aiTimeoutRef.current = null;
+    }
+
+    if (!isAITurn || isBPComplete(bpState) || loading || champions.length === 0) {
+      setAiThinking(false);
+      setAiRecommendation(null);
+      return;
+    }
+
+    setAiThinking(true);
+    setAiRecommendation(null);
+
+    // 模拟思考延迟 0.8-2秒
+    const thinkingDelay = 800 + Math.random() * 1200;
+
+    aiTimeoutRef.current = setTimeout(() => {
+      const champion = getRandomChampion();
+
+      if (champion) {
+        const recommendation: AIRecommendation = {
+          champion: champion.enName,
+          score: Math.floor(Math.random() * 30) + 70,
+          reason: 'AI random selection (placeholder)',
+          winRate: Math.floor(Math.random() * 20) + 45
+        };
+
+        setAiRecommendation(recommendation);
+        setAiThinking(false);
+
+        if (autoPlay) {
+          aiTimeoutRef.current = setTimeout(() => {
+            setBpState(prev => selectChampion(prev, champion));
+          }, 500);
+        }
+      } else {
+        setAiThinking(false);
+      }
+    }, thinkingDelay);
+
+    return () => {
+      if (aiTimeoutRef.current) {
+        clearTimeout(aiTimeoutRef.current);
+      }
+    };
+  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion]);
+
+  // 处理AI模式切换
+  const handleAIModeChange = (mode: AIControlMode) => {
+    setAiMode(mode);
+    setAiThinking(false);
+    setAiRecommendation(null);
+  };
+
   // 处理英雄选择
   const handleChampionSelect = (champion: Champion) => {
     if (bpState.usedChampions.has(champion.id)) return;
@@ -98,13 +187,12 @@ export default function LOLBPPage() {
     setBpState(undoLastAction(bpState));
   };
 
-  // 处理重置
+  // 处理重置（同时重置AI状态）
   const handleReset = () => {
     setBpState(createInitialState());
+    setAiThinking(false);
+    setAiRecommendation(null);
   };
-
-  const currentStep = getCurrentStep(bpState);
-  const phaseDesc = getPhaseDescription(bpState.currentStep, language);
 
   return (
     <div className="min-h-screen text-white">
@@ -128,6 +216,20 @@ export default function LOLBPPage() {
           {version && <span className="ml-2 text-gray-500">v{version}</span>}
         </p>
       </motion.div>
+
+      {/* AI 控制面板 */}
+      <div className="max-w-2xl mx-auto px-4">
+        <AIControlPanel
+          language={language}
+          aiMode={aiMode}
+          onModeChange={handleAIModeChange}
+          isThinking={aiThinking}
+          currentTeam={currentTeam}
+          recommendation={aiRecommendation}
+          autoPlay={autoPlay}
+          onAutoPlayChange={setAutoPlay}
+        />
+      </div>
 
       {/* 阶段指示器 */}
       <PhaseIndicator

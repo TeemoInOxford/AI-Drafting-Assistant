@@ -55,6 +55,26 @@ export interface BPHistoryEntry {
 // 语言类型
 export type Language = 'zh' | 'en';
 
+// AI 控制模式
+export type AIControlMode = 'off' | 'blue' | 'red' | 'both';
+
+// AI 模式状态
+export interface AIState {
+  mode: AIControlMode;
+  isThinking: boolean;
+  lastRecommendation: AIRecommendation | null;
+  autoPlay: boolean; // 是否自动执行AI选择
+  thinkingDelay: number; // AI思考延迟(ms)，模拟真人
+}
+
+// AI 推荐结果
+export interface AIRecommendation {
+  champion: string;
+  score: number;
+  reason: string;
+  winRate?: number;
+}
+
 // DDragon API响应类型
 export interface DDragonChampionData {
   type: string;
