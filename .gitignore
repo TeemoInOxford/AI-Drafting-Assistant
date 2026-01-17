@@ -37,3 +37,10 @@ next-env.d.ts
 
 # database (keep structure, ignore data)
 *.db
+*.db-shm
+*.db-wal
+
+# data files (too large for git)
+scripts/grid-data-fetcher/data/*.json
+scripts/grid-data-fetcher/data/*.log
+!scripts/grid-data-fetcher/data/.gitkeep
