@@ -2,22 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Language, ProPlayer, TeamRoster, MatchRosterState, Position } from '../lib/types';
+import { ProPlayer, TeamRoster, MatchRosterState, Position } from '../lib/types';
 
 interface TeamRosterSetupProps {
-  language: Language;
   rosterState: MatchRosterState;
   onRosterStateChange: (state: MatchRosterState) => void;
 }
 
 const POSITIONS: Position[] = ['top', 'jungle', 'mid', 'bot', 'support'];
 
-const positionLabels: Record<Position, { zh: string; en: string }> = {
-  top: { zh: '上单', en: 'Top' },
-  jungle: { zh: '打野', en: 'Jungle' },
-  mid: { zh: '中单', en: 'Mid' },
-  bot: { zh: 'ADC', en: 'ADC' },
-  support: { zh: '辅助', en: 'Support' },
+const positionLabels: Record<Position, string> = {
+  top: 'Top',
+  jungle: 'Jungle',
+  mid: 'Mid',
+  bot: 'ADC',
+  support: 'Support',
 };
 
 interface SearchResult {
@@ -26,7 +25,6 @@ interface SearchResult {
 }
 
 export default function TeamRosterSetup({
-  language,
   rosterState,
   onRosterStateChange,
 }: TeamRosterSetupProps) {
@@ -176,7 +174,7 @@ export default function TeamRosterSetup({
     const teamKey = team === 'blue' ? 'blueTeam' : 'redTeam';
     const player = rosterState[teamKey].players[position];
     const isActive = activeSlot?.team === team && activeSlot?.position === position;
-    const posLabel = positionLabels[POSITIONS[position]][language];
+    const posLabel = positionLabels[POSITIONS[position]];
     const borderColor = team === 'blue' ? 'border-blue-500/50' : 'border-red-500/50';
     const bgColor = team === 'blue' ? 'bg-blue-500/10' : 'bg-red-500/10';
     const hoverBg = team === 'blue' ? 'hover:bg-blue-500/20' : 'hover:bg-red-500/20';
@@ -214,7 +212,7 @@ export default function TeamRosterSetup({
             </div>
           ) : (
             <span className="text-xs text-gray-500">
-              {language === 'zh' ? '点击选择选手' : 'Click to select'}
+              Click to select
             </span>
           )}
         </div>
@@ -233,14 +231,14 @@ export default function TeamRosterSetup({
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder={language === 'zh' ? '搜索选手名...' : 'Search player name...'}
+                placeholder="Search player name..."
                 className="w-full px-3 py-2 bg-transparent border-b border-white/10 text-sm text-white placeholder-gray-500 focus:outline-none"
                 autoFocus
               />
               <div className="max-h-48 overflow-y-auto">
                 {isSearching ? (
                   <div className="p-3 text-center text-gray-500 text-sm">
-                    {language === 'zh' ? '搜索中...' : 'Searching...'}
+                    Searching...
                   </div>
                 ) : searchResults.players.length > 0 ? (
                   searchResults.players.slice(0, 10).map((p) => (
@@ -257,11 +255,11 @@ export default function TeamRosterSetup({
                   ))
                 ) : searchTerm.length >= 2 ? (
                   <div className="p-3 text-center text-gray-500 text-sm">
-                    {language === 'zh' ? '未找到选手' : 'No players found'}
+                    No players found
                   </div>
                 ) : (
                   <div className="p-3 text-center text-gray-500 text-sm">
-                    {language === 'zh' ? '输入至少2个字符' : 'Type at least 2 characters'}
+                    Type at least 2 characters
                   </div>
                 )}
               </div>
@@ -285,14 +283,14 @@ export default function TeamRosterSetup({
             type="text"
             value={rosterState[teamKey].teamName}
             onChange={(e) => handleTeamNameChange(team, e.target.value)}
-            placeholder={language === 'zh' ? (team === 'blue' ? '蓝方队名' : '红方队名') : (team === 'blue' ? 'Blue Team' : 'Red Team')}
+            placeholder={team === 'blue' ? 'Blue Team' : 'Red Team'}
             className={`bg-transparent text-sm font-medium ${teamColor} placeholder-gray-600 focus:outline-none flex-1`}
           />
           <button
             onClick={() => setShowTeamSelect(showTeamSelect === team ? null : team)}
             className="text-[10px] px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-gray-300 transition-colors"
           >
-            {language === 'zh' ? '选战队' : 'Select Team'}
+            Select Team
           </button>
         </div>
 
@@ -306,7 +304,6 @@ export default function TeamRosterSetup({
               className="mb-3"
             >
               <TeamSearchDropdown
-                language={language}
                 onSelect={(teamId, teamName) => handleSelectTeam(teamId, teamName, team)}
                 onClose={() => setShowTeamSelect(null)}
               />
@@ -328,16 +325,14 @@ export default function TeamRosterSetup({
         <div className="flex items-center gap-2">
           <span className="text-lg">👥</span>
           <h3 className="text-white font-bold text-sm sm:text-base">
-            {language === 'zh' ? '选手配置' : 'Team Roster'}
+            Team Roster
           </h3>
         </div>
 
         {/* Toggle */}
         <label className="flex items-center gap-2 cursor-pointer">
           <span className="text-xs sm:text-sm text-gray-400">
-            {rosterState.enabled
-              ? (language === 'zh' ? '已启用' : 'Enabled')
-              : (language === 'zh' ? '已关闭' : 'Disabled')}
+            {rosterState.enabled ? 'Enabled' : 'Disabled'}
           </span>
           <div
             className={`w-10 h-5 rounded-full transition-colors ${rosterState.enabled ? 'bg-emerald-500' : 'bg-gray-600'}`}
@@ -360,9 +355,7 @@ export default function TeamRosterSetup({
             exit={{ opacity: 0, height: 0 }}
           >
             <p className="text-xs text-gray-400 mb-3">
-              {language === 'zh'
-                ? '配置双方战队的首发阵容，用于后续英雄池权重计算'
-                : 'Configure starting rosters for champion pool weighting'}
+              Configure starting rosters for champion pool weighting
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3">
@@ -378,11 +371,9 @@ export default function TeamRosterSetup({
 
 // Team search dropdown component
 function TeamSearchDropdown({
-  language,
   onSelect,
   onClose,
 }: {
-  language: Language;
   onSelect: (teamId: string, teamName: string) => void;
   onClose: () => void;
 }) {
@@ -428,14 +419,14 @@ function TeamSearchDropdown({
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder={language === 'zh' ? '搜索战队名...' : 'Search team name...'}
+        placeholder="Search team name..."
         className="w-full px-3 py-2 bg-transparent border-b border-white/10 text-sm text-white placeholder-gray-500 focus:outline-none"
         autoFocus
       />
       <div className="max-h-40 overflow-y-auto">
         {isLoading ? (
           <div className="p-3 text-center text-gray-500 text-sm">
-            {language === 'zh' ? '搜索中...' : 'Searching...'}
+            Searching...
           </div>
         ) : teams.length > 0 ? (
           teams.slice(0, 8).map((t) => (
@@ -450,18 +441,18 @@ function TeamSearchDropdown({
               <div className="text-sm text-white">{t.name}</div>
               {t.seriesCount && (
                 <div className="text-[10px] text-gray-500">
-                  {t.seriesCount} {language === 'zh' ? '场比赛' : 'matches'}
+                  {t.seriesCount} matches
                 </div>
               )}
             </div>
           ))
         ) : searchTerm.length >= 2 ? (
           <div className="p-3 text-center text-gray-500 text-sm">
-            {language === 'zh' ? '未找到战队' : 'No teams found'}
+            No teams found
           </div>
         ) : (
           <div className="p-3 text-center text-gray-500 text-sm">
-            {language === 'zh' ? '输入至少2个字符' : 'Type at least 2 characters'}
+            Type at least 2 characters
           </div>
         )}
       </div>
