@@ -2,192 +2,331 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-// 数据目录
-const DATA_DIR = path.join(process.cwd(), 'scripts/grid-data-fetcher/data');
+// Data directory - using the new hierarchy.json
+const DATA_DIR = path.join(process.cwd(), 'data/lol');
+
+// Cache for hierarchy data
+let hierarchyCache: any = null;
+let cacheTimestamp = 0;
+const CACHE_DURATION = 60000; // 1 minute
+
+function loadHierarchy() {
+  const now = Date.now();
+  if (hierarchyCache && now - cacheTimestamp < CACHE_DURATION) {
+    return hierarchyCache;
+  }
+
+  const hierarchyPath = path.join(DATA_DIR, 'hierarchy.json');
+  if (!fs.existsSync(hierarchyPath)) {
+    return null;
+  }
+
+  hierarchyCache = JSON.parse(fs.readFileSync(hierarchyPath, 'utf-8'));
+  cacheTimestamp = now;
+  return hierarchyCache;
+}
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get('type') || 'summary';
   const regionCode = searchParams.get('region');
+  const leagueName = searchParams.get('league');
   const tournamentId = searchParams.get('tournament');
   const teamId = searchParams.get('team');
 
   try {
+    const hierarchy = loadHierarchy();
+    if (!hierarchy) {
+      return NextResponse.json({ error: 'Hierarchy data not found' }, { status: 404 });
+    }
+
     switch (type) {
       case 'summary': {
-        // 返回摘要数据
-        const summaryPath = path.join(DATA_DIR, 'lol_hierarchy_summary.json');
-        if (!fs.existsSync(summaryPath)) {
-          return NextResponse.json({ error: 'Summary data not found' }, { status: 404 });
-        }
-        const data = JSON.parse(fs.readFileSync(summaryPath, 'utf-8'));
-        return NextResponse.json({ success: true, ...data });
+        // Return summary stats
+        return NextResponse.json({
+          success: true,
+          totalPlayers: hierarchy.stats.totalPlayers,
+          totalTeams: hierarchy.stats.totalTeams,
+          totalTournaments: hierarchy.stats.totalLeagues,
+          regionCount: hierarchy.stats.totalRegions,
+          totalPlayersWithTeams: hierarchy.stats.totalPlayers,
+          totalPlayersAll: hierarchy.stats.totalPlayers,
+          updatedAt: hierarchy.updatedAt
+        });
       }
 
       case 'regions': {
-        // 返回所有赛区列表
-        const hierarchyPath = path.join(DATA_DIR, 'lol_hierarchy.json');
-        if (!fs.existsSync(hierarchyPath)) {
-          return NextResponse.json({ error: 'Hierarchy data not found' }, { status: 404 });
-        }
-        const data = JSON.parse(fs.readFileSync(hierarchyPath, 'utf-8'));
-        const regions = data.map((r: any) => ({
-          code: r.code,
-          name: r.name,
-          fullName: r.fullName,
-          country: r.country,
-          tournamentCount: r.tournamentCount,
-          teamCount: r.teamCount,
-          playerCount: r.playerCount
-        }));
+        // Return all regions list
+        const regions = Object.values(hierarchy.regions).map((r: any) => {
+          // Count total series for this region
+          let matchCount = 0;
+          Object.values(r.leagues).forEach((league: any) => {
+            Object.values(league.tournaments).forEach((t: any) => {
+              matchCount += t.seriesIds?.length || 0;
+            });
+          });
+
+          return {
+            code: r.id,
+            name: r.name,
+            fullName: r.name,
+            country: r.shortName,
+            tournamentCount: r.stats.leagues,
+            teamCount: r.stats.teams,
+            playerCount: r.stats.players,
+            matchCount
+          };
+        });
+
+        // Sort by match count descending
+        regions.sort((a: any, b: any) => b.matchCount - a.matchCount);
+
         return NextResponse.json({ success: true, regions });
       }
 
       case 'region': {
-        // 返回指定赛区的联赛列表
+        // Return leagues for a specific region
         if (!regionCode) {
           return NextResponse.json({ error: 'region parameter is required' }, { status: 400 });
         }
-        const hierarchyPath = path.join(DATA_DIR, 'lol_hierarchy.json');
-        if (!fs.existsSync(hierarchyPath)) {
-          return NextResponse.json({ error: 'Hierarchy data not found' }, { status: 404 });
-        }
-        const data = JSON.parse(fs.readFileSync(hierarchyPath, 'utf-8'));
-        const region = data.find((r: any) => r.code === regionCode);
+
+        const region = hierarchy.regions[regionCode];
         if (!region) {
           return NextResponse.json({ error: 'Region not found' }, { status: 404 });
         }
-        // 返回联赛列表（不包含战队详情以减少数据量）
-        const tournaments = region.tournaments.map((t: any) => ({
-          id: t.id,
-          name: t.name,
-          nameShortened: t.nameShortened,
-          startDate: t.startDate,
-          endDate: t.endDate,
-          teamCount: t.teamCount
-        }));
+
+        // Convert leagues to array format expected by frontend
+        const tournaments = Object.entries(region.leagues).map(([name, league]: [string, any]) => {
+          // Calculate total series count for this league
+          let seriesCount = 0;
+          Object.values(league.tournaments).forEach((t: any) => {
+            seriesCount += t.seriesIds?.length || 0;
+          });
+
+          return {
+            id: name, // Use league name as ID
+            name: league.name,
+            nameShortened: league.split || league.name,
+            startDate: null,
+            endDate: null,
+            teamCount: league.teams?.length || 0,
+            seriesCount
+          };
+        });
+
+        // Sort by name (most recent first)
+        tournaments.sort((a, b) => b.name.localeCompare(a.name));
+
         return NextResponse.json({
           success: true,
           region: {
-            code: region.code,
+            code: region.id,
             name: region.name,
-            fullName: region.fullName,
-            country: region.country
+            fullName: region.name,
+            country: region.shortName,
+            playerCount: region.stats.players,
+            teamCount: region.stats.teams
           },
           tournaments
         });
       }
 
       case 'tournament': {
-        // 返回指定联赛的战队列表
+        // Return teams for a specific league
         if (!tournamentId) {
           return NextResponse.json({ error: 'tournament parameter is required' }, { status: 400 });
         }
-        const hierarchyPath = path.join(DATA_DIR, 'lol_hierarchy.json');
-        if (!fs.existsSync(hierarchyPath)) {
-          return NextResponse.json({ error: 'Hierarchy data not found' }, { status: 404 });
-        }
-        const data = JSON.parse(fs.readFileSync(hierarchyPath, 'utf-8'));
 
-        // 在所有赛区中查找联赛
-        let tournament = null;
-        let regionInfo = null;
-        for (const region of data) {
-          const found = region.tournaments.find((t: any) => t.id === tournamentId);
-          if (found) {
-            tournament = found;
-            regionInfo = {
-              code: region.code,
-              name: region.name
-            };
+        // Find the league across all regions
+        let foundLeague = null;
+        let foundRegion = null;
+
+        for (const [regionId, region] of Object.entries(hierarchy.regions) as [string, any][]) {
+          if (region.leagues[tournamentId]) {
+            foundLeague = region.leagues[tournamentId];
+            foundRegion = region;
             break;
           }
         }
 
-        if (!tournament) {
+        if (!foundLeague) {
           return NextResponse.json({ error: 'Tournament not found' }, { status: 404 });
         }
 
+        // Get team details from global teams index
+        const teams = (foundLeague.teams || []).map((teamId: string) => {
+          const team = hierarchy.teams[teamId];
+          if (!team) return null;
+          return {
+            id: teamId,
+            name: team.name,
+            nameShortened: team.name,
+            logoUrl: null,
+            playerCount: Object.keys(team.players || {}).length,
+            seriesCount: team.seriesCount || 0
+          };
+        }).filter(Boolean);
+
+        // Sort by series count descending
+        teams.sort((a: any, b: any) => b.seriesCount - a.seriesCount);
+
         return NextResponse.json({
           success: true,
-          region: regionInfo,
-          tournament: {
-            id: tournament.id,
-            name: tournament.name,
-            nameShortened: tournament.nameShortened,
-            startDate: tournament.startDate,
-            endDate: tournament.endDate
+          region: {
+            code: foundRegion.id,
+            name: foundRegion.name
           },
-          teams: tournament.teams.map((t: any) => ({
-            id: t.id,
-            name: t.name,
-            nameShortened: t.nameShortened,
-            logoUrl: t.logoUrl,
-            organization: t.organization,
-            playerCount: t.players?.length || 0
-          }))
+          tournament: {
+            id: tournamentId,
+            name: foundLeague.name,
+            nameShortened: foundLeague.split || foundLeague.name,
+            startDate: null,
+            endDate: null
+          },
+          teams
         });
       }
 
       case 'team': {
-        // 返回指定战队的选手列表
+        // Return players for a specific team
         if (!teamId) {
           return NextResponse.json({ error: 'team parameter is required' }, { status: 400 });
         }
 
-        // 从所有战队数据中查找
-        const allTeamsPath = path.join(DATA_DIR, 'lol_all_teams.json');
-        if (!fs.existsSync(allTeamsPath)) {
-          return NextResponse.json({ error: 'Teams data not found' }, { status: 404 });
-        }
-        const allTeams = JSON.parse(fs.readFileSync(allTeamsPath, 'utf-8'));
-        const team = allTeams.find((t: any) => t.id === teamId);
-
+        const team = hierarchy.teams[teamId];
         if (!team) {
           return NextResponse.json({ error: 'Team not found' }, { status: 404 });
         }
 
+        // Get player details from global players index
+        const players = Object.entries(team.players || {}).map(([playerId, playerName]: [string, any]) => {
+          const player = hierarchy.players[playerId];
+          return {
+            id: playerId,
+            nickname: playerName || player?.name || 'Unknown',
+            seriesCount: player?.seriesCount || 0
+          };
+        });
+
+        // Sort by series count descending
+        players.sort((a: any, b: any) => b.seriesCount - a.seriesCount);
+
         return NextResponse.json({
           success: true,
           team: {
-            id: team.id,
+            id: teamId,
             name: team.name,
-            nameShortened: team.nameShortened,
-            logoUrl: team.logoUrl,
-            organization: team.organization,
-            region: team.region
+            nameShortened: team.name,
+            logoUrl: null,
+            seriesCount: team.seriesCount
           },
-          players: team.players,
-          tournaments: team.tournaments
+          players
         });
       }
 
       case 'all-teams': {
-        // 返回所有有选手的战队
-        const allTeamsPath = path.join(DATA_DIR, 'lol_all_teams.json');
-        if (!fs.existsSync(allTeamsPath)) {
-          return NextResponse.json({ error: 'Teams data not found' }, { status: 404 });
-        }
-        const allTeams = JSON.parse(fs.readFileSync(allTeamsPath, 'utf-8'));
-
-        // 只返回有选手的战队
-        const teamsWithPlayers = allTeams
-          .filter((t: any) => t.playerCount > 0)
-          .map((t: any) => ({
-            id: t.id,
-            name: t.name,
-            nameShortened: t.nameShortened,
-            logoUrl: t.logoUrl,
-            organization: t.organization,
-            region: t.region,
-            playerCount: t.playerCount,
-            players: t.players
-          }));
+        // Return all teams with players
+        const allTeams = Object.entries(hierarchy.teams)
+          .map(([teamId, team]: [string, any]) => ({
+            id: teamId,
+            name: team.name,
+            nameShortened: team.name,
+            logoUrl: null,
+            region: { code: team.leagues?.[0] || 'Unknown', name: team.leagues?.[0] || 'Unknown' },
+            playerCount: Object.keys(team.players || {}).length,
+            seriesCount: team.seriesCount || 0,
+            players: Object.entries(team.players || {}).map(([pid, pname]) => ({
+              id: pid,
+              nickname: pname
+            }))
+          }))
+          .filter(t => t.playerCount > 0)
+          .sort((a, b) => b.seriesCount - a.seriesCount);
 
         return NextResponse.json({
           success: true,
-          teams: teamsWithPlayers,
-          total: teamsWithPlayers.length
+          teams: allTeams,
+          total: allTeams.length
+        });
+      }
+
+      case 'player': {
+        // Return player details
+        const playerId = searchParams.get('player');
+        if (!playerId) {
+          return NextResponse.json({ error: 'player parameter is required' }, { status: 400 });
+        }
+
+        const player = hierarchy.players[playerId];
+        if (!player) {
+          return NextResponse.json({ error: 'Player not found' }, { status: 404 });
+        }
+
+        // Get team details
+        const teams = (player.teams || []).map((teamId: string) => {
+          const team = hierarchy.teams[teamId];
+          return team ? { id: teamId, name: team.name } : null;
+        }).filter(Boolean);
+
+        return NextResponse.json({
+          success: true,
+          player: {
+            id: playerId,
+            name: player.name,
+            teams,
+            seriesCount: player.seriesCount
+          }
+        });
+      }
+
+      case 'search': {
+        // Search players and teams by name
+        const query = searchParams.get('q')?.toLowerCase();
+        if (!query || query.length < 2) {
+          return NextResponse.json({
+            success: true,
+            players: [],
+            teams: []
+          });
+        }
+
+        // Search players
+        const matchedPlayers = Object.entries(hierarchy.players)
+          .filter(([_, player]: [string, any]) =>
+            player.name?.toLowerCase().includes(query)
+          )
+          .slice(0, 15)
+          .map(([playerId, player]: [string, any]) => {
+            // Get first team name
+            const firstTeamId = player.teams?.[0];
+            const firstTeam = firstTeamId ? hierarchy.teams[firstTeamId] : null;
+            return {
+              id: playerId,
+              name: player.name,
+              teamId: firstTeamId,
+              teamName: firstTeam?.name,
+              seriesCount: player.seriesCount
+            };
+          })
+          .sort((a, b) => (b.seriesCount || 0) - (a.seriesCount || 0));
+
+        // Search teams
+        const matchedTeams = Object.entries(hierarchy.teams)
+          .filter(([_, team]: [string, any]) =>
+            team.name?.toLowerCase().includes(query)
+          )
+          .slice(0, 10)
+          .map(([teamId, team]: [string, any]) => ({
+            id: teamId,
+            name: team.name,
+            seriesCount: team.seriesCount
+          }))
+          .sort((a, b) => (b.seriesCount || 0) - (a.seriesCount || 0));
+
+        return NextResponse.json({
+          success: true,
+          players: matchedPlayers,
+          teams: matchedTeams
         });
       }
 

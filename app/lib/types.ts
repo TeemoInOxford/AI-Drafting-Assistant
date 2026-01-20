@@ -125,3 +125,25 @@ export interface SeriesState {
 
 // 历史选择模式
 export type HistorySelectMode = 'off' | 'blue' | 'red';
+
+// Pro Player from hierarchy data
+export interface ProPlayer {
+  id: string;
+  name: string;
+  teamId?: string;
+  teamName?: string;
+  seriesCount?: number;
+}
+
+// Team Roster - 5 players per team
+export interface TeamRoster {
+  teamName: string;
+  players: (ProPlayer | null)[]; // 5 positions: top, jungle, mid, bot, support
+}
+
+// Match Roster State - both teams
+export interface MatchRosterState {
+  enabled: boolean;
+  blueTeam: TeamRoster;
+  redTeam: TeamRoster;
+}
