@@ -1,181 +1,221 @@
 # LOL AI Drafting Assistant
 
-一个基于 AI 的英雄联盟 BP（Ban/Pick）辅助工具，提供实时战队阵容数据和智能推荐。
+**A Stage-Aware Draft Strategist**
 
-## 功能特性
+> "Draft Is About Timing. Not Strength."
 
-### 1. BP 辅助工具
-- 实时 Ban/Pick 模拟
-- AI 智能推荐（基于战队历史数据）
-- 支持所有主流赛区（LPL, LCK, LEC, LCS 等）
-- 实时战队阵容数据
+A decision-support system for professional League of Legends drafting. Built for coaches who understand that drafts are won in the margins—and lost in the moments you didn't see coming.
 
-### 2. 电竞数据浏览 (`/data`)
-- **层级数据展示**：赛区 → 联赛 → 战队 → 选手
-- **7 大赛区**：
-  - LPL (中国) - 54 联赛, 17 战队, 222 选手
-  - LEC (欧洲) - 34 联赛, 11 战队, 97 选手
-  - LCK (韩国) - 33 联赛, 10 战队, 128 选手
-  - LCS (北美) - 10 联赛, 8 战队, 47 选手
-  - LTA North/South/Cross-Conference (美洲)
-- **数据统计**：
-  - 总选手数：18,765
-  - 总战队数：2,160
-  - 总联赛数：173
-- **交互式浏览**：点击赛区查看联赛，点击联赛查看战队，点击战队查看选手阵容
+## 🎯 What This Is
 
-### 3. 数据来源
-- **GRID Esports API** - 官方电竞数据平台
-- 数据覆盖：2024 年至今
-- 自动同步更新
+A stage-aware drafting assistant that makes timing, trade-offs, and draft consequences explicit. It surfaces what you're gaining, what you're giving up, and what windows are closing.
 
-## 技术栈
+## 🚫 What This Is Not
 
-- **框架**: Next.js 16 (App Router)
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **动画**: Framer Motion
-- **数据**: GRID Static Data API
-- **部署**: PM2 + Nginx
+Not an auto-draft bot. Not a winrate optimizer. Not a replacement for strategic judgment. The final call always belongs to the coaching staff. This tool ensures that call is fully informed.
 
-## 项目结构
+## ✨ Core Features
+
+### 1. BP Simulator (`/bp`)
+- Interactive draft sandbox with real-time analysis
+- Stage-aware champion recommendations
+- Pick Threat Score (PTS) system
+- Support for all major regions (LPL, LCK, LEC, LCS, etc.)
+- Fearless draft mode support
+- Series state management
+- Team roster configuration
+
+### 2. Pick Threat Score (PTS)
+Traditional tools ask: "What happens if we pick this?"
+**PTS asks: "What happens if we don't act now?"**
+
+PTS quantifies the cost of inaction. It measures what you lose by waiting—factoring in draft stage, side assignment, opponent trajectory, and denial risk. PTS reveals the difference between a safe delay and a critical window.
+
+### 3. Esports Data Explorer (`/data`)
+- **Hierarchical Data Display**: Region → League → Team → Player
+- **7 Major Regions**:
+  - LPL (China) - 54 leagues, 17 teams, 222 players
+  - LEC (Europe) - 34 leagues, 11 teams, 97 players
+  - LCK (Korea) - 33 leagues, 10 teams, 128 players
+  - LCS (North America) - 10 leagues, 8 teams, 47 players
+  - LTA North/South/Cross-Conference (Americas)
+- **Data Statistics**:
+  - Total Players: 18,765
+  - Total Teams: 2,160
+  - Total Leagues: 173
+- **Interactive Browsing**: Click through regions, leagues, teams, and player rosters
+
+### 4. System Architecture (`/ERD`)
+Technical documentation for analysts and developers. Full transparency on data structure and methodology.
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **Data Source**: GRID Esports API
+- **Deployment**: PM2 + Nginx
+
+## 📁 Project Structure
 
 ```
 AI-Drafting-Assistant/
 ├── app/
 │   ├── api/
 │   │   └── lol/
-│   │       ├── data/          # 原有战队阵容 API
-│   │       ├── hierarchy/     # 新增层级数据 API
-│   │       └── recommend/     # AI 推荐 API
-│   ├── components/            # React 组件
-│   ├── data/                  # 数据浏览页面
-│   ├── lib/                   # 工具库
-│   │   ├── grid-api.ts       # GRID API 客户端
-│   │   ├── grid-types.ts     # 类型定义
-│   │   └── lol-db.ts         # 本地数据库
-│   └── page.tsx              # BP 工具主页
+│   │       ├── data/          # Team roster API
+│   │       ├── hierarchy/     # Hierarchical data API
+│   │       ├── recommend/     # AI recommendation API
+│   │       └── series/        # Series state API
+│   ├── components/            # React components
+│   ├── bp/                    # BP simulator page
+│   ├── data/                  # Data explorer page
+│   ├── ERD/                   # System architecture page
+│   ├── lib/                   # Utility libraries
+│   │   ├── grid-api.ts       # GRID API client
+│   │   ├── grid-types.ts     # Type definitions
+│   │   ├── bp-logic.ts       # BP logic engine
+│   │   └── lol-db.ts         # Local database
+│   └── page.tsx              # Homepage
+├── data/
+│   └── lol/                  # LOL data files
+│       ├── hierarchy.json    # Hierarchical structure
+│       ├── index.json        # Team rosters
+│       └── series.json       # Series data
 ├── scripts/
-│   └── grid-data-fetcher/    # 数据获取脚本
-│       ├── fetch_lol_data.py # 获取 LOL 数据
-│       ├── build_hierarchy.py # 构建层级结构
-│       └── data/             # 数据文件
-└── public/                   # 静态资源
+│   └── grid-data-fetcher/    # Data fetching scripts
+│       ├── fetch_lol_data.py
+│       ├── build_hierarchy.py
+│       └── data/
+└── docs/                     # Documentation
 ```
 
-## 数据脚本
+## 🔧 Data Scripts
 
-### 获取 LOL 数据
+### Fetch LOL Data
 ```bash
 cd scripts/grid-data-fetcher
 python3 fetch_lol_data.py
 ```
 
-获取的数据：
-- `lol_players.json` - 所有 LOL 选手
-- `lol_teams.json` - 所有 LOL 战队
-- `lol_tournaments.json` - 所有 LOL 联赛
-- `lol_player_relationships.json` - 选手-战队-联赛关系
+Fetched data:
+- `lol_players.json` - All LOL players
+- `lol_teams.json` - All LOL teams
+- `lol_tournaments.json` - All LOL leagues
+- `lol_player_relationships.json` - Player-team-league relationships
 
-### 构建层级数据
+### Build Hierarchical Data
 ```bash
 python3 build_hierarchy.py
 ```
 
-生成的数据：
-- `lol_hierarchy.json` - 赛区→联赛→战队→选手层级结构
-- `lol_all_teams.json` - 所有战队及选手列表
-- `lol_hierarchy_summary.json` - 数据摘要
+Generated data:
+- `lol_hierarchy.json` - Region→League→Team→Player hierarchy
+- `lol_all_teams.json` - All teams with player rosters
+- `lol_hierarchy_summary.json` - Data summary
 
-## API 接口
+## 🌐 API Endpoints
 
-### 层级数据 API (`/api/lol/hierarchy`)
+### Hierarchy API (`/api/lol/hierarchy`)
 
-#### 获取摘要
+#### Get Summary
 ```
 GET /api/lol/hierarchy?type=summary
 ```
 
-#### 获取赛区列表
+#### Get Regions
 ```
 GET /api/lol/hierarchy?type=regions
 ```
 
-#### 获取赛区的联赛
+#### Get Region's Leagues
 ```
 GET /api/lol/hierarchy?type=region&region=LPL
 ```
 
-#### 获取联赛的战队
+#### Get League's Teams
 ```
 GET /api/lol/hierarchy?type=tournament&tournament=758054
 ```
 
-#### 获取战队的选手
+#### Get Team's Players
 ```
 GET /api/lol/hierarchy?type=team&team=3586
 ```
 
-#### 获取所有有选手的战队
+#### Get All Teams with Players
 ```
 GET /api/lol/hierarchy?type=all-teams
 ```
 
-## 本地开发
+## 💻 Local Development
 
-### 安装依赖
+### Install Dependencies
 ```bash
 npm install
 ```
 
-### 配置环境变量
-创建 `.env.local` 文件：
+### Configure Environment Variables
+Create `.env.local` file:
 ```env
 GRID_API_URL=https://api-op.grid.gg/central-data/graphql
 GRID_API_KEY=your_api_key_here
 ```
 
-### 运行开发服务器
+### Run Development Server
 ```bash
 npm run dev
 ```
 
-访问 http://localhost:3000
+Visit http://localhost:3000
 
-### 构建生产版本
+### Build Production Version
 ```bash
 npm run build
 npm start
 ```
 
-## 部署
+## 🚀 Deployment
 
-使用 PM2 管理进程：
+Using PM2 for process management:
 ```bash
 pm2 start npm --name "lol-drafting" -- start -- -p 3003
 pm2 save
 ```
 
-## 数据更新
+## 📊 Data Updates
 
-数据来自 GRID Esports API，覆盖 2024 年至今的 LOL 电竞数据。
+Data is sourced from GRID Esports API, covering LOL esports data from 2024 to present.
 
-更新数据：
+Update data:
 ```bash
 cd scripts/grid-data-fetcher
 python3 fetch_lol_data.py
 python3 build_hierarchy.py
 ```
 
-## 访问地址
+## 🌍 Live Site
 
-- **生产环境**: https://lol.dreamofdragon.org
-- **数据浏览**: https://lol.dreamofdragon.org/data
+- **Production**: https://lol.dreamofdragon.org
+- **BP Simulator**: https://lol.dreamofdragon.org/bp
+- **Data Explorer**: https://lol.dreamofdragon.org/data
+- **Architecture**: https://lol.dreamofdragon.org/ERD
 
-## 许可证
+## 📄 License
 
 MIT License
 
-## 更新日志
+## 📝 Changelog
 
-查看 [CHANGELOG.md](./CHANGELOG.md) 了解详细更新历史。
+See [CHANGELOG.md](./CHANGELOG.md) for detailed update history.
+
+## 🤝 Contributing
+
+Issues and Pull Requests are welcome!
+
+---
+
+**Decision support for professional League of Legends coaching staff.**
+
+*"Drafts aren't won by picking the strongest champions. They're lost by missing the moment a door closed."*

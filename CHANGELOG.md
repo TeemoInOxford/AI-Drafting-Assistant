@@ -2,114 +2,179 @@
 
 All notable changes to this project will be documented in this file.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.1.0] - 2026-01-21
+
+### 🎨 Major Design Overhaul
+
+#### Changed
+- **Homepage Redesign**
+  - Updated main title from "LOL Ban/Pick Tool" to "Draft Is About Timing. Not Strength."
+  - Replaced animated floating orb background with clean static grid pattern
+  - Simplified hero section with professional esports aesthetic
+  - Improved visual hierarchy with cleaner typography
+
+- **Website Branding**
+  - Changed website title to "LOL AI Drafting Assistant - A Stage-Aware Draft Strategist"
+  - Updated metadata description to emphasize decision-support focus
+
+- **Color Scheme Migration**
+  - Migrated from blue/red theme to cyan/slate/rose palette
+  - Blue team now uses cyan accent colors
+  - Red team now uses rose accent colors
+  - Improved contrast and readability across all components
+
+- **Component Styling Updates**
+  - Updated TeamPanel with new color scheme and glow effects
+  - Enhanced ChampionCard with improved hover states
+  - Refined ControlBar button styling
+  - Improved PhaseIndicator with better visual feedback
+  - Updated PositionFilter with cleaner button design
+
+#### Removed
+- Animated `.bg-ambient` background effects
+- Floating orb animations from globals.css
+- Noise texture overlay from homepage
+- Excessive glow effects and decorative elements
+
+#### Technical
+- Optimized CSS by removing unused animation keyframes
+- Improved component performance by simplifying background effects
+- Enhanced accessibility with better color contrast ratios
+
+---
+
 ## [2.0.0] - 2026-01-17
 
-### 🎉 重大更新：电竞数据浏览功能
+### 🎉 Major Update: Esports Data Explorer
 
-#### ✨ 新增功能
+#### ✨ Added
 
-- **电竞数据浏览页面 (`/data`)**
-  - 全新的四列层级展示：赛区 → 联赛 → 战队 → 选手
-  - 支持 7 大赛区：LPL, LEC, LCK, LCS, LTA North/South/Cross-Conference
-  - 交互式数据浏览，点击即可查看下级数据
-  - 面包屑导航，清晰显示当前浏览路径
-  - 中英文双语支持
+- **Esports Data Explorer Page (`/data`)**
+  - Four-column hierarchical display: Region → League → Team → Player
+  - Support for 7 major regions: LPL, LEC, LCK, LCS, LTA North/South/Cross-Conference
+  - Interactive data browsing with click-through navigation
+  - Breadcrumb navigation showing current browsing path
+  - Bilingual support (Chinese/English)
 
-- **层级数据 API (`/api/lol/hierarchy`)**
-  - `type=summary` - 获取数据摘要和赛区列表
-  - `type=regions` - 获取所有赛区
-  - `type=region` - 获取指定赛区的联赛
-  - `type=tournament` - 获取指定联赛的战队
-  - `type=team` - 获取指定战队的选手
-  - `type=all-teams` - 获取所有有选手的战队
+- **Hierarchical Data API (`/api/lol/hierarchy`)**
+  - `type=summary` - Get data summary and region list
+  - `type=regions` - Get all regions
+  - `type=region` - Get leagues for specified region
+  - `type=tournament` - Get teams for specified league
+  - `type=team` - Get players for specified team
+  - `type=all-teams` - Get all teams with player rosters
 
-- **数据获取脚本**
-  - `fetch_lol_data.py` - 从 GRID API 获取 LOL 数据
-    - 支持速率限制处理和自动重试
-    - 分页获取所有选手、战队、联赛数据
-    - 自动保存中间结果，防止数据丢失
-  - `build_hierarchy.py` - 构建层级数据结构
-    - 从联赛名称自动提取赛区信息
-    - 建立选手→战队→联赛→赛区的完整关系链
-    - 生成数据摘要和统计信息
+- **Data Fetching Scripts**
+  - `fetch_lol_data.py` - Fetch LOL data from GRID API
+    - Rate limiting handling with automatic retry
+    - Paginated fetching of all players, teams, and leagues
+    - Automatic intermediate result saving to prevent data loss
+  - `build_hierarchy.py` - Build hierarchical data structure
+    - Automatic region extraction from league names
+    - Complete relationship chain: Player→Team→League→Region
+    - Generate data summary and statistics
 
-#### 📊 数据统计
+#### 📊 Data Statistics
 
-- **18,765** 名 LOL 选手
-- **2,160** 支战队
-- **173** 个联赛
-- **7** 个主要赛区
-- 数据覆盖：2024 年 1 月至今
+- **18,765** LOL players
+- **2,160** teams
+- **173** leagues
+- **7** major regions
+- Data coverage: January 2024 to present
 
-#### 🔧 技术改进
+#### 🔧 Technical Improvements
 
-- 优化内存使用，支持大数据量处理
-- 实现数据缓存机制，提升加载速度
-- 添加错误处理和重试逻辑
-- 改进 API 响应结构，减少数据传输量
+- Optimized memory usage for large dataset processing
+- Implemented data caching mechanism for faster loading
+- Added error handling and retry logic
+- Improved API response structure to reduce data transfer
 
-#### 📝 文档
+#### 📝 Documentation
 
-- 新增完整的 README.md
-- 详细的 API 文档
-- 数据脚本使用说明
+- Comprehensive README.md
+- Detailed API documentation
+- Data script usage instructions
 
-#### 🎨 UI/UX 改进
+#### 🎨 UI/UX Improvements
 
-- 响应式四列布局，适配各种屏幕尺寸
-- 流畅的加载动画和过渡效果
-- 清晰的视觉层级，使用不同颜色区分各级数据
-- 优化的滚动体验
+- Responsive four-column layout adapting to various screen sizes
+- Smooth loading animations and transitions
+- Clear visual hierarchy with different colors for each data level
+- Optimized scrolling experience
 
 ---
 
 ## [1.0.0] - 2025-01-15
 
-### 初始版本
+### 🎉 Initial Release
 
-#### ✨ 功能
+#### ✨ Features
 
-- BP（Ban/Pick）辅助工具
-- 实时战队阵容数据
-- AI 智能推荐
-- 支持主流赛区
+- **BP (Ban/Pick) Assistant Tool**
+  - Real-time Ban/Pick simulation
+  - AI-powered recommendations based on team historical data
+  - Support for all major regions
+  - Real-time team roster data
 
-#### 🛠 技术栈
+- **Pick Threat Score (PTS) System**
+  - Quantifies the cost of inaction
+  - Stage-aware champion evaluation
+  - Factors in draft phase, side assignment, and opponent trajectory
 
-- Next.js 16
+- **Core Innovations**
+  - Stage Awareness: Draft phase as a narrowing corridor
+  - Multi-Path Analysis: Trade-off structures instead of optimal solutions
+  - Coach-Centric Design: No auto-selections, full transparency
+
+#### 🛠 Tech Stack
+
+- Next.js 16 (App Router)
 - TypeScript
 - Tailwind CSS
 - Framer Motion
 - GRID Esports API
 
----
+#### 🌐 Deployment
 
-## 数据来源说明
-
-### GRID Esports API 数据覆盖
-
-根据查询确认，GRID Open Access API 的 LOL 数据覆盖范围：
-
-| 年份 | 比赛场数 | 说明 |
-|------|----------|------|
-| 2020-2023 | 0 | 无数据 |
-| 2024 | 776 | 完整数据 |
-| 2025 | 856 | 完整数据 |
-
-**最早数据**：2024-01-13 (LEC Winter 2024)
-
-如需更早的历史数据，可能需要：
-- GRID Full Access 权限
-- 其他数据源（Leaguepedia, Oracle's Elixir 等）
+- Production environment: https://lol.dreamofdragon.org
+- PM2 process management
+- Nginx reverse proxy
 
 ---
 
-## 版本说明
+## Data Source Information
 
-- **主版本号**：重大功能更新或架构变更
-- **次版本号**：新功能添加
-- **修订号**：Bug 修复和小改进
+### GRID Esports API Coverage
 
-## 贡献
+Based on query confirmation, GRID Open Access API LOL data coverage:
 
-欢迎提交 Issue 和 Pull Request！
+| Year | Matches | Notes |
+|------|---------|-------|
+| 2020-2023 | 0 | No data available |
+| 2024 | 776 | Complete data |
+| 2025 | 856 | Complete data |
+
+**Earliest Data**: 2024-01-13 (LEC Winter 2024)
+
+For earlier historical data, you may need:
+- GRID Full Access permissions
+- Alternative data sources (Leaguepedia, Oracle's Elixir, etc.)
+
+---
+
+## Version Numbering
+
+- **Major version**: Significant feature updates or architectural changes
+- **Minor version**: New feature additions
+- **Patch version**: Bug fixes and minor improvements
+
+## Contributing
+
+Issues and Pull Requests are welcome!
+
+## License
+
+MIT License - see [LICENSE](./LICENSE) for details
