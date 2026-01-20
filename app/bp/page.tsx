@@ -24,6 +24,7 @@ import SeriesSetup from '@/app/components/SeriesSetup';
 import TeamRosterSetup from '@/app/components/TeamRosterSetup';
 import { generateAIAnalysis } from '@/app/lib/ai-analysis';
 import { calculatePTS, bpStateToDraftState } from '@/app/lib/pts-engine';
+import PTSRiskBoard from '@/app/components/PTSRiskBoard';
 
 export default function LOLBPPage() {
   const { showToast, confirm, alert: showAlert } = useModal();
@@ -139,6 +140,59 @@ export default function LOLBPPage() {
     const randomIndex = Math.floor(Math.random() * available.length);
     return available[randomIndex];
   }, [champions, allUsedChampions]);
+
+  // Calculate PTS for current draft state
+  const ptsResults = useMemo(() => {
+    if (!currentStep || loading || champions.length === 0 || isBPComplete(bpState)) {
+      return [];
+    }
+
+    try {
+      const draftState = bpStateToDraftState(bpState, currentStep);
+      const availableChamps = champions.filter(c => !allUsedChampions.has(c.id));
+      return calculatePTS(draftState, availableChamps);
+    } catch (e) {
+      console.error('PTS calculation failed:', e);
+      return [];
+    }
+  }, [bpState, currentStep, champions, allUsedChampions, loading]);
+
+  // Get draft context for PTS board
+  const draftContext = useMemo(() => {
+    if (!currentStep) {
+      return {
+        currentTurn: 'Draft Complete',
+        ourSide: 'blue' as const,
+        nextOpponentActions: 'None',
+      };
+    }
+
+    const turnLabel = `${currentStep.action === 'ban' ? 'Ban' : 'Pick'} ${currentStep.index + 1}`;
+    const opponentTeam = currentStep.team === 'blue' ? 'Red' : 'Blue';
+
+    // Determine next opponent actions
+    let nextActions = '';
+    const nextStep = bpState.currentStep + 1;
+    if (nextStep < 20) {
+      if (nextStep < 6) {
+        nextActions = `${opponentTeam} Ban`;
+      } else if (nextStep < 12) {
+        nextActions = `${opponentTeam} Pick`;
+      } else if (nextStep < 16) {
+        nextActions = `${opponentTeam} Ban`;
+      } else {
+        nextActions = `${opponentTeam} Pick`;
+      }
+    } else {
+      nextActions = 'Draft Complete';
+    }
+
+    return {
+      currentTurn: turnLabel,
+      ourSide: currentStep.team,
+      nextOpponentActions: nextActions,
+    };
+  }, [currentStep, bpState.currentStep]);
 
   // AI analysis generation (when BP state changes or AI mode is enabled)
   useEffect(() => {
@@ -297,6 +351,43 @@ export default function LOLBPPage() {
     setAiThinking(false);
     setAiRecommendation(null);
     setAiAnalysis(null);
+  };
+
+  // Load demo draft scenario
+  const handleLoadDemo = () => {
+    // Create a realistic mid-draft scenario where PTS becomes critical
+    // Scenario: R3 Pick (Blue side) - Critical jungle/support decisions
+    const demoState = createInitialState();
+
+    // Simulate draft progression to step 12 (R3 Pick for Blue)
+    // Blue bans: Yone, Sylas, Kalista
+    // Red bans: Aatrox, K'Sante, Xayah
+    // Blue picks: Azir (mid), Varus (ADC)
+    // Red picks: Jax (top), Graves (jungle), Nautilus (support)
+
+    const demoChampions = [
+      'Yone', 'Sylas', 'Kalista', // Blue bans
+      'Aatrox', 'KSante', 'Xayah', // Red bans
+      'Azir', 'Varus', // Blue picks
+      'Jax', 'Graves', 'Nautilus', // Red picks
+    ];
+
+    let state = demoState;
+    demoChampions.forEach((champName) => {
+      const champ = champions.find(c =>
+        c.name.toLowerCase() === champName.toLowerCase() ||
+        c.id.toLowerCase() === champName.toLowerCase()
+      );
+      if (champ) {
+        state = selectChampion(state, champ);
+      }
+    });
+
+    setBpState(state);
+    setAiThinking(false);
+    setAiRecommendation(null);
+    setAiAnalysis(null);
+    showToast({ message: 'Demo scenario loaded: R3 Pick (Blue side)', type: 'success' });
   };
 
   // Fearless Draft: Save progress to localStorage
@@ -475,6 +566,24 @@ export default function LOLBPPage() {
         />
       </div>
 
+      {/* PTS Risk Board */}
+      {ptsResults.length > 0 && !isBPComplete(bpState) && (
+        <div className="relative z-10 max-w-4xl mx-auto px-4 my-4">
+          <PTSRiskBoard
+            ptsResults={ptsResults}
+            currentTurn={draftContext.currentTurn}
+            ourSide={draftContext.ourSide}
+            nextOpponentActions={draftContext.nextOpponentActions}
+            onChampionClick={(championId) => {
+              const champion = champions.find(c => c.id === championId);
+              if (champion && !allUsedChampions.has(championId)) {
+                handleChampionSelect(champion);
+              }
+            }}
+          />
+        </div>
+      )}
+
       {/* AI Analysis Panel */}
       {aiMode !== 'off' && (
         <div className="relative z-10 max-w-4xl mx-auto px-4 my-4">
@@ -497,6 +606,7 @@ export default function LOLBPPage() {
           isComplete={isBPComplete(bpState)}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          onLoadDemo={handleLoadDemo}
         />
       </div>
 

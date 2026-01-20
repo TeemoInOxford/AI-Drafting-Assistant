@@ -9,6 +9,7 @@ interface ControlBarProps {
   isComplete: boolean;
   searchTerm: string;
   onSearchChange: (value: string) => void;
+  onLoadDemo?: () => void;
 }
 
 export default function ControlBar({
@@ -18,6 +19,7 @@ export default function ControlBar({
   isComplete,
   searchTerm,
   onSearchChange,
+  onLoadDemo,
 }: ControlBarProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 mb-4">
@@ -44,6 +46,17 @@ export default function ControlBar({
         >
           🔄 Reset
         </motion.button>
+
+        {onLoadDemo && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onLoadDemo}
+            className="px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 rounded-lg font-medium text-sm sm:text-base transition-all duration-200"
+          >
+            🎯 Load Demo
+          </motion.button>
+        )}
 
         {isComplete && (
           <motion.span
