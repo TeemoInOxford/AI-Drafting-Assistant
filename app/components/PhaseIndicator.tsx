@@ -1,23 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BPStep, Language } from '../lib/types';
+import { BPStep } from '../lib/types';
 
 interface PhaseIndicatorProps {
   phase: string;
   currentStep: BPStep | null;
-  language: Language;
 }
 
-export default function PhaseIndicator({ phase, currentStep, language }: PhaseIndicatorProps) {
+export default function PhaseIndicator({ phase, currentStep }: PhaseIndicatorProps) {
   const getActionText = () => {
     if (!currentStep) return '';
-    const teamName = language === 'zh'
-      ? (currentStep.team === 'blue' ? '蓝方' : '红方')
-      : (currentStep.team === 'blue' ? 'Blue' : 'Red');
-    const actionName = language === 'zh'
-      ? (currentStep.action === 'ban' ? '禁用' : '选择')
-      : (currentStep.action === 'ban' ? 'Ban' : 'Pick');
+    const teamName = currentStep.team === 'blue' ? 'Blue' : 'Red';
+    const actionName = currentStep.action === 'ban' ? 'Ban' : 'Pick';
     return `${teamName} ${actionName}`;
   };
 
@@ -31,7 +26,7 @@ export default function PhaseIndicator({ phase, currentStep, language }: PhaseIn
     >
       <div className="inline-flex flex-col items-center gap-2 px-6 py-3 bg-slate-900/60 backdrop-blur-sm rounded-xl border border-slate-700/50">
         <span className="text-xs uppercase tracking-widest text-slate-500 font-mono">
-          {language === 'zh' ? '当前阶段' : 'Current Phase'}
+          Current Phase
         </span>
         <span className="text-lg font-bold text-white">{phase}</span>
         {currentStep && (
