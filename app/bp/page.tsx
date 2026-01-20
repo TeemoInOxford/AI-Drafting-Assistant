@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode, MatchRosterState } from '@/app/lib/types';
@@ -148,7 +150,7 @@ export default function LOLBPPage() {
 
   // 获取当前步骤信息
   const currentStep = getCurrentStep(bpState);
-  const phaseDesc = getPhaseDescription(bpState.currentStep, language);
+  const phaseDesc = getPhaseDescription(bpState.currentStep);
 
   // 获取当前回合的队伍
   const currentTeam = currentStep?.team || 'blue';
@@ -177,14 +179,13 @@ export default function LOLBPPage() {
       return;
     }
 
-    // 生成AI分析
+    // Generate AI analysis
     if (currentStep) {
       const analysis = generateAIAnalysis(
         bpState,
         champions,
         currentStep.action,
-        currentStep.team,
-        language
+        currentStep.team
       );
       setAiAnalysis(analysis);
     }
@@ -260,9 +261,9 @@ export default function LOLBPPage() {
     setAiMode(mode);
     setAiThinking(false);
     setAiRecommendation(null);
-    // 如果开启AI，立即生成分析
+    // If AI is enabled, generate analysis immediately
     if (mode !== 'off' && currentStep && champions.length > 0) {
-      const analysis = generateAIAnalysis(bpState, champions, currentStep.action, currentStep.team, language);
+      const analysis = generateAIAnalysis(bpState, champions, currentStep.action, currentStep.team);
       setAiAnalysis(analysis);
     } else {
       setAiAnalysis(null);
