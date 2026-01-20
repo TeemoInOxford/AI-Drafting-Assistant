@@ -1,18 +1,18 @@
 import { Position, PositionInfo } from './types';
 
-// 位置图标来自 CommunityDragon (Riot Games官方资源)
+// Position icons from CommunityDragon (Riot Games official resources)
 const POSITION_ICON_BASE = 'https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions';
 
-// 位置信息
+// Position information
 export const POSITIONS: PositionInfo[] = [
-  { id: 'top', enName: 'Top', zhName: '上路', icon: `${POSITION_ICON_BASE}/icon-position-top.png` },
-  { id: 'jungle', enName: 'Jungle', zhName: '打野', icon: `${POSITION_ICON_BASE}/icon-position-jungle.png` },
-  { id: 'mid', enName: 'Mid', zhName: '中路', icon: `${POSITION_ICON_BASE}/icon-position-middle.png` },
-  { id: 'bot', enName: 'Bot', zhName: '下路', icon: `${POSITION_ICON_BASE}/icon-position-bottom.png` },
-  { id: 'support', enName: 'Support', zhName: '辅助', icon: `${POSITION_ICON_BASE}/icon-position-utility.png` },
+  { id: 'top', name: 'Top', icon: `${POSITION_ICON_BASE}/icon-position-top.png` },
+  { id: 'jungle', name: 'Jungle', icon: `${POSITION_ICON_BASE}/icon-position-jungle.png` },
+  { id: 'mid', name: 'Mid', icon: `${POSITION_ICON_BASE}/icon-position-middle.png` },
+  { id: 'bot', name: 'Bot', icon: `${POSITION_ICON_BASE}/icon-position-bottom.png` },
+  { id: 'support', name: 'Support', icon: `${POSITION_ICON_BASE}/icon-position-utility.png` },
 ];
 
-// 英雄位置映射 (基于当前版本常见位置)
+// Champion position mapping (based on current meta)
 export const CHAMPION_POSITIONS: Record<string, Position[]> = {
   // A
   Aatrox: ['top'],
@@ -208,7 +208,7 @@ export const CHAMPION_POSITIONS: Record<string, Position[]> = {
   Zyra: ['support'],
 };
 
-// 获取英雄位置
+// Get champion positions
 export function getChampionPositions(championId: string): Position[] {
   return CHAMPION_POSITIONS[championId] || [];
 }
