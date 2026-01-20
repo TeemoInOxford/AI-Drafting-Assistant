@@ -2,26 +2,24 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode, MatchRosterState } from '@/app/lib/types';
+import { Champion, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, BanReason, MatchRosterState } from '@/app/lib/types';
 import {
   createInitialState,
   selectChampion,
   undoLastAction,
   getCurrentStep,
   getPhaseDescription,
-  isBPComplete
+  isBPComplete,
+  toggleManualBan
 } from '@/app/lib/bp-logic';
 import { getLatestVersion, getChampions } from '@/app/lib/champion-api';
 import ChampionGrid from '@/app/components/ChampionGrid';
 import BPPanel from '@/app/components/BPPanel';
 import PhaseIndicator from '@/app/components/PhaseIndicator';
-import ControlBar from '@/app/components/ControlBar';
 import PositionFilter from '@/app/components/PositionFilter';
 import { useModal } from '@/app/components/ModalProvider';
 import AIControlPanel from '@/app/components/AIControlPanel';
-import AIAnalysisPanel from '@/app/components/AIAnalysisPanel';
-import SeriesSetup from '@/app/components/SeriesSetup';
-import TeamRosterSetup from '@/app/components/TeamRosterSetup';
+import TeamRosterCompact from '@/app/components/TeamRosterCompact';
 import { generateAIAnalysis } from '@/app/lib/ai-analysis';
 import { calculatePTS, bpStateToDraftState } from '@/app/lib/pts-engine';
 import PTSRiskBoard from '@/app/components/PTSRiskBoard';
@@ -37,22 +35,18 @@ export default function LOLBPPage() {
   const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
 
   // AI mode state
-  const [aiMode, setAiMode] = useState<AIControlMode>('off');
+  const [aiMode, setAiMode] = useState<AIControlMode>('manual');
+  const [userSide, setUserSide] = useState<'blue' | 'red'>('blue');
   const [aiThinking, setAiThinking] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
   const [autoPlay, setAutoPlay] = useState(true);
   const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Fearless Draft state
-  const [fearlessMode, setFearlessMode] = useState(false);
-  const [seriesState, setSeriesState] = useState<SeriesState>({
-    format: 'bo3',
-    currentGame: 1,
-    gameRecords: [],
-    fearlessPool: new Set(),
-  });
-  const [historySelectMode, setHistorySelectMode] = useState<HistorySelectMode>('off');
+  // Fearless Draft interaction mode
+  const [fearlessModeEnabled, setFearlessModeEnabled] = useState(false);
+  const [fearlessBannedChampions, setFearlessBannedChampions] = useState<Set<string>>(new Set());
+  const [shakeChampionId, setShakeChampionId] = useState<string | null>(null);
 
   // Team Roster state
   const [rosterState, setRosterState] = useState<MatchRosterState>({
@@ -108,14 +102,10 @@ export default function LOLBPPage() {
     return result;
   }, [champions, searchTerm, selectedPosition]);
 
-  // Merge current game usedChampions with fearless pool
+  // Used champions
   const allUsedChampions = useMemo(() => {
-    const combined = new Set(bpState.usedChampions);
-    if (fearlessMode) {
-      seriesState.fearlessPool.forEach(id => combined.add(id));
-    }
-    return combined;
-  }, [bpState.usedChampions, fearlessMode, seriesState.fearlessPool]);
+    return bpState.usedChampions;
+  }, [bpState.usedChampions]);
 
   // Get current step info
   const currentStep = getCurrentStep(bpState);
@@ -123,15 +113,17 @@ export default function LOLBPPage() {
 
   // Get current team
   const currentTeam = currentStep?.team || 'blue';
+  const canUndo = bpState.history.length > 0;
 
-  // Check if it's AI's turn
+  // Check if it's AI's turn (opponent simulation)
   const isAITurn = useMemo(() => {
-    if (aiMode === 'off') return false;
-    if (aiMode === 'both') return true;
-    if (aiMode === 'blue' && currentTeam === 'blue') return true;
-    if (aiMode === 'red' && currentTeam === 'red') return true;
+    if (aiMode === 'manual') return false;
+    if (aiMode === 'assistant') {
+      // AI simulates opponent - it's AI's turn when current team is NOT user's side
+      return currentTeam !== userSide;
+    }
     return false;
-  }, [aiMode, currentTeam]);
+  }, [aiMode, currentTeam, userSide]);
 
   // Fallback random selection
   const getRandomChampion = useCallback(() => {
@@ -196,7 +188,7 @@ export default function LOLBPPage() {
 
   // AI analysis generation (when BP state changes or AI mode is enabled)
   useEffect(() => {
-    if (aiMode === 'off' || loading || champions.length === 0 || isBPComplete(bpState)) {
+    if (aiMode === 'manual' || loading || champions.length === 0 || isBPComplete(bpState)) {
       setAiAnalysis(null);
       return;
     }
@@ -326,16 +318,52 @@ export default function LOLBPPage() {
     }
   };
 
+  // Handle Fearless Mode toggle
+  const handleFearlessModeToggle = async () => {
+    if (fearlessModeEnabled) {
+      // Turning OFF: validate
+      const count = fearlessBannedChampions.size;
+      if (count % 10 !== 0 || count > 40) {
+        const confirmed = await confirm(
+          `You have banned ${count} champions. Fearless Draft requires exactly 10 champions per game (max 40 total). Are you sure you want to turn off Fearless Mode?`,
+          'Validation Warning'
+        );
+        if (!confirmed) return;
+      }
+      setFearlessModeEnabled(false);
+    } else {
+      // Turning ON
+      setFearlessModeEnabled(true);
+    }
+  };
+
   // Handle champion selection
   const handleChampionSelect = (champion: Champion) => {
-    // If in history select mode, add to history
-    if (historySelectMode !== 'off') {
-      handleAddToHistory(champion);
+    // Fearless Mode ON: add to fearless pool
+    if (fearlessModeEnabled) {
+      setFearlessBannedChampions(prev => {
+        const newSet = new Set(prev);
+        if (newSet.has(champion.id)) {
+          // Unbanning
+          newSet.delete(champion.id);
+        } else {
+          // Banning
+          if (newSet.size >= 40) {
+            // Trigger shake animation
+            setShakeChampionId(champion.id);
+            setTimeout(() => setShakeChampionId(null), 500);
+            return prev; // Don't add
+          }
+          newSet.add(champion.id);
+        }
+        return newSet;
+      });
       return;
     }
 
-    // Normal BP mode
+    // Normal BP logic
     if (allUsedChampions.has(champion.id)) return;
+    if (fearlessBannedChampions.has(champion.id)) return;
     if (isBPComplete(bpState)) return;
     setBpState(selectChampion(bpState, champion));
   };
@@ -345,7 +373,7 @@ export default function LOLBPPage() {
     setBpState(undoLastAction(bpState));
   };
 
-  // Handle reset (also reset AI state)
+  // Handle reset
   const handleReset = () => {
     setBpState(createInitialState());
     setAiThinking(false);
@@ -355,21 +383,12 @@ export default function LOLBPPage() {
 
   // Load demo draft scenario
   const handleLoadDemo = () => {
-    // Create a realistic mid-draft scenario where PTS becomes critical
-    // Scenario: R3 Pick (Blue side) - Critical jungle/support decisions
     const demoState = createInitialState();
-
-    // Simulate draft progression to step 12 (R3 Pick for Blue)
-    // Blue bans: Yone, Sylas, Kalista
-    // Red bans: Aatrox, K'Sante, Xayah
-    // Blue picks: Azir (mid), Varus (ADC)
-    // Red picks: Jax (top), Graves (jungle), Nautilus (support)
-
     const demoChampions = [
-      'Yone', 'Sylas', 'Kalista', // Blue bans
-      'Aatrox', 'KSante', 'Xayah', // Red bans
-      'Azir', 'Varus', // Blue picks
-      'Jax', 'Graves', 'Nautilus', // Red picks
+      'Yone', 'Sylas', 'Kalista',
+      'Aatrox', 'KSante', 'Xayah',
+      'Azir', 'Varus',
+      'Jax', 'Graves', 'Nautilus',
     ];
 
     let state = demoState;
@@ -387,235 +406,201 @@ export default function LOLBPPage() {
     setAiThinking(false);
     setAiRecommendation(null);
     setAiAnalysis(null);
-    showToast({ message: 'Demo scenario loaded: R3 Pick (Blue side)', type: 'success' });
-  };
-
-  // Fearless Draft: Save progress to localStorage
-  const handleSaveSeries = () => {
-    const data = {
-      format: seriesState.format,
-      currentGame: seriesState.currentGame,
-      gameRecords: seriesState.gameRecords,
-      fearlessPool: Array.from(seriesState.fearlessPool),
-    };
-    localStorage.setItem('lol-fearless-series', JSON.stringify(data));
-    showToast({ message: 'Progress saved!', type: 'success' });
-  };
-
-  // Fearless Draft: Load progress from localStorage
-  const handleLoadSeries = () => {
-    const saved = localStorage.getItem('lol-fearless-series');
-    if (saved) {
-      try {
-        const data = JSON.parse(saved);
-        setSeriesState({
-          format: data.format,
-          currentGame: data.currentGame,
-          gameRecords: data.gameRecords,
-          fearlessPool: new Set(data.fearlessPool),
-        });
-        setFearlessMode(true);
-        showToast({ message: 'Progress loaded!', type: 'success' });
-      } catch {
-        showToast({ message: 'Load failed, invalid data', type: 'error' });
-      }
-    } else {
-      showToast({ message: 'No saved progress', type: 'warning' });
-    }
-  };
-
-  // Fearless Draft: Reset series
-  const handleResetSeries = async () => {
-    const confirmed = await confirm(
-      'Reset the entire series?',
-      'Reset Series'
-    );
-    if (confirmed) {
-      setSeriesState({
-        format: seriesState.format,
-        currentGame: 1,
-        gameRecords: [],
-        fearlessPool: new Set(),
-      });
-      setBpState(createInitialState());
-      setHistorySelectMode('off');
-      showToast({ message: 'Series reset', type: 'success' });
-    }
-  };
-
-  // Fearless Draft: Add champion to history
-  const handleAddToHistory = (champion: Champion) => {
-    if (historySelectMode === 'off') return;
-
-    const targetGame = seriesState.currentGame - 1; // Add to previous game
-    if (targetGame < 1) return;
-
-    // Check if already in pool
-    if (seriesState.fearlessPool.has(champion.id)) return;
-
-    const existingRecord = seriesState.gameRecords.find(r => r.gameNumber === targetGame);
-    const newRecords = [...seriesState.gameRecords];
-
-    if (existingRecord) {
-      const recordIndex = newRecords.findIndex(r => r.gameNumber === targetGame);
-      if (historySelectMode === 'blue') {
-        if (existingRecord.bluePicks.length >= 5) return; // Max 5 per team
-        newRecords[recordIndex] = {
-          ...existingRecord,
-          bluePicks: [...existingRecord.bluePicks, champion.id],
-        };
-      } else {
-        if (existingRecord.redPicks.length >= 5) return;
-        newRecords[recordIndex] = {
-          ...existingRecord,
-          redPicks: [...existingRecord.redPicks, champion.id],
-        };
-      }
-    } else {
-      // Create new record
-      newRecords.push({
-        gameNumber: targetGame,
-        bluePicks: historySelectMode === 'blue' ? [champion.id] : [],
-        redPicks: historySelectMode === 'red' ? [champion.id] : [],
-      });
-      // Sort by game number
-      newRecords.sort((a, b) => a.gameNumber - b.gameNumber);
-    }
-
-    // Update fearless pool
-    const newPool = new Set<string>();
-    newRecords.forEach(r => {
-      r.bluePicks.forEach(id => newPool.add(id));
-      r.redPicks.forEach(id => newPool.add(id));
-    });
-
-    setSeriesState({
-      ...seriesState,
-      gameRecords: newRecords,
-      fearlessPool: newPool,
-    });
+    showToast({ message: 'Demo scenario loaded', type: 'success' });
   };
 
   return (
-    <div className="min-h-screen text-white relative">
+    <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden flex flex-col">
+      {/* Background Gradients */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-900/20 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-rose-900/20 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDIpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-[0.03]" />
+      </div>
+
       {/* Title */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 text-center pt-4 sm:pt-6 pb-3 sm:pb-4 px-4"
+        className="relative z-10 text-center pt-4 pb-3 px-4"
       >
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-          LOL Ban/Pick Tool
+          LOL Ban/Pick Simulator
         </h1>
-        <p className="text-slate-400 mt-1.5 sm:mt-2 text-xs sm:text-sm">
+        <p className="text-slate-400 mt-1.5 text-xs sm:text-sm">
           Tournament BP Rules
           {version && <span className="ml-2 text-slate-500">v{version}</span>}
         </p>
       </motion.div>
 
-      {/* Fearless Draft Setup */}
-      <div className="relative z-10 max-w-2xl mx-auto px-4">
-        <SeriesSetup
-          seriesState={seriesState}
-          onSeriesStateChange={setSeriesState}
-          fearlessMode={fearlessMode}
-          onFearlessModeChange={setFearlessMode}
-          historySelectMode={historySelectMode}
-          onHistorySelectModeChange={setHistorySelectMode}
-          onSave={handleSaveSeries}
-          onLoad={handleLoadSeries}
-          onReset={handleResetSeries}
-          champions={champions}
-        />
-      </div>
+      {/* Header with Phase Indicator */}
+      <header className="relative z-20 h-16 w-full flex items-center justify-between px-8 border-b border-white/5 bg-slate-950/80 backdrop-blur-md">
+        <div className="flex items-center gap-4">
+          <TeamRosterCompact
+            rosterState={rosterState}
+            onRosterStateChange={setRosterState}
+          />
 
-      {/* Team Roster Setup */}
-      <div className="relative z-10 max-w-2xl mx-auto px-4">
-        <TeamRosterSetup
-          rosterState={rosterState}
-          onRosterStateChange={setRosterState}
-        />
-      </div>
+          <button
+            onClick={handleFearlessModeToggle}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+              fearlessModeEnabled
+                ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                : 'border-white/10 text-slate-500 hover:text-slate-300'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span className="text-xs font-bold uppercase">Fearless: {fearlessModeEnabled ? 'ON' : 'OFF'}</span>
+            {fearlessModeEnabled && (
+              <span className="text-xs text-slate-400 font-mono ml-2">
+                {fearlessBannedChampions.size}/{Math.min(Math.ceil(fearlessBannedChampions.size / 10) * 10 || 10, 40)}
+              </span>
+            )}
+          </button>
+        </div>
 
-      {/* AI Control Panel */}
-      <div className="relative z-10 max-w-2xl mx-auto px-4">
-        <AIControlPanel
-          aiMode={aiMode}
-          onModeChange={handleAIModeChange}
-          isThinking={aiThinking}
-          currentTeam={currentTeam}
-          recommendation={aiRecommendation}
-          autoPlay={autoPlay}
-          onAutoPlayChange={setAutoPlay}
-        />
-      </div>
+        {/* Phase Indicator - Center */}
+        <div className="absolute left-1/2 -translate-x-1/2">
+          <PhaseIndicator phase={phaseDesc} currentStep={currentStep} />
+        </div>
 
-      {/* Phase Indicator */}
+        {/* Right: Undo/Reset/Demo + AI Toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleUndo}
+            disabled={!canUndo}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+              canUndo
+                ? 'border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+                : 'border-white/5 text-slate-600 cursor-not-allowed'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+            </svg>
+            <span className="text-xs font-bold uppercase">Undo</span>
+          </button>
+
+          <button
+            onClick={handleReset}
+            className="flex items-center gap-2 px-3 py-1.5 rounded border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-all duration-300"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span className="text-xs font-bold uppercase">Reset</span>
+          </button>
+
+          <button
+            onClick={handleLoadDemo}
+            className="flex items-center gap-2 px-3 py-1.5 rounded border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-all duration-300"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-xs font-bold uppercase">Demo</span>
+          </button>
+
+          <button
+            onClick={() => setAiMode(aiMode === 'manual' ? 'assistant' : 'manual')}
+            className={`flex items-center gap-2 px-4 py-1.5 rounded border transition-all duration-300 ${
+              aiMode === 'assistant'
+                ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300 shadow-[0_0_10px_rgba(99,102,241,0.2)]'
+                : 'border-white/10 text-slate-500 hover:text-slate-300'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            <span className="text-xs font-bold uppercase">AI: {aiMode === 'assistant' ? 'ON' : 'OFF'}</span>
+          </button>
+        </div>
+      </header>
+
+      {/* AI Control Panel - Above BP Panel */}
+      {aiMode === 'assistant' && (
+        <div className="relative z-10 max-w-4xl mx-auto px-4 mb-4">
+          <AIControlPanel
+            aiMode={aiMode}
+            onModeChange={handleAIModeChange}
+            isThinking={aiThinking}
+            currentTeam={currentTeam}
+            recommendation={aiRecommendation}
+            autoPlay={autoPlay}
+            onAutoPlayChange={setAutoPlay}
+            userSide={userSide}
+            onUserSideChange={setUserSide}
+          />
+        </div>
+      )}
+
+      {/* Main Content Area - BP Panel centered */}
       <div className="relative z-10">
-        <PhaseIndicator
-          phase={phaseDesc}
-          currentStep={currentStep}
-        />
-      </div>
+        {/* PTS Risk Board - Overlay on left side */}
+        {ptsResults.length > 0 && !isBPComplete(bpState) && (
+          <div className="fixed left-4 top-1/2 -translate-y-1/2 w-80 z-30">
+            <PTSRiskBoard
+              ptsResults={ptsResults}
+              currentTurn={draftContext.currentTurn}
+              ourSide={draftContext.ourSide}
+              nextOpponentActions={draftContext.nextOpponentActions}
+              onChampionClick={(championId) => {
+                const champion = champions.find(c => c.id === championId);
+                if (champion && !allUsedChampions.has(championId)) {
+                  handleChampionSelect(champion);
+                }
+              }}
+            />
+          </div>
+        )}
 
-      {/* BP Panel */}
-      <div className="relative z-10">
+        {/* BP Panel - Center */}
         <BPPanel
           bpState={bpState}
           currentStep={currentStep}
+          blueTeamPlayers={rosterState.blueTeam.players}
+          redTeamPlayers={rosterState.redTeam.players}
+          fearlessBannedChampions={fearlessBannedChampions}
+          champions={champions}
+          blueTeamName={rosterState.blueTeam.teamName || 'Blue Team'}
+          redTeamName={rosterState.redTeam.teamName || 'Red Team'}
+          blueTeamLogo={rosterState.blueTeam.teamLogo}
+          redTeamLogo={rosterState.redTeam.teamLogo}
         />
       </div>
 
-      {/* PTS Risk Board */}
-      {ptsResults.length > 0 && !isBPComplete(bpState) && (
-        <div className="relative z-10 max-w-4xl mx-auto px-4 my-4">
-          <PTSRiskBoard
-            ptsResults={ptsResults}
-            currentTurn={draftContext.currentTurn}
-            ourSide={draftContext.ourSide}
-            nextOpponentActions={draftContext.nextOpponentActions}
-            onChampionClick={(championId) => {
-              const champion = champions.find(c => c.id === championId);
-              if (champion && !allUsedChampions.has(championId)) {
-                handleChampionSelect(champion);
-              }
-            }}
+      {/* Search and Position Filters */}
+      <div className="relative z-20 h-16 flex items-center justify-center px-8 border-b border-white/5 bg-slate-950/50">
+        <div className="flex items-center gap-3">
+          {/* Search Input */}
+          <div className="relative">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search..."
+              className="w-40 px-3 py-1.5 bg-slate-800/50 border border-white/10 rounded text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+              >
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+
+          <PositionFilter
+            selectedPosition={selectedPosition}
+            onSelect={setSelectedPosition}
           />
         </div>
-      )}
-
-      {/* AI Analysis Panel */}
-      {aiMode !== 'off' && (
-        <div className="relative z-10 max-w-4xl mx-auto px-4 my-4">
-          <AIAnalysisPanel
-            analysis={aiAnalysis}
-            isThinking={aiThinking}
-            currentTeam={currentTeam}
-            currentAction={currentStep?.action || 'ban'}
-            isAIEnabled={true}
-          />
-        </div>
-      )}
-
-      {/* Control Bar */}
-      <div className="relative z-10">
-        <ControlBar
-          onUndo={handleUndo}
-          onReset={handleReset}
-          canUndo={bpState.history.length > 0}
-          isComplete={isBPComplete(bpState)}
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onLoadDemo={handleLoadDemo}
-        />
-      </div>
-
-      {/* Position Filter */}
-      <div className="relative z-10">
-        <PositionFilter
-          selectedPosition={selectedPosition}
-          onSelect={setSelectedPosition}
-        />
       </div>
 
       {/* Champion Grid */}
@@ -642,9 +627,9 @@ export default function LOLBPPage() {
             champions={filteredChampions}
             usedChampions={allUsedChampions}
             onSelect={handleChampionSelect}
-            disabled={isBPComplete(bpState) && historySelectMode === 'off'}
-            fearlessPool={fearlessMode ? seriesState.fearlessPool : undefined}
-            historySelectMode={historySelectMode}
+            disabled={isBPComplete(bpState)}
+            fearlessPool={fearlessBannedChampions}
+            shakeChampionId={shakeChampionId}
           />
         )}
       </div>

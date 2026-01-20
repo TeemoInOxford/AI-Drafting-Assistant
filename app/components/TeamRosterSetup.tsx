@@ -175,18 +175,19 @@ export default function TeamRosterSetup({
     const player = rosterState[teamKey].players[position];
     const isActive = activeSlot?.team === team && activeSlot?.position === position;
     const posLabel = positionLabels[POSITIONS[position]];
-    const borderColor = team === 'blue' ? 'border-blue-500/50' : 'border-red-500/50';
-    const bgColor = team === 'blue' ? 'bg-blue-500/10' : 'bg-red-500/10';
-    const hoverBg = team === 'blue' ? 'hover:bg-blue-500/20' : 'hover:bg-red-500/20';
+    const borderColor = team === 'blue' ? 'border-cyan-500/30' : 'border-rose-500/30';
+    const bgColor = team === 'blue' ? 'bg-cyan-500/5' : 'bg-rose-500/5';
+    const hoverBg = team === 'blue' ? 'hover:bg-cyan-500/10' : 'hover:bg-rose-500/10';
+    const hoverBorder = team === 'blue' ? 'hover:border-cyan-500/50' : 'hover:border-rose-500/50';
 
     return (
       <div key={`${team}-${position}`} className="relative">
         <div
           onClick={() => setActiveSlot(isActive ? null : { team, position })}
           className={`
-            flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition-all
-            ${borderColor} ${bgColor} ${hoverBg}
-            ${isActive ? 'ring-2 ring-white/50' : ''}
+            flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition-all duration-300
+            ${borderColor} ${bgColor} ${hoverBg} ${hoverBorder}
+            ${isActive ? 'ring-2 ring-white/50 shadow-lg' : ''}
           `}
         >
           <span className="text-[10px] text-gray-400 w-12 shrink-0">{posLabel}</span>
@@ -272,13 +273,16 @@ export default function TeamRosterSetup({
 
   const renderTeamSection = (team: 'blue' | 'red') => {
     const teamKey = team === 'blue' ? 'blueTeam' : 'redTeam';
-    const teamColor = team === 'blue' ? 'text-blue-400' : 'text-red-400';
-    const borderColor = team === 'blue' ? 'border-blue-500/30' : 'border-red-500/30';
+    const teamColor = team === 'blue' ? 'text-cyan-400' : 'text-rose-400';
+    const borderColor = team === 'blue' ? 'border-cyan-500/20' : 'border-rose-500/20';
+    const bgGradient = team === 'blue'
+      ? 'bg-gradient-to-br from-cyan-900/10 to-blue-900/10'
+      : 'bg-gradient-to-br from-rose-900/10 to-red-900/10';
 
     return (
-      <div className={`flex-1 border ${borderColor} rounded-lg p-3`}>
+      <div className={`flex-1 border ${borderColor} ${bgGradient} rounded-xl p-3 sm:p-4 backdrop-blur-sm`}>
         <div className="flex items-center gap-2 mb-3">
-          <span className={`w-3 h-3 rounded-full ${team === 'blue' ? 'bg-blue-500' : 'bg-red-500'}`}></span>
+          <span className={`w-3 h-3 rounded-full ${team === 'blue' ? 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.5)]' : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.5)]'}`}></span>
           <input
             type="text"
             value={rosterState[teamKey].teamName}
@@ -288,7 +292,7 @@ export default function TeamRosterSetup({
           />
           <button
             onClick={() => setShowTeamSelect(showTeamSelect === team ? null : team)}
-            className="text-[10px] px-2 py-1 bg-white/10 hover:bg-white/20 rounded text-gray-300 transition-colors"
+            className="text-[10px] px-3 py-1.5 bg-slate-800/50 hover:bg-slate-700/70 rounded-lg text-gray-300 transition-all duration-300 border border-slate-700 hover:border-cyan-500/30"
           >
             Select Team
           </button>
@@ -319,27 +323,24 @@ export default function TeamRosterSetup({
   };
 
   return (
-    <div className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-xl p-3 sm:p-4 border border-emerald-500/30 mb-4">
+    <div className="bg-gradient-to-br from-emerald-900/20 via-teal-900/20 to-cyan-900/20 rounded-2xl p-4 sm:p-5 border border-emerald-500/20 mb-4 backdrop-blur-sm">
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-lg">👥</span>
-          <h3 className="text-white font-bold text-sm sm:text-base">
-            Team Roster
-          </h3>
-        </div>
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <h3 className="text-white font-bold text-xs sm:text-sm tracking-wider uppercase">
+          Team Roster
+        </h3>
 
         {/* Toggle */}
         <label className="flex items-center gap-2 cursor-pointer">
-          <span className="text-xs sm:text-sm text-gray-400">
+          <span className="text-xs text-gray-400">
             {rosterState.enabled ? 'Enabled' : 'Disabled'}
           </span>
           <div
-            className={`w-10 h-5 rounded-full transition-colors ${rosterState.enabled ? 'bg-emerald-500' : 'bg-gray-600'}`}
+            className={`w-11 h-6 rounded-full transition-all duration-300 ${rosterState.enabled ? 'bg-gradient-to-r from-emerald-500 to-teal-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]' : 'bg-slate-700'}`}
             onClick={handleToggle}
           >
             <motion.div
-              className="w-4 h-4 bg-white rounded-full mt-0.5"
+              className="w-5 h-5 bg-white rounded-full mt-0.5 shadow-lg"
               animate={{ marginLeft: rosterState.enabled ? '22px' : '2px' }}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />

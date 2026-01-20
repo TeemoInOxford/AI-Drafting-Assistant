@@ -19,31 +19,30 @@ export default function PhaseIndicator({ phase, currentStep }: PhaseIndicatorPro
   const isBlue = currentStep?.team === 'blue';
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="text-center mb-4"
-    >
-      <div className="inline-flex flex-col items-center gap-2 px-6 py-3 bg-slate-900/60 backdrop-blur-sm rounded-xl border border-slate-700/50">
-        <span className="text-xs uppercase tracking-widest text-slate-500 font-mono">
-          Current Phase
+    <div className="flex items-center justify-center gap-6">
+      <div className="hidden md:flex h-[1px] w-20 bg-gradient-to-r from-transparent to-cyan-500/50" />
+      <div className="flex flex-col items-center">
+        <span className="text-[10px] text-indigo-400 font-bold tracking-widest uppercase mb-1">
+          {phase}
         </span>
-        <span className="text-lg font-bold text-white">{phase}</span>
         {currentStep && (
-          <motion.span
+          <motion.div
             key={`${currentStep.team}-${currentStep.action}-${currentStep.index}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className={`text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider ${
+            className={`px-6 py-1 rounded-full shadow-lg ${
               isBlue
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                ? 'bg-cyan-950/50 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                : 'bg-rose-950/50 border border-rose-500/30 shadow-[0_0_15px_rgba(244,63,94,0.3)]'
             }`}
           >
-            {getActionText()}
-          </motion.span>
+            <span className={`text-sm font-bold uppercase tracking-wide ${isBlue ? 'text-cyan-300' : 'text-rose-300'}`}>
+              {getActionText()}
+            </span>
+          </motion.div>
         )}
       </div>
-    </motion.div>
+      <div className="hidden md:flex h-[1px] w-20 bg-gradient-to-l from-transparent to-rose-500/50" />
+    </div>
   );
 }

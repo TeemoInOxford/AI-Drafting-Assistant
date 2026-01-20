@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Position } from '../lib/types';
 import { POSITIONS } from '../lib/positions';
 
@@ -14,45 +13,37 @@ export default function PositionFilter({
   onSelect,
 }: PositionFilterProps) {
   return (
-    <div className="flex items-center justify-center gap-1 sm:gap-2 mb-4 px-2">
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+    <div className="flex items-center gap-2">
+      <button
         onClick={() => onSelect(null)}
-        className={`
-          px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all
-          ${selectedPosition === null
-            ? 'bg-slate-100 text-slate-900'
-            : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'}
-        `}
+        className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+          selectedPosition === null
+            ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)]'
+            : 'border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+        }`}
       >
-        ALL
-      </motion.button>
+        <span className="text-xs font-bold uppercase tracking-wider">ALL</span>
+      </button>
 
       {POSITIONS.map((pos) => (
-        <motion.button
+        <button
           key={pos.id}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
           onClick={() => onSelect(pos.id)}
-          className={`
-            relative flex flex-col items-center gap-0.5 p-1 sm:p-1.5 rounded-lg transition-all
-            ${selectedPosition === pos.id
-              ? 'bg-cyan-500/20 ring-2 ring-cyan-400'
-              : 'bg-slate-800 hover:bg-slate-700'}
-          `}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+            selectedPosition === pos.id
+              ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)]'
+              : 'border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+          }`}
           title={pos.name}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={pos.icon}
             alt={pos.name}
-            className={`w-5 h-5 sm:w-6 sm:h-6 ${selectedPosition === pos.id ? '' : 'opacity-70'}`}
+            className="w-4 h-4"
           />
-          <span className={`text-[8px] sm:text-[10px] font-medium ${selectedPosition === pos.id ? 'text-cyan-300' : 'text-slate-500'}`}>
-            {pos.name}
-          </span>
-        </motion.button>
+          <span className="text-xs font-bold uppercase tracking-wider">{pos.name}</span>
+        </button>
       ))}
     </div>
   );

@@ -11,6 +11,7 @@ interface ChampionCardProps {
   disabled: boolean;
   index: number;
   historySelectMode?: HistorySelectMode;
+  shouldShake?: boolean;
 }
 
 export default function ChampionCard({
@@ -21,6 +22,7 @@ export default function ChampionCard({
   disabled,
   index,
   historySelectMode = 'off',
+  shouldShake = false,
 }: ChampionCardProps) {
   const isInHistoryMode = historySelectMode !== 'off';
 
@@ -38,8 +40,15 @@ export default function ChampionCard({
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: Math.min(index * 0.01, 0.5) }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        x: shouldShake ? [0, -10, 10, -10, 10, 0] : 0
+      }}
+      transition={{
+        delay: Math.min(index * 0.01, 0.5),
+        x: { duration: 0.5 }
+      }}
       whileHover={!disabled ? { scale: 1.1, zIndex: 10 } : {}}
       whileTap={!disabled ? { scale: 0.95 } : {}}
       onClick={!disabled ? onClick : undefined}

@@ -1,15 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Team, ActionType, Champion } from '../lib/types';
+import { Team, ActionType, Champion, BanEntry } from '../lib/types';
 
 interface TeamPanelProps {
   team: Team;
-  bans: (Champion | null)[];
+  bans: BanEntry[];
   picks: (Champion | null)[];
   isActive: boolean;
   currentAction: ActionType | null;
   currentIndex: number | null;
+  players?: (string | null)[];
 }
 
 export default function TeamPanel({
@@ -19,15 +20,26 @@ export default function TeamPanel({
   isActive,
   currentAction,
   currentIndex,
+  players,
 }: TeamPanelProps) {
   const teamName = team === 'blue' ? 'Blue Side' : 'Red Side';
   const isBlue = team === 'blue';
+
+  const getBanLabel = (reason?: string) => {
+    switch (reason) {
+      case 'manual': return '✋';
+      case 'fearless': return '🔒';
+      case 'pts': return '📊';
+      default: return '';
+    }
+  };
 
   const renderSlot = (
     champion: Champion | null,
     index: number,
     action: ActionType,
-    isCurrentSlot: boolean
+    isCurrentSlot: boolean,
+    banReason?: string
   ) => {
     const isBan = action === 'ban';
 
@@ -63,9 +75,16 @@ export default function TeamPanel({
               className={`w-full h-full object-cover ${isBan ? 'grayscale opacity-50' : ''}`}
             />
             {isBan && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-full h-0.5 bg-rose-500 rotate-45 absolute"></div>
-              </div>
+              <>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-0.5 bg-rose-500 rotate-45 absolute"></div>
+                </div>
+                {banReason && (
+                  <div className="absolute top-0 right-0 bg-black/90 text-xs px-1 rounded-bl">
+                    {getBanLabel(banReason)}
+                  </div>
+                )}
+              </>
             )}
             <div className="absolute inset-x-0 bottom-0 bg-black/80 text-[8px] text-center text-white truncate px-0.5">
               {champion.name}
@@ -89,8 +108,8 @@ export default function TeamPanel({
           : 'bg-rose-950/30 border border-rose-500/30'}
         ${isActive
           ? isBlue
-            ? 'border-l-4 border-l-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.15)]'
-            : 'border-r-4 border-r-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.15)]'
+            ? 'border-2 border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.4)] ring-2 ring-cyan-400/50 animate-pulse-slow'
+            : 'border-2 border-rose-400 shadow-[0_0_30px_rgba(244,63,94,0.4)] ring-2 ring-rose-400/50 animate-pulse-slow'
           : ''}
         transition-all duration-300
       `}
@@ -113,12 +132,13 @@ export default function TeamPanel({
           Bans
         </p>
         <div className="flex gap-1.5 sm:gap-2 flex-wrap">
-          {bans.map((champ, idx) =>
+          {bans.map((banEntry, idx) =>
             renderSlot(
-              champ,
+              banEntry.champion,
               idx,
               'ban',
-              isActive && currentAction === 'ban' && currentIndex === idx
+              isActive && currentAction === 'ban' && currentIndex === idx,
+              banEntry.reason
             )
           )}
         </div>
@@ -140,6 +160,25 @@ export default function TeamPanel({
           )}
         </div>
       </div>
+
+      {/* Player Roster */}
+      {players && players.some(p => p) && (
+        <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-700/50">
+          <p className="text-[10px] sm:text-xs text-slate-500 mb-2 uppercase tracking-wider">
+            Players
+          </p>
+          <div className="space-y-1.5">
+            {['Top', 'Jungle', 'Mid', 'ADC', 'Support'].map((position, idx) => (
+              <div key={position} className="flex items-center gap-2 text-xs">
+                <span className="text-slate-500 w-12 sm:w-14">{position}:</span>
+                <span className={`${players[idx] ? 'text-slate-300' : 'text-slate-600'}`}>
+                  {players[idx] || '-'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

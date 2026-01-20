@@ -8,6 +8,7 @@ const DATA_DIR = path.join(process.cwd(), 'data/lol');
 // Cache for hierarchy data
 let hierarchyCache: any = null;
 let cacheTimestamp = 0;
+let teamLogosCache: Map<string, string> = new Map();
 const CACHE_DURATION = 60000; // 1 minute
 
 function loadHierarchy() {
@@ -23,6 +24,26 @@ function loadHierarchy() {
 
   hierarchyCache = JSON.parse(fs.readFileSync(hierarchyPath, 'utf-8'));
   cacheTimestamp = now;
+
+  // Load team logos from series.json if not already cached
+  if (teamLogosCache.size === 0) {
+    try {
+      const seriesPath = path.join(DATA_DIR, 'series.json');
+      if (fs.existsSync(seriesPath)) {
+        const seriesData = JSON.parse(fs.readFileSync(seriesPath, 'utf-8'));
+        seriesData.forEach((series: any) => {
+          series.teams?.forEach((team: any) => {
+            if (team.baseInfo?.id && team.baseInfo?.logoUrl) {
+              teamLogosCache.set(team.baseInfo.id, team.baseInfo.logoUrl);
+            }
+          });
+        });
+      }
+    } catch (e) {
+      console.error('Failed to load team logos:', e);
+    }
+  }
+
   return hierarchyCache;
 }
 
@@ -217,7 +238,7 @@ export async function GET(request: NextRequest) {
             id: teamId,
             name: team.name,
             nameShortened: team.name,
-            logoUrl: null,
+            logoUrl: teamLogosCache.get(teamId) || null,
             seriesCount: team.seriesCount
           },
           players
@@ -231,7 +252,7 @@ export async function GET(request: NextRequest) {
             id: teamId,
             name: team.name,
             nameShortened: team.name,
-            logoUrl: null,
+            logoUrl: teamLogosCache.get(teamId) || null,
             region: { code: team.leagues?.[0] || 'Unknown', name: team.leagues?.[0] || 'Unknown' },
             playerCount: Object.keys(team.players || {}).length,
             seriesCount: team.seriesCount || 0,

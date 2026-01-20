@@ -1,4 +1,4 @@
-import { BPStep, BPState, Champion } from './types';
+import { BPStep, BPState, Champion, BanEntry, BanReason } from './types';
 
 // Complete BP sequence (20 steps) - Official match rules
 export const BP_SEQUENCE: BPStep[] = [
@@ -34,8 +34,20 @@ export const BP_SEQUENCE: BPStep[] = [
 // Initial state
 export const createInitialState = (): BPState => ({
   currentStep: 0,
-  blueBans: [null, null, null, null, null],
-  redBans: [null, null, null, null, null],
+  blueBans: [
+    { champion: null },
+    { champion: null },
+    { champion: null },
+    { champion: null },
+    { champion: null },
+  ],
+  redBans: [
+    { champion: null },
+    { champion: null },
+    { champion: null },
+    { champion: null },
+    { champion: null },
+  ],
   bluePicks: [null, null, null, null, null],
   redPicks: [null, null, null, null, null],
   usedChampions: new Set(),
@@ -69,7 +81,7 @@ export const getCurrentActionDescription = (state: BPState): string => {
 };
 
 // Select champion
-export const selectChampion = (state: BPState, champion: Champion): BPState => {
+export const selectChampion = (state: BPState, champion: Champion, banReason?: BanReason): BPState => {
   const currentStep = getCurrentStep(state);
   if (!currentStep) return state;
 
@@ -83,7 +95,7 @@ export const selectChampion = (state: BPState, champion: Champion): BPState => {
   if (team === 'blue') {
     if (action === 'ban') {
       newState.blueBans = [...state.blueBans];
-      newState.blueBans[index] = champion;
+      newState.blueBans[index] = { champion, reason: banReason || 'manual' };
     } else {
       newState.bluePicks = [...state.bluePicks];
       newState.bluePicks[index] = champion;
@@ -91,7 +103,7 @@ export const selectChampion = (state: BPState, champion: Champion): BPState => {
   } else {
     if (action === 'ban') {
       newState.redBans = [...state.redBans];
-      newState.redBans[index] = champion;
+      newState.redBans[index] = { champion, reason: banReason || 'manual' };
     } else {
       newState.redPicks = [...state.redPicks];
       newState.redPicks[index] = champion;
@@ -138,7 +150,7 @@ export const undoLastAction = (state: BPState): BPState => {
   if (step.team === 'blue') {
     if (step.action === 'ban') {
       newState.blueBans = [...state.blueBans];
-      newState.blueBans[step.index] = null;
+      newState.blueBans[step.index] = { champion: null };
     } else {
       newState.bluePicks = [...state.bluePicks];
       newState.bluePicks[step.index] = null;
@@ -146,10 +158,53 @@ export const undoLastAction = (state: BPState): BPState => {
   } else {
     if (step.action === 'ban') {
       newState.redBans = [...state.redBans];
-      newState.redBans[step.index] = null;
+      newState.redBans[step.index] = { champion: null };
     } else {
       newState.redPicks = [...state.redPicks];
       newState.redPicks[step.index] = null;
+    }
+  }
+
+  return newState;
+};
+
+// Toggle manual ban (for Ban Mode)
+export const toggleManualBan = (
+  state: BPState,
+  champion: Champion,
+  banReason: BanReason
+): BPState => {
+  const newState = { ...state };
+
+  // Check if champion is already banned
+  const isBannedBlue = state.blueBans.some(b => b.champion?.id === champion.id);
+  const isBannedRed = state.redBans.some(b => b.champion?.id === champion.id);
+
+  if (isBannedBlue || isBannedRed) {
+    // Unban the champion
+    newState.blueBans = state.blueBans.map(b =>
+      b.champion?.id === champion.id ? { champion: null } : b
+    );
+    newState.redBans = state.redBans.map(b =>
+      b.champion?.id === champion.id ? { champion: null } : b
+    );
+    newState.usedChampions = new Set(state.usedChampions);
+    newState.usedChampions.delete(champion.id);
+  } else {
+    // Ban the champion - find first empty slot
+    const blueEmptyIndex = state.blueBans.findIndex(b => !b.champion);
+    const redEmptyIndex = state.redBans.findIndex(b => !b.champion);
+
+    if (blueEmptyIndex !== -1) {
+      newState.blueBans = [...state.blueBans];
+      newState.blueBans[blueEmptyIndex] = { champion, reason: banReason };
+      newState.usedChampions = new Set(state.usedChampions);
+      newState.usedChampions.add(champion.id);
+    } else if (redEmptyIndex !== -1) {
+      newState.redBans = [...state.redBans];
+      newState.redBans[redEmptyIndex] = { champion, reason: banReason };
+      newState.usedChampions = new Set(state.usedChampions);
+      newState.usedChampions.add(champion.id);
     }
   }
 
