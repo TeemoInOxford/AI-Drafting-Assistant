@@ -24,7 +24,7 @@ export default function ChampionCard({
   language,
   historySelectMode = 'off',
 }: ChampionCardProps) {
-  const displayName = language === 'zh' ? champion.zhName : champion.enName;
+  const displayName = champion.name;
   const isInHistoryMode = historySelectMode !== 'off';
 
   // 确定边框颜色
