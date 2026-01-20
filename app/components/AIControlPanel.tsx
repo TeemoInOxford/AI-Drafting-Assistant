@@ -11,6 +11,8 @@ interface AIControlPanelProps {
   recommendation: AIRecommendation | null;
   autoPlay: boolean;
   onAutoPlayChange: (autoPlay: boolean) => void;
+  userSide: 'blue' | 'red';
+  onUserSideChange: (side: 'blue' | 'red') => void;
 }
 
 export default function AIControlPanel({
@@ -21,130 +23,117 @@ export default function AIControlPanel({
   recommendation,
   autoPlay,
   onAutoPlayChange,
+  userSide,
+  onUserSideChange,
 }: AIControlPanelProps) {
-  const modes: { id: AIControlMode; label: string; desc: string }[] = [
-    {
-      id: 'off',
-      label: 'Manual',
-      desc: 'Both sides controlled by player'
-    },
-    {
-      id: 'blue',
-      label: 'AI Blue',
-      desc: 'AI controls Blue, you control Red'
-    },
-    {
-      id: 'red',
-      label: 'AI Red',
-      desc: 'AI controls Red, you control Blue'
-    },
-    {
-      id: 'both',
-      label: 'AI vs AI',
-      desc: 'AI controls both sides'
-    },
-  ];
-
-  const isAITurn =
-    (aiMode === 'blue' && currentTeam === 'blue') ||
-    (aiMode === 'red' && currentTeam === 'red') ||
-    aiMode === 'both';
-
   return (
-    <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-xl p-3 sm:p-4 border border-purple-500/30 mb-4">
-      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-lg">🤖</span>
-          <h3 className="text-white font-bold text-sm sm:text-base">AI Mode</h3>
+    <div className="bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-slate-900/20 rounded-2xl p-4 sm:p-5 border border-indigo-500/20 mb-4 backdrop-blur-sm">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <h3 className="text-white font-bold text-xs sm:text-sm tracking-wider uppercase">Draft Intelligence</h3>
+      </div>
+
+      {/* User Side Selection */}
+      <div className="bg-slate-900/50 rounded-xl p-3 border border-indigo-500/20 mb-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs text-gray-400 uppercase tracking-wider">Your Team</span>
         </div>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            onClick={() => onUserSideChange('blue')}
+            className={`px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide transition-all duration-300 ${
+              userSide === 'blue'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-[0_0_12px_rgba(59,130,246,0.4)]'
+                : 'bg-slate-800/50 text-gray-400 border border-slate-700 hover:bg-slate-700/70 hover:text-blue-300'
+            }`}
+          >
+            Blue Side
+          </button>
+          <button
+            onClick={() => onUserSideChange('red')}
+            className={`px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide transition-all duration-300 ${
+              userSide === 'red'
+                ? 'bg-gradient-to-r from-red-600 to-red-700 text-white shadow-[0_0_12px_rgba(239,68,68,0.4)]'
+                : 'bg-slate-800/50 text-gray-400 border border-slate-700 hover:bg-slate-700/70 hover:text-red-300'
+            }`}
+          >
+            Red Side
+          </button>
+        </div>
+      </div>
 
-        {aiMode !== 'off' && (
-          <label className="flex items-center gap-2 cursor-pointer">
-            <span className="text-xs sm:text-sm text-gray-400">Auto Play</span>
-            <div
-              className={`w-10 h-5 rounded-full transition-colors ${autoPlay ? 'bg-green-500' : 'bg-gray-600'}`}
-              onClick={() => onAutoPlayChange(!autoPlay)}
-            >
+      {/* Auto-execute Toggle */}
+      <div className="bg-slate-900/50 rounded-xl p-3 border border-indigo-500/20 mb-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium text-white mb-0.5">Auto-execute Opponent Moves</div>
+            <div className="text-[10px] text-gray-500">AI automatically plays opponent turns</div>
+          </div>
+          <div
+            className={`w-11 h-6 rounded-full transition-all duration-300 cursor-pointer ${autoPlay ? 'bg-gradient-to-r from-indigo-500 to-purple-500 shadow-[0_0_8px_rgba(99,102,241,0.4)]' : 'bg-slate-700'}`}
+            onClick={() => onAutoPlayChange(!autoPlay)}
+          >
+            <motion.div
+              className="w-5 h-5 bg-white rounded-full mt-0.5 shadow-lg"
+              animate={{ marginLeft: autoPlay ? '22px' : '2px' }}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* AI Recommendation Display */}
+      {currentTeam !== userSide && (
+        <div className="bg-slate-900/50 rounded-xl p-3 sm:p-4 border border-indigo-500/20 mb-3">
+          {isThinking ? (
+            <div className="flex items-center gap-3 text-indigo-300">
               <motion.div
-                className="w-4 h-4 bg-white rounded-full mt-0.5"
-                animate={{ marginLeft: autoPlay ? '22px' : '2px' }}
-                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                className="w-5 h-5 border-2 border-indigo-400 border-t-transparent rounded-full"
               />
+              <span className="text-sm">Simulating opponent decision...</span>
             </div>
-          </label>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
-        {modes.map((mode) => (
-          <motion.button
-            key={mode.id}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => onModeChange(mode.id)}
-            className={`
-              px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all
-              ${aiMode === mode.id
-                ? 'bg-purple-600 text-white border-2 border-purple-400'
-                : 'bg-gray-800 text-gray-300 border border-gray-700 hover:bg-gray-700'}
-            `}
-          >
-            <div className="font-bold">{mode.label}</div>
-            <div className="text-[10px] opacity-70 mt-0.5">{mode.desc}</div>
-          </motion.button>
-        ))}
-      </div>
-
-      <AnimatePresence>
-        {isAITurn && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden"
-          >
-            <div className="bg-black/30 rounded-lg p-3 border border-purple-500/20">
-              {isThinking ? (
-                <div className="flex items-center gap-2 text-purple-300">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                  >
-                    ⚙️
-                  </motion.div>
-                  <span className="text-sm">AI is thinking...</span>
-                </div>
-              ) : recommendation ? (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-purple-300 text-sm font-medium">Recommendation:</span>
-                    <span className="text-xs text-gray-400">Score: {recommendation.score}</span>
-                  </div>
-                  <div className="text-white font-bold">{recommendation.champion}</div>
-                  <div className="text-xs text-gray-400">{recommendation.reason}</div>
-                  {recommendation.pts !== undefined && (
-                    <div className="flex items-center gap-2 text-xs">
-                      <span className="text-cyan-400">PTS: {recommendation.pts.toFixed(1)}</span>
-                      {recommendation.riskTier && (
-                        <span className={`px-2 py-0.5 rounded ${
-                          recommendation.riskTier === 'critical' ? 'bg-red-500/20 text-red-300' :
-                          recommendation.riskTier === 'high' ? 'bg-orange-500/20 text-orange-300' :
-                          recommendation.riskTier === 'moderate' ? 'bg-yellow-500/20 text-yellow-300' :
-                          'bg-green-500/20 text-green-300'
-                        }`}>
-                          {recommendation.riskTier.toUpperCase()}
-                        </span>
-                      )}
-                    </div>
+          ) : recommendation ? (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-indigo-300 text-xs font-medium uppercase tracking-wider">Opponent Likely Move:</span>
+                <span className="text-[10px] text-gray-500">Confidence: {recommendation.score}%</span>
+              </div>
+              <div className="text-white font-bold text-base">{recommendation.champion}</div>
+              <div className="text-xs text-gray-400">{recommendation.reason}</div>
+              {recommendation.pts !== undefined && (
+                <div className="flex items-center gap-2 text-xs pt-2 border-t border-slate-700/50">
+                  <span className="text-cyan-400 font-semibold">PTS: {recommendation.pts.toFixed(1)}</span>
+                  {recommendation.riskTier && (
+                    <span className={`px-2 py-1 rounded-full font-medium text-[10px] ${
+                      recommendation.riskTier === 'critical' ? 'bg-red-500/20 text-red-300' :
+                      recommendation.riskTier === 'high' ? 'bg-orange-500/20 text-orange-300' :
+                      recommendation.riskTier === 'moderate' ? 'bg-yellow-500/20 text-yellow-300' :
+                      'bg-green-500/20 text-green-300'
+                    }`}>
+                      {recommendation.riskTier.toUpperCase()}
+                    </span>
                   )}
                 </div>
-              ) : (
-                <div className="text-gray-400 text-sm">Waiting for AI...</div>
               )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ) : (
+            <div className="text-gray-400 text-sm">Waiting for opponent turn...</div>
+          )}
+        </div>
+      )}
+
+      {/* Coach Reminder */}
+      {currentTeam === userSide && (
+        <div className="bg-indigo-500/10 rounded-xl p-3 border border-indigo-500/30">
+          <div className="text-xs text-indigo-300 font-medium">
+            Your turn - Make your decision
+          </div>
+          <div className="text-[10px] text-gray-400 mt-1">
+            AI provides analysis, but final decision is yours
+          </div>
+        </div>
+      )}
     </div>
   );
 }

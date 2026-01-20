@@ -23,6 +23,15 @@ export type Team = 'blue' | 'red';
 // Action type
 export type ActionType = 'ban' | 'pick';
 
+// Ban reason type
+export type BanReason = 'manual' | 'fearless' | 'pts';
+
+// Ban entry with reason
+export interface BanEntry {
+  champion: Champion | null;
+  reason?: BanReason;
+}
+
 // BP step definition
 export interface BPStep {
   team: Team;
@@ -33,8 +42,8 @@ export interface BPStep {
 // BP state
 export interface BPState {
   currentStep: number;  // Current step index (0-19)
-  blueBans: (Champion | null)[];    // Blue bans (5)
-  redBans: (Champion | null)[];     // Red bans (5)
+  blueBans: BanEntry[];    // Blue bans (5)
+  redBans: BanEntry[];     // Red bans (5)
   bluePicks: (Champion | null)[];   // Blue picks (5)
   redPicks: (Champion | null)[];    // Red picks (5)
   usedChampions: Set<string>;       // Used champion IDs
@@ -49,8 +58,8 @@ export interface BPHistoryEntry {
   action: ActionType;
 }
 
-// AI control mode
-export type AIControlMode = 'off' | 'blue' | 'red' | 'both';
+// AI control mode - coach-centric design
+export type AIControlMode = 'manual' | 'assistant';
 
 // AI mode state
 export interface AIState {
@@ -134,6 +143,7 @@ export interface ProPlayer {
 // Team Roster - 5 players per team
 export interface TeamRoster {
   teamName: string;
+  teamLogo?: string | null;
   players: (ProPlayer | null)[]; // 5 positions: top, jungle, mid, bot, support
 }
 

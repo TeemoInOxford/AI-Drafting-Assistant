@@ -11,6 +11,7 @@ interface ChampionGridProps {
   disabled: boolean;
   fearlessPool?: Set<string>;
   historySelectMode?: HistorySelectMode;
+  shakeChampionId?: string | null;
 }
 
 export default function ChampionGrid({
@@ -20,6 +21,7 @@ export default function ChampionGrid({
   disabled,
   fearlessPool,
   historySelectMode = 'off',
+  shakeChampionId,
 }: ChampionGridProps) {
   return (
     <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-8">
@@ -35,6 +37,7 @@ export default function ChampionGrid({
           const isDisabled = historySelectMode !== 'off'
             ? isFearlessBanned
             : (disabled || isUsed);
+          const shouldShake = shakeChampionId === champion.id;
 
           return (
             <ChampionCard
@@ -46,6 +49,7 @@ export default function ChampionGrid({
               disabled={isDisabled}
               index={index}
               historySelectMode={historySelectMode}
+              shouldShake={shouldShake}
             />
           );
         })}

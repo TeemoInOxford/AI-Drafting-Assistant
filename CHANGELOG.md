@@ -5,6 +5,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-01-21
+
+### 🎨 UI/UX Improvements
+
+#### Changed
+- **BP Panel Layout Reorganization**
+  - Moved Phase Indicator to center of top control bar
+  - Relocated search and position filters to between BP panel and champion grid
+  - Improved visual hierarchy and information flow
+
+- **Pick Display Enhancements**
+  - Increased pick loading image size from 160px to 224px (h-56)
+  - Added champion names at bottom of pick images with semi-transparent background
+  - Adjusted fade-away gradient to preserve name visibility (90% cutoff)
+  - Improved pick width: 120px normal, 140px when active
+
+- **Team Logo Integration**
+  - Added team logo display in BP panel center section
+  - Implemented team logo caching from series.json data
+  - Team logos now center-aligned with pick images (80px spacer)
+  - Fallback to circular placeholder when logo unavailable
+
+- **Team Roster Management**
+  - Added TeamRosterCompact component for streamlined roster selection
+  - Popular teams now displayed immediately in dropdown (top 20 by series count)
+  - Auto-fill all 5 roster positions when selecting a team
+  - Team logos automatically loaded and displayed
+
+#### Added
+- **Hierarchy API Enhancements**
+  - Team logo caching mechanism from series.json
+  - Logo URLs included in team endpoint responses
+  - Search endpoint for players and teams
+  - All-teams endpoint with player rosters
+
+#### Fixed
+- Player auto-fill issue (API field mapping: nickname → name)
+- Team logo null values (now loaded from series.json)
+- Fade-away gradient blocking champion names
+- Team element positioning and z-index conflicts
+
+#### Technical
+- Optimized component layout using flex flow with spacer divs
+- Improved API response caching (1-minute cache duration)
+- Enhanced type definitions for TeamRoster interface
+
+---
+
 ## [2.1.0] - 2026-01-21
 
 ### 🎨 Major Design Overhaul
