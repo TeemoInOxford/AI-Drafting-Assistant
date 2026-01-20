@@ -175,3 +175,17 @@ select option {
   border-color: rgba(168, 85, 247, 0.3);
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
 }
+
+/* Slow pulse for critical items */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
