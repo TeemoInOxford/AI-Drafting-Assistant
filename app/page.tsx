@@ -1,531 +1,344 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode } from './lib/types';
-import {
-  createInitialState,
-  selectChampion,
-  undoLastAction,
-  getCurrentStep,
-  getPhaseDescription,
-  isBPComplete
-} from './lib/bp-logic';
-import { getLatestVersion, getChampions } from './lib/champion-api';
-import ChampionGrid from './components/ChampionGrid';
-import BPPanel from './components/BPPanel';
-import PhaseIndicator from './components/PhaseIndicator';
-import ControlBar from './components/ControlBar';
-import LanguageToggle from './components/LanguageToggle';
-import PositionFilter from './components/PositionFilter';
-import { useModal } from '@/app/components/ModalProvider';
-import AIControlPanel from './components/AIControlPanel';
-import AIAnalysisPanel from './components/AIAnalysisPanel';
-import SeriesSetup from './components/SeriesSetup';
-import { generateAIAnalysis } from './lib/ai-analysis';
+import Link from 'next/link';
 
-// 根据浏览器语言检测默认语言
-function getDefaultLanguage(): Language {
-  if (typeof window === 'undefined') return 'zh';
-  const browserLang = navigator.language || (navigator as any).userLanguage || '';
-  // 如果浏览器语言以 zh 开头（zh-CN, zh-TW, zh-HK 等），使用中文
-  return browserLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
-}
-
-export default function LOLBPPage() {
-  const { showToast, confirm, alert: showAlert } = useModal();
-  const [language, setLanguage] = useState<Language>('zh');
-
-  // 初始化时根据浏览器语言设置
-  useEffect(() => {
-    setLanguage(getDefaultLanguage());
-  }, []);
-  const [champions, setChampions] = useState<Champion[]>([]);
-  const [bpState, setBpState] = useState<BPState>(createInitialState());
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [version, setVersion] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
-
-  // AI 模式状态
-  const [aiMode, setAiMode] = useState<AIControlMode>('off');
-  const [aiThinking, setAiThinking] = useState(false);
-  const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
-  const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null);
-  const [autoPlay, setAutoPlay] = useState(true);
-  const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // 无畏征召 (Fearless Draft) 状态
-  const [fearlessMode, setFearlessMode] = useState(false);
-  const [seriesState, setSeriesState] = useState<SeriesState>({
-    format: 'bo3',
-    currentGame: 1,
-    gameRecords: [],
-    fearlessPool: new Set(),
-  });
-  const [historySelectMode, setHistorySelectMode] = useState<HistorySelectMode>('off');
-
-  // 加载英雄数据
-  useEffect(() => {
-    async function loadChampions() {
-      setLoading(true);
-      setError(null);
-      try {
-        const ver = await getLatestVersion();
-        setVersion(ver);
-        const data = await getChampions(ver);
-        // 按名称排序（根据当前语言）
-        setChampions(data.sort((a, b) => {
-          const nameA = language === 'zh' ? a.zhName : a.enName;
-          const nameB = language === 'zh' ? b.zhName : b.enName;
-          return nameA.localeCompare(nameB);
-        }));
-      } catch (err) {
-        console.error('Failed to load champions:', err);
-        setError(language === 'zh' ? '加载英雄数据失败，请刷新重试' : 'Failed to load champions, please refresh');
-      }
-      setLoading(false);
-    }
-    loadChampions();
-  }, []);
-
-  // 语言切换时重新排序
-  useEffect(() => {
-    if (champions.length > 0) {
-      setChampions(prev => [...prev].sort((a, b) => {
-        const nameA = language === 'zh' ? a.zhName : a.enName;
-        const nameB = language === 'zh' ? b.zhName : b.enName;
-        return nameA.localeCompare(nameB);
-      }));
-    }
-  }, [language]);
-
-  // 过滤英雄（搜索 + 位置）
-  const filteredChampions = useMemo(() => {
-    let result = champions;
-
-    // 位置过滤
-    if (selectedPosition) {
-      result = result.filter(c => c.positions.includes(selectedPosition));
-    }
-
-    // 搜索过滤
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      result = result.filter(c =>
-        c.enName.toLowerCase().includes(term) ||
-        c.zhName.toLowerCase().includes(term) ||
-        c.id.toLowerCase().includes(term)
-      );
-    }
-
-    return result;
-  }, [champions, searchTerm, selectedPosition]);
-
-  // 合并当局usedChampions和无畏征召池
-  const allUsedChampions = useMemo(() => {
-    const combined = new Set(bpState.usedChampions);
-    if (fearlessMode) {
-      seriesState.fearlessPool.forEach(id => combined.add(id));
-    }
-    return combined;
-  }, [bpState.usedChampions, fearlessMode, seriesState.fearlessPool]);
-
-  // 获取当前步骤信息
-  const currentStep = getCurrentStep(bpState);
-  const phaseDesc = getPhaseDescription(bpState.currentStep, language);
-
-  // 获取当前回合的队伍
-  const currentTeam = currentStep?.team || 'blue';
-
-  // 判断是否是AI的回合
-  const isAITurn = useMemo(() => {
-    if (aiMode === 'off') return false;
-    if (aiMode === 'both') return true;
-    if (aiMode === 'blue' && currentTeam === 'blue') return true;
-    if (aiMode === 'red' && currentTeam === 'red') return true;
-    return false;
-  }, [aiMode, currentTeam]);
-
-  // AI 随机选择（占位，后续优化为真正AI）
-  const getRandomChampion = useCallback(() => {
-    const available = champions.filter(c => !allUsedChampions.has(c.id));
-    if (available.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * available.length);
-    return available[randomIndex];
-  }, [champions, allUsedChampions]);
-
-  // AI 分析生成（当BP状态变化或AI模式开启时）
-  useEffect(() => {
-    if (aiMode === 'off' || loading || champions.length === 0 || isBPComplete(bpState)) {
-      setAiAnalysis(null);
-      return;
-    }
-
-    // 生成AI分析
-    if (currentStep) {
-      const analysis = generateAIAnalysis(
-        bpState,
-        champions,
-        currentStep.action,
-        currentStep.team,
-        language
-      );
-      setAiAnalysis(analysis);
-    }
-  }, [aiMode, bpState.currentStep, champions.length, loading, language]);
-
-  // AI 自动操作逻辑
-  useEffect(() => {
-    if (aiTimeoutRef.current) {
-      clearTimeout(aiTimeoutRef.current);
-      aiTimeoutRef.current = null;
-    }
-
-    if (!isAITurn || isBPComplete(bpState) || loading || champions.length === 0) {
-      setAiThinking(false);
-      setAiRecommendation(null);
-      return;
-    }
-
-    setAiThinking(true);
-    setAiRecommendation(null);
-
-    // 模拟思考延迟 0.8-2秒
-    const thinkingDelay = 800 + Math.random() * 1200;
-
-    aiTimeoutRef.current = setTimeout(() => {
-      const champion = getRandomChampion();
-
-      if (champion && aiAnalysis && aiAnalysis.recommendations.length > 0) {
-        // 使用分析中的第一个推荐
-        const topRec = aiAnalysis.recommendations[0];
-        const matchedChamp = champions.find(
-          c => c.enName === topRec.champion || c.zhName === topRec.champion
-        ) || champion;
-
-        setAiRecommendation(topRec);
-        setAiThinking(false);
-
-        if (autoPlay) {
-          aiTimeoutRef.current = setTimeout(() => {
-            setBpState(prev => selectChampion(prev, matchedChamp));
-          }, 500);
-        }
-      } else if (champion) {
-        const recommendation: AIRecommendation = {
-          champion: language === 'zh' ? champion.zhName : champion.enName,
-          score: Math.floor(Math.random() * 30) + 70,
-          reason: language === 'zh' ? 'AI随机选择（占位）' : 'AI random selection (placeholder)',
-          winRate: Math.floor(Math.random() * 20) + 45
-        };
-
-        setAiRecommendation(recommendation);
-        setAiThinking(false);
-
-        if (autoPlay) {
-          aiTimeoutRef.current = setTimeout(() => {
-            setBpState(prev => selectChampion(prev, champion));
-          }, 500);
-        }
-      } else {
-        setAiThinking(false);
-      }
-    }, thinkingDelay);
-
-    return () => {
-      if (aiTimeoutRef.current) {
-        clearTimeout(aiTimeoutRef.current);
-      }
-    };
-  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion, aiAnalysis, language]);
-
-  // 处理AI模式切换
-  const handleAIModeChange = (mode: AIControlMode) => {
-    setAiMode(mode);
-    setAiThinking(false);
-    setAiRecommendation(null);
-    // 如果开启AI，立即生成分析
-    if (mode !== 'off' && currentStep && champions.length > 0) {
-      const analysis = generateAIAnalysis(bpState, champions, currentStep.action, currentStep.team, language);
-      setAiAnalysis(analysis);
-    } else {
-      setAiAnalysis(null);
-    }
-  };
-
-  // 处理英雄选择
-  const handleChampionSelect = (champion: Champion) => {
-    // 如果在历史选择模式，添加到历史记录
-    if (historySelectMode !== 'off') {
-      handleAddToHistory(champion);
-      return;
-    }
-
-    // 正常BP模式
-    if (allUsedChampions.has(champion.id)) return;
-    if (isBPComplete(bpState)) return;
-    setBpState(selectChampion(bpState, champion));
-  };
-
-  // 处理撤销
-  const handleUndo = () => {
-    setBpState(undoLastAction(bpState));
-  };
-
-  // 处理重置（同时重置AI状态）
-  const handleReset = () => {
-    setBpState(createInitialState());
-    setAiThinking(false);
-    setAiRecommendation(null);
-    setAiAnalysis(null);
-  };
-
-  // 无畏征召：保存进度到localStorage
-  const handleSaveSeries = () => {
-    const data = {
-      format: seriesState.format,
-      currentGame: seriesState.currentGame,
-      gameRecords: seriesState.gameRecords,
-      fearlessPool: Array.from(seriesState.fearlessPool),
-    };
-    localStorage.setItem('lol-fearless-series', JSON.stringify(data));
-    showToast({ message: language === 'zh' ? '进度已保存！' : 'Progress saved!', type: 'success' });
-  };
-
-  // 无畏征召：从localStorage加载进度
-  const handleLoadSeries = () => {
-    const saved = localStorage.getItem('lol-fearless-series');
-    if (saved) {
-      try {
-        const data = JSON.parse(saved);
-        setSeriesState({
-          format: data.format,
-          currentGame: data.currentGame,
-          gameRecords: data.gameRecords,
-          fearlessPool: new Set(data.fearlessPool),
-        });
-        setFearlessMode(true);
-        showToast({ message: language === 'zh' ? '进度已加载！' : 'Progress loaded!', type: 'success' });
-      } catch {
-        showToast({ message: language === 'zh' ? '加载失败，数据格式错误' : 'Load failed, invalid data', type: 'error' });
-      }
-    } else {
-      showToast({ message: language === 'zh' ? '没有保存的进度' : 'No saved progress', type: 'warning' });
-    }
-  };
-
-  // 无畏征召：重置系列赛
-  const handleResetSeries = async () => {
-    const confirmed = await confirm(
-      language === 'zh' ? '确定要重置整个系列赛吗？' : 'Reset the entire series?',
-      language === 'zh' ? '重置系列赛' : 'Reset Series'
-    );
-    if (confirmed) {
-      setSeriesState({
-        format: seriesState.format,
-        currentGame: 1,
-        gameRecords: [],
-        fearlessPool: new Set(),
-      });
-      setBpState(createInitialState());
-      setHistorySelectMode('off');
-      showToast({ message: language === 'zh' ? '系列赛已重置' : 'Series reset', type: 'success' });
-    }
-  };
-
-  // 无畏征召：添加英雄到历史记录
-  const handleAddToHistory = (champion: Champion) => {
-    if (historySelectMode === 'off') return;
-
-    const targetGame = seriesState.currentGame - 1; // 添加到"之前"的局
-    if (targetGame < 1) return;
-
-    // 检查是否已在池中
-    if (seriesState.fearlessPool.has(champion.id)) return;
-
-    const existingRecord = seriesState.gameRecords.find(r => r.gameNumber === targetGame);
-    const newRecords = [...seriesState.gameRecords];
-
-    if (existingRecord) {
-      const recordIndex = newRecords.findIndex(r => r.gameNumber === targetGame);
-      if (historySelectMode === 'blue') {
-        if (existingRecord.bluePicks.length >= 5) return; // 每队最多5个
-        newRecords[recordIndex] = {
-          ...existingRecord,
-          bluePicks: [...existingRecord.bluePicks, champion.id],
-        };
-      } else {
-        if (existingRecord.redPicks.length >= 5) return;
-        newRecords[recordIndex] = {
-          ...existingRecord,
-          redPicks: [...existingRecord.redPicks, champion.id],
-        };
-      }
-    } else {
-      // 创建新记录
-      newRecords.push({
-        gameNumber: targetGame,
-        bluePicks: historySelectMode === 'blue' ? [champion.id] : [],
-        redPicks: historySelectMode === 'red' ? [champion.id] : [],
-      });
-      // 按局数排序
-      newRecords.sort((a, b) => a.gameNumber - b.gameNumber);
-    }
-
-    // 更新fearlessPool
-    const newPool = new Set<string>();
-    newRecords.forEach(r => {
-      r.bluePicks.forEach(id => newPool.add(id));
-      r.redPicks.forEach(id => newPool.add(id));
-    });
-
-    setSeriesState({
-      ...seriesState,
-      gameRecords: newRecords,
-      fearlessPool: newPool,
-    });
-  };
-
+export default function HomePage() {
   return (
-    <div className="min-h-screen text-white">
-      {/* 语言切换 */}
-      <LanguageToggle
-        language={language}
-        onToggle={() => setLanguage(l => l === 'zh' ? 'en' : 'zh')}
-      />
-
-      {/* 标题 */}
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center pt-4 sm:pt-6 pb-3 sm:pb-4 px-4"
-      >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-          {language === 'zh' ? 'LOL Ban/Pick 工具' : 'LOL Ban/Pick Tool'}
-        </h1>
-        <p className="text-gray-400 mt-1.5 sm:mt-2 text-xs sm:text-sm">
-          {language === 'zh' ? '正规比赛BP规则' : 'Tournament BP Rules'}
-          {version && <span className="ml-2 text-gray-500">v{version}</span>}
-        </p>
-      </motion.div>
-
-      {/* 无畏征召设置 */}
-      <div className="max-w-2xl mx-auto px-4">
-        <SeriesSetup
-          language={language}
-          seriesState={seriesState}
-          onSeriesStateChange={setSeriesState}
-          fearlessMode={fearlessMode}
-          onFearlessModeChange={setFearlessMode}
-          historySelectMode={historySelectMode}
-          onHistorySelectModeChange={setHistorySelectMode}
-          onSave={handleSaveSeries}
-          onLoad={handleLoadSeries}
-          onReset={handleResetSeries}
-          champions={champions}
-        />
+    <div className="min-h-screen text-white relative overflow-hidden selection:bg-cyan-500/30">
+      {/* Background Grid - Static & Subtle */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"></div>
       </div>
 
-      {/* AI 控制面板 */}
-      <div className="max-w-2xl mx-auto px-4">
-        <AIControlPanel
-          language={language}
-          aiMode={aiMode}
-          onModeChange={handleAIModeChange}
-          isThinking={aiThinking}
-          currentTeam={currentTeam}
-          recommendation={aiRecommendation}
-          autoPlay={autoPlay}
-          onAutoPlayChange={setAutoPlay}
-        />
-      </div>
+      {/* Main content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
 
-      {/* 阶段指示器 */}
-      <PhaseIndicator
-        phase={phaseDesc}
-        currentStep={currentStep}
-        language={language}
-      />
-
-      {/* BP面板 */}
-      <BPPanel
-        bpState={bpState}
-        currentStep={currentStep}
-        language={language}
-      />
-
-      {/* AI 分析面板 */}
-      {aiMode !== 'off' && (
-        <div className="max-w-4xl mx-auto px-4 my-4">
-          <AIAnalysisPanel
-            language={language}
-            analysis={aiAnalysis}
-            isThinking={aiThinking}
-            currentTeam={currentTeam}
-            currentAction={currentStep?.action || 'ban'}
-            isAIEnabled={true}
-          />
-        </div>
-      )}
-
-      {/* 控制栏 */}
-      <ControlBar
-        onUndo={handleUndo}
-        onReset={handleReset}
-        canUndo={bpState.history.length > 0}
-        isComplete={isBPComplete(bpState)}
-        language={language}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-      />
-
-      {/* 位置过滤 */}
-      <PositionFilter
-        selectedPosition={selectedPosition}
-        onSelect={setSelectedPosition}
-        language={language}
-      />
-
-      {/* 英雄网格 */}
-      {loading ? (
-        <div className="flex flex-col justify-center items-center h-64 gap-4">
-          <img src="https://cdn.dreamofdragon.org/images/spinner/spinner.svg" alt="Loading" width={60} height={60} />
-          <p className="text-gray-400">
-            {language === 'zh' ? '加载英雄数据中...' : 'Loading champions...'}
-          </p>
-        </div>
-      ) : error ? (
-        <div className="flex flex-col justify-center items-center h-64 gap-4">
-          <p className="text-red-400">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 rounded-lg"
+        {/* ============ HERO SECTION ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-28"
+        >
+          {/* Version badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8 inline-flex items-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300 backdrop-blur-sm"
           >
-            {language === 'zh' ? '刷新页面' : 'Refresh'}
-          </button>
-        </div>
-      ) : (
-        <ChampionGrid
-          champions={filteredChampions}
-          usedChampions={allUsedChampions}
-          onSelect={handleChampionSelect}
-          disabled={isBPComplete(bpState) && historySelectMode === 'off'}
-          language={language}
-          fearlessPool={fearlessMode ? seriesState.fearlessPool : undefined}
-          historySelectMode={historySelectMode}
-        />
-      )}
+            <span className="mr-2 h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+            v2.0 Beta Live
+          </motion.div>
 
-      {/* 英雄数量统计 */}
-      {!loading && !error && (
-        <div className="text-center pb-8 text-gray-500 text-sm">
-          {language === 'zh'
-            ? `共 ${champions.length} 位英雄${(searchTerm || selectedPosition) ? `，显示 ${filteredChampions.length} 位` : ''}`
-            : `${champions.length} champions${(searchTerm || selectedPosition) ? `, showing ${filteredChampions.length}` : ''}`}
-        </div>
-      )}
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
+            Draft Is About <span className="text-cyan-400">Timing</span>. <br />
+            <span className="text-slate-500">Not Strength.</span>
+          </h1>
+
+          <h2 className="font-mono text-lg md:text-xl font-medium text-cyan-400 mb-8">
+            "Every Pick Closes a Door. Know Which Ones."
+          </h2>
+
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-6 leading-relaxed">
+            A decision-support system for professional League of Legends drafting.
+            <br className="hidden md:block" />
+            Built for coaches who understand that drafts are won in the margins—
+            <br className="hidden md:block" />
+            and lost in the moments you didn't see coming.
+          </p>
+
+          <p className="text-base text-slate-500 max-w-2xl mx-auto mb-12">
+            Stage-Aware Draft Strategist models timing, exposure, and irreversible consequences—
+            so every decision is made with full situational clarity.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/bp"
+              className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold px-8 py-4 rounded-full transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:shadow-[0_0_50px_rgba(34,211,238,0.5)]"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <span>Launch BP Simulator</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+            <Link
+              href="/ERD"
+              className="text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+            >
+              View Architecture <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </motion.section>
+
+        {/* ============ WHAT THIS IS / IS NOT ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="mb-28"
+        >
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+            <h2 className="text-xl font-bold tracking-tight text-white">System Overview</h2>
+            <span className="font-mono text-xs text-slate-600">SYSTEM_INFO_01</span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="glass-card rounded-2xl p-8 transition-all hover:border-cyan-500/30">
+              <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">What This Is</h3>
+              <p className="text-slate-300 leading-relaxed">
+                A stage-aware drafting assistant that makes timing, trade-offs, and draft consequences explicit.
+                It surfaces what you're gaining, what you're giving up, and what windows are closing.
+              </p>
+            </div>
+            <div className="glass-card rounded-2xl p-8 transition-all hover:border-rose-500/30">
+              <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">What This Is Not</h3>
+              <p className="text-slate-300 leading-relaxed">
+                Not an auto-draft bot. Not a winrate optimizer. Not a replacement for strategic judgment.
+                The final call always belongs to the coaching staff. This tool ensures that call is fully informed.
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ============ PICK THREAT SCORE (PTS) ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="mb-28"
+        >
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+            <h2 className="text-xl font-bold tracking-tight text-white">Core Innovation</h2>
+            <span className="font-mono text-xs text-slate-600">CORE_FEATURE_01</span>
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl p-8 md:p-12 border border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 via-slate-900/50 to-indigo-950/30">
+            {/* Glow effect */}
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl" />
+
+            <div className="relative max-w-3xl mx-auto">
+              <h3 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">Pick Threat Score</h3>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-10">
+                <div className="space-y-2">
+                  <p className="text-slate-500 text-sm uppercase tracking-wider">Traditional Tools Ask</p>
+                  <p className="text-xl text-slate-300">"What happens if we pick this?"</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-cyan-400 text-sm uppercase tracking-wider">PTS Asks</p>
+                  <p className="text-xl text-white font-semibold">"What happens if we don't act now?"</p>
+                </div>
+              </div>
+
+              <p className="text-slate-300 leading-relaxed mb-8">
+                <span className="text-white font-semibold">Pick Threat Score</span> quantifies the cost of inaction.
+                It measures what you lose by waiting—factoring in draft stage, side assignment, opponent trajectory,
+                and denial risk. PTS reveals the difference between a safe delay and a critical window.
+                It exposes forced decisions before they become regrets.
+              </p>
+
+              <div className="bg-slate-950/50 rounded-xl p-6 border border-slate-800">
+                <p className="text-slate-400 italic text-center">
+                  "Winrate tells you what's strong. <span className="text-cyan-400 font-medium">PTS tells you what's slipping away.</span>"
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ============ THREE PILLARS ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="mb-28"
+        >
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+            <h2 className="text-xl font-bold tracking-tight text-white">Core Innovations</h2>
+            <span className="font-mono text-xs text-slate-600">SYSTEM_FEATURES</span>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+            {/* Stage Awareness */}
+            <div className="group glass-card rounded-2xl p-8 transition-all hover:border-blue-500/50 relative overflow-hidden">
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-blue-500/10 blur-2xl transition-all group-hover:bg-blue-500/20" />
+              <div className="relative">
+                <div className="w-12 h-12 bg-slate-800 group-hover:bg-blue-950 rounded-xl flex items-center justify-center mb-5 transition-colors">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Stage Awareness</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  Draft phase isn't a sequence—it's a narrowing corridor. Champion value shifts based on pick number,
+                  side, what's revealed, and what remains hidden.
+                </p>
+                <p className="text-slate-500 text-sm">
+                  A flex that's powerful when concealed becomes predictable when exposed. Timing changes everything.
+                </p>
+              </div>
+            </div>
+
+            {/* Multi-Path Analysis */}
+            <div className="group glass-card rounded-2xl p-8 transition-all hover:border-purple-500/50 relative overflow-hidden">
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-purple-500/10 blur-2xl transition-all group-hover:bg-purple-500/20" />
+              <div className="relative">
+                <div className="w-12 h-12 bg-slate-800 group-hover:bg-purple-950 rounded-xl flex items-center justify-center mb-5 transition-colors">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Multi-Path Analysis</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  Professional drafts don't have optimal solutions—they have trade-off structures.
+                  This system surfaces multiple viable directions, each with explicit costs.
+                </p>
+                <p className="text-slate-500 text-sm">
+                  The goal isn't to find the best pick. It's to understand the shape of the decision.
+                </p>
+              </div>
+            </div>
+
+            {/* Coach-Centric */}
+            <div className="group glass-card rounded-2xl p-8 transition-all hover:border-cyan-500/50 relative overflow-hidden">
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-cyan-500/10 blur-2xl transition-all group-hover:bg-cyan-500/20" />
+              <div className="relative">
+                <div className="w-12 h-12 bg-slate-800 group-hover:bg-cyan-950 rounded-xl flex items-center justify-center mb-5 transition-colors">
+                  <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Coach-Centric</h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  Built for professionals who already know how to draft. No auto-selections.
+                  No black-box recommendations. Every output is designed to be interrogated and overruled.
+                </p>
+                <p className="text-slate-500 text-sm">
+                  The coach owns the draft. The system ensures nothing was missed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ============ CALLOUT QUOTES ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="mb-28"
+        >
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-slate-900/50 rounded-xl p-6 border-l-4 border-cyan-500/50 backdrop-blur-sm">
+              <p className="text-slate-300 italic">
+                "Drafts aren't won by picking the strongest champions. They're lost by missing the moment a door closed."
+              </p>
+            </div>
+            <div className="bg-slate-900/50 rounded-xl p-6 border-l-4 border-purple-500/50 backdrop-blur-sm">
+              <p className="text-slate-300 italic">
+                "We don't tell you what to pick. We show you what you're giving up."
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ============ NAVIGATION CARDS ============ */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.55 }}
+          className="mb-20"
+        >
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+            <h2 className="text-xl font-bold tracking-tight text-white">System Modules</h2>
+            <span className="font-mono text-xs text-slate-600">ACCESS_POINTS</span>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+
+            {/* BP Simulator */}
+            <Link href="/bp" className="group">
+              <div className="h-full relative overflow-hidden rounded-2xl p-8 border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-950/40 to-slate-900 transition-all hover:scale-[1.02] hover:border-cyan-500/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+                <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl" />
+                <div className="relative">
+                  <div className="w-14 h-14 bg-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/20">
+                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">BP Simulator</h3>
+                  <p className="text-cyan-200/70 text-sm mb-6">
+                    Interactive draft sandbox with real-time PTS analysis. Test scenarios. Explore branches. Prepare for stage.
+                  </p>
+                  <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-cyan-300">
+                    <span>Enter System</span>
+                    <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Data Explorer */}
+            <Link href="/data" className="group">
+              <div className="h-full glass-card rounded-2xl p-8 transition-all hover:scale-[1.02] hover:border-purple-500/50">
+                <div className="w-14 h-14 bg-slate-800 group-hover:bg-purple-950 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                  <svg className="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Data Explorer</h3>
+                <p className="text-slate-400 text-sm mb-6">
+                  Browse professional match data by region, league, team, and player. Context for every recommendation.
+                </p>
+                <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-slate-400 group-hover:text-purple-400 transition-colors">
+                  <span>Enter System</span>
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* System Architecture */}
+            <Link href="/ERD" className="group">
+              <div className="h-full glass-card rounded-2xl p-8 transition-all hover:scale-[1.02] hover:border-indigo-500/50">
+                <div className="w-14 h-14 bg-slate-800 group-hover:bg-indigo-950 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
+                  <svg className="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">System Architecture</h3>
+                <p className="text-slate-400 text-sm mb-6">
+                  Technical documentation for analysts and developers. Full transparency on data structure and methodology.
+                </p>
+                <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-slate-400 group-hover:text-indigo-400 transition-colors">
+                  <span>Enter System</span>
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </motion.section>
+
+        {/* ============ CLOSING STATEMENT ============ */}
+        <motion.footer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.65 }}
+          className="text-center pt-12 border-t border-slate-800"
+        >
+          <p className="font-mono text-xs text-slate-600 mb-2">
+            © {new Date().getFullYear()} LOL BP Tool. Designed for Professional Esports Analysis.
+          </p>
+          <p className="text-slate-700 text-xs">
+            Decision support for professional League of Legends coaching staff.
+          </p>
+        </motion.footer>
+      </div>
     </div>
   );
 }

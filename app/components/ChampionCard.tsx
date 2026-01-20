@@ -29,14 +29,14 @@ export default function ChampionCard({
 
   // 确定边框颜色
   const getBorderClass = () => {
-    if (isUsed) return 'border-gray-600';
-    if (isFearlessBanned) return 'border-red-600';
+    if (isUsed) return 'border-slate-700';
+    if (isFearlessBanned) return 'border-rose-700';
     if (isInHistoryMode) {
       return historySelectMode === 'blue'
-        ? 'border-blue-400 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/30'
-        : 'border-red-400 hover:border-red-300 hover:shadow-lg hover:shadow-red-500/30';
+        ? 'border-cyan-400 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30'
+        : 'border-rose-400 hover:border-rose-300 hover:shadow-lg hover:shadow-rose-500/30';
     }
-    return 'border-white/20 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/30';
+    return 'border-slate-700 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20';
   };
 
   return (
@@ -55,7 +55,7 @@ export default function ChampionCard({
     >
       {/* 头像 */}
       <div className={`
-        relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden border-2 transition-all duration-200
+        relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden border-2 transition-all duration-200 bg-slate-900
         ${getBorderClass()}
       `}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -66,13 +66,13 @@ export default function ChampionCard({
           loading="lazy"
         />
         {isUsed && (
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <span className="text-red-400 text-lg">✕</span>
+          <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
+            <span className="text-rose-400 text-lg">✕</span>
           </div>
         )}
         {isFearlessBanned && !isUsed && (
-          <div className="absolute inset-0 bg-red-900/60 flex items-center justify-center">
-            <span className="text-red-300 text-sm">🚫</span>
+          <div className="absolute inset-0 bg-rose-950/70 flex items-center justify-center">
+            <span className="text-rose-300 text-sm">🚫</span>
           </div>
         )}
       </div>
@@ -80,7 +80,7 @@ export default function ChampionCard({
       {/* 名字 */}
       <span className={`
         mt-1 text-[10px] md:text-xs text-center truncate w-full px-0.5
-        ${isUsed || isFearlessBanned ? 'text-gray-500' : 'text-gray-300'}
+        ${isUsed || isFearlessBanned ? 'text-slate-600' : 'text-slate-400'}
       `}>
         {displayName}
       </span>
