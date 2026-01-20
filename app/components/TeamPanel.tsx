@@ -102,15 +102,15 @@ export default function TeamPanel({
         {teamName}
         {isActive && (
           <span className={`ml-2 text-xs sm:text-sm animate-pulse ${isBlue ? 'text-cyan-300' : 'text-rose-300'}`}>
-            {language === 'zh' ? '(当前)' : '(Active)'}
+            (Active)
           </span>
         )}
       </h3>
 
-      {/* Ban区域 */}
+      {/* Ban area */}
       <div className="mb-3 sm:mb-4">
         <p className="text-[10px] sm:text-xs text-slate-500 mb-1.5 sm:mb-2 uppercase tracking-wider">
-          {language === 'zh' ? '禁用' : 'Bans'}
+          Bans
         </p>
         <div className="flex gap-1.5 sm:gap-2 flex-wrap">
           {bans.map((champ, idx) =>
@@ -124,10 +124,10 @@ export default function TeamPanel({
         </div>
       </div>
 
-      {/* Pick区域 */}
+      {/* Pick area */}
       <div>
         <p className="text-[10px] sm:text-xs text-slate-500 mb-1.5 sm:mb-2 uppercase tracking-wider">
-          {language === 'zh' ? '选择' : 'Picks'}
+          Picks
         </p>
         <div className="flex gap-1.5 sm:gap-2 flex-wrap">
           {picks.map((champ, idx) =>
