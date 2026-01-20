@@ -1,50 +1,47 @@
-// 英雄数据类型
+// Champion data type
 export interface Champion {
-  id: string;           // 如 "Aatrox"
-  key: string;          // 如 "266"
-  name: string;         // 显示名称（根据语言）
-  enName: string;       // 英文名称
-  zhName: string;       // 中文名称
-  image: string;        // 头像URL
-  positions: Position[]; // 位置
+  id: string;           // e.g. "Aatrox"
+  key: string;          // e.g. "266"
+  name: string;         // Display name
+  image: string;        // Avatar URL
+  positions: Position[]; // Positions
 }
 
-// 位置类型
+// Position type
 export type Position = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
 
-// 位置信息
+// Position info
 export interface PositionInfo {
   id: Position;
-  enName: string;
-  zhName: string;
+  name: string;
   icon: string;
 }
 
-// 队伍类型
+// Team type
 export type Team = 'blue' | 'red';
 
-// 操作类型
+// Action type
 export type ActionType = 'ban' | 'pick';
 
-// BP步骤定义
+// BP step definition
 export interface BPStep {
   team: Team;
   action: ActionType;
-  index: number;        // 该队伍该操作的第几个（0-4）
+  index: number;        // Index for this team's action (0-4)
 }
 
-// BP状态
+// BP state
 export interface BPState {
-  currentStep: number;  // 当前步骤索引（0-19）
-  blueBans: (Champion | null)[];    // 蓝方Ban的英雄（5个）
-  redBans: (Champion | null)[];     // 红方Ban的英雄（5个）
-  bluePicks: (Champion | null)[];   // 蓝方Pick的英雄（5个）
-  redPicks: (Champion | null)[];    // 红方Pick的英雄（5个）
-  usedChampions: Set<string>;       // 已使用的英雄ID
-  history: BPHistoryEntry[];        // 操作历史（用于撤销）
+  currentStep: number;  // Current step index (0-19)
+  blueBans: (Champion | null)[];    // Blue bans (5)
+  redBans: (Champion | null)[];     // Red bans (5)
+  bluePicks: (Champion | null)[];   // Blue picks (5)
+  redPicks: (Champion | null)[];    // Red picks (5)
+  usedChampions: Set<string>;       // Used champion IDs
+  history: BPHistoryEntry[];        // Action history (for undo)
 }
 
-// 历史记录条目
+// History entry
 export interface BPHistoryEntry {
   step: number;
   championId: string;
@@ -52,44 +49,43 @@ export interface BPHistoryEntry {
   action: ActionType;
 }
 
-// 语言类型
-export type Language = 'zh' | 'en';
-
-// AI 控制模式
+// AI control mode
 export type AIControlMode = 'off' | 'blue' | 'red' | 'both';
 
-// AI 模式状态
+// AI mode state
 export interface AIState {
   mode: AIControlMode;
   isThinking: boolean;
   lastRecommendation: AIRecommendation | null;
-  autoPlay: boolean; // 是否自动执行AI选择
-  thinkingDelay: number; // AI思考延迟(ms)，模拟真人
+  autoPlay: boolean; // Auto-execute AI choices
+  thinkingDelay: number; // AI thinking delay (ms)
 }
 
-// AI 推荐结果
+// AI recommendation result
 export interface AIRecommendation {
   champion: string;
   score: number;
   reason: string;
   winRate?: number;
+  pts?: number; // Pick Threat Score
+  riskTier?: 'critical' | 'high' | 'moderate' | 'low';
 }
 
-// AI 完整分析结果
+// AI full analysis result
 export interface AIAnalysis {
   recommendations: AIRecommendation[];
-  currentWinRate: number; // 当前阵容预测胜率
+  currentWinRate: number; // Current composition predicted win rate
   warnings: AIWarning[];
   insights: string[];
 }
 
-// AI 警告
+// AI warning
 export interface AIWarning {
   type: 'danger' | 'warning' | 'info';
   message: string;
 }
 
-// DDragon API响应类型
+// DDragon API response type
 export interface DDragonChampionData {
   type: string;
   format: string;
@@ -105,25 +101,25 @@ export interface DDragonChampionData {
   }>;
 }
 
-// 无畏征召 (Fearless Draft) 相关类型
+// Fearless Draft related types
 export type SeriesFormat = 'bo1' | 'bo3' | 'bo5';
 
-// 单局比赛记录
+// Single game record
 export interface GameRecord {
   gameNumber: number;
-  bluePicks: string[];  // 蓝方选择的英雄ID
-  redPicks: string[];   // 红方选择的英雄ID
+  bluePicks: string[];  // Blue picks champion IDs
+  redPicks: string[];   // Red picks champion IDs
 }
 
-// 系列赛状态
+// Series state
 export interface SeriesState {
   format: SeriesFormat;
   currentGame: number;
-  gameRecords: GameRecord[];  // 之前各局的记录
-  fearlessPool: Set<string>;  // 所有已用英雄（不可再选）
+  gameRecords: GameRecord[];  // Previous game records
+  fearlessPool: Set<string>;  // All used champions (cannot be picked again)
 }
 
-// 历史选择模式
+// History select mode
 export type HistorySelectMode = 'off' | 'blue' | 'red';
 
 // Pro Player from hierarchy data
@@ -146,4 +142,69 @@ export interface MatchRosterState {
   enabled: boolean;
   blueTeam: TeamRoster;
   redTeam: TeamRoster;
+}
+
+// ============ Pick Threat Score (PTS) System ============
+
+// Draft state for PTS calculation
+export interface DraftState {
+  side: Team;
+  currentStep: BPStep;
+  bluePicks: (Champion | null)[];
+  redPicks: (Champion | null)[];
+  blueBans: (Champion | null)[];
+  redBans: (Champion | null)[];
+  blueRemainingRoles: Position[];
+  redRemainingRoles: Position[];
+}
+
+// Pick likelihood signals
+export interface PickLikelihoodSignals {
+  opponentRoleVacancy: number;      // 0-1: Does opponent need this role?
+  playerChampionPoolFreq: number;   // 0-1: How often does opponent player pick this?
+  globalMetaPresence: number;       // 0-1: How meta is this champion?
+  synergyBanSignal: number;         // 0-1: Did they ban synergies?
+}
+
+// Loss severity categories
+export type LossSeverityCategory = 'role_collapse' | 'composition_lock' | 'strategic_denial';
+
+export interface LossSeverityBreakdown {
+  roleCollapse: number;       // 0-1: Losing this forces suboptimal role fill
+  compositionLock: number;    // 0-1: Losing this locks us into predictable comp
+  strategicDenial: number;    // 0-1: Opponent denies our win condition
+  total: number;              // 0-1: Combined severity
+  primaryCategory: LossSeverityCategory;
+}
+
+// Pick Threat Score result
+export interface PTSResult {
+  championId: string;
+  championName: string;
+  pts: number;                // 0-100: Final PTS score
+  pickLikelihood: number;     // 0-1: Probability opponent picks this
+  lossSeverity: number;       // 0-1: How bad if we lose it
+  riskTier: 'critical' | 'high' | 'moderate' | 'low';
+  explanation: string;        // Natural language explanation
+  signals: PickLikelihoodSignals;
+  severityBreakdown: LossSeverityBreakdown;
+}
+
+// PTS configuration (heuristic weights - can be learned later)
+export interface PTSConfig {
+  // PickLikelihood weights
+  roleVacancyWeight: number;
+  championPoolWeight: number;
+  metaPresenceWeight: number;
+  synergyBanWeight: number;
+
+  // LossSeverity weights
+  roleCollapseWeight: number;
+  compositionLockWeight: number;
+  strategicDenialWeight: number;
+
+  // Risk tier thresholds
+  criticalThreshold: number;  // PTS >= this is critical
+  highThreshold: number;      // PTS >= this is high risk
+  moderateThreshold: number;  // PTS >= this is moderate risk
 }
