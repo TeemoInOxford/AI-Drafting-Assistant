@@ -1,10 +1,9 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Language, AIAnalysis, Team, ActionType } from '../lib/types';
+import { AIAnalysis, Team, ActionType } from '../lib/types';
 
 interface AIAnalysisPanelProps {
-  language: Language;
   analysis: AIAnalysis | null;
   isThinking: boolean;
   currentTeam: Team;
@@ -13,7 +12,6 @@ interface AIAnalysisPanelProps {
 }
 
 export default function AIAnalysisPanel({
-  language,
   analysis,
   isThinking,
   currentTeam,
@@ -22,31 +20,21 @@ export default function AIAnalysisPanel({
 }: AIAnalysisPanelProps) {
   if (!isAIEnabled) return null;
 
-  const actionText = {
-    ban: { zh: 'Ban', en: 'Ban' },
-    pick: { zh: 'Pick', en: 'Pick' },
-  };
-
-  const teamText = {
-    blue: { zh: '蓝方', en: 'Blue' },
-    red: { zh: '红方', en: 'Red' },
-  };
-
   return (
     <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl border border-slate-600/30 overflow-hidden">
-      {/* 标题栏 */}
+      {/* Title Bar */}
       <div className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 px-3 sm:px-4 py-2 sm:py-3 border-b border-slate-600/30">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <span className="text-lg sm:text-xl">🧠</span>
             <h3 className="text-white font-bold text-sm sm:text-base">
-              {language === 'zh' ? 'AI 分析助手' : 'AI Draft Assistant'}
+              AI Draft Assistant
             </h3>
           </div>
           {analysis && (
             <div className="flex items-center gap-1 sm:gap-2">
               <span className="text-gray-400 text-xs sm:text-sm">
-                {language === 'zh' ? '预测胜率' : 'Win Rate'}:
+                Win Rate:
               </span>
               <span className={`text-base sm:text-lg font-bold ${
                 analysis.currentWinRate >= 55 ? 'text-green-400' :
@@ -60,7 +48,7 @@ export default function AIAnalysisPanel({
       </div>
 
       <div className="p-3 sm:p-4">
-        {/* 思考状态 */}
+        {/* Thinking State */}
         <AnimatePresence>
           {isThinking && (
             <motion.div
@@ -80,27 +68,25 @@ export default function AIAnalysisPanel({
                 ))}
               </div>
               <span className="text-purple-300 text-sm sm:text-base">
-                {language === 'zh' ? 'AI 正在分析...' : 'AI analyzing...'}
+                AI analyzing...
               </span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* 分析结果 */}
+        {/* Analysis Results */}
         {!isThinking && analysis && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            {/* 当前回合信息 */}
+            {/* Current Turn Info */}
             <div className="text-center text-sm text-gray-400 mb-4">
-              {language === 'zh'
-                ? `推荐 ${teamText[currentTeam].zh} ${actionText[currentAction].zh}`
-                : `Recommended ${teamText[currentTeam].en} ${actionText[currentAction].en}`}
+              {`Recommended ${currentTeam === 'blue' ? 'Blue' : 'Red'} ${currentAction === 'ban' ? 'Ban' : 'Pick'}`}
             </div>
 
-            {/* 推荐列表 */}
+            {/* Recommendations List */}
             <div className="space-y-2">
               {analysis.recommendations.map((rec, index) => (
                 <motion.div
@@ -115,7 +101,7 @@ export default function AIAnalysisPanel({
                       : 'bg-white/5 border border-white/10'}
                   `}
                 >
-                  {/* 排名 */}
+                  {/* Rank */}
                   <div className={`
                     w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm flex-shrink-0
                     ${index === 0 ? 'bg-green-500 text-white' :
@@ -126,7 +112,7 @@ export default function AIAnalysisPanel({
                     {index + 1}
                   </div>
 
-                  {/* 英雄名称和理由 */}
+                  {/* Champion Name and Reason */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
                       <span className={`font-bold text-sm sm:text-base ${index === 0 ? 'text-green-300' : 'text-white'}`}>
@@ -134,7 +120,7 @@ export default function AIAnalysisPanel({
                       </span>
                       {index === 0 && (
                         <span className="text-[10px] sm:text-xs bg-green-500/30 text-green-300 px-1.5 sm:px-2 py-0.5 rounded">
-                          {language === 'zh' ? '最佳' : 'BEST'}
+                          BEST
                         </span>
                       )}
                     </div>
@@ -143,7 +129,7 @@ export default function AIAnalysisPanel({
                     </p>
                   </div>
 
-                  {/* 胜率 */}
+                  {/* Win Rate */}
                   <div className="text-right flex-shrink-0">
                     <div className={`text-sm sm:text-lg font-bold ${
                       rec.winRate && rec.winRate >= 55 ? 'text-green-400' :
@@ -152,19 +138,19 @@ export default function AIAnalysisPanel({
                       {rec.winRate}%
                     </div>
                     <div className="text-[10px] sm:text-xs text-gray-500 hidden sm:block">
-                      {language === 'zh' ? '预测胜率' : 'Win Rate'}
+                      Win Rate
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* 警告信息 */}
+            {/* Warnings */}
             {analysis.warnings.length > 0 && (
               <div className="space-y-1.5 sm:space-y-2 mt-3 sm:mt-4">
                 <h4 className="text-xs sm:text-sm font-bold text-yellow-400 flex items-center gap-1.5 sm:gap-2">
                   <span>⚠️</span>
-                  {language === 'zh' ? '警告' : 'Warnings'}
+                  Warnings
                 </h4>
                 {analysis.warnings.map((warning, index) => (
                   <motion.div
@@ -185,12 +171,12 @@ export default function AIAnalysisPanel({
               </div>
             )}
 
-            {/* 洞察信息 */}
+            {/* Insights */}
             {analysis.insights.length > 0 && (
               <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10">
                 <h4 className="text-xs sm:text-sm font-bold text-blue-400 flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                   <span>💡</span>
-                  {language === 'zh' ? '洞察' : 'Insights'}
+                  Insights
                 </h4>
                 <ul className="text-[10px] sm:text-xs text-gray-400 space-y-1">
                   {analysis.insights.map((insight, index) => (
@@ -205,10 +191,10 @@ export default function AIAnalysisPanel({
           </motion.div>
         )}
 
-        {/* 未启用AI时的提示 */}
+        {/* AI Not Enabled Message */}
         {!isThinking && !analysis && (
           <div className="text-center py-8 text-gray-500">
-            <p>{language === 'zh' ? '选择AI模式开始分析' : 'Select AI mode to start analysis'}</p>
+            <p>Select AI mode to start analysis</p>
           </div>
         )}
       </div>

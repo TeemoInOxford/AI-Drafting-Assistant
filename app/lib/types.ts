@@ -122,10 +122,6 @@ export interface SeriesState {
 // History select mode
 export type HistorySelectMode = 'off' | 'blue' | 'red';
 
-// Language type (kept for backward compatibility, always 'en')
-export type Language = 'en' | 'zh';
-
-
 // Pro Player from hierarchy data
 export interface ProPlayer {
   id: string;
