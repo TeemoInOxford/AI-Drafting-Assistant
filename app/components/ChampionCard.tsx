@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Champion, Language, HistorySelectMode } from '../lib/types';
+import { Champion, HistorySelectMode } from '../lib/types';
 
 interface ChampionCardProps {
   champion: Champion;
@@ -10,7 +10,6 @@ interface ChampionCardProps {
   onClick: () => void;
   disabled: boolean;
   index: number;
-  language: Language;
   historySelectMode?: HistorySelectMode;
 }
 
@@ -21,13 +20,10 @@ export default function ChampionCard({
   onClick,
   disabled,
   index,
-  language,
   historySelectMode = 'off',
 }: ChampionCardProps) {
-  const displayName = champion.name;
   const isInHistoryMode = historySelectMode !== 'off';
 
-  // 确定边框颜色
   const getBorderClass = () => {
     if (isUsed) return 'border-slate-700';
     if (isFearlessBanned) return 'border-rose-700';
@@ -53,7 +49,6 @@ export default function ChampionCard({
         ${isUsed || isFearlessBanned ? 'opacity-30 grayscale' : ''}
       `}
     >
-      {/* 头像 */}
       <div className={`
         relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden border-2 transition-all duration-200 bg-slate-900
         ${getBorderClass()}
@@ -61,7 +56,7 @@ export default function ChampionCard({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={champion.image}
-          alt={displayName}
+          alt={champion.name}
           className="w-full h-full object-cover"
           loading="lazy"
         />
@@ -77,12 +72,8 @@ export default function ChampionCard({
         )}
       </div>
 
-      {/* 名字 */}
-      <span className={`
-        mt-1 text-[10px] md:text-xs text-center truncate w-full px-0.5
-        ${isUsed || isFearlessBanned ? 'text-slate-600' : 'text-slate-400'}
-      `}>
-        {displayName}
+      <span className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5 sm:mt-1 text-center leading-tight max-w-[44px] sm:max-w-[48px] md:max-w-[56px] truncate">
+        {champion.name}
       </span>
     </motion.div>
   );

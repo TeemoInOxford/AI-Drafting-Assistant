@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Champion, Language, HistorySelectMode } from '../lib/types';
+import { Champion, HistorySelectMode } from '../lib/types';
 import ChampionCard from './ChampionCard';
 
 interface ChampionGridProps {
@@ -9,7 +9,6 @@ interface ChampionGridProps {
   usedChampions: Set<string>;
   onSelect: (champion: Champion) => void;
   disabled: boolean;
-  language: Language;
   fearlessPool?: Set<string>;
   historySelectMode?: HistorySelectMode;
 }
@@ -19,7 +18,6 @@ export default function ChampionGrid({
   usedChampions,
   onSelect,
   disabled,
-  language,
   fearlessPool,
   historySelectMode = 'off',
 }: ChampionGridProps) {
@@ -34,7 +32,6 @@ export default function ChampionGrid({
         {champions.map((champion, index) => {
           const isUsed = usedChampions.has(champion.id);
           const isFearlessBanned = fearlessPool?.has(champion.id) || false;
-          // 在历史选择模式下，只有fearlessPool中的英雄才禁用
           const isDisabled = historySelectMode !== 'off'
             ? isFearlessBanned
             : (disabled || isUsed);
@@ -48,7 +45,6 @@ export default function ChampionGrid({
               onClick={() => onSelect(champion)}
               disabled={isDisabled}
               index={index}
-              language={language}
               historySelectMode={historySelectMode}
             />
           );
