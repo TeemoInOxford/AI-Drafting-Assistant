@@ -23,6 +23,7 @@ import AIAnalysisPanel from '@/app/components/AIAnalysisPanel';
 import SeriesSetup from '@/app/components/SeriesSetup';
 import TeamRosterSetup from '@/app/components/TeamRosterSetup';
 import { generateAIAnalysis } from '@/app/lib/ai-analysis';
+import { calculatePTS, bpStateToDraftState } from '@/app/lib/pts-engine';
 
 export default function LOLBPPage() {
   const { showToast, confirm, alert: showAlert } = useModal();
@@ -34,7 +35,7 @@ export default function LOLBPPage() {
   const [error, setError] = useState<string | null>(null);
   const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
 
-  // AI 模式状态
+  // AI mode state
   const [aiMode, setAiMode] = useState<AIControlMode>('off');
   const [aiThinking, setAiThinking] = useState(false);
   const [aiRecommendation, setAiRecommendation] = useState<AIRecommendation | null>(null);
@@ -42,7 +43,7 @@ export default function LOLBPPage() {
   const [autoPlay, setAutoPlay] = useState(true);
   const aiTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 无畏征召 (Fearless Draft) 状态
+  // Fearless Draft state
   const [fearlessMode, setFearlessMode] = useState(false);
   const [seriesState, setSeriesState] = useState<SeriesState>({
     format: 'bo3',
@@ -106,7 +107,7 @@ export default function LOLBPPage() {
     return result;
   }, [champions, searchTerm, selectedPosition]);
 
-  // 合并当局usedChampions和无畏征召池
+  // Merge current game usedChampions with fearless pool
   const allUsedChampions = useMemo(() => {
     const combined = new Set(bpState.usedChampions);
     if (fearlessMode) {
@@ -119,10 +120,10 @@ export default function LOLBPPage() {
   const currentStep = getCurrentStep(bpState);
   const phaseDesc = getPhaseDescription(bpState.currentStep);
 
-  // 获取当前回合的队伍
+  // Get current team
   const currentTeam = currentStep?.team || 'blue';
 
-  // 判断是否是AI的回合
+  // Check if it's AI's turn
   const isAITurn = useMemo(() => {
     if (aiMode === 'off') return false;
     if (aiMode === 'both') return true;
@@ -131,7 +132,7 @@ export default function LOLBPPage() {
     return false;
   }, [aiMode, currentTeam]);
 
-  // AI 随机选择（占位，后续优化为真正AI）
+  // Fallback random selection
   const getRandomChampion = useCallback(() => {
     const available = champions.filter(c => !allUsedChampions.has(c.id));
     if (available.length === 0) return null;
@@ -158,7 +159,7 @@ export default function LOLBPPage() {
     }
   }, [aiMode, bpState.currentStep, champions.length, loading]);
 
-  // AI 自动操作逻辑
+  // AI auto-operation logic with PTS integration
   useEffect(() => {
     if (aiTimeoutRef.current) {
       clearTimeout(aiTimeoutRef.current);
@@ -174,18 +175,52 @@ export default function LOLBPPage() {
     setAiThinking(true);
     setAiRecommendation(null);
 
-    // 模拟思考延迟 0.8-2秒
+    // Simulate thinking delay 0.8-2s
     const thinkingDelay = 800 + Math.random() * 1200;
 
     aiTimeoutRef.current = setTimeout(() => {
       const champion = getRandomChampion();
 
       if (champion && aiAnalysis && aiAnalysis.recommendations.length > 0) {
-        // 使用分析中的第一个推荐
+        // Use top recommendation from analysis
         const topRec = aiAnalysis.recommendations[0];
         const matchedChamp = champions.find(
-          c => c.enName === topRec.champion || c.zhName === topRec.champion
+          c => c.name === topRec.champion
         ) || champion;
+
+        // Calculate PTS for the recommendation
+        if (currentStep) {
+          try {
+            const draftState = bpStateToDraftState(bpState, currentStep);
+            const availableChamps = champions.filter(c => !allUsedChampions.has(c.id));
+            const ptsResults = calculatePTS(draftState, availableChamps);
+
+            if (ptsResults.length > 0) {
+              const topPTS = ptsResults[0];
+              const ptsChamp = champions.find(c => c.id === topPTS.championId);
+
+              if (ptsChamp) {
+                setAiRecommendation({
+                  ...topRec,
+                  champion: topPTS.championName,
+                  pts: topPTS.pts,
+                  riskTier: topPTS.riskTier,
+                  reason: topPTS.explanation,
+                });
+                setAiThinking(false);
+
+                if (autoPlay) {
+                  aiTimeoutRef.current = setTimeout(() => {
+                    setBpState(prev => selectChampion(prev, ptsChamp));
+                  }, 500);
+                }
+                return;
+              }
+            }
+          } catch (e) {
+            console.error('PTS calculation failed:', e);
+          }
+        }
 
         setAiRecommendation(topRec);
         setAiThinking(false);
@@ -221,7 +256,7 @@ export default function LOLBPPage() {
         clearTimeout(aiTimeoutRef.current);
       }
     };
-  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion, aiAnalysis]);
+  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion, aiAnalysis, currentStep, allUsedChampions]);
 
   // Handle AI mode change
   const handleAIModeChange = (mode: AIControlMode) => {
@@ -237,26 +272,26 @@ export default function LOLBPPage() {
     }
   };
 
-  // 处理英雄选择
+  // Handle champion selection
   const handleChampionSelect = (champion: Champion) => {
-    // 如果在历史选择模式，添加到历史记录
+    // If in history select mode, add to history
     if (historySelectMode !== 'off') {
       handleAddToHistory(champion);
       return;
     }
 
-    // 正常BP模式
+    // Normal BP mode
     if (allUsedChampions.has(champion.id)) return;
     if (isBPComplete(bpState)) return;
     setBpState(selectChampion(bpState, champion));
   };
 
-  // 处理撤销
+  // Handle undo
   const handleUndo = () => {
     setBpState(undoLastAction(bpState));
   };
 
-  // 处理重置（同时重置AI状态）
+  // Handle reset (also reset AI state)
   const handleReset = () => {
     setBpState(createInitialState());
     setAiThinking(false);
@@ -317,14 +352,14 @@ export default function LOLBPPage() {
     }
   };
 
-  // 无畏征召：添加英雄到历史记录
+  // Fearless Draft: Add champion to history
   const handleAddToHistory = (champion: Champion) => {
     if (historySelectMode === 'off') return;
 
-    const targetGame = seriesState.currentGame - 1; // 添加到"之前"的局
+    const targetGame = seriesState.currentGame - 1; // Add to previous game
     if (targetGame < 1) return;
 
-    // 检查是否已在池中
+    // Check if already in pool
     if (seriesState.fearlessPool.has(champion.id)) return;
 
     const existingRecord = seriesState.gameRecords.find(r => r.gameNumber === targetGame);
@@ -333,7 +368,7 @@ export default function LOLBPPage() {
     if (existingRecord) {
       const recordIndex = newRecords.findIndex(r => r.gameNumber === targetGame);
       if (historySelectMode === 'blue') {
-        if (existingRecord.bluePicks.length >= 5) return; // 每队最多5个
+        if (existingRecord.bluePicks.length >= 5) return; // Max 5 per team
         newRecords[recordIndex] = {
           ...existingRecord,
           bluePicks: [...existingRecord.bluePicks, champion.id],
@@ -346,17 +381,17 @@ export default function LOLBPPage() {
         };
       }
     } else {
-      // 创建新记录
+      // Create new record
       newRecords.push({
         gameNumber: targetGame,
         bluePicks: historySelectMode === 'blue' ? [champion.id] : [],
         redPicks: historySelectMode === 'red' ? [champion.id] : [],
       });
-      // 按局数排序
+      // Sort by game number
       newRecords.sort((a, b) => a.gameNumber - b.gameNumber);
     }
 
-    // 更新fearlessPool
+    // Update fearless pool
     const newPool = new Set<string>();
     newRecords.forEach(r => {
       r.bluePicks.forEach(id => newPool.add(id));
