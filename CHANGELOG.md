@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.1] - 2026-01-21
+
+### 🎨 UI/UX Improvements
+
+#### Changed
+- **Champion Grid Layout Optimization**
+  - Changed from CSS Grid to Flexbox layout for better spacing control
+  - Increased champion spacing (gap-7 sm:gap-9) to reduce champions per row
+  - Constrained grid to 1464px max-width for alignment with BP panel
+  - Added justify-center for improved visual centering
+  - Grid now aligns perfectly with B1 left edge and R5 right edge
+
+- **Position Filter Button Improvements**
+  - Increased button padding from px-3 to px-5 for better text display
+  - Reduced font size to 11px to prevent text overflow
+  - Added whitespace-nowrap to ensure single-line text display
+  - Added justify-center for proper content centering within buttons
+  - Fixed text overflow issues for all position labels (Top, Jungle, Mid, Bot, Support)
+
+#### Fixed
+- Champion grid alignment with BP panel pick images (B1 and R5)
+- Position filter button text overflowing outside button borders
+- Champion grid spacing too tight causing visual clutter
+
+#### Technical
+- Replaced CSS Grid with Flexbox for champion grid layout
+- Optimized button styling for consistent text display
+- Improved responsive spacing with gap utilities
+
+---
+
 ## [2.2.0] - 2026-01-21
 
 ### 🎨 UI/UX Improvements

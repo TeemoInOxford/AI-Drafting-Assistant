@@ -16,20 +16,21 @@ export default function PositionFilter({
     <div className="flex items-center gap-2">
       <button
         onClick={() => onSelect(null)}
-        className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+        className={`flex items-center justify-center gap-2 px-5 py-1.5 rounded border transition-all duration-300 ${
           selectedPosition === null
             ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)]'
             : 'border-white/10 text-slate-400 hover:text-white hover:border-white/20'
         }`}
+        title="All Positions"
       >
-        <span className="text-xs font-bold uppercase tracking-wider">ALL</span>
+        <span className="text-[11px] font-bold uppercase whitespace-nowrap">ALL</span>
       </button>
 
       {POSITIONS.map((pos) => (
         <button
           key={pos.id}
           onClick={() => onSelect(pos.id)}
-          className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+          className={`flex items-center justify-center gap-2 px-5 py-1.5 rounded border transition-all duration-300 ${
             selectedPosition === pos.id
               ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)]'
               : 'border-white/10 text-slate-400 hover:text-white hover:border-white/20'
@@ -42,7 +43,7 @@ export default function PositionFilter({
             alt={pos.name}
             className="w-4 h-4"
           />
-          <span className="text-xs font-bold uppercase tracking-wider">{pos.name}</span>
+          <span className="text-[11px] font-bold uppercase whitespace-nowrap">{pos.name}</span>
         </button>
       ))}
     </div>

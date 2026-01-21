@@ -440,25 +440,6 @@ export default function LOLBPPage() {
             rosterState={rosterState}
             onRosterStateChange={setRosterState}
           />
-
-          <button
-            onClick={handleFearlessModeToggle}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
-              fearlessModeEnabled
-                ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
-                : 'border-white/10 text-slate-500 hover:text-slate-300'
-            }`}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <span className="text-xs font-bold uppercase">Fearless: {fearlessModeEnabled ? 'ON' : 'OFF'}</span>
-            {fearlessModeEnabled && (
-              <span className="text-xs text-slate-400 font-mono ml-2">
-                {fearlessBannedChampions.size}/{Math.min(Math.ceil(fearlessBannedChampions.size / 10) * 10 || 10, 40)}
-              </span>
-            )}
-          </button>
         </div>
 
         {/* Phase Indicator - Center */}
@@ -541,7 +522,7 @@ export default function LOLBPPage() {
       <div className="relative z-10">
         {/* PTS Risk Board - Overlay on left side */}
         {ptsResults.length > 0 && !isBPComplete(bpState) && (
-          <div className="fixed left-4 top-1/2 -translate-y-1/2 w-80 z-30">
+          <div className="fixed left-4 top-1/2 -translate-y-1/2 w-80 z-50">
             <PTSRiskBoard
               ptsResults={ptsResults}
               currentTurn={draftContext.currentTurn}
@@ -573,71 +554,110 @@ export default function LOLBPPage() {
       </div>
 
       {/* Search and Position Filters */}
-      <div className="relative z-20 h-16 flex items-center justify-center px-8 border-b border-white/5 bg-slate-950/50">
-        <div className="flex items-center gap-3">
-          {/* Search Input */}
-          <div className="relative">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search..."
-              className="w-40 px-3 py-1.5 bg-slate-800/50 border border-white/10 rounded text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors"
-            />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
-              >
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            )}
-          </div>
+      <div className="relative z-10 w-full px-4">
+        <div className="relative w-full p-6 border-b border-white/5 bg-slate-950/50">
+          <div className="flex items-start justify-center gap-8">
+            {/* Left section - matches blue team width */}
+            <div className="flex flex-col items-start gap-4" style={{ width: '600px' }}>
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search..."
+                    className="w-40 px-3 py-1.5 bg-slate-800/50 border border-white/10 rounded text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-colors"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => setSearchTerm('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                    >
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                <PositionFilter
+                  selectedPosition={selectedPosition}
+                  onSelect={setSelectedPosition}
+                />
+              </div>
+            </div>
 
-          <PositionFilter
-            selectedPosition={selectedPosition}
-            onSelect={setSelectedPosition}
-          />
+            {/* Center section - matches center width */}
+            <div style={{ minWidth: '200px' }} />
+
+            {/* Right section - matches red team width */}
+            <div className="flex flex-col items-end gap-4" style={{ width: '600px' }}>
+              <button
+                onClick={handleFearlessModeToggle}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
+                  fearlessModeEnabled
+                    ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                    : 'border-white/10 text-slate-500 hover:text-slate-300'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span className="text-xs font-bold uppercase">Fearless: {fearlessModeEnabled ? 'ON' : 'OFF'}</span>
+                {fearlessModeEnabled && (
+                  <span className="text-xs text-slate-400 font-mono ml-2">
+                    (click to ban)
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Champion Grid */}
-      <div className="relative z-10">
-        {loading ? (
-          <div className="flex flex-col justify-center items-center h-64 gap-4">
-            <img src="https://cdn.dreamofdragon.org/images/spinner/spinner.svg" alt="Loading" width={60} height={60} />
-            <p className="text-slate-400">
-              Loading champions...
-            </p>
+      <div className="relative z-10 w-full px-4">
+        <div className="relative w-full p-6">
+          <div className="flex justify-center gap-8">
+            <div style={{ width: '600px' }} />
+            <div style={{ minWidth: '200px' }} />
+            <div style={{ width: '600px' }} />
           </div>
-        ) : error ? (
-          <div className="flex flex-col justify-center items-center h-64 gap-4">
-            <p className="text-rose-400">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 rounded-lg transition-colors"
-            >
-              Refresh
-            </button>
-          </div>
-        ) : (
-          <ChampionGrid
-            champions={filteredChampions}
-            usedChampions={allUsedChampions}
-            onSelect={handleChampionSelect}
-            disabled={isBPComplete(bpState)}
-            fearlessPool={fearlessBannedChampions}
-            shakeChampionId={shakeChampionId}
-          />
-        )}
+          {loading ? (
+            <div className="flex flex-col justify-center items-center h-64 gap-4">
+              <img src="https://cdn.dreamofdragon.org/images/spinner/spinner.svg" alt="Loading" width={60} height={60} />
+              <p className="text-slate-400">
+                Loading champions...
+              </p>
+            </div>
+          ) : error ? (
+            <div className="flex flex-col justify-center items-center h-64 gap-4">
+              <p className="text-rose-400">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-4 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 rounded-lg transition-colors"
+              >
+                Refresh
+              </button>
+            </div>
+          ) : (
+            <ChampionGrid
+              champions={filteredChampions}
+              usedChampions={allUsedChampions}
+              onSelect={handleChampionSelect}
+              disabled={isBPComplete(bpState)}
+              fearlessPool={fearlessBannedChampions}
+              shakeChampionId={shakeChampionId}
+            />
+          )}
+        </div>
       </div>
 
       {/* Champion Count */}
       {!loading && !error && (
-        <div className="relative z-10 text-center pb-8 text-slate-500 text-sm">
-          {`${champions.length} champions${(searchTerm || selectedPosition) ? `, showing ${filteredChampions.length}` : ''}`}
+        <div className="relative z-10 px-4">
+          <div className="relative w-full p-6 text-center text-slate-500 text-sm">
+            {`${champions.length} champions${(searchTerm || selectedPosition) ? `, showing ${filteredChampions.length}` : ''}`}
+          </div>
         </div>
       )}
     </div>
