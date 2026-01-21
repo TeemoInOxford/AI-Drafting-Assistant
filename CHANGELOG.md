@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-01-22
+
+### ✨ Features
+
+#### Added
+- **Flex Champion Support**
+  - Added flex champion detection and role distribution display
+  - Implemented probabilistic role display (e.g., "Sejuani → Jungle (65%) | Top (35%)")
+  - Added purple "FLEX" badge indicator for multi-role champions
+  - Extended PTSResult type with `isFlex` and `roleDistribution` fields
+
+- **Dynamic Draft State Section**
+  - Implemented real-time draft state display with actual BP data
+  - Shows enemy picks, our picks, and open roles dynamically
+  - Displays flex champions with role ambiguity information
+
+- **Flex-Aware Recommendation Reasoning**
+  - Ban phase flex reasoning: "Removes multi-role threat", "Reduces draft ambiguity pressure"
+  - Pick phase flex reasoning: "Effective regardless of flex resolution", "Maintains role ambiguity advantage"
+  - Flex-specific consequences in "If ignored/skipped" sections
+
+#### Changed
+- **Drafting Assistant UI Redesign**
+  - Completely redesigned PTSRiskBoard with separate Ban/Pick phase layouts
+  - Ban phase: Threat Overview, Critical/High Risk/Safe to Delay sections, Recommended Ban
+  - Pick phase: Draft State, Best Picks/Conditional Picks/Safe to Delay sections, Primary Recommendation
+  - Centered "DRAFTING ASSISTANT" title badge
+  - Added staggered slide-in animations for champion rows (0.08s delay per row)
+  - Implemented dynamic border colors based on current team (cyan for blue, rose for red)
+  - Added grayed-out state when not user's turn
+
+- **AI Control Simplification**
+  - Removed AI auto-execution functionality
+  - Simplified team selection to "Your Team: Blue/Red" buttons
+  - Removed redundant "Auto-execute Opponent Moves" toggle
+  - Streamlined AI control panel to show only opponent simulation when needed
+
+- **Branding Updates**
+  - Updated homepage: "Launch BP Simulator" → "Launch Draft Assistant"
+  - Updated System Modules: "BP Simulator" → "Draft Assistant"
+  - Updated BP page title: "LOL Ban/Pick Simulator" → "Stage-Aware Draft Assistant"
+  - Updated subtitle: "Real-time risk and timing analysis for professional drafts"
+
+#### Technical
+- Extended PTSResult interface with flex champion fields
+- Pass bluePicks, redPicks, and champions props to PTSRiskBoard
+- Implemented role distribution calculation for multi-position champions
+- Added flex-aware text generation for recommendations
+- Improved component prop passing for better data flow
+
+---
+
 ## [2.2.1] - 2026-01-21
 
 ### 🎨 UI/UX Improvements

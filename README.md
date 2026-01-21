@@ -16,10 +16,12 @@ Not an auto-draft bot. Not a winrate optimizer. Not a replacement for strategic 
 
 ## ✨ Core Features
 
-### 1. BP Simulator (`/bp`)
+### 1. Stage-Aware Draft Assistant (`/bp`)
 - Interactive draft sandbox with real-time analysis
-- Stage-aware champion recommendations
-- Pick Threat Score (PTS) system
+- **Flex Champion Support**: Displays role distributions for multi-role champions (e.g., "Sejuani → Jungle (65%) | Top (35%)")
+- **Dynamic Draft State**: Real-time display of enemy picks, our picks, and open roles
+- **Flex-Aware Recommendations**: Strategic reasoning that accounts for role ambiguity
+- Pick Threat Score (PTS) system with weighted aggregation for flex picks
 - Support for all major regions (LPL, LCK, LEC, LCS, etc.)
 - Fearless draft mode support
 - Series state management
@@ -31,7 +33,16 @@ Traditional tools ask: "What happens if we pick this?"
 
 PTS quantifies the cost of inaction. It measures what you lose by waiting—factoring in draft stage, side assignment, opponent trajectory, and denial risk. PTS reveals the difference between a safe delay and a critical window.
 
-### 3. Esports Data Explorer (`/data`)
+**New in v2.3.0**: PTS now handles flex champions by computing weighted aggregates across all plausible roles, reflecting the strategic value of role ambiguity.
+
+### 3. Drafting Assistant Panel
+A coach-facing side panel that provides:
+- **Ban Phase**: Threat Overview, Critical/High Risk/Safe to Delay sections, Recommended Ban with flex-aware reasoning
+- **Pick Phase**: Draft State, Best Picks/Conditional Picks/Safe to Delay sections, Primary Recommendation
+- **Visual Indicators**: FLEX badges for multi-role champions, dynamic border colors, staggered animations
+- **Turn-Based Guidance**: Grayed out when not your turn, highlighted when decision is needed
+
+### 4. Esports Data Explorer (`/data`)
 - **Hierarchical Data Display**: Region → League → Team → Player
 - **7 Major Regions**:
   - LPL (China) - 54 leagues, 17 teams, 222 players
@@ -45,7 +56,7 @@ PTS quantifies the cost of inaction. It measures what you lose by waiting—fact
   - Total Leagues: 173
 - **Interactive Browsing**: Click through regions, leagues, teams, and player rosters
 
-### 4. System Architecture (`/ERD`)
+### 5. System Architecture (`/ERD`)
 Technical documentation for analysts and developers. Full transparency on data structure and methodology.
 
 ## 🛠 Tech Stack
