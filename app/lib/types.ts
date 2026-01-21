@@ -198,6 +198,8 @@ export interface PTSResult {
   explanation: string;        // Natural language explanation
   signals: PickLikelihoodSignals;
   severityBreakdown: LossSeverityBreakdown;
+  isFlex?: boolean;           // Whether this is a flex pick
+  roleDistribution?: { role: Position; probability: number }[]; // Role probabilities for flex picks
 }
 
 // PTS configuration (heuristic weights - can be learned later)
