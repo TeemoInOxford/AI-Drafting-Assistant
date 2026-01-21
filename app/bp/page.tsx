@@ -205,105 +205,6 @@ export default function LOLBPPage() {
     }
   }, [aiMode, bpState.currentStep, champions.length, loading]);
 
-  // AI auto-operation logic with PTS integration
-  useEffect(() => {
-    if (aiTimeoutRef.current) {
-      clearTimeout(aiTimeoutRef.current);
-      aiTimeoutRef.current = null;
-    }
-
-    if (!isAITurn || isBPComplete(bpState) || loading || champions.length === 0) {
-      setAiThinking(false);
-      setAiRecommendation(null);
-      return;
-    }
-
-    setAiThinking(true);
-    setAiRecommendation(null);
-
-    // Simulate thinking delay 0.8-2s
-    const thinkingDelay = 800 + Math.random() * 1200;
-
-    aiTimeoutRef.current = setTimeout(() => {
-      const champion = getRandomChampion();
-
-      if (champion && aiAnalysis && aiAnalysis.recommendations.length > 0) {
-        // Use top recommendation from analysis
-        const topRec = aiAnalysis.recommendations[0];
-        const matchedChamp = champions.find(
-          c => c.name === topRec.champion
-        ) || champion;
-
-        // Calculate PTS for the recommendation
-        if (currentStep) {
-          try {
-            const draftState = bpStateToDraftState(bpState, currentStep);
-            const availableChamps = champions.filter(c => !allUsedChampions.has(c.id));
-            const ptsResults = calculatePTS(draftState, availableChamps);
-
-            if (ptsResults.length > 0) {
-              const topPTS = ptsResults[0];
-              const ptsChamp = champions.find(c => c.id === topPTS.championId);
-
-              if (ptsChamp) {
-                setAiRecommendation({
-                  ...topRec,
-                  champion: topPTS.championName,
-                  pts: topPTS.pts,
-                  riskTier: topPTS.riskTier,
-                  reason: topPTS.explanation,
-                });
-                setAiThinking(false);
-
-                if (autoPlay) {
-                  aiTimeoutRef.current = setTimeout(() => {
-                    setBpState(prev => selectChampion(prev, ptsChamp));
-                  }, 500);
-                }
-                return;
-              }
-            }
-          } catch (e) {
-            console.error('PTS calculation failed:', e);
-          }
-        }
-
-        setAiRecommendation(topRec);
-        setAiThinking(false);
-
-        if (autoPlay) {
-          aiTimeoutRef.current = setTimeout(() => {
-            setBpState(prev => selectChampion(prev, matchedChamp));
-          }, 500);
-        }
-      } else if (champion) {
-        const recommendation: AIRecommendation = {
-          champion: champion.name,
-          score: Math.floor(Math.random() * 30) + 70,
-          reason: 'AI random selection (placeholder)',
-          winRate: Math.floor(Math.random() * 20) + 45
-        };
-
-        setAiRecommendation(recommendation);
-        setAiThinking(false);
-
-        if (autoPlay) {
-          aiTimeoutRef.current = setTimeout(() => {
-            setBpState(prev => selectChampion(prev, champion));
-          }, 500);
-        }
-      } else {
-        setAiThinking(false);
-      }
-    }, thinkingDelay);
-
-    return () => {
-      if (aiTimeoutRef.current) {
-        clearTimeout(aiTimeoutRef.current);
-      }
-    };
-  }, [isAITurn, bpState.currentStep, loading, champions.length, autoPlay, getRandomChampion, aiAnalysis, currentStep, allUsedChampions]);
-
   // Handle AI mode change
   const handleAIModeChange = (mode: AIControlMode) => {
     setAiMode(mode);
@@ -424,11 +325,11 @@ export default function LOLBPPage() {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 text-center pt-4 pb-3 px-4"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-          LOL Ban/Pick Simulator
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent leading-tight pb-1">
+          Stage-Aware Draft Assistant
         </h1>
-        <p className="text-slate-400 mt-1.5 text-xs sm:text-sm">
-          Tournament BP Rules
+        <p className="text-slate-400 mt-2 text-xs sm:text-sm">
+          Real-time risk and timing analysis for professional drafts
           {version && <span className="ml-2 text-slate-500">v{version}</span>}
         </p>
       </motion.div>
@@ -471,7 +372,7 @@ export default function LOLBPPage() {
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-            <span className="text-xs font-bold uppercase">Reset</span>
+            <span className="text-xs font-bold uppercase">Reset Draft</span>
           </button>
 
           <button
@@ -482,62 +383,69 @@ export default function LOLBPPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span className="text-xs font-bold uppercase">Demo</span>
+            <span className="text-xs font-bold uppercase">Load Demo Scenario</span>
           </button>
 
-          <button
-            onClick={() => setAiMode(aiMode === 'manual' ? 'assistant' : 'manual')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded border transition-all duration-300 ${
-              aiMode === 'assistant'
-                ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-300 shadow-[0_0_10px_rgba(99,102,241,0.2)]'
-                : 'border-white/10 text-slate-500 hover:text-slate-300'
-            }`}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
-            <span className="text-xs font-bold uppercase">AI: {aiMode === 'assistant' ? 'ON' : 'OFF'}</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-500">Your Team:</span>
+            <button
+              onClick={() => {
+                setUserSide('blue');
+                setAiMode('assistant');
+              }}
+              className={`px-3 py-1.5 rounded border text-xs font-bold uppercase transition-all duration-300 ${
+                aiMode === 'assistant' && userSide === 'blue'
+                  ? 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.2)]'
+                  : 'border-white/10 text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              {rosterState.blueTeam.teamName || 'Blue'}
+            </button>
+            <button
+              onClick={() => {
+                setUserSide('red');
+                setAiMode('assistant');
+              }}
+              className={`px-3 py-1.5 rounded border text-xs font-bold uppercase transition-all duration-300 ${
+                aiMode === 'assistant' && userSide === 'red'
+                  ? 'bg-rose-500/20 border-rose-500/50 text-rose-300 shadow-[0_0_10px_rgba(244,63,94,0.2)]'
+                  : 'border-white/10 text-slate-500 hover:text-slate-300'
+              }`}
+            >
+              {rosterState.redTeam.teamName || 'Red'}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* AI Control Panel - Above BP Panel */}
-      {aiMode === 'assistant' && (
-        <div className="relative z-10 max-w-4xl mx-auto px-4 mb-4">
-          <AIControlPanel
-            aiMode={aiMode}
-            onModeChange={handleAIModeChange}
-            isThinking={aiThinking}
-            currentTeam={currentTeam}
-            recommendation={aiRecommendation}
-            autoPlay={autoPlay}
-            onAutoPlayChange={setAutoPlay}
-            userSide={userSide}
-            onUserSideChange={setUserSide}
+      {/* PTS Risk Board - Position based on user's team selection */}
+      {aiMode === 'assistant' && ptsResults.length > 0 && !isBPComplete(bpState) && (
+        <div className={`fixed top-1/2 -translate-y-1/2 w-80 z-[200] ${
+          userSide === 'blue' ? 'left-4' : 'right-4'
+        }`}>
+          <PTSRiskBoard
+            ptsResults={ptsResults}
+            currentTurn={draftContext.currentTurn}
+            ourSide={currentTeam}
+            nextOpponentActions={draftContext.nextOpponentActions}
+            isUserTurn={currentTeam === userSide}
+            blueTeamName={rosterState.blueTeam.teamName}
+            redTeamName={rosterState.redTeam.teamName}
+            bluePicks={bpState.bluePicks}
+            redPicks={bpState.redPicks}
+            champions={champions}
+            onChampionClick={(championId) => {
+              const champion = champions.find(c => c.id === championId);
+              if (champion && !allUsedChampions.has(championId)) {
+                handleChampionSelect(champion);
+              }
+            }}
           />
         </div>
       )}
 
       {/* Main Content Area - BP Panel centered */}
       <div className="relative z-10">
-        {/* PTS Risk Board - Overlay on left side */}
-        {ptsResults.length > 0 && !isBPComplete(bpState) && (
-          <div className="fixed left-4 top-1/2 -translate-y-1/2 w-80 z-50">
-            <PTSRiskBoard
-              ptsResults={ptsResults}
-              currentTurn={draftContext.currentTurn}
-              ourSide={draftContext.ourSide}
-              nextOpponentActions={draftContext.nextOpponentActions}
-              onChampionClick={(championId) => {
-                const champion = champions.find(c => c.id === championId);
-                if (champion && !allUsedChampions.has(championId)) {
-                  handleChampionSelect(champion);
-                }
-              }}
-            />
-          </div>
-        )}
-
         {/* BP Panel - Center */}
         <BPPanel
           bpState={bpState}
@@ -593,6 +501,7 @@ export default function LOLBPPage() {
             <div className="flex flex-col items-end gap-4" style={{ width: '600px' }}>
               <button
                 onClick={handleFearlessModeToggle}
+                title="Applies champion restrictions from previous games"
                 className={`flex items-center gap-2 px-3 py-1.5 rounded border transition-all duration-300 ${
                   fearlessModeEnabled
                     ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
@@ -624,7 +533,7 @@ export default function LOLBPPage() {
           </div>
           {loading ? (
             <div className="flex flex-col justify-center items-center h-64 gap-4">
-              <img src="https://cdn.dreamofdragon.org/images/spinner/spinner.svg" alt="Loading" width={60} height={60} />
+              <div className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin" />
               <p className="text-slate-400">
                 Loading champions...
               </p>
