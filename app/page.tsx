@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Champion, Language, BPState, Position, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode } from './lib/types';
+import { Champion, Language, BPState, Position, ChampionClass, AIControlMode, AIRecommendation, AIAnalysis, SeriesState, HistorySelectMode } from './lib/types';
 import {
   createInitialState,
   selectChampion,
@@ -23,6 +23,7 @@ import AIControlPanel from './components/AIControlPanel';
 import AIAnalysisPanel from './components/AIAnalysisPanel';
 import SeriesSetup from './components/SeriesSetup';
 import { generateAIAnalysis } from './lib/ai-analysis';
+import DropDownClassFilter from './components/DropDownClassFilter';
 
 // 根据浏览器语言检测默认语言
 function getDefaultLanguage(): Language {
@@ -47,6 +48,7 @@ export default function LOLBPPage() {
   const [version, setVersion] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [selectedPosition, setSelectedPosition] = useState<Position | null>(null);
+  const [selectedClass, setSelectedClass] = useState<ChampionClass | null>('AD Bruiser');
 
   // AI 模式状态
   const [aiMode, setAiMode] = useState<AIControlMode>('off');
@@ -110,6 +112,10 @@ export default function LOLBPPage() {
       result = result.filter(c => c.positions.includes(selectedPosition));
     }
 
+    if(selectedClass) {
+      result = result.filter(c => c.class === selectedClass);
+    }
+
     // 搜索过滤
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
@@ -121,7 +127,7 @@ export default function LOLBPPage() {
     }
 
     return result;
-  }, [champions, searchTerm, selectedPosition]);
+  }, [champions, searchTerm, selectedPosition, selectedClass]);
 
   // 合并当局usedChampions和无畏征召池
   const allUsedChampions = useMemo(() => {
@@ -487,6 +493,14 @@ export default function LOLBPPage() {
         onSelect={setSelectedPosition}
         language={language}
       />
+
+      <DropDownClassFilter
+        selectedClass={selectedClass}
+        onSelect={setSelectedClass}
+        language={language}
+      />
+
+
 
       {/* 英雄网格 */}
       {loading ? (

@@ -7,10 +7,20 @@ export interface Champion {
   zhName: string;       // 中文名称
   image: string;        // 头像URL
   positions: Position[]; // 位置
+  class: string;
 }
 
 // 位置类型
 export type Position = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
+
+export type ChampionClass =
+
+'AD Bruiser' | 'AP Bruiser' |
+'Burst mage' | 'Control mage' | 'Poke mage' |
+'AD Assasin' | 'AP Assasin' | 
+'Engage Tank' | 'Defensive Tank' |  
+'Utility marksman' | 'Carry marksman' |
+'Enchanter' | '';
 
 // 位置信息
 export interface PositionInfo {

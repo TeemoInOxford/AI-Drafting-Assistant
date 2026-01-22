@@ -12,6 +12,7 @@ interface ChampionGridProps {
   language: Language;
   fearlessPool?: Set<string>;
   historySelectMode?: HistorySelectMode;
+  class?: string;
 }
 
 export default function ChampionGrid({
@@ -32,6 +33,9 @@ export default function ChampionGrid({
         transition={{ duration: 0.5 }}
       >
         {champions.map((champion, index) => {
+
+          console.log(champion);
+          
           const isUsed = usedChampions.has(champion.id);
           const isFearlessBanned = fearlessPool?.has(champion.id) || false;
           // 在历史选择模式下，只有fearlessPool中的英雄才禁用

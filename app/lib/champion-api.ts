@@ -1,5 +1,6 @@
 import { Champion, DDragonChampionData } from './types';
 import { getChampionPositions } from './positions';
+import { getChampionClass } from './classes';
 
 const DDRAGON_BASE = 'https://ddragon.leagueoflegends.com';
 
@@ -24,6 +25,7 @@ export async function getChampions(version: string): Promise<Champion[]> {
   // 合并数据
   return Object.values(enData.data).map((champ) => {
     const zhChamp = zhData.data[champ.id];
+    //console.log(champ.id);
     return {
       id: champ.id,
       key: champ.key,
@@ -32,6 +34,7 @@ export async function getChampions(version: string): Promise<Champion[]> {
       zhName: zhChamp?.name || champ.name,
       image: `${DDRAGON_BASE}/cdn/${version}/img/champion/${champ.id}.png`,
       positions: getChampionPositions(champ.id),
+      class: getChampionClass(champ.id), // 先留空，后续可根据需要填充
     };
   });
 }
