@@ -12,7 +12,7 @@ from datetime import datetime
 
 # API 配置 - 使用 Open Access URL
 API_URL = "https://api-op.grid.gg/central-data/graphql"
-API_KEY = "crM9kbj1QQVhzN6vm19DiYwJUl4lMoTdSHVBlMO8"
+API_KEY = "DAnUJqbh0Hf5RMo6KlE22eYih9OTsEVjKsvSKXlX"
 
 # LOL 的 titleId
 LOL_TITLE_ID = "3"
