@@ -19,8 +19,8 @@ export default function ERDPage() {
           <div className="text-sm text-gray-300 space-y-1">
             <p>• <strong>Central Data API:</strong> https://api-op.grid.gg/central-data/graphql</p>
             <p>• <strong>数据结构:</strong> 层级数据 (Region → League → Team → Player)</p>
-            <p>• <strong>完整数据:</strong> 18,804名选手 | 2,165支战队 | 173个联赛（包含所有历史数据）</p>
-            <p>• <strong>更新时间:</strong> 2026-01-23 23:14</p>
+            <p>• <strong>清洗后数据:</strong> 5,804名选手 | 56支战队 | 93个联赛（已移除测试账号和重复数据）</p>
+            <p>• <strong>更新时间:</strong> 2026-01-24</p>
           </div>
         </div>
 
@@ -182,19 +182,19 @@ export default function ERDPage() {
               <div className="text-xs text-gray-500 mt-1">LPL, LCK, LEC, LCS, LTA等</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-cyan-400">173</div>
+              <div className="text-3xl font-bold text-cyan-400">93</div>
               <div className="text-gray-400 mt-1">联赛 (Leagues)</div>
-              <div className="text-xs text-gray-500 mt-1">包含各赛季和分组</div>
+              <div className="text-xs text-gray-500 mt-1">有战队的活跃联赛</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400">2,165</div>
+              <div className="text-3xl font-bold text-yellow-400">56</div>
               <div className="text-gray-400 mt-1">战队 (Teams)</div>
-              <div className="text-xs text-gray-500 mt-1">所有历史战队</div>
+              <div className="text-xs text-gray-500 mt-1">有选手的活跃战队</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-400">18,804</div>
+              <div className="text-3xl font-bold text-green-400">5,804</div>
               <div className="text-gray-400 mt-1">选手 (Players)</div>
-              <div className="text-xs text-gray-500 mt-1">所有历史选手</div>
+              <div className="text-xs text-gray-500 mt-1">清洗后的有效选手</div>
             </div>
           </div>
         </div>
