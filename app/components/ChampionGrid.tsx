@@ -24,10 +24,10 @@ export default function ChampionGrid({
   shakeChampionId,
 }: ChampionGridProps) {
   return (
-    <div className="w-full pb-8 flex justify-center px-4">
+    <div className="w-full pb-8 flex justify-center">
       <motion.div
-        className="flex flex-wrap justify-center gap-7 sm:gap-9"
-        style={{ maxWidth: '1464px' }}
+        className="flex flex-wrap justify-center gap-2"
+        style={{ width: '100%' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}

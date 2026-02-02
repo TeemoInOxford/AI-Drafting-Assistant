@@ -1,0 +1,26 @@
+{
+  "original": {
+    "train_auc": 0.9896,
+    "val_auc": 0.9619,
+    "gap": 0.0277,
+    "val_acc": 0.8733
+  },
+  "regularized": {
+    "train_auc": 0.9860444444444445,
+    "train_acc": 0.9316666666666666,
+    "val_auc": 0.9572444444444445,
+    "val_acc": 0.8733333333333333,
+    "auc_gap": 0.028800000000000048,
+    "acc_gap": 0.05833333333333335,
+    "best_iteration": 211
+  },
+  "ensemble": {
+    "train_auc": 0.9870333333333333,
+    "val_auc": 0.9561777777777777,
+    "train_acc": 0.93,
+    "val_acc": 0.8733333333333333,
+    "auc_gap": 0.030855555555555636,
+    "n_models": 5
+  },
+  "best_model": "Original"
+}

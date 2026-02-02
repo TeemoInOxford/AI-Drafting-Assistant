@@ -1,0 +1,4372 @@
+{
+  "id": "2754535",
+  "format": "best-of-3",
+  "started": true,
+  "finished": true,
+  "startedAt": "2025-02-02T16:03:00Z",
+  "duration": "PT2H37M1.973S",
+  "teams": [
+    {
+      "id": "54284",
+      "name": "Isurus Estral",
+      "score": 2,
+      "won": true,
+      "kills": 51,
+      "deaths": 54,
+      "players": [
+        {
+          "id": "21821",
+          "name": "Burdol"
+        },
+        {
+          "id": "23109",
+          "name": "Josedeodo"
+        },
+        {
+          "id": "20362",
+          "name": "Mireu"
+        },
+        {
+          "id": "21513",
+          "name": "Snaker"
+        },
+        {
+          "id": "20131",
+          "name": "Ackerman"
+        }
+      ]
+    },
+    {
+      "id": "52573",
+      "name": "RED Kalunga",
+      "score": 1,
+      "won": false,
+      "kills": 54,
+      "deaths": 51,
+      "players": [
+        {
+          "id": "24528",
+          "name": "fNb"
+        },
+        {
+          "id": "22917",
+          "name": "Aegis"
+        },
+        {
+          "id": "27580",
+          "name": "Grevthar"
+        },
+        {
+          "id": "27557",
+          "name": "Brance"
+        },
+        {
+          "id": "29597",
+          "name": "frostyy"
+        }
+      ]
+    }
+  ],
+  "games": [
+    {
+      "id": "58e6c02b-ebb9-46de-8f54-839542bf894b",
+      "sequenceNumber": 1,
+      "started": true,
+      "finished": true,
+      "startedAt": "2025-02-02T16:09:46.476Z",
+      "duration": "PT42M36.953S",
+      "draftActions": [
+        {
+          "type": "ban",
+          "sequenceNumber": "1",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "5179b7c8-f751-3f66-b40d-6671d54aab37",
+            "type": "character",
+            "name": "Nocturne"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "2",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "52ab36ab-7b94-31c7-afa5-e74badcd74ea",
+            "type": "character",
+            "name": "Skarner"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "3",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "6d94812f-ea1f-3460-80b7-c38518abb709",
+            "type": "character",
+            "name": "Ambessa"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "4",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "a0cf8bf6-39d8-30fb-9dab-c1e8af747901",
+            "type": "character",
+            "name": "Kalista"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "5",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "40cc8559-a028-35a5-a6dd-5e48c4601d66",
+            "type": "character",
+            "name": "K'Sante"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "6",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "7552f226-fa3b-3053-b692-0dcdd9c79cf4",
+            "type": "character",
+            "name": "Rumble"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "7",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "fa136dcc-94b9-35e2-aaff-cc4c2c46f7a3",
+            "type": "character",
+            "name": "Jayce"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "8",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "d5da0bd8-00ea-3bc1-9ad9-09751d791b20",
+            "type": "character",
+            "name": "Varus"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "9",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "8092e614-e064-36f3-87b7-0c5ac018d7cc",
+            "type": "character",
+            "name": "Sejuani"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "10",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "cdfefdba-3f62-3d3a-b20d-62e9d7a474e1",
+            "type": "character",
+            "name": "Ashe"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "11",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "2bf2eedb-58ef-39d3-8be6-88508b55ffc3",
+            "type": "character",
+            "name": "Aurora"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "12",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "a6c6341f-f06c-3428-a0e3-797a0d0e2638",
+            "type": "character",
+            "name": "Renekton"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "13",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "28c76f65-a320-3efc-8dbf-f5ccd8f30078",
+            "type": "character",
+            "name": "Vi"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "14",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "6b28be83-b1f2-3f1b-b887-85f87e172511",
+            "type": "character",
+            "name": "Sylas"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "15",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "cf8f9783-b321-3a1d-95bd-f3e3b612d4c4",
+            "type": "character",
+            "name": "Maokai"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "16",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "484c410a-0c65-3c5d-8f22-a34e2e883427",
+            "type": "character",
+            "name": "Elise"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "17",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "39cd3cf0-4f19-3b16-a4fa-9b650bc71e9e",
+            "type": "character",
+            "name": "Viktor"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "18",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "9530371e-3e7d-3e74-a17d-aa5ac56abf85",
+            "type": "character",
+            "name": "Wukong"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "19",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "2bcecd67-6a8c-3c44-be6a-bd120bc1dcc5",
+            "type": "character",
+            "name": "Bard"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "20",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "31360e91-4470-348a-9a2b-ce10e9a107b1",
+            "type": "character",
+            "name": "Rakan"
+          }
+        }
+      ],
+      "teams": [
+        {
+          "id": "54284",
+          "name": "Isurus Estral",
+          "side": "blue",
+          "won": false,
+          "kills": 11,
+          "deaths": 27,
+          "netWorth": 63541,
+          "experiencePoints": 82106,
+          "totalMoneyEarned": 67742,
+          "firstKill": true,
+          "damageDealt": 1082090,
+          "damageTaken": 155347,
+          "damagePerMinute": 25391.706456864868,
+          "damagePerMoney": 15.973694310767323,
+          "kdaRatio": 1.2222222222222223,
+          "moneyDifference": -12224,
+          "visionScore": 379.6138725280762,
+          "visionScorePerMinute": 8.907802510130052,
+          "killsAndAssists": 33.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 76,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateBot",
+              "type": "destroyTurretPlateBot",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 5,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyTurretPlateMid",
+              "type": "destroyTurretPlateMid",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTower",
+              "type": "destroyTower",
+              "completionCount": 4,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftHerald",
+              "type": "slayRiftHerald",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayBaron",
+              "type": "slayBaron",
+              "completionCount": 1,
+              "completedFirst": true
+            }
+          ],
+          "players": [
+            {
+              "id": "21821",
+              "name": "Burdol",
+              "character": {
+                "id": "fa136dcc-94b9-35e2-aaff-cc4c2c46f7a3",
+                "name": "Jayce"
+              },
+              "kills": 4,
+              "deaths": 7,
+              "killAssistsGiven": 3,
+              "netWorth": 13980,
+              "experiencePoints": 18848,
+              "totalMoneyEarned": 15119,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 5203,
+              "currentArmor": 200,
+              "respawnClock": {
+                "currentSeconds": 24
+              },
+              "damageDealt": 235009,
+              "damageTaken": 39094,
+              "damagePerMinute": 5514.587088616802,
+              "damagePercentage": 21.718064116663125,
+              "damagePerMoney": 15.543951319531715,
+              "kdaRatio": 1.0,
+              "visionScore": 59.16883087158203,
+              "visionScorePerMinute": 1.3884220211693064,
+              "killsAndAssists": 7.0,
+              "killParticipation": 63.63636363636363,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "20f8eda3-beb6-3ab4-a2ae-6e33ed9edec9",
+                    "name": "Black Cleaver",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "de27046e-a5f6-373b-87c5-bcdc6f589205",
+                    "name": "Fimbulwinter",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "ce77d76b-d243-3595-be66-49fc8a950f66",
+                    "name": "Unending Despair",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "a1218895-0699-3331-92d6-b205b78b1a71",
+                    "name": "Spirit Visage",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "c4f25bd6-6ba1-368f-b8d6-2ac955370757",
+                    "name": "Bramble Vest",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "23109",
+              "name": "Josedeodo",
+              "character": {
+                "id": "9530371e-3e7d-3e74-a17d-aa5ac56abf85",
+                "name": "Wukong"
+              },
+              "kills": 4,
+              "deaths": 4,
+              "killAssistsGiven": 3,
+              "netWorth": 14633,
+              "experiencePoints": 16398,
+              "totalMoneyEarned": 14137,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 3886,
+              "currentArmor": 108,
+              "respawnClock": {
+                "currentSeconds": 9
+              },
+              "damageDealt": 319379,
+              "damageTaken": 44183,
+              "damagePerMinute": 7494.365363774774,
+              "damagePercentage": 29.515012614477538,
+              "damagePerMoney": 22.591709697955718,
+              "kdaRatio": 1.75,
+              "visionScore": 77.55973815917969,
+              "visionScorePerMinute": 1.8199725570046774,
+              "killsAndAssists": 7.0,
+              "killParticipation": 63.63636363636363,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "7dfff6bf-3991-31c7-8d03-ac1479e04fc0",
+                    "name": "Gustwalker Hatchling",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6fd14095-8c6b-3e1c-a021-e62f77761f3e",
+                    "name": "Mosstomper Seedling",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "54eba4f1-faf3-3f6a-a374-5f0939a49267",
+                    "name": "Sheen",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4bd971a3-4667-3dad-bb66-fb16d860f047",
+                    "name": "Sundered Sky",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "20f8eda3-beb6-3ab4-a2ae-6e33ed9edec9",
+                    "name": "Black Cleaver",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6f6e26d4-888e-33f0-9464-afcf60c6acf7",
+                    "name": "Tunneler",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 15,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 3,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 3,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 4,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftHerald",
+                  "type": "slayRiftHerald",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayBaron",
+                  "type": "slayBaron",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "20362",
+              "name": "Mireu",
+              "character": {
+                "id": "2bf2eedb-58ef-39d3-8be6-88508b55ffc3",
+                "name": "Aurora"
+              },
+              "kills": 1,
+              "deaths": 6,
+              "killAssistsGiven": 1,
+              "netWorth": 12617,
+              "experiencePoints": 17758,
+              "totalMoneyEarned": 13531,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2695,
+              "currentArmor": 93,
+              "respawnClock": {
+                "currentSeconds": 23
+              },
+              "damageDealt": 237209,
+              "damageTaken": 28967,
+              "damagePerMinute": 5566.211033210231,
+              "damagePercentage": 21.921374377362326,
+              "damagePerMoney": 17.5307811691671,
+              "kdaRatio": 0.3333333333333333,
+              "visionScore": 35.85432052612305,
+              "visionScorePerMinute": 0.8413370255798142,
+              "killsAndAssists": 2.0,
+              "killParticipation": 18.181818181818183,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "8fbed62c-d5f0-348d-bdf5-e61e29c9c0b2",
+                    "name": "Luden's Companion",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5eacaef5-dbb9-3eb5-b43d-7a5afeba0c6c",
+                    "name": "Dark Seal",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "07c77336-0e31-3903-be27-f1f60b773d36",
+                    "name": "Shadowflame",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b2b10f04-915d-3170-bfc0-ba698adc4fb6",
+                    "name": "Void Staff",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "78930a22-aea2-3cf4-ba08-9f4f7d2c5a1f",
+                    "name": "Elixir of Sorcery",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 16,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateMid",
+                  "type": "destroyTurretPlateMid",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "21513",
+              "name": "Snaker",
+              "character": {
+                "id": "cdfefdba-3f62-3d3a-b20d-62e9d7a474e1",
+                "name": "Ashe"
+              },
+              "kills": 1,
+              "deaths": 5,
+              "killAssistsGiven": 7,
+              "netWorth": 15146,
+              "experiencePoints": 16398,
+              "totalMoneyEarned": 16020,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2226,
+              "currentArmor": 92,
+              "respawnClock": {
+                "currentSeconds": 15
+              },
+              "damageDealt": 256522,
+              "damageTaken": 22462,
+              "damagePerMinute": 6019.398870452448,
+              "damagePercentage": 23.706161225036734,
+              "damagePerMoney": 16.012609238451937,
+              "kdaRatio": 1.6,
+              "visionScore": 51.73369598388672,
+              "visionScorePerMinute": 1.2139533886751939,
+              "killsAndAssists": 8.0,
+              "killParticipation": 72.72727272727273,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "fa7be47c-e223-3249-a205-50dd905a90a1",
+                    "name": "Berserker's Greaves",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "a987f77d-5bf0-3487-be78-c5d65e4add99",
+                    "name": "Kraken Slayer",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "ce91d0cc-201b-354c-9efb-2d1d9c73a476",
+                    "name": "Phantom Dancer",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbe50430-2e45-3bb0-b033-46ee651042e7",
+                    "name": "Mortal Reminder",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f841835e-4f84-3134-96fd-799e29d62cba",
+                    "name": "Bloodthirster",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 15,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "20131",
+              "name": "Ackerman",
+              "character": {
+                "id": "2bcecd67-6a8c-3c44-be6a-bd120bc1dcc5",
+                "name": "Bard"
+              },
+              "kills": 0,
+              "deaths": 5,
+              "killAssistsGiven": 8,
+              "netWorth": 7165,
+              "experiencePoints": 12704,
+              "totalMoneyEarned": 8935,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2865,
+              "currentArmor": 94,
+              "respawnClock": {
+                "currentSeconds": 9
+              },
+              "damageDealt": 33971,
+              "damageTaken": 20641,
+              "damagePerMinute": 797.1441008106132,
+              "damagePercentage": 3.1393876664602764,
+              "damagePerMoney": 3.8020145495243423,
+              "kdaRatio": 1.6,
+              "visionScore": 155.2972869873047,
+              "visionScorePerMinute": 3.6441175177010607,
+              "killsAndAssists": 8.0,
+              "killParticipation": 72.72727272727273,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f923f591-b258-330c-adf6-3c548e96401c",
+                    "name": "Ionian Boots of Lucidity",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "54139970-56a4-3838-bff6-c2a793b37a46",
+                    "name": "Bloodsong",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b1071489-7300-3173-ae83-5eb9f766a647",
+                    "name": "Mikael's Blessing",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "637c3963-986d-38fb-b9c6-6e593392a6bb",
+                    "name": "Redemption",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "8fa47380-4ac6-3e42-898f-ca097f667d23",
+                    "name": "Kindlegem",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 13,
+                  "completedFirst": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "52573",
+          "name": "RED Kalunga",
+          "side": "red",
+          "won": true,
+          "kills": 27,
+          "deaths": 11,
+          "netWorth": 77025,
+          "experiencePoints": 96224,
+          "totalMoneyEarned": 79966,
+          "firstKill": false,
+          "damageDealt": 1225688,
+          "damageTaken": 173805,
+          "damagePerMinute": 28761.29518219537,
+          "damagePerMoney": 15.327614236050321,
+          "kdaRatio": 8.545454545454545,
+          "moneyDifference": 12224,
+          "visionScore": 387.8795051574707,
+          "visionScorePerMinute": 9.101759128716187,
+          "killsAndAssists": 94.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 82,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateBot",
+              "type": "destroyTurretPlateBot",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "slayHextechDrake",
+              "type": "slayHextechDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "slayOceanDrake",
+              "type": "slayOceanDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTower",
+              "type": "destroyTower",
+              "completionCount": 11,
+              "completedFirst": true
+            },
+            {
+              "id": "slayChemtechDrake",
+              "type": "slayChemtechDrake",
+              "completionCount": 2,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoraciousAtakhan",
+              "type": "slayVoraciousAtakhan",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayElderDragon",
+              "type": "slayElderDragon",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyFortifier",
+              "type": "destroyFortifier",
+              "completionCount": 2,
+              "completedFirst": true
+            },
+            {
+              "id": "slayBaron",
+              "type": "slayBaron",
+              "completionCount": 1,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyNexus",
+              "type": "destroyNexus",
+              "completionCount": 1,
+              "completedFirst": true
+            }
+          ],
+          "players": [
+            {
+              "id": "24528",
+              "name": "fNb",
+              "character": {
+                "id": "a6c6341f-f06c-3428-a0e3-797a0d0e2638",
+                "name": "Renekton"
+              },
+              "kills": 7,
+              "deaths": 2,
+              "killAssistsGiven": 9,
+              "netWorth": 17018,
+              "experiencePoints": 23855,
+              "totalMoneyEarned": 18232,
+              "alive": true,
+              "currentHealth": 2412,
+              "maxHealth": 4277,
+              "currentArmor": 203,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 288336,
+              "damageTaken": 44269,
+              "damagePerMinute": 6765.928040132141,
+              "damagePercentage": 23.524420570324587,
+              "damagePerMoney": 15.814831066257131,
+              "kdaRatio": 8.0,
+              "visionScore": 43.24189758300781,
+              "visionScorePerMinute": 1.0146896931544962,
+              "killsAndAssists": 16.0,
+              "killParticipation": 59.25925925925925,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "9ac6f146-ea7d-3750-b422-e82adea52e3e",
+                    "name": "Stridebreaker",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b9831c3e-592a-3a3e-be46-f20c9438adca",
+                    "name": "Plated Steelcaps",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6ccff3d2-e295-3a81-ae07-f8399737a99d",
+                    "name": "Sterak's Gage",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9cc3c506-f0ac-3f80-8a0f-0844822c05e9",
+                    "name": "Death's Dance",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "20f8eda3-beb6-3ab4-a2ae-6e33ed9edec9",
+                    "name": "Black Cleaver",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 4,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "22917",
+              "name": "Aegis",
+              "character": {
+                "id": "8092e614-e064-36f3-87b7-0c5ac018d7cc",
+                "name": "Sejuani"
+              },
+              "kills": 5,
+              "deaths": 1,
+              "killAssistsGiven": 19,
+              "netWorth": 14330,
+              "experiencePoints": 18622,
+              "totalMoneyEarned": 15459,
+              "alive": true,
+              "currentHealth": 4028,
+              "maxHealth": 5520,
+              "currentArmor": 282,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 342768,
+              "damageTaken": 68824,
+              "damagePerMinute": 8043.198291090997,
+              "damagePercentage": 27.965354967985327,
+              "damagePerMoney": 22.172714923345623,
+              "kdaRatio": 24.0,
+              "visionScore": 81.06962585449219,
+              "visionScorePerMinute": 1.9023335787828446,
+              "killsAndAssists": 24.0,
+              "killParticipation": 88.88888888888889,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "da0351be-017f-3ade-bd12-82a28925db84",
+                    "name": "Heartsteel",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "ce77d76b-d243-3595-be66-49fc8a950f66",
+                    "name": "Unending Despair",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f15ffeab-7b40-3d62-b557-308ebb05e280",
+                    "name": "Armored Advance",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "a1218895-0699-3331-92d6-b205b78b1a71",
+                    "name": "Spirit Visage",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "c91e9249-5d5d-3a99-8c03-1e2a175c7bb0",
+                    "name": "Thornmail",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayHextechDrake",
+                  "type": "slayHextechDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayChemtechDrake",
+                  "type": "slayChemtechDrake",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoraciousAtakhan",
+                  "type": "slayVoraciousAtakhan",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayElderDragon",
+                  "type": "slayElderDragon",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayBaron",
+                  "type": "slayBaron",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyNexus",
+                  "type": "destroyNexus",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "27580",
+              "name": "Grevthar",
+              "character": {
+                "id": "39cd3cf0-4f19-3b16-a4fa-9b650bc71e9e",
+                "name": "Viktor"
+              },
+              "kills": 4,
+              "deaths": 1,
+              "killAssistsGiven": 12,
+              "netWorth": 15479,
+              "experiencePoints": 21633,
+              "totalMoneyEarned": 17183,
+              "alive": true,
+              "currentHealth": 2168,
+              "maxHealth": 2665,
+              "currentArmor": 97,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 277456,
+              "damageTaken": 15106,
+              "damagePerMinute": 6510.624168688279,
+              "damagePercentage": 22.636755846512326,
+              "damagePerMoney": 16.147122155618927,
+              "kdaRatio": 16.0,
+              "visionScore": 66.54618072509766,
+              "visionScorePerMinute": 1.561534703025773,
+              "killsAndAssists": 16.0,
+              "killParticipation": 59.25925925925925,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "f923f591-b258-330c-adf6-3c548e96401c",
+                    "name": "Ionian Boots of Lucidity",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b4dd0bf3-04cd-3a60-b8cd-47fd2e67a723",
+                    "name": "Blackfire Torch",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "3bb81a94-876b-3ce6-b42c-47938bac28f9",
+                    "name": "Liandry's Torment",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "900c5db3-7566-3ac6-adf8-c68fbfa20880",
+                    "name": "Rabadon's Deathcap",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b2b10f04-915d-3170-bfc0-ba698adc4fb6",
+                    "name": "Void Staff",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 2,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "27557",
+              "name": "Brance",
+              "character": {
+                "id": "d5da0bd8-00ea-3bc1-9ad9-09751d791b20",
+                "name": "Varus"
+              },
+              "kills": 9,
+              "deaths": 3,
+              "killAssistsGiven": 7,
+              "netWorth": 20244,
+              "experiencePoints": 18566,
+              "totalMoneyEarned": 17463,
+              "alive": true,
+              "currentHealth": 715,
+              "maxHealth": 2790,
+              "currentArmor": 105,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 291773,
+              "damageTaken": 20190,
+              "damagePerMinute": 6846.578720844693,
+              "damagePercentage": 23.804834509271526,
+              "damagePerMoney": 16.708068487659624,
+              "kdaRatio": 5.333333333333333,
+              "visionScore": 40.33401107788086,
+              "visionScorePerMinute": 0.9464548877796547,
+              "killsAndAssists": 16.0,
+              "killParticipation": 59.25925925925925,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "80fb9860-a2ef-355e-8d7c-721826c0125f",
+                    "name": "Long Sword",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "2039264f-6fab-3ba8-b9ff-67d21d759ae7",
+                    "name": "Youmuu's Ghostblade",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "af351412-0ffb-30a5-8ddb-36625b0bdb2e",
+                    "name": "Edge of Night",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "14c4878e-f619-3ebe-86d5-e38b640fa240",
+                    "name": "Manamune",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "2b92b8ae-45c8-31d9-b5aa-f4a257cbd220",
+                    "name": "Muramana",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e0ab6404-4b36-3fa2-9ffd-fa1f94032855",
+                    "name": "Crimson Lucidity",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "eaa4c414-e3bf-3948-8a8a-39076eafb5d3",
+                    "name": "Serylda's Grudge",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "ef64d57e-ad4d-3648-94b9-d40c5cdef156",
+                    "name": "Serrated Dirk",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayOceanDrake",
+                  "type": "slayOceanDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "29597",
+              "name": "frostyy",
+              "character": {
+                "id": "31360e91-4470-348a-9a2b-ce10e9a107b1",
+                "name": "Rakan"
+              },
+              "kills": 2,
+              "deaths": 4,
+              "killAssistsGiven": 20,
+              "netWorth": 9954,
+              "experiencePoints": 13548,
+              "totalMoneyEarned": 11629,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2938,
+              "currentArmor": 144,
+              "respawnClock": {
+                "currentSeconds": 12
+              },
+              "damageDealt": 25355,
+              "damageTaken": 25416,
+              "damagePerMinute": 594.9659614392599,
+              "damagePercentage": 2.068634105906234,
+              "damagePerMoney": 2.180325049445352,
+              "kdaRatio": 5.5,
+              "visionScore": 156.6877899169922,
+              "visionScorePerMinute": 3.6767462659734185,
+              "killsAndAssists": 22.0,
+              "killParticipation": 81.48148148148148,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e02bb101-242e-3ddb-aeaa-95be49890f8a",
+                    "name": "Solstice Sleigh",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b1071489-7300-3173-ae83-5eb9f766a647",
+                    "name": "Mikael's Blessing",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "527d0088-04c7-347d-9a1e-6e979635a8ea",
+                    "name": "Zeke's Convergence",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "b762e4e6-eea8-341c-a77c-8b0fd2e18885",
+                    "name": "Locket of the Iron Solari",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 14,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "84986aff-3794-4a64-a8c9-8038778fcc4f",
+      "sequenceNumber": 2,
+      "started": true,
+      "finished": true,
+      "startedAt": "2025-02-02T17:09:31.273Z",
+      "duration": "PT51M12.011S",
+      "draftActions": [
+        {
+          "type": "ban",
+          "sequenceNumber": "1",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "5179b7c8-f751-3f66-b40d-6671d54aab37",
+            "type": "character",
+            "name": "Nocturne"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "2",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "52ab36ab-7b94-31c7-afa5-e74badcd74ea",
+            "type": "character",
+            "name": "Skarner"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "3",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "e7a28e21-1e51-3ff4-ae76-2e7dc7a69ace",
+            "type": "character",
+            "name": "Corki"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "4",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "a0cf8bf6-39d8-30fb-9dab-c1e8af747901",
+            "type": "character",
+            "name": "Kalista"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "5",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "40cc8559-a028-35a5-a6dd-5e48c4601d66",
+            "type": "character",
+            "name": "K'Sante"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "6",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "6d94812f-ea1f-3460-80b7-c38518abb709",
+            "type": "character",
+            "name": "Ambessa"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "7",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "7552f226-fa3b-3053-b692-0dcdd9c79cf4",
+            "type": "character",
+            "name": "Rumble"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "8",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "28c76f65-a320-3efc-8dbf-f5ccd8f30078",
+            "type": "character",
+            "name": "Vi"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "9",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "aeab401d-5c3e-38d6-8bb5-fe87f6db1a6f",
+            "type": "character",
+            "name": "Galio"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "10",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "159758c6-e12b-32cc-8b30-a3eec29d655c",
+            "type": "character",
+            "name": "Xin Zhao"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "11",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "3a52e342-5377-32b9-935f-b54a66688acd",
+            "type": "character",
+            "name": "Ezreal"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "12",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "f5848d60-ffbf-3c51-93ec-797142690b59",
+            "type": "character",
+            "name": "Rell"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "13",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "9104bd4f-7d7d-3895-8151-d3210b34e3d2",
+            "type": "character",
+            "name": "Alistar"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "14",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "16e85313-6510-315b-83f5-13f437b191c3",
+            "type": "character",
+            "name": "Kai'Sa"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "15",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "787b7cb3-d9ef-3d55-91f6-7e076ba8b0c5",
+            "type": "character",
+            "name": "Braum"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "16",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "ca371e80-177a-3738-b51c-62f85a56916c",
+            "type": "character",
+            "name": "Miss Fortune"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "17",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "1dc7e56e-efef-35da-b827-dd31dd8812bf",
+            "type": "character",
+            "name": "Zeri"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "18",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "6b28be83-b1f2-3f1b-b887-85f87e172511",
+            "type": "character",
+            "name": "Sylas"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "19",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "1e6bddd1-a107-3db2-a589-5bec2044b11c",
+            "type": "character",
+            "name": "Poppy"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "20",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "d50bfa6a-0179-375a-b583-e23a79a16908",
+            "type": "character",
+            "name": "Ahri"
+          }
+        }
+      ],
+      "teams": [
+        {
+          "id": "54284",
+          "name": "Isurus Estral",
+          "side": "blue",
+          "won": true,
+          "kills": 22,
+          "deaths": 24,
+          "netWorth": 90969,
+          "experiencePoints": 120363,
+          "totalMoneyEarned": 97893,
+          "firstKill": false,
+          "damageDealt": 1684128,
+          "damageTaken": 225290,
+          "damagePerMinute": 32893.00721904967,
+          "damagePerMoney": 17.203763292574546,
+          "kdaRatio": 3.625,
+          "moneyDifference": 6627,
+          "visionScore": 460.9006156921387,
+          "visionScorePerMinute": 9.001932916753331,
+          "killsAndAssists": 87.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 84,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 4,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 7,
+              "completedFirst": false
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyTurretPlateBot",
+              "type": "destroyTurretPlateBot",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTower",
+              "type": "destroyTower",
+              "completionCount": 11,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftHerald",
+              "type": "slayRiftHerald",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayChemtechDrake",
+              "type": "slayChemtechDrake",
+              "completionCount": 2,
+              "completedFirst": true
+            },
+            {
+              "id": "slayBaron",
+              "type": "slayBaron",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayElderDragon",
+              "type": "slayElderDragon",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyFortifier",
+              "type": "destroyFortifier",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyNexus",
+              "type": "destroyNexus",
+              "completionCount": 1,
+              "completedFirst": true
+            }
+          ],
+          "players": [
+            {
+              "id": "21821",
+              "name": "Burdol",
+              "character": {
+                "id": "7552f226-fa3b-3053-b692-0dcdd9c79cf4",
+                "name": "Rumble"
+              },
+              "kills": 4,
+              "deaths": 5,
+              "killAssistsGiven": 11,
+              "netWorth": 18262,
+              "experiencePoints": 26902,
+              "totalMoneyEarned": 20076,
+              "alive": true,
+              "currentHealth": 2406,
+              "maxHealth": 3479,
+              "currentArmor": 165,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 319866,
+              "damageTaken": 39948,
+              "damagePerMinute": 6247.360442394249,
+              "damagePercentage": 18.992974405745883,
+              "damagePerMoney": 15.932755528989839,
+              "kdaRatio": 3.0,
+              "visionScore": 65.17797088623047,
+              "visionScorePerMinute": 1.2730026855938432,
+              "killsAndAssists": 15.0,
+              "killParticipation": 68.18181818181817,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "ec9d966b-5cb9-3dbb-bdf5-901cfabeecef",
+                    "name": "Glowing Mote",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "3bb81a94-876b-3ce6-b42c-47938bac28f9",
+                    "name": "Liandry's Torment",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "d37f1a62-6a52-3302-8f3b-eeaa4f0e0b88",
+                    "name": "Riftmaker",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fad00187-8e7c-3295-9307-84dbfd68473b",
+                    "name": "Zhonya's Hourglass",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9679ba31-3a0a-32e5-9a45-bc2e221b2d2e",
+                    "name": "Cryptbloom",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "78930a22-aea2-3cf4-ba08-9f4f7d2c5a1f",
+                    "name": "Elixir of Sorcery",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "07c77336-0e31-3903-be27-f1f60b773d36",
+                    "name": "Shadowflame",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyNexus",
+                  "type": "destroyNexus",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "23109",
+              "name": "Josedeodo",
+              "character": {
+                "id": "159758c6-e12b-32cc-8b30-a3eec29d655c",
+                "name": "Xin Zhao"
+              },
+              "kills": 3,
+              "deaths": 2,
+              "killAssistsGiven": 11,
+              "netWorth": 18799,
+              "experiencePoints": 25982,
+              "totalMoneyEarned": 20182,
+              "alive": true,
+              "currentHealth": 4023,
+              "maxHealth": 4422,
+              "currentArmor": 165,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 492875,
+              "damageTaken": 71991,
+              "damagePerMinute": 9626.430374109988,
+              "damagePercentage": 29.265887153470523,
+              "damagePerMoney": 24.421514220592606,
+              "kdaRatio": 7.0,
+              "visionScore": 88.46940612792969,
+              "visionScorePerMinute": 1.7279119012515844,
+              "killsAndAssists": 14.0,
+              "killParticipation": 63.63636363636363,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "7dfff6bf-3991-31c7-8d03-ac1479e04fc0",
+                    "name": "Gustwalker Hatchling",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4bd971a3-4667-3dad-bb66-fb16d860f047",
+                    "name": "Sundered Sky",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6ccff3d2-e295-3a81-ae07-f8399737a99d",
+                    "name": "Sterak's Gage",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "20f8eda3-beb6-3ab4-a2ae-6e33ed9edec9",
+                    "name": "Black Cleaver",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "8f6989a9-c5bc-36ad-9a30-84da3d46c2bd",
+                    "name": "Guardian Angel",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "36030d7d-1e06-3b22-bf32-5f491d0b7991",
+                    "name": "Titanic Hydra",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 3,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 7,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftHerald",
+                  "type": "slayRiftHerald",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayChemtechDrake",
+                  "type": "slayChemtechDrake",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayBaron",
+                  "type": "slayBaron",
+                  "completionCount": 3,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayElderDragon",
+                  "type": "slayElderDragon",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "20362",
+              "name": "Mireu",
+              "character": {
+                "id": "6b28be83-b1f2-3f1b-b887-85f87e172511",
+                "name": "Sylas"
+              },
+              "kills": 8,
+              "deaths": 8,
+              "killAssistsGiven": 11,
+              "netWorth": 18530,
+              "experiencePoints": 24728,
+              "totalMoneyEarned": 21314,
+              "alive": true,
+              "currentHealth": 3311,
+              "maxHealth": 3764,
+              "currentArmor": 167,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 297887,
+              "damageTaken": 52923,
+              "damagePerMinute": 5818.084635764651,
+              "damagePercentage": 17.68790733245929,
+              "damagePerMoney": 13.976118982828188,
+              "kdaRatio": 2.375,
+              "visionScore": 56.885215759277344,
+              "visionScorePerMinute": 1.1110353919815523,
+              "killsAndAssists": 19.0,
+              "killParticipation": 86.36363636363636,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "5910498e-d6e9-3dc7-9721-de060e9632ff",
+                    "name": "Hextech Rocketbelt",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "d37f1a62-6a52-3302-8f3b-eeaa4f0e0b88",
+                    "name": "Riftmaker",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fad00187-8e7c-3295-9307-84dbfd68473b",
+                    "name": "Zhonya's Hourglass",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "900c5db3-7566-3ac6-adf8-c68fbfa20880",
+                    "name": "Rabadon's Deathcap",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "bc472ebb-0524-3fde-8290-c4a7b4fcf7bc",
+                    "name": "Blighting Jewel",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "78930a22-aea2-3cf4-ba08-9f4f7d2c5a1f",
+                    "name": "Elixir of Sorcery",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 4,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 2,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "21513",
+              "name": "Snaker",
+              "character": {
+                "id": "3a52e342-5377-32b9-935f-b54a66688acd",
+                "name": "Ezreal"
+              },
+              "kills": 7,
+              "deaths": 4,
+              "killAssistsGiven": 12,
+              "netWorth": 25261,
+              "experiencePoints": 25015,
+              "totalMoneyEarned": 23615,
+              "alive": true,
+              "currentHealth": 2715,
+              "maxHealth": 3182,
+              "currentArmor": 103,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 537363,
+              "damageTaken": 31434,
+              "damagePerMinute": 10495.333512803176,
+              "damagePercentage": 31.90749159208801,
+              "damagePerMoney": 22.755155621427058,
+              "kdaRatio": 4.75,
+              "visionScore": 51.50216293334961,
+              "visionScorePerMinute": 1.005898017943613,
+              "killsAndAssists": 19.0,
+              "killParticipation": 86.36363636363636,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "14c4878e-f619-3ebe-86d5-e38b640fa240",
+                    "name": "Manamune",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "2b92b8ae-45c8-31d9-b5aa-f4a257cbd220",
+                    "name": "Muramana",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "222398fa-9918-34eb-a35e-cd9a2198ce13",
+                    "name": "Spear of Shojin",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "eaa4c414-e3bf-3948-8a8a-39076eafb5d3",
+                    "name": "Serylda's Grudge",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f841835e-4f84-3134-96fd-799e29d62cba",
+                    "name": "Bloodthirster",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "53599eec-78d2-37b6-8c7d-2246a143686f",
+                    "name": "Elixir of Wrath",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "47f33d00-8778-3e06-b68c-fb6a85bffba2",
+                    "name": "Ravenous Hydra",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 2,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "20131",
+              "name": "Ackerman",
+              "character": {
+                "id": "1e6bddd1-a107-3db2-a589-5bec2044b11c",
+                "name": "Poppy"
+              },
+              "kills": 0,
+              "deaths": 5,
+              "killAssistsGiven": 20,
+              "netWorth": 10117,
+              "experiencePoints": 17736,
+              "totalMoneyEarned": 12706,
+              "alive": true,
+              "currentHealth": 498,
+              "maxHealth": 3014,
+              "currentArmor": 333,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 36137,
+              "damageTaken": 28994,
+              "damagePerMinute": 705.7982539776061,
+              "damagePercentage": 2.1457395162362958,
+              "damagePerMoney": 2.8440894065795685,
+              "kdaRatio": 4.0,
+              "visionScore": 198.86585998535156,
+              "visionScorePerMinute": 3.884084919982739,
+              "killsAndAssists": 20.0,
+              "killParticipation": 90.9090909090909,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b762e4e6-eea8-341c-a77c-8b0fd2e18885",
+                    "name": "Locket of the Iron Solari",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5d786793-d0bd-35a1-a5f6-d70b4d58ce3c",
+                    "name": "Celestial Opposition",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "1aeb692e-8bbc-37ce-bd00-1cbb2911d37d",
+                    "name": "Knight's Vow",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5f651e47-fbfe-368b-a0b8-a375d1fd5ee9",
+                    "name": "Frozen Heart",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 16,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "52573",
+          "name": "RED Kalunga",
+          "side": "red",
+          "won": false,
+          "kills": 24,
+          "deaths": 22,
+          "netWorth": 77430,
+          "experiencePoints": 112772,
+          "totalMoneyEarned": 91266,
+          "firstKill": true,
+          "damageDealt": 1706381,
+          "damageTaken": 236087,
+          "damagePerMinute": 33327.63456901684,
+          "damagePerMoney": 18.69678741261806,
+          "kdaRatio": 3.772727272727273,
+          "moneyDifference": -6627,
+          "visionScore": 413.17372131347656,
+          "visionScorePerMinute": 8.069770348741782,
+          "killsAndAssists": 83.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 83,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 2,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayCloudDrake",
+              "type": "slayCloudDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateMid",
+              "type": "destroyTurretPlateMid",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateTop",
+              "type": "destroyTurretPlateTop",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayInfernalDrake",
+              "type": "slayInfernalDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyTower",
+              "type": "destroyTower",
+              "completionCount": 6,
+              "completedFirst": false
+            },
+            {
+              "id": "slayVoraciousAtakhan",
+              "type": "slayVoraciousAtakhan",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayChemtechDrake",
+              "type": "slayChemtechDrake",
+              "completionCount": 2,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyFortifier",
+              "type": "destroyFortifier",
+              "completionCount": 1,
+              "completedFirst": true
+            }
+          ],
+          "players": [
+            {
+              "id": "24528",
+              "name": "fNb",
+              "character": {
+                "id": "aeab401d-5c3e-38d6-8bb5-fe87f6db1a6f",
+                "name": "Galio"
+              },
+              "kills": 1,
+              "deaths": 6,
+              "killAssistsGiven": 12,
+              "netWorth": 15916,
+              "experiencePoints": 25402,
+              "totalMoneyEarned": 17589,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 4153,
+              "currentArmor": 153,
+              "respawnClock": {
+                "currentSeconds": 37
+              },
+              "damageDealt": 336198,
+              "damageTaken": 62481,
+              "damagePerMinute": 6566.343675201683,
+              "damagePercentage": 19.702399405525494,
+              "damagePerMoney": 19.114105406788333,
+              "kdaRatio": 2.1666666666666665,
+              "visionScore": 51.39397430419922,
+              "visionScorePerMinute": 1.0037849663467848,
+              "killsAndAssists": 13.0,
+              "killParticipation": 54.166666666666664,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "4f94ace1-5f8b-39f2-8d2a-fba22d503b5e",
+                    "name": "Hollow Radiance",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "d37f1a62-6a52-3302-8f3b-eeaa4f0e0b88",
+                    "name": "Riftmaker",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "90426fe3-3fc8-3b05-bbc4-31d3bdce4980",
+                    "name": "Chainlaced Crushers",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fad00187-8e7c-3295-9307-84dbfd68473b",
+                    "name": "Zhonya's Hourglass",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "900c5db3-7566-3ac6-adf8-c68fbfa20880",
+                    "name": "Rabadon's Deathcap",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "78930a22-aea2-3cf4-ba08-9f4f7d2c5a1f",
+                    "name": "Elixir of Sorcery",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateTop",
+                  "type": "destroyTurretPlateTop",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "22917",
+              "name": "Aegis",
+              "character": {
+                "id": "28c76f65-a320-3efc-8dbf-f5ccd8f30078",
+                "name": "Vi"
+              },
+              "kills": 9,
+              "deaths": 3,
+              "killAssistsGiven": 8,
+              "netWorth": 16341,
+              "experiencePoints": 22709,
+              "totalMoneyEarned": 17774,
+              "alive": false,
+              "currentHealth": 82,
+              "maxHealth": 4618,
+              "currentArmor": 109,
+              "respawnClock": {
+                "currentSeconds": 43
+              },
+              "damageDealt": 391544,
+              "damageTaken": 59438,
+              "damagePerMinute": 7647.316367031238,
+              "damagePercentage": 22.94587199458972,
+              "damagePerMoney": 22.02903116912344,
+              "kdaRatio": 5.666666666666667,
+              "visionScore": 58.54710388183594,
+              "visionScorePerMinute": 1.1434940281496897,
+              "killsAndAssists": 17.0,
+              "killParticipation": 70.83333333333334,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "80fb9860-a2ef-355e-8d7c-721826c0125f",
+                    "name": "Long Sword",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4bd971a3-4667-3dad-bb66-fb16d860f047",
+                    "name": "Sundered Sky",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6ccff3d2-e295-3a81-ae07-f8399737a99d",
+                    "name": "Sterak's Gage",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "90426fe3-3fc8-3b05-bbc4-31d3bdce4980",
+                    "name": "Chainlaced Crushers",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "20f8eda3-beb6-3ab4-a2ae-6e33ed9edec9",
+                    "name": "Black Cleaver",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4877eb52-0970-3405-93f0-e910c78e2d3c",
+                    "name": "Force of Nature",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5ea701f7-4ead-3566-989e-4fa190682c15",
+                    "name": "Winged Moonplate",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 3,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayCloudDrake",
+                  "type": "slayCloudDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayInfernalDrake",
+                  "type": "slayInfernalDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayVoraciousAtakhan",
+                  "type": "slayVoraciousAtakhan",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayChemtechDrake",
+                  "type": "slayChemtechDrake",
+                  "completionCount": 2,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "27580",
+              "name": "Grevthar",
+              "character": {
+                "id": "d50bfa6a-0179-375a-b583-e23a79a16908",
+                "name": "Ahri"
+              },
+              "kills": 2,
+              "deaths": 3,
+              "killAssistsGiven": 13,
+              "netWorth": 17158,
+              "experiencePoints": 24890,
+              "totalMoneyEarned": 18271,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2723,
+              "currentArmor": 150,
+              "respawnClock": {
+                "currentSeconds": 41
+              },
+              "damageDealt": 372125,
+              "damageTaken": 34794,
+              "damagePerMinute": 7268.040381365821,
+              "damagePercentage": 21.80784947793019,
+              "damagePerMoney": 20.366974987685403,
+              "kdaRatio": 5.0,
+              "visionScore": 51.97367858886719,
+              "visionScorePerMinute": 1.0151072751145849,
+              "killsAndAssists": 15.0,
+              "killParticipation": 62.5,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "914862ed-c96d-3ff8-ac9a-a465a6d716fc",
+                    "name": "Malignance",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9d87db74-ddc0-3e0f-b470-7b701f2950b4",
+                    "name": "Amplifying Tome",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "3bb81a94-876b-3ce6-b42c-47938bac28f9",
+                    "name": "Liandry's Torment",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fad00187-8e7c-3295-9307-84dbfd68473b",
+                    "name": "Zhonya's Hourglass",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9679ba31-3a0a-32e5-9a45-bc2e221b2d2e",
+                    "name": "Cryptbloom",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e0ab6404-4b36-3fa2-9ffd-fa1f94032855",
+                    "name": "Crimson Lucidity",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "42ba8019-04e4-3c30-8156-8d04fefcaa78",
+                    "name": "Needlessly Large Rod",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "78930a22-aea2-3cf4-ba08-9f4f7d2c5a1f",
+                    "name": "Elixir of Sorcery",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "27557",
+              "name": "Brance",
+              "character": {
+                "id": "1dc7e56e-efef-35da-b827-dd31dd8812bf",
+                "name": "Zeri"
+              },
+              "kills": 11,
+              "deaths": 4,
+              "killAssistsGiven": 8,
+              "netWorth": 19338,
+              "experiencePoints": 23919,
+              "totalMoneyEarned": 25616,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2710,
+              "currentArmor": 140,
+              "respawnClock": {
+                "currentSeconds": 66
+              },
+              "damageDealt": 584671,
+              "damageTaken": 40970,
+              "damagePerMinute": 11419.314579277223,
+              "damagePercentage": 34.263801577725026,
+              "damagePerMoney": 22.82444565896315,
+              "kdaRatio": 4.75,
+              "visionScore": 78.0919418334961,
+              "visionScorePerMinute": 1.5252277775078817,
+              "killsAndAssists": 19.0,
+              "killParticipation": 79.16666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "38d0057d-eb55-3e02-bdc6-9eb0b8331e55",
+                    "name": "Runaan's Hurricane",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbe50430-2e45-3bb0-b033-46ee651042e7",
+                    "name": "Mortal Reminder",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f8475fe7-7380-3336-b3e1-2b84f2459f7d",
+                    "name": "Infinity Edge",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "1a0ad4ed-45e5-3abd-aa61-b2bf856fa324",
+                    "name": "Gunmetal Greaves",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "8f6989a9-c5bc-36ad-9a30-84da3d46c2bd",
+                    "name": "Guardian Angel",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "53599eec-78d2-37b6-8c7d-2246a143686f",
+                    "name": "Elixir of Wrath",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f25c35df-2f21-30a4-b4e8-2485adaf809a",
+                    "name": "Yun Tal Wildarrows",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 17,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 2,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "29597",
+              "name": "frostyy",
+              "character": {
+                "id": "f5848d60-ffbf-3c51-93ec-797142690b59",
+                "name": "Rell"
+              },
+              "kills": 1,
+              "deaths": 6,
+              "killAssistsGiven": 18,
+              "netWorth": 8677,
+              "experiencePoints": 15852,
+              "totalMoneyEarned": 12016,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 3598,
+              "currentArmor": 142,
+              "respawnClock": {
+                "currentSeconds": 58
+              },
+              "damageDealt": 21843,
+              "damageTaken": 38404,
+              "damagePerMinute": 426.61956614087643,
+              "damagePercentage": 1.2800775442295713,
+              "damagePerMoney": 1.8178262316910785,
+              "kdaRatio": 3.1666666666666665,
+              "visionScore": 173.16702270507812,
+              "visionScorePerMinute": 3.3821563016228415,
+              "killsAndAssists": 19.0,
+              "killParticipation": 79.16666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5d786793-d0bd-35a1-a5f6-d70b4d58ce3c",
+                    "name": "Celestial Opposition",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "527d0088-04c7-347d-9a1e-6e979635a8ea",
+                    "name": "Zeke's Convergence",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b762e4e6-eea8-341c-a77c-8b0fd2e18885",
+                    "name": "Locket of the Iron Solari",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "a02eb57b-82e3-37dc-9c39-128ee91cf8c0",
+                    "name": "Giant's Belt",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "241617c5-fcd9-3e14-9eb5-2c6568923a3a",
+                    "name": "Elixir of Iron",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "90426fe3-3fc8-3b05-bbc4-31d3bdce4980",
+                    "name": "Chainlaced Crushers",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 15,
+                  "completedFirst": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d470e8cc-0ba5-4c88-84c6-081a004e7160",
+      "sequenceNumber": 3,
+      "started": true,
+      "finished": true,
+      "startedAt": "2025-02-02T18:16:56.042Z",
+      "duration": "PT23M5.931S",
+      "draftActions": [
+        {
+          "type": "ban",
+          "sequenceNumber": "1",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "a0cf8bf6-39d8-30fb-9dab-c1e8af747901",
+            "type": "character",
+            "name": "Kalista"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "2",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "52ab36ab-7b94-31c7-afa5-e74badcd74ea",
+            "type": "character",
+            "name": "Skarner"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "3",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "cf8f9783-b321-3a1d-95bd-f3e3b612d4c4",
+            "type": "character",
+            "name": "Maokai"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "4",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "5179b7c8-f751-3f66-b40d-6671d54aab37",
+            "type": "character",
+            "name": "Nocturne"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "5",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "40cc8559-a028-35a5-a6dd-5e48c4601d66",
+            "type": "character",
+            "name": "K'Sante"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "6",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "6d94812f-ea1f-3460-80b7-c38518abb709",
+            "type": "character",
+            "name": "Ambessa"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "7",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "e7a28e21-1e51-3ff4-ae76-2e7dc7a69ace",
+            "type": "character",
+            "name": "Corki"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "8",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "df57a4ea-3f1a-3e5f-9a38-4589c6966fde",
+            "type": "character",
+            "name": "Jax"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "9",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "eaea6b00-a13f-3241-a356-04d7882fb128",
+            "type": "character",
+            "name": "Azir"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "10",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "717061ba-4e85-30e1-9340-aef80368dfa0",
+            "type": "character",
+            "name": "Gnar"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "11",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "3f8c659e-ac1f-3a2e-877d-3af99bbc027b",
+            "type": "character",
+            "name": "Leona"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "12",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "5f69228a-cad9-3813-9d0b-31c455503d83",
+            "type": "character",
+            "name": "Caitlyn"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "13",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "cd06d06b-453c-3046-9bed-89dfd8d7b049",
+            "type": "character",
+            "name": "Nidalee"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "14",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "613fec9e-f951-31c3-9268-f529a9aea1ea",
+            "type": "character",
+            "name": "Ivern"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "15",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "ec7ba948-3e9d-373a-bfa4-569c749fdca7",
+            "type": "character",
+            "name": "Zyra"
+          }
+        },
+        {
+          "type": "ban",
+          "sequenceNumber": "16",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "787b7cb3-d9ef-3d55-91f6-7e076ba8b0c5",
+            "type": "character",
+            "name": "Braum"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "17",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "484c410a-0c65-3c5d-8f22-a34e2e883427",
+            "type": "character",
+            "name": "Elise"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "18",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "7927c3c0-d37c-36f0-922a-8c422f5ce170",
+            "type": "character",
+            "name": "Lillia"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "19",
+          "drafter": {
+            "id": "52573",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "a88709a3-f874-36e6-acec-9cc31b318a50",
+            "type": "character",
+            "name": "Sion"
+          }
+        },
+        {
+          "type": "pick",
+          "sequenceNumber": "20",
+          "drafter": {
+            "id": "54284",
+            "type": "team"
+          },
+          "draftable": {
+            "id": "96af4071-d73d-3c52-ac51-209e46e315a7",
+            "type": "character",
+            "name": "Viego"
+          }
+        }
+      ],
+      "teams": [
+        {
+          "id": "54284",
+          "name": "Isurus Estral",
+          "side": "red",
+          "won": true,
+          "kills": 18,
+          "deaths": 3,
+          "netWorth": 48570,
+          "experiencePoints": 58566,
+          "totalMoneyEarned": 50855,
+          "firstKill": true,
+          "damageDealt": 662454,
+          "damageTaken": 76844,
+          "damagePerMinute": 28679.09008457131,
+          "damagePerMoney": 13.026329761085439,
+          "kdaRatio": 17.0,
+          "moneyDifference": 16758,
+          "visionScore": 145.38593673706055,
+          "visionScorePerMinute": 6.294076836598383,
+          "killsAndAssists": 51.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 64,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyTurretPlateTop",
+              "type": "destroyTurretPlateTop",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 5,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateMid",
+              "type": "destroyTurretPlateMid",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "slayCloudDrake",
+              "type": "slayCloudDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateBot",
+              "type": "destroyTurretPlateBot",
+              "completionCount": 4,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 3,
+              "completedFirst": false
+            },
+            {
+              "id": "slayOceanDrake",
+              "type": "slayOceanDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTower",
+              "type": "destroyTower",
+              "completionCount": 11,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftHerald",
+              "type": "slayRiftHerald",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayHextechDrake",
+              "type": "slayHextechDrake",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoraciousAtakhan",
+              "type": "slayVoraciousAtakhan",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyFortifier",
+              "type": "destroyFortifier",
+              "completionCount": 3,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyNexus",
+              "type": "destroyNexus",
+              "completionCount": 1,
+              "completedFirst": true
+            }
+          ],
+          "players": [
+            {
+              "id": "21821",
+              "name": "Burdol",
+              "character": {
+                "id": "df57a4ea-3f1a-3e5f-9a38-4589c6966fde",
+                "name": "Jax"
+              },
+              "kills": 3,
+              "deaths": 2,
+              "killAssistsGiven": 6,
+              "netWorth": 10421,
+              "experiencePoints": 13368,
+              "totalMoneyEarned": 10726,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 3077,
+              "currentArmor": 116,
+              "respawnClock": {
+                "currentSeconds": 22
+              },
+              "damageDealt": 126812,
+              "damageTaken": 22474,
+              "damagePerMinute": 5489.9702799057095,
+              "damagePercentage": 19.142763120156268,
+              "damagePerMoney": 11.822860339362297,
+              "kdaRatio": 4.5,
+              "visionScore": 17.791162490844727,
+              "visionScorePerMinute": 0.7702185386218243,
+              "killsAndAssists": 9.0,
+              "killParticipation": 50.0,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "93d4e779-86fe-3e64-bf65-5c19fe10119c",
+                    "name": "Stealth Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7357a52d-2416-3e10-a439-0ce5fd09bef2",
+                    "name": "Dagger",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4bd971a3-4667-3dad-bb66-fb16d860f047",
+                    "name": "Sundered Sky",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "81ad737e-e405-3e94-9b95-62bf674bd70b",
+                    "name": "Seeker's Armguard",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 14,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTurretPlateTop",
+                  "type": "destroyTurretPlateTop",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 2,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "23109",
+              "name": "Josedeodo",
+              "character": {
+                "id": "96af4071-d73d-3c52-ac51-209e46e315a7",
+                "name": "Viego"
+              },
+              "kills": 7,
+              "deaths": 0,
+              "killAssistsGiven": 4,
+              "netWorth": 10290,
+              "experiencePoints": 11971,
+              "totalMoneyEarned": 10765,
+              "alive": true,
+              "currentHealth": 298,
+              "maxHealth": 2970,
+              "currentArmor": 89,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 218122,
+              "damageTaken": 31051,
+              "damagePerMinute": 9442.980927621938,
+              "damagePercentage": 32.92636167945246,
+              "damagePerMoney": 20.262145843009755,
+              "kdaRatio": 11.0,
+              "visionScore": 24.866361618041992,
+              "visionScorePerMinute": 1.0765194638712314,
+              "killsAndAssists": 11.0,
+              "killParticipation": 61.111111111111114,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4bd971a3-4667-3dad-bb66-fb16d860f047",
+                    "name": "Sundered Sky",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "80fb9860-a2ef-355e-8d7c-721826c0125f",
+                    "name": "Long Sword",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e98bd7a8-6d2d-3f80-a7bf-e04af7023f2e",
+                    "name": "Ruby Crystal",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 13,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 4,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayCloudDrake",
+                  "type": "slayCloudDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 3,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayOceanDrake",
+                  "type": "slayOceanDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftHerald",
+                  "type": "slayRiftHerald",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayHextechDrake",
+                  "type": "slayHextechDrake",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoraciousAtakhan",
+                  "type": "slayVoraciousAtakhan",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyFortifier",
+                  "type": "destroyFortifier",
+                  "completionCount": 1,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyNexus",
+                  "type": "destroyNexus",
+                  "completionCount": 1,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "20362",
+              "name": "Mireu",
+              "character": {
+                "id": "eaea6b00-a13f-3241-a356-04d7882fb128",
+                "name": "Azir"
+              },
+              "kills": 3,
+              "deaths": 0,
+              "killAssistsGiven": 9,
+              "netWorth": 10644,
+              "experiencePoints": 14075,
+              "totalMoneyEarned": 11174,
+              "alive": true,
+              "currentHealth": 624,
+              "maxHealth": 2583,
+              "currentArmor": 91,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 151758,
+              "damageTaken": 9991,
+              "damagePerMinute": 6569.937464419225,
+              "damagePercentage": 22.90845854957476,
+              "damagePerMoney": 13.581349561482012,
+              "kdaRatio": 12.0,
+              "visionScore": 13.636707305908203,
+              "visionScorePerMinute": 0.5903630399742067,
+              "killsAndAssists": 12.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "64e1135f-96ae-362d-aab7-0d19af1b8597",
+                    "name": "Doran's Ring",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "d0cff948-d164-37aa-bc13-87ffc65f5a11",
+                    "name": "Nashor's Tooth",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "3bb81a94-876b-3ce6-b42c-47938bac28f9",
+                    "name": "Liandry's Torment",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "90426fe3-3fc8-3b05-bbc4-31d3bdce4980",
+                    "name": "Chainlaced Crushers",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 14,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateBot",
+                  "type": "destroyTurretPlateBot",
+                  "completionCount": 2,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 3,
+                  "completedFirst": true
+                }
+              ]
+            },
+            {
+              "id": "21513",
+              "name": "Snaker",
+              "character": {
+                "id": "5f69228a-cad9-3813-9d0b-31c455503d83",
+                "name": "Caitlyn"
+              },
+              "kills": 2,
+              "deaths": 0,
+              "killAssistsGiven": 5,
+              "netWorth": 10254,
+              "experiencePoints": 11598,
+              "totalMoneyEarned": 10719,
+              "alive": true,
+              "currentHealth": 751,
+              "maxHealth": 2103,
+              "currentArmor": 83,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 144598,
+              "damageTaken": 5382,
+              "damagePerMinute": 6259.965322948979,
+              "damagePercentage": 21.827628786300636,
+              "damagePerMoney": 13.489877787107007,
+              "kdaRatio": 7.0,
+              "visionScore": 26.04153823852539,
+              "visionScorePerMinute": 1.1273954434322657,
+              "killsAndAssists": 7.0,
+              "killParticipation": 38.88888888888889,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "1bcd42c7-ef2c-3c65-9145-e7f1881f7419",
+                    "name": "Doran's Blade",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fa7be47c-e223-3249-a205-50dd905a90a1",
+                    "name": "Berserker's Greaves",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f25c35df-2f21-30a4-b4e8-2485adaf809a",
+                    "name": "Yun Tal Wildarrows",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "f8475fe7-7380-3336-b3e1-2b84f2459f7d",
+                    "name": "Infinity Edge",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7357a52d-2416-3e10-a439-0ce5fd09bef2",
+                    "name": "Dagger",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 13,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTurretPlateMid",
+                  "type": "destroyTurretPlateMid",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 3,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "20131",
+              "name": "Ackerman",
+              "character": {
+                "id": "484c410a-0c65-3c5d-8f22-a34e2e883427",
+                "name": "Elise"
+              },
+              "kills": 3,
+              "deaths": 1,
+              "killAssistsGiven": 9,
+              "netWorth": 6961,
+              "experiencePoints": 7554,
+              "totalMoneyEarned": 7471,
+              "alive": true,
+              "currentHealth": 676,
+              "maxHealth": 2236,
+              "currentArmor": 69,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 21164,
+              "damageTaken": 7946,
+              "damagePerMinute": 916.2360896754601,
+              "damagePercentage": 3.194787864515876,
+              "damagePerMoney": 2.8328202382545844,
+              "kdaRatio": 12.0,
+              "visionScore": 63.05016708374024,
+              "visionScorePerMinute": 2.7295803506988547,
+              "killsAndAssists": 12.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "54139970-56a4-3838-bff6-c2a793b37a46",
+                    "name": "Bloodsong",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5910498e-d6e9-3dc7-9721-de060e9632ff",
+                    "name": "Hextech Rocketbelt",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9d87db74-ddc0-3e0f-b470-7b701f2950b4",
+                    "name": "Amplifying Tome",
+                    "quantity": 2
+                  },
+                  {
+                    "id": "b672402b-f831-3d46-8946-1f12891a1e53",
+                    "name": "Sorcerer's Shoes",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 10,
+                  "completedFirst": false
+                },
+                {
+                  "id": "destroyTower",
+                  "type": "destroyTower",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "52573",
+          "name": "RED Kalunga",
+          "side": "blue",
+          "won": false,
+          "kills": 3,
+          "deaths": 18,
+          "netWorth": 32507,
+          "experiencePoints": 43625,
+          "totalMoneyEarned": 34097,
+          "firstKill": false,
+          "damageDealt": 458826,
+          "damageTaken": 96651,
+          "damagePerMinute": 19863.586282433975,
+          "damagePerMoney": 13.456491773469807,
+          "kdaRatio": 0.5555555555555556,
+          "moneyDifference": -16758,
+          "visionScore": 131.52844715118408,
+          "visionScorePerMinute": 5.694155646328024,
+          "killsAndAssists": 10.0,
+          "moneyPerMinute": 0.0,
+          "baronPowerPlays": [],
+          "objectives": [
+            {
+              "id": "increaseLevel",
+              "type": "increaseLevel",
+              "completionCount": 53,
+              "completedFirst": true
+            },
+            {
+              "id": "destroyTurretPlateBot",
+              "type": "destroyTurretPlateBot",
+              "completionCount": 1,
+              "completedFirst": true
+            },
+            {
+              "id": "slayRiftScuttlerBot",
+              "type": "slayRiftScuttlerBot",
+              "completionCount": 2,
+              "completedFirst": true
+            },
+            {
+              "id": "slayVoidGrub",
+              "type": "slayVoidGrub",
+              "completionCount": 1,
+              "completedFirst": false
+            },
+            {
+              "id": "destroyTurretPlateTop",
+              "type": "destroyTurretPlateTop",
+              "completionCount": 1,
+              "completedFirst": false
+            },
+            {
+              "id": "slayRiftScuttlerTop",
+              "type": "slayRiftScuttlerTop",
+              "completionCount": 1,
+              "completedFirst": false
+            }
+          ],
+          "players": [
+            {
+              "id": "24528",
+              "name": "fNb",
+              "character": {
+                "id": "717061ba-4e85-30e1-9340-aef80368dfa0",
+                "name": "Gnar"
+              },
+              "kills": 0,
+              "deaths": 3,
+              "killAssistsGiven": 2,
+              "netWorth": 7135,
+              "experiencePoints": 11213,
+              "totalMoneyEarned": 7365,
+              "alive": true,
+              "currentHealth": 2976,
+              "maxHealth": 3263,
+              "currentArmor": 109,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 105936,
+              "damageTaken": 20861,
+              "damagePerMinute": 4586.202343406707,
+              "damagePercentage": 23.088491061971204,
+              "damagePerMoney": 14.383706720977596,
+              "kdaRatio": 0.6666666666666666,
+              "visionScore": 17.452943801879883,
+              "visionScorePerMinute": 0.7555763079928172,
+              "killsAndAssists": 2.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "1bcd42c7-ef2c-3c65-9145-e7f1881f7419",
+                    "name": "Doran's Blade",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "93d4e779-86fe-3e64-bf65-5c19fe10119c",
+                    "name": "Stealth Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "6f6e26d4-888e-33f0-9464-afcf60c6acf7",
+                    "name": "Tunneler",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e98bd7a8-6d2d-3f80-a7bf-e04af7023f2e",
+                    "name": "Ruby Crystal",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 12,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "22917",
+              "name": "Aegis",
+              "character": {
+                "id": "7927c3c0-d37c-36f0-922a-8c422f5ce170",
+                "name": "Lillia"
+              },
+              "kills": 0,
+              "deaths": 4,
+              "killAssistsGiven": 2,
+              "netWorth": 6984,
+              "experiencePoints": 9283,
+              "totalMoneyEarned": 6894,
+              "alive": true,
+              "currentHealth": 2053,
+              "maxHealth": 2058,
+              "currentArmor": 66,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 155551,
+              "damageTaken": 27911,
+              "damagePerMinute": 6734.144773441102,
+              "damagePercentage": 33.901958476633844,
+              "damagePerMoney": 22.56324340005802,
+              "kdaRatio": 0.5,
+              "visionScore": 14.66133499145508,
+              "visionScorePerMinute": 0.6347214251555848,
+              "killsAndAssists": 2.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "93d4e779-86fe-3e64-bf65-5c19fe10119c",
+                    "name": "Stealth Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "8d572340-4041-3808-8301-d1b85af64235",
+                    "name": "Health Potion",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9d87db74-ddc0-3e0f-b470-7b701f2950b4",
+                    "name": "Amplifying Tome",
+                    "quantity": 3
+                  },
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "3bb81a94-876b-3ce6-b42c-47938bac28f9",
+                    "name": "Liandry's Torment",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 11,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayRiftScuttlerBot",
+                  "type": "slayRiftScuttlerBot",
+                  "completionCount": 2,
+                  "completedFirst": true
+                },
+                {
+                  "id": "slayVoidGrub",
+                  "type": "slayVoidGrub",
+                  "completionCount": 1,
+                  "completedFirst": false
+                },
+                {
+                  "id": "slayRiftScuttlerTop",
+                  "type": "slayRiftScuttlerTop",
+                  "completionCount": 1,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "27580",
+              "name": "Grevthar",
+              "character": {
+                "id": "a88709a3-f874-36e6-acec-9cc31b318a50",
+                "name": "Sion"
+              },
+              "kills": 1,
+              "deaths": 5,
+              "killAssistsGiven": 1,
+              "netWorth": 5816,
+              "experiencePoints": 9165,
+              "totalMoneyEarned": 6621,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 3223,
+              "currentArmor": 123,
+              "respawnClock": {
+                "currentSeconds": 22
+              },
+              "damageDealt": 76706,
+              "damageTaken": 25830,
+              "damagePerMinute": 3320.7713803933966,
+              "damagePercentage": 16.717884339597145,
+              "damagePerMoney": 11.585259024316569,
+              "kdaRatio": 0.4,
+              "visionScore": 24.211040496826172,
+              "visionScorePerMinute": 1.0481491717910707,
+              "killsAndAssists": 2.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "93d4e779-86fe-3e64-bf65-5c19fe10119c",
+                    "name": "Stealth Ward",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "4f94ace1-5f8b-39f2-8d2a-fba22d503b5e",
+                    "name": "Hollow Radiance",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b9831c3e-592a-3a3e-be46-f20c9438adca",
+                    "name": "Plated Steelcaps",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "e98bd7a8-6d2d-3f80-a7bf-e04af7023f2e",
+                    "name": "Ruby Crystal",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "df22e85a-ba2e-34d0-872e-b4494e1f5203",
+                    "name": "Aegis of the Legion",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 11,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "27557",
+              "name": "Brance",
+              "character": {
+                "id": "e7a28e21-1e51-3ff4-ae76-2e7dc7a69ace",
+                "name": "Corki"
+              },
+              "kills": 2,
+              "deaths": 3,
+              "killAssistsGiven": 0,
+              "netWorth": 8434,
+              "experiencePoints": 8891,
+              "totalMoneyEarned": 8489,
+              "alive": false,
+              "currentHealth": 0,
+              "maxHealth": 2162,
+              "currentArmor": 89,
+              "respawnClock": {
+                "currentSeconds": 34
+              },
+              "damageDealt": 108314,
+              "damageTaken": 11035,
+              "damagePerMinute": 4689.151191509534,
+              "damagePercentage": 23.606770322518777,
+              "damagePerMoney": 12.759335610790435,
+              "kdaRatio": 0.6666666666666666,
+              "visionScore": 13.73776912689209,
+              "visionScorePerMinute": 0.5947382283919801,
+              "killsAndAssists": 2.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "1bcd42c7-ef2c-3c65-9145-e7f1881f7419",
+                    "name": "Doran's Blade",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "9e80ca4f-8a81-38eb-b601-7c6d93701d73",
+                    "name": "Trinity Force",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5075c1e1-afbd-34f1-92da-738cb1986428",
+                    "name": "Farsight Alteration",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "14c4878e-f619-3ebe-86d5-e38b640fa240",
+                    "name": "Manamune",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "ac1049ef-1627-387b-b007-270ddd24c836",
+                    "name": "Boots",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "24bf9c95-3fdf-3865-bad7-569768bbfc8f",
+                    "name": "Cloth Armor",
+                    "quantity": 1
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 11,
+                  "completedFirst": false
+                }
+              ]
+            },
+            {
+              "id": "29597",
+              "name": "frostyy",
+              "character": {
+                "id": "3f8c659e-ac1f-3a2e-877d-3af99bbc027b",
+                "name": "Leona"
+              },
+              "kills": 0,
+              "deaths": 3,
+              "killAssistsGiven": 2,
+              "netWorth": 4138,
+              "experiencePoints": 5073,
+              "totalMoneyEarned": 4728,
+              "alive": true,
+              "currentHealth": 1916,
+              "maxHealth": 1916,
+              "currentArmor": 100,
+              "respawnClock": {
+                "currentSeconds": 0
+              },
+              "damageDealt": 12319,
+              "damageTaken": 11014,
+              "damagePerMinute": 533.3165936832354,
+              "damagePercentage": 2.684895799279029,
+              "damagePerMoney": 2.6055414551607443,
+              "kdaRatio": 0.6666666666666666,
+              "visionScore": 61.46535873413086,
+              "visionScorePerMinute": 2.6609705129965717,
+              "killsAndAssists": 2.0,
+              "killParticipation": 66.66666666666666,
+              "moneyPerMinute": 0.0,
+              "moneyPercentage": 0.0,
+              "inventory": {
+                "items": [
+                  {
+                    "id": "cec7cdb2-0634-36fc-9bc3-19bdf26ff436",
+                    "name": "Oracle Lens",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "fbacf077-b7ff-33a7-ae73-0e774feadcc5",
+                    "name": "Mercury's Treads",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "5d786793-d0bd-35a1-a5f6-d70b4d58ce3c",
+                    "name": "Celestial Opposition",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "b762e4e6-eea8-341c-a77c-8b0fd2e18885",
+                    "name": "Locket of the Iron Solari",
+                    "quantity": 1
+                  },
+                  {
+                    "id": "7b101664-c419-37d5-94a8-7f6143c2bce6",
+                    "name": "Control Ward",
+                    "quantity": 2
+                  }
+                ]
+              },
+              "objectives": [
+                {
+                  "id": "increaseLevel",
+                  "type": "increaseLevel",
+                  "completionCount": 8,
+                  "completedFirst": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "_version": "v3.38",
+  "_downloadedAt": "2026-01-24T06:56:35.610351Z"
+}

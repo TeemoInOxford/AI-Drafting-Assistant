@@ -1,3 +1,16 @@
+// Champion class/role types
+export type ChampionClass = 'Tank' | 'Fighter' | 'Assassin' | 'Mage' | 'Marksman' | 'Support' | 'Controller';
+
+// Opponent type (from game theory)
+export type OpponentType = 'aggressive' | 'defensive' | 'meta_follower' | 'counter_focused' | 'flex_master' | 'unknown';
+
+// Opponent model for PTS calculation
+export interface OpponentModel {
+  predictedType: OpponentType;
+  confidence: number;           // 0-1
+  observedPicks: Champion[];    // 对手已选的英雄
+}
+
 // Champion data type
 export interface Champion {
   id: string;           // e.g. "Aatrox"
@@ -5,6 +18,7 @@ export interface Champion {
   name: string;         // Display name
   image: string;        // Avatar URL
   positions: Position[]; // Positions
+  tags: ChampionClass[]; // Champion classes/roles
 }
 
 // Position type
@@ -107,6 +121,7 @@ export interface DDragonChampionData {
     image: {
       full: string;
     };
+    tags: string[];
   }>;
 }
 
@@ -174,6 +189,7 @@ export interface PickLikelihoodSignals {
   playerChampionPoolFreq: number;   // 0-1: How often does opponent player pick this?
   globalMetaPresence: number;       // 0-1: How meta is this champion?
   synergyBanSignal: number;         // 0-1: Did they ban synergies?
+  championPoolStrength?: number;    // 0-1: Opponent's proficiency with this champion (from Game Theory)
 }
 
 // Loss severity categories
@@ -191,11 +207,18 @@ export interface LossSeverityBreakdown {
 export interface PTSResult {
   championId: string;
   championName: string;
-  pts: number;                // 0-100: Final PTS score
+  pts: number;                // 0-100: Final PTS score (内部使用，不显示给用户)
   pickLikelihood: number;     // 0-1: Probability opponent picks this
   lossSeverity: number;       // 0-1: How bad if we lose it
   riskTier: 'critical' | 'high' | 'moderate' | 'low';
+
+  // 新增：用户友好的等级显示
+  threatLevel?: '高' | '中' | '低';        // Ban阶段：威胁程度
+  recommendLevel?: '高' | '中' | '低';     // Pick阶段：推荐度
+
   explanation: string;        // Natural language explanation
+  detailedReason?: string;    // 详细推荐理由（指标来源）
+
   signals: PickLikelihoodSignals;
   severityBreakdown: LossSeverityBreakdown;
   isFlex?: boolean;           // Whether this is a flex pick

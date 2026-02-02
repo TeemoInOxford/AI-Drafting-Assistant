@@ -1,6 +1,8 @@
 import { Champion, BPState, AIAnalysis, AIRecommendation, AIWarning, ActionType, Team } from './types';
 import { bpStateToDraftState, getTopPTSChampions, DEFAULT_PTS_CONFIG } from './pts-engine';
 import { getCurrentStep } from './bp-logic';
+import { TeamChampionPool } from './team-champion-pool.types';
+import { adjustBanScoreByTeamPool } from './ban-recommendation-adjuster';
 
 // Warning templates
 const WARNING_TEMPLATES = [
@@ -23,12 +25,14 @@ const INSIGHT_TEMPLATES = [
 
 /**
  * Generate AI analysis using PTS system
+ * 支持队伍英雄池的 Ban 推荐调整
  */
 export function generateAIAnalysis(
   bpState: BPState,
   champions: Champion[],
   currentAction: ActionType,
-  currentTeam: Team
+  currentTeam: Team,
+  enemyTeamPool?: TeamChampionPool | null
 ): AIAnalysis {
   // Get available champions
   const availableChampions = champions.filter(c => !bpState.usedChampions.has(c.id));
@@ -48,10 +52,34 @@ export function generateAIAnalysis(
   const draftState = bpStateToDraftState(bpState, currentStep, currentTeam);
 
   // Calculate PTS for all available champions
-  const ptsResults = getTopPTSChampions(draftState, availableChampions, 5, DEFAULT_PTS_CONFIG);
+  const ptsResults = getTopPTSChampions(draftState, availableChampions, 10, DEFAULT_PTS_CONFIG);
 
-  // Convert PTS results to AI recommendations
-  const recommendations: AIRecommendation[] = ptsResults.map((result) => ({
+  // 如果是 Ban 阶段且有敌方队伍数据，根据队伍英雄池调整分数
+  let adjustedResults = ptsResults;
+  if (currentAction === 'ban' && enemyTeamPool) {
+    adjustedResults = ptsResults.map(result => {
+      const champion = champions.find(c => c.id === result.championId);
+      if (!champion) return result;
+
+      const adjustedScore = adjustBanScoreByTeamPool(
+        champion,
+        result.pts,
+        enemyTeamPool,
+        bpState
+      );
+
+      return {
+        ...result,
+        pts: adjustedScore,
+      };
+    });
+
+    // 重新排序
+    adjustedResults.sort((a, b) => b.pts - a.pts);
+  }
+
+  // Convert PTS results to AI recommendations (取前5个)
+  const recommendations: AIRecommendation[] = adjustedResults.slice(0, 5).map((result) => ({
     champion: result.championName,
     score: result.pts,
     reason: result.explanation,

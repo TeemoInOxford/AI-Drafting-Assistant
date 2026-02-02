@@ -1,285 +1,190 @@
-# LOL数据架构文档
+# Data Architecture
 
-## 一、数据来源
+## 数据来源
 
-### GRID API 层级
+### GRID API
 ```
-Central Data Feed (静态数据)
-├── Title (游戏) - LOL ID=3
-├── Tournament (赛事)
-├── Team (战队)
-├── Player (选手)
-└── Series (系列赛)
+Central Data (静态)
+├── Tournament → League
+├── Team → Roster
+└── Player → Profile
 
-Live Data Feed (实时数据)
-├── SeriesState (系列赛状态)
-│   ├── teams[] (战队)
-│   │   └── players[] (选手)
-│   └── games[] (单局)
-│       ├── teams[] (战队单局状态)
-│       │   └── players[] (选手单局状态)
-│       ├── draftActions[] (BP)
-│       └── structures[] (建筑)
-└── GameTeamStateLol / GamePlayerStateLol (LOL专属扩展字段)
+Live Data (实时)
+└── SeriesState
+    └── games[]
+        ├── draftActions[] (BP序列)
+        └── teams[].players[] (单局数据)
 ```
 
----
+**API端点**: `https://api-op.grid.gg/central-data/graphql`
 
-## 二、本地数据结构
+## 本地数据文件
 
-### 文件说明
+| 文件 | 内容 | 大小 |
+|------|------|------|
+| `data/lol/hierarchy.json` | 赛区→联赛→战队→选手 | ~2MB |
+| `data/lol/series.json` | 系列赛列表 | ~500KB |
+| `data/lol/states.json` | 系列赛详细状态 | ~10MB |
 
-| 文件 | 说明 | 数据来源 |
-|------|------|----------|
-| `data/lol/index.json` | 索引文件，包含所有联赛、选手的汇总 | 自动生成 |
-| `data/lol/series.json` | 系列赛基础信息列表 | Central Data Feed |
-| `data/lol/states.json` | 系列赛详细状态数据 | Live Data Feed |
-
-### index.json 结构
-```json
+### hierarchy.json 结构
+```typescript
 {
-  "updatedAt": "2025-01-20T...",
-  "totalSeries": 1632,
-  "totalStates": 1488,
-  "tournaments": {
-    "756907": {
-      "name": "LCK - Spring 2024",
-      "count": 50,
-      "seriesIds": ["2616371", ...]
+  regions: {
+    [regionId]: {
+      name: string,
+      leagues: string[],  // league IDs
+      teams: string[],    // team IDs
+      players: string[]   // player IDs
     }
   },
-  "players": {
-    "21575": {
-      "name": "Knight",
-      "count": 45,
-      "seriesIds": ["2616371", ...]
-    }
-  }
+  leagues: { [id]: { name, teams[] } },
+  teams: { [id]: { name, players[] } },
+  players: { [id]: { name, team } }
 }
 ```
 
-### states.json 结构
-```json
+## 核心数据模型
+
+### DraftAction (BP动作)
+```typescript
 {
-  "2616371": {
-    "id": "2616371",
-    "started": true,
-    "finished": true,
-    "format": "best-of-3",
-    "teams": [
-      {
-        "id": "47494",
-        "name": "T1",
-        "score": 2,
-        "won": true,
-        "kills": 31,
-        "deaths": 16,
-        "players": [
-          {
-            "id": "23596",
-            "name": "Zeus",
-            "kills": 4,
-            "deaths": 6
-          }
-        ]
-      }
-    ],
-    "games": [
-      {
-        "id": "game-uuid",
-        "sequenceNumber": 1,
-        "teams": [
-          {
-            "id": "47494",
-            "name": "T1",
-            "side": "blue",
-            "won": true,
-            "players": [
-              {
-                "id": "23596",
-                "name": "Zeus",
-                "character": {"id": "...", "name": "Twisted Fate"},
-                "kills": 4,
-                "deaths": 6,
-                "netWorth": 12652,
-                "damageDealt": 15000,
-                "visionScore": 25.5
-              }
-            ]
-          }
-        ],
-        "draftActions": [
-          {"type": "ban", "drafter": {...}, "draftable": {"name": "Aatrox"}}
-        ]
-      }
-    ]
-  }
+  type: 'ban' | 'pick',
+  sequenceNumber: string,  // "0"-"19"
+  drafter: { id: string, type: 'team' },
+  draftable: { id: string, type: 'character', name: string }
 }
 ```
 
----
+### GameTeamStateLol (战队单局)
+| 字段 | 类型 | 版本要求 | 说明 |
+|------|------|----------|------|
+| kills | Int | - | 击杀数 |
+| deaths | Int | - | 死亡数 |
+| netWorth | Int | - | 净资产 |
+| damageDealt | Int | v3.23+ | 总伤害 |
+| visionScore | Float | v3.30+ | 视野得分 |
 
-## 三、赛区层级结构
+### GamePlayerStateLol (选手单局)
+| 字段 | 类型 | 版本要求 | 说明 |
+|------|------|----------|------|
+| character | Character | - | 使用英雄 |
+| kills/deaths | Int | - | KDA |
+| netWorth | Int | - | 经济 |
+| damageDealt | Int | v3.23+ | 伤害输出 |
+| kdaRatio | Float | v3.27+ | KDA比率 |
+| killParticipation | Float | v3.35+ | 参团率 |
 
-### 推荐的赛区划分
+## 数据清洗规则
 
-```javascript
+### 1. 重复账号移除
+**规则**: 移除数字后缀账号 (如 `Barracks01`, `Barracks02`)
+```python
+pattern = r'^(.+?)(\d{1,2})$'
+if match and base_name in seen:
+    remove_player()
+```
+
+### 2. 测试账号过滤
+**特征**: 包含 `test`, `OBS`, `Observer`, `Staff`, `centraldev`
+**处理**: 自动移除
+
+### 3. 关联完整性
+**规则**:
+- 只保留有战队的选手
+- 只保留有选手的战队
+- 只保留有战队的联赛
+
+### 清洗效果
+```
+选手: 18,804 → 5,804 (-69%)
+战队: 2,165 → 56 (-97%)
+联赛: 173 → 93 (-46%)
+```
+
+**脚本位置**: `scripts/grid-data-fetcher/rebuild_clean_hierarchy.py`
+
+## 赛区划分
+
+```typescript
 const REGIONS = {
-  "LCK": {
-    name: "韩国",
-    leagues: ["LCK"]
-  },
-  "LPL": {
-    name: "中国大陆",
-    leagues: ["LPL"]
-  },
-  "LEC": {
-    name: "欧洲",
-    leagues: ["LEC"]
-  },
-  "LCS": {
-    name: "北美",
-    leagues: ["LCS"]
-  },
-  "LTA": {
-    name: "拉丁美洲/南美",
-    leagues: ["LTA North", "LTA South", "LTA Cross-Conference"]
-  },
-  "LJL": {
-    name: "日本",
-    leagues: ["LJL"]
-  },
-  "PCS": {
-    name: "太平洋",
-    leagues: ["PCS"]
-  },
-  "VCS": {
-    name: "越南",
-    leagues: ["VCS"]
-  },
-  "INTERNATIONAL": {
-    name: "国际赛事",
-    leagues: ["Worlds", "MSI", "First Stand"]
-  }
+  LPL: { name: '中国', leagues: ['LPL'] },
+  LCK: { name: '韩国', leagues: ['LCK'] },
+  LEC: { name: '欧洲', leagues: ['LEC'] },
+  LCS: { name: '北美', leagues: ['LCS'] },
+  LTA: { name: '拉美', leagues: ['LTA North', 'LTA South'] },
+  INTERNATIONAL: { name: '国际', leagues: ['Worlds', 'MSI'] }
 };
 ```
 
----
+## 数据约束
 
-## 四、数据字段说明 (LOL专属)
+### 版本兼容性
+- **v3.23+**: damageDealt, damageTaken
+- **v3.27+**: kdaRatio
+- **v3.30+**: visionScore
+- **v3.35+**: killParticipation
 
-### GameTeamStateLol (战队单局数据)
+**处理**: 旧版本数据缺失字段时使用默认值或跳过
 
-| 字段 | 类型 | 说明 | 版本要求 |
-|------|------|------|----------|
-| id | ID | 战队ID | - |
-| name | String | 战队名称 | - |
-| side | String | blue/red | - |
-| won | Boolean | 是否获胜 | - |
-| score | Int | 得分 | - |
-| kills | Int | 击杀数 | - |
-| deaths | Int | 死亡数 | - |
-| netWorth | Int | 净资产 | - |
-| damageDealt | Int | 总伤害 | v3.23+ |
-| damageTaken | Int | 承受伤害 | v3.23+ |
-| visionScore | Float | 视野得分 | v3.30+ |
-| experiencePoints | Int | 总经验 | - |
-| moneyDifference | Int | 经济差 | v3.28+ |
-| objectives | [Objective] | 目标(龙/男爵) | - |
-| structuresDestroyed | Int | 拆塔数 | - |
-
-### GamePlayerStateLol (选手单局数据)
-
-| 字段 | 类型 | 说明 | 版本要求 |
-|------|------|------|----------|
-| id | ID | 选手ID | - |
-| name | String | 选手名称 | - |
-| character | Character | 英雄 | - |
-| kills | Int | 击杀 | - |
-| deaths | Int | 死亡 | - |
-| killAssistsGiven | Int | 助攻 | - |
-| netWorth | Int | 经济 | - |
-| alive | Boolean | 存活状态 | - |
-| currentHealth | Int | 当前血量 | - |
-| maxHealth | Int | 最大血量 | - |
-| currentArmor | Int | 护甲 | - |
-| experiencePoints | Int | 经验值 | - |
-| damageDealt | Int | 伤害输出 | v3.23+ |
-| damagePercentage | Float | 伤害占比 | v3.23+ |
-| visionScore | Float | 视野得分 | v3.30+ |
-| kdaRatio | Float | KDA | v3.27+ |
-| killParticipation | Float | 参团率 | v3.35+ |
-
----
-
-## 五、数据清洗规则
-
-### 已实现的清洗规则
-
-1. **LGD前缀移除**: `LGDBurdol` -> `Burdol`
-2. **Cryin重复合并**: `"Cryin "` -> `"Cryin"` (ID合并)
-3. **大小写统一**: `knight` -> `Knight`
-4. **空格移除**: `"Quantum "` -> `"Quantum"`
-
-### 清洗脚本位置
-```
-scripts/clean_player_data.py
+### 数据完整性校验
+```typescript
+function validateSeriesState(state: SeriesState): boolean {
+  return (
+    state.games.every(g => g.draftActions.length === 20) &&
+    state.teams.length === 2 &&
+    state.teams.every(t => t.players.length === 5)
+  );
+}
 ```
 
----
+## GraphQL查询示例
 
-## 六、前端页面结构建议
-
-### /data 页面层级
-
-```
-/data
-├── /data/regions                    # 赛区列表
-├── /data/regions/[region]           # 单个赛区详情
-├── /data/leagues/[league]           # 联赛详情
-├── /data/teams/[teamId]             # 战队详情
-├── /data/players/[playerId]         # 选手详情
-├── /data/series/[seriesId]          # 系列赛详情
-└── /data/games/[gameId]             # 单局详情
-```
-
-### 数据展示层级
-
-```
-赛区页面 (/data)
-  ├── 显示所有赛区卡片
-  └── 每个赛区显示该赛区的联赛数量、队伍数量
-
-联赛页面 (/data/leagues/[league])
-  ├── 显示联赛信息
-  ├── 参赛战队列表
-  └── 最近比赛列表
-
-战队页面 (/data/teams/[teamId])
-  ├── 战队基本信息
-  ├── 选手阵容
-  └── 历史比赛记录
-
-选手页面 (/data/players/[playerId])
-  ├── 选手基本信息
-  ├── 英雄池统计
-  ├── 数据统计 (KDA, 场均伤害等)
-  └── 参与的比赛列表
-
-比赛详情页面 (/data/series/[seriesId])
-  ├── 比赛基本信息 (时间、联赛、对阵)
-  ├── 比分和胜负
-  ├── 每局游戏的BP
-  ├── 每局游戏的选手数据
-  └── 数据对比图表
+### 获取系列赛BP数据
+```graphql
+query GetSeriesState($seriesId: ID!) {
+  seriesState(id: $seriesId) {
+    games {
+      draftActions {
+        type
+        sequenceNumber
+        drafter { id }
+        draftable { id name }
+      }
+      teams {
+        side
+        won
+        players {
+          name
+          character { name }
+          ... on GamePlayerStateLol {
+            kills
+            deaths
+            kdaRatio
+          }
+        }
+      }
+    }
+  }
+}
 ```
 
----
+## 数据更新流程
 
-## 七、下一步开发建议
+```bash
+# 1. 获取原始数据
+cd scripts/grid-data-fetcher
+python3 fetch_lol_data.py
 
-1. **重建index.json**: 添加赛区和联赛的层级关系
-2. **创建赛区映射**: 根据联赛名称自动归类到赛区
-3. **增量更新机制**: 只更新最近的比赛数据
-4. **数据验证**: 添加数据完整性检查
-5. **缓存策略**: 前端缓存常用数据减少加载时间
+# 2. 清洗数据
+python3 rebuild_clean_hierarchy.py
+
+# 3. 转换为API格式
+python3 convert_clean_to_api.py
+
+# 4. 更新项目数据
+cp data/lol_hierarchy_clean_api.json ../../data/lol/hierarchy.json
+```
+
+## 工程价值
+
+本文档定义数据模型、清洗规则和唯一事实源，确保数据一致性。任何数据相关问题应首先参考此文档。

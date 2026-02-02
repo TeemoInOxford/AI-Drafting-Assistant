@@ -2,8 +2,15 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden selection:bg-cyan-500/30">
       {/* Background Grid - Static & Subtle */}
@@ -16,15 +23,15 @@ export default function HomePage() {
 
         {/* ============ HERO SECTION ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8 }}
           className="text-center mb-28"
         >
           {/* Version badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={mounted ? { opacity: 0, scale: 0.9 } : false}
+            animate={mounted ? { opacity: 1, scale: 1 } : false}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-8 inline-flex items-center rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300 backdrop-blur-sm"
           >
@@ -77,8 +84,8 @@ export default function HomePage() {
 
         {/* ============ WHAT THIS IS / IS NOT ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 40 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8, delay: 0.15 }}
           className="mb-28"
         >
@@ -106,8 +113,8 @@ export default function HomePage() {
 
         {/* ============ PICK THREAT SCORE (PTS) ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 40 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8, delay: 0.25 }}
           className="mb-28"
         >
@@ -153,8 +160,8 @@ export default function HomePage() {
 
         {/* ============ THREE PILLARS ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 40 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mb-28"
         >
@@ -229,8 +236,8 @@ export default function HomePage() {
 
         {/* ============ CALLOUT QUOTES ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 40 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8, delay: 0.45 }}
           className="mb-28"
         >
@@ -250,8 +257,8 @@ export default function HomePage() {
 
         {/* ============ NAVIGATION CARDS ============ */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={mounted ? { opacity: 0, y: 40 } : false}
+          animate={mounted ? { opacity: 1, y: 0 } : false}
           transition={{ duration: 0.8, delay: 0.55 }}
           className="mb-20"
         >
@@ -326,13 +333,13 @@ export default function HomePage() {
 
         {/* ============ CLOSING STATEMENT ============ */}
         <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={mounted ? { opacity: 0 } : false}
+          animate={mounted ? { opacity: 1 } : false}
           transition={{ duration: 0.8, delay: 0.65 }}
           className="text-center pt-12 border-t border-slate-800"
         >
           <p className="font-mono text-xs text-slate-600 mb-2">
-            © {new Date().getFullYear()} LOL BP Tool. Designed for Professional Esports Analysis.
+            © 2026 LOL BP Tool. Designed for Professional Esports Analysis.
           </p>
           <p className="text-slate-700 text-xs">
             Decision support for professional League of Legends coaching staff.

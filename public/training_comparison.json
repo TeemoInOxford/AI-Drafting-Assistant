@@ -1,0 +1,112 @@
+{
+  "baseline": {
+    "auc": 0.9528,
+    "best_iteration": 78,
+    "classification_report": {
+      "0": {
+        "precision": 0.88,
+        "recall": 0.88,
+        "f1-score": 0.88,
+        "support": 75
+      },
+      "1": {
+        "precision": 0.88,
+        "recall": 0.88,
+        "f1-score": 0.88,
+        "support": 75
+      },
+      "accuracy": 0.88,
+      "macro avg": {
+        "precision": 0.88,
+        "recall": 0.88,
+        "f1-score": 0.88,
+        "support": 150
+      },
+      "weighted avg": {
+        "precision": 0.88,
+        "recall": 0.88,
+        "f1-score": 0.88,
+        "support": 150
+      }
+    },
+    "confusion_matrix": [
+      [
+        66,
+        9
+      ],
+      [
+        9,
+        66
+      ]
+    ]
+  },
+  "optimized": {
+    "auc": 0.9618666666666666,
+    "best_iteration": 140,
+    "best_params": {
+      "num_leaves": 21,
+      "learning_rate": 0.08292797530014898,
+      "n_estimators": 377,
+      "subsample": 0.9746595013029591,
+      "colsample_bytree": 0.9916893928795038,
+      "reg_alpha": 0.6902470735691452,
+      "reg_lambda": 0.2579269526014921,
+      "max_depth": 3,
+      "min_child_samples": 49
+    },
+    "classification_report": {
+      "0": {
+        "precision": 0.8783783783783784,
+        "recall": 0.8666666666666667,
+        "f1-score": 0.87248322147651,
+        "support": 75
+      },
+      "1": {
+        "precision": 0.868421052631579,
+        "recall": 0.88,
+        "f1-score": 0.8741721854304636,
+        "support": 75
+      },
+      "accuracy": 0.8733333333333333,
+      "macro avg": {
+        "precision": 0.8733997155049786,
+        "recall": 0.8733333333333333,
+        "f1-score": 0.8733277034534868,
+        "support": 150
+      },
+      "weighted avg": {
+        "precision": 0.8733997155049789,
+        "recall": 0.8733333333333333,
+        "f1-score": 0.8733277034534869,
+        "support": 150
+      }
+    },
+    "confusion_matrix": [
+      [
+        65,
+        10
+      ],
+      [
+        9,
+        66
+      ]
+    ]
+  },
+  "comparison": {
+    "baseline": {
+      "auc": 0.9528,
+      "accuracy": 0.88,
+      "n_features": 30
+    },
+    "optimized": {
+      "auc": 0.9618666666666666,
+      "accuracy": 0.8733333333333333,
+      "n_features": 30
+    },
+    "improvement": {
+      "auc_improvement_pct": 0.9515813042261406,
+      "accuracy_improvement_pct": -0.666666666666671
+    }
+  },
+  "timestamp": "2026-01-28T00:13:04.208217"
+}

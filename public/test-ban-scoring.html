@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ban Scoring API Test</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        pre {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+    </style>
+</head>
+<body>
+    <h1>Ban Scoring API 测试</h1>
+    <button onclick="testAPI()">测试 API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>正在请求...</p>';
+
+            try {
+                const response = await fetch('/api/lol/ban-scoring', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        allChampions: [
+                            { id: 'Aatrox', name: 'Aatrox', key: '266', image: '', positions: ['top'], tags: ['Fighter'] },
+                            { id: 'Ahri', name: 'Ahri', key: '103', image: '', positions: ['mid'], tags: ['Mage'] },
+                            { id: 'Akali', name: 'Akali', key: '84', image: '', positions: ['mid', 'top'], tags: ['Assassin'] },
+                        ],
+                        bpState: {
+                            currentStep: 0,
+                            blueBans: [],
+                            redBans: [],
+                            bluePicks: [],
+                            redPicks: [],
+                            usedChampions: [],
+                            history: [],
+                        },
+                        championStatsMap: {
+                            'Aatrox': { winRate: 52, banRate: 25, pickRate: 15 },
+                            'Ahri': { winRate: 51, banRate: 20, pickRate: 12 },
+                            'Akali': { winRate: 49, banRate: 30, pickRate: 18 },
+                        },
+                        topN: 10,
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `
+                        <h2 class="success">✅ API 调用成功</h2>
+                        <p><strong>推荐数量:</strong> ${data.recommendations.length}</p>
+                        <p><strong>时间戳:</strong> ${data.timestamp}</p>
+                        <h3>推荐列表:</h3>
+                        <pre>${JSON.stringify(data.recommendations, null, 2)}</pre>
+                        <h3>Debug 信息:</h3>
+                        <pre>${JSON.stringify(data.debug, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <h2 class="error">❌ API 返回失败</h2>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <h2 class="error">❌ 请求失败</h2>
+                    <p>${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

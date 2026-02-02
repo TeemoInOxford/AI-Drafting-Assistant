@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { PTSResult, Champion, Position } from '../lib/types';
+import { PTSResult, Champion, Position, BPState, BPStep } from '../lib/types';
+import { generateDetailedRecommendation } from '../lib/stage-aware-recommendation';
+import { generateDetailedRecommendationZh } from '../lib/stage-aware-recommendation-zh';
 
 interface PTSRiskBoardProps {
   ptsResults: PTSResult[];
@@ -16,6 +18,8 @@ interface PTSRiskBoardProps {
   bluePicks?: (Champion | null)[];
   redPicks?: (Champion | null)[];
   champions?: Champion[];
+  bpState?: BPState;
+  currentStep?: BPStep | null;
 }
 
 export default function PTSRiskBoard({
@@ -30,377 +34,287 @@ export default function PTSRiskBoard({
   bluePicks = [],
   redPicks = [],
   champions = [],
+  bpState,
+  currentStep,
 }: PTSRiskBoardProps) {
-  const isBanPhase = currentTurn.toLowerCase().includes('ban');
-  const topPick = ptsResults[0];
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
-  const critical = ptsResults.filter(r => r.riskTier === 'critical').slice(0, 2);
-  const high = ptsResults.filter(r => r.riskTier === 'high').slice(0, 2);
-  const safe = ptsResults.filter(r => r.riskTier === 'moderate' || r.riskTier === 'low').slice(0, 2);
-
-  if (ptsResults.length === 0) {
+  if (ptsResults.length === 0 || !bpState || !currentStep) {
     return null;
   }
 
-  // Helper to format role distribution
-  const formatRoleDistribution = (roleDistribution?: { role: Position; probability: number }[]) => {
-    if (!roleDistribution || roleDistribution.length <= 1) return null;
+  // Get top 3 recommendations
+  const top3 = ptsResults.slice(0, 3);
 
-    return roleDistribution
-      .sort((a, b) => b.probability - a.probability)
-      .map(({ role, probability }) => `${role.charAt(0).toUpperCase() + role.slice(1)} (${Math.round(probability * 100)}%)`)
-      .join(' | ');
+  // Get our picks and enemy picks based on our side
+  const ourPicks = ourSide === 'blue' ? bluePicks : redPicks;
+  const enemyPicks = ourSide === 'blue' ? redPicks : bluePicks;
+
+  // 职业中文映射
+  const classNamesZh: Record<string, string> = {
+    'Tank': '坦克',
+    'Fighter': '战士',
+    'Assassin': '刺客',
+    'Mage': '法师',
+    'Marksman': '射手',
+    'Support': '辅助',
+    'Controller': '控制',
   };
 
-  // Helper to get role distribution for a champion
-  const getChampionRoleDistribution = (champion: Champion): { role: Position; probability: number }[] | undefined => {
-    if (champion.positions.length <= 1) return undefined;
-
-    // Simple heuristic: distribute probability based on position count
-    const probability = 1 / champion.positions.length;
-    return champion.positions.map(role => ({ role, probability }));
-  };
-
-  // Format draft picks with flex handling
-  const formatDraftPicks = (picks: (Champion | null)[]) => {
-    const validPicks = picks.filter((p): p is Champion => p !== null);
-    if (validPicks.length === 0) return 'None';
-
-    return validPicks.map(champ => {
-      const roleDistribution = getChampionRoleDistribution(champ);
-      const roleText = formatRoleDistribution(roleDistribution);
-
-      if (roleText) {
-        return `${champ.name} → ${roleText}`;
-      }
-      return `${champ.name} (${champ.positions[0]})`;
-    }).join(', ');
-  };
-
-  // Get open roles
-  const getOpenRoles = () => {
-    const allRoles: Position[] = ['top', 'jungle', 'mid', 'bot', 'support'];
-    const ourPicks = ourSide === 'blue' ? bluePicks : redPicks;
-    const validPicks = ourPicks.filter((p): p is Champion => p !== null);
-
-    // For simplicity, assume each pick takes one role
-    // In reality, flex picks create ambiguity
-    const takenRoles = validPicks.flatMap(p => p.positions.slice(0, 1));
-    const openRoles = allRoles.filter(r => !takenRoles.includes(r));
-
-    return openRoles.map(r => r.charAt(0).toUpperCase() + r.slice(1)).join(', ') || 'All filled';
-  };
-
-  const renderChampionRow = (result: PTSResult, index: number) => {
-    const roleText = formatRoleDistribution(result.roleDistribution);
-
-    return (
-      <motion.div
-        key={result.championId}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: index * 0.08 }}
-        onClick={() => onChampionClick?.(result.championId)}
-        className="flex items-center justify-between py-1.5 px-2 hover:bg-slate-800/50 rounded cursor-pointer transition-colors"
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-white font-medium text-sm">{result.championName}</span>
-          {result.isFlex && (
-            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-              FLEX
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-cyan-400 font-bold text-sm">PTS {Math.round(result.pts)}</span>
-          <span className="text-slate-400 text-xs">
-            {isBanPhase ? `Win Impact: −${(result.pts * 0.07).toFixed(1)}%` : `Win Rate: ${(52 + result.pts * 0.08).toFixed(1)}%`}
-          </span>
-        </div>
-      </motion.div>
-    );
+  // 风险等级中文映射
+  const riskTierZh: Record<string, string> = {
+    'critical': '紧急',
+    'high': '高',
+    'moderate': '中等',
+    'low': '低',
   };
 
   const Divider = () => (
-    <div className="border-t border-slate-700/50 my-3" />
+    <div className="border-t border-slate-700/30 my-2" />
   );
 
   return (
-    <div className={`relative rounded-lg border-2 p-4 shadow-xl transition-all duration-300 ${
-      isUserTurn
-        ? ourSide === 'blue'
-          ? 'bg-slate-900/95 backdrop-blur-sm border-cyan-500/50'
-          : 'bg-slate-900/95 backdrop-blur-sm border-rose-500/50'
-        : 'bg-slate-900/50 backdrop-blur-sm border-slate-600/50 opacity-60 pointer-events-none'
-    }`}>
+    <div className="relative rounded-lg border p-3 shadow-lg transition-all duration-300 bg-slate-900/40 backdrop-blur-md border-white/5">
       {/* Title Badge - Top Center */}
-      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-slate-800 border border-slate-600/50">
-        <span className="text-[9px] font-bold text-slate-400 tracking-wider">DRAFTING ASSISTANT</span>
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-slate-800/80 border border-slate-600/30 rounded">
+        <span className="text-[8px] font-bold text-slate-400 tracking-wider">AI 推荐</span>
       </div>
 
       {/* Current Turn Bar */}
-      <div className={`-mx-4 -mt-4 mb-4 px-4 py-3 pt-6 border-b ${
-        ourSide === 'blue'
-          ? 'bg-cyan-500/10 border-cyan-500/30'
-          : 'bg-rose-500/10 border-rose-500/30'
-      }`}>
+      <div className="mb-3 pt-2">
         <div className="flex items-center justify-center gap-2">
-          <span className={`font-bold text-base ${
-            ourSide === 'blue' ? 'text-cyan-300' : 'text-rose-300'
-          }`}>
+          <span className="font-medium text-xs text-slate-400">
             {ourSide === 'blue'
-              ? (blueTeamName || 'BLUE SIDE')
-              : (redTeamName || 'RED SIDE')
+              ? (blueTeamName || '蓝色方')
+              : (redTeamName || '红色方')
             }
           </span>
           <span className="text-slate-500">•</span>
-          <span className="text-white font-bold text-base">{currentTurn}</span>
+          <span className="text-slate-300 font-medium text-sm">{currentTurn}</span>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="space-y-3 text-sm">
-        {isBanPhase ? (
-          <>
-            {/* Threat Overview */}
-            <div>
-              <h3 className="text-slate-300 font-bold text-xs uppercase tracking-wider mb-2">Threat Overview</h3>
-              <Divider />
-              <p className="text-slate-400 text-xs leading-relaxed">
-                Opponent has no picks revealed.<br />
-                Early denial phase — remove high-leverage openers.
-              </p>
+      {/* Top 3 Recommendations */}
+      <div className="space-y-3">
+        {top3.map((result, index) => {
+          // Find the champion object
+          const champion = champions.find(c => c.id === result.championId);
+          if (!champion) return null;
+
+          // Generate detailed recommendation (Chinese version)
+          const detailedReason = result.detailedReason || generateDetailedRecommendationZh(
+            champion,
+            result,
+            bpState,
+            currentStep,
+            ourPicks,
+            enemyPicks
+          );
+
+          const isExpanded = expandedIndex === index;
+
+          // Parse the detailed reason into sections
+          const sections = detailedReason.split('\n\n').filter(s => s.trim());
+
+          return (
+            <motion.div
+              key={result.championId}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-slate-800/30 rounded-lg border border-slate-700/30 overflow-hidden"
+            >
+              {/* Champion Header - Always Visible */}
+              <div
+                onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                className="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-800/50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/30">
+                    <span className="text-cyan-400 font-bold text-sm">#{index + 1}</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-white font-bold text-sm">{result.championName}</span>
+                      {result.isFlex && (
+                        <span className="text-[8px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                          摇摆
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[10px] text-slate-400">
+                        {champion.tags.map(tag => classNamesZh[tag] || tag).join(' • ')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    {/* 根据阶段显示不同的等级 */}
+                    {currentStep.action === 'ban' ? (
+                      <>
+                        <div className={`font-bold text-sm ${
+                          result.threatLevel === '高' ? 'text-rose-400' :
+                          result.threatLevel === '中' ? 'text-orange-400' :
+                          'text-slate-400'
+                        }`}>
+                          威胁度：{result.threatLevel || '中'}
+                        </div>
+                        <div className="text-[10px] text-slate-500">
+                          {result.threatLevel === '高' ? '建议优先Ban' :
+                           result.threatLevel === '中' ? '可考虑Ban' :
+                           '威胁较低'}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className={`font-bold text-sm ${
+                          result.recommendLevel === '高' ? 'text-cyan-400' :
+                          result.recommendLevel === '中' ? 'text-blue-400' :
+                          'text-slate-400'
+                        }`}>
+                          推荐度：{result.recommendLevel || '中'}
+                        </div>
+                        <div className="text-[10px] text-slate-500">
+                          {result.recommendLevel === '高' ? '强烈推荐' :
+                           result.recommendLevel === '中' ? '可选择' :
+                           '备选方案'}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <svg
+                    className={`w-5 h-5 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Detailed Recommendation - Expandable */}
+              {isExpanded && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="border-t border-slate-700/30"
+                >
+                  <div className="p-3 space-y-2 text-xs">
+                    {/* 显示详细推荐理由 */}
+                    <div className="bg-slate-900/50 rounded p-2.5 border border-slate-700/30">
+                      <h4 className="font-bold text-[10px] uppercase tracking-wider mb-2 text-cyan-400">
+                        {currentStep.action === 'ban' ? '📊 Ban理由分析' : '✨ 推荐理由分析'}
+                      </h4>
+                      <div className="space-y-1.5">
+                        {detailedReason.split('；').map((reason, idx) => {
+                          // 提取指标类型
+                          const match = reason.match(/^([^：]+)：(.+)$/);
+                          if (match) {
+                            const [, indicator, content] = match;
+                            // 根据指标类型设置颜色
+                            let indicatorColor = 'text-slate-300';
+                            if (indicator.includes('对手英雄池')) indicatorColor = 'text-rose-400';
+                            else if (indicator.includes('版本强度')) indicatorColor = 'text-purple-400';
+                            else if (indicator.includes('位置')) indicatorColor = 'text-orange-400';
+                            else if (indicator.includes('阵容')) indicatorColor = 'text-green-400';
+                            else if (indicator.includes('博弈')) indicatorColor = 'text-cyan-400';
+                            else if (indicator.includes('针对')) indicatorColor = 'text-yellow-400';
+                            else if (indicator.includes('协同')) indicatorColor = 'text-blue-400';
+                            else if (indicator.includes('摇摆')) indicatorColor = 'text-pink-400';
+
+                            return (
+                              <div key={idx} className="flex items-start gap-2">
+                                <span className="text-slate-500 mt-0.5">•</span>
+                                <div className="flex-1">
+                                  <span className={`font-semibold ${indicatorColor}`}>{indicator}</span>
+                                  <span className="text-slate-300">：{content}</span>
+                                </div>
+                              </div>
+                            );
+                          }
+                          return (
+                            <div key={idx} className="flex items-start gap-2">
+                              <span className="text-slate-500 mt-0.5">•</span>
+                              <span className="text-slate-300">{reason}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* 如果有原始的详细分析，也显示 */}
+                    {sections.length > 0 && sections[0] !== detailedReason && (
+                      <>
+                        <Divider />
+                        {sections.map((section, sectionIndex) => {
+                          const lines = section.split('\n');
+                          const title = lines[0].replace(/\*\*/g, '').replace('：', '').trim();
+                          const content = lines.slice(1).join('\n').trim();
+
+                          // Determine color based on section title
+                          let titleColor = 'text-slate-300';
+                          if (title.includes('阶段分析')) titleColor = 'text-blue-400';
+                          else if (title.includes('职业协同')) titleColor = 'text-green-400';
+                          else if (title.includes('职业康特')) titleColor = 'text-orange-400';
+                          else if (title.includes('紧急程度')) titleColor = 'text-rose-400';
+                          else if (title.includes('风险评估')) titleColor = 'text-yellow-400';
+
+                          return (
+                            <div key={sectionIndex}>
+                              <h4 className={`font-bold text-[10px] uppercase tracking-wider mb-1.5 ${titleColor}`}>
+                                {title}
+                              </h4>
+                              <p className="text-slate-300 text-[11px] leading-relaxed whitespace-pre-wrap">
+                                {content}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </>
+                    )}
+
+                    {/* Action Button */}
+                    <div className="pt-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onChampionClick?.(result.championId);
+                        }}
+                        className="w-full py-2 px-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-400 font-medium text-xs transition-colors"
+                      >
+                        选择 {result.championName}
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Footer */}
+      <div className="mt-3">
+        <Divider />
+        {isUserTurn ? (
+          <div className="bg-indigo-500/10 rounded-lg p-2.5 border border-indigo-500/30">
+            <div className="text-xs text-indigo-300 font-medium">
+              轮到你了 — 点击展开详情
             </div>
-
-            {/* Critical */}
-            {critical.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-red-400 font-black text-xs uppercase tracking-wider mb-2">
-                  CRITICAL — MUST BAN NOW
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {critical.map((r, i) => renderChampionRow(r, i))}
-                </div>
-              </div>
-            )}
-
-            {/* High Risk */}
-            {high.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-orange-400 font-bold text-xs uppercase tracking-wider mb-2">
-                  HIGH RISK
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {high.map((r, i) => renderChampionRow(r, critical.length + i))}
-                </div>
-              </div>
-            )}
-
-            {/* Safe to Delay */}
-            {safe.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-slate-400 font-bold text-xs uppercase tracking-wider mb-2">
-                  SAFE TO DELAY
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {safe.map((r, i) => renderChampionRow(r, critical.length + high.length + i))}
-                </div>
-              </div>
-            )}
-
-            {/* Recommended Ban */}
-            {topPick && (
-              <div>
-                <Divider />
-                <h3 className="text-cyan-300 font-bold text-xs uppercase tracking-wider mb-2">
-                  Recommended Ban
-                </h3>
-                <Divider />
-                <div className="bg-slate-800/50 rounded p-3 space-y-2">
-                  <div className="text-white font-bold text-base">{topPick.championName}</div>
-
-                  <div>
-                    <p className="text-slate-300 text-xs font-semibold mb-1">If banned:</p>
-                    <ul className="text-slate-400 text-xs space-y-0.5 ml-3">
-                      {topPick.isFlex ? (
-                        <>
-                          <li>• Removes multi-role threat</li>
-                          <li>• Forces opponent into predictable picks</li>
-                          <li>• Reduces draft ambiguity pressure</li>
-                        </>
-                      ) : (
-                        <>
-                          <li>• Removes safest blind pick</li>
-                          <li>• Forces earlier role reveal</li>
-                          <li>• Reduces opponent win chance ~{(topPick.pts * 0.07).toFixed(0)}%</li>
-                        </>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <p className="text-slate-300 text-xs font-semibold mb-1">If ignored:</p>
-                    <ul className="text-slate-400 text-xs space-y-0.5 ml-3">
-                      {topPick.isFlex ? (
-                        <>
-                          <li>• Opponent retains role ambiguity</li>
-                          <li>• Delays opponent role commitment</li>
-                          <li>• Forces blind response under incomplete information</li>
-                        </>
-                      ) : (
-                        <>
-                          <li>• Likely first-picked</li>
-                          <li>• Draft tempo shifts to opponent</li>
-                        </>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-          </>
+            <div className="text-[10px] text-gray-400 mt-0.5">
+              AI 提供阶段感知分析。最终决定权在你。
+            </div>
+          </div>
         ) : (
-          <>
-            {/* Draft State */}
-            <div>
-              <h3 className="text-slate-300 font-bold text-xs uppercase tracking-wider mb-2">Draft State</h3>
-              <Divider />
-              <div className="space-y-2 text-xs">
-                <div>
-                  <p className="text-slate-400 font-semibold">Enemy Picks:</p>
-                  <p className="text-slate-300">{formatDraftPicks(ourSide === 'blue' ? redPicks : bluePicks)}</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 font-semibold">Our Picks:</p>
-                  <p className="text-slate-300">{formatDraftPicks(ourSide === 'blue' ? bluePicks : redPicks)}</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 font-semibold">Open Roles:</p>
-                  <p className="text-slate-300">{getOpenRoles()}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Best Picks Now */}
-            {critical.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-cyan-400 font-black text-xs uppercase tracking-wider mb-2">
-                  BEST PICKS NOW
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {critical.map((r, i) => renderChampionRow(r, i))}
-                </div>
-              </div>
-            )}
-
-            {/* Conditional Picks */}
-            {high.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-yellow-400 font-bold text-xs uppercase tracking-wider mb-2">
-                  CONDITIONAL PICKS
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {high.map((r, i) => renderChampionRow(r, critical.length + i))}
-                </div>
-              </div>
-            )}
-
-            {/* Safe to Delay */}
-            {safe.length > 0 && (
-              <div>
-                <Divider />
-                <h3 className="text-slate-400 font-bold text-xs uppercase tracking-wider mb-2">
-                  SAFE TO DELAY
-                </h3>
-                <Divider />
-                <div className="space-y-1">
-                  {safe.map((r, i) => renderChampionRow(r, critical.length + high.length + i))}
-                </div>
-              </div>
-            )}
-
-            {/* Primary Recommendation */}
-            {topPick && (
-              <div>
-                <Divider />
-                <h3 className="text-cyan-300 font-bold text-xs uppercase tracking-wider mb-2">
-                  Primary Recommendation
-                </h3>
-                <Divider />
-                <div className="bg-slate-800/50 rounded p-3 space-y-2">
-                  <div className="text-white font-bold text-base">{topPick.championName}</div>
-
-                  <div>
-                    <p className="text-slate-300 text-xs font-semibold mb-1">Why:</p>
-                    <ul className="text-slate-400 text-xs space-y-0.5 ml-3">
-                      {topPick.isFlex ? (
-                        <>
-                          <li>• Effective regardless of flex resolution</li>
-                          <li>• Maintains role ambiguity advantage</li>
-                          <li>• Preserves draft flexibility</li>
-                        </>
-                      ) : (
-                        <>
-                          <li>• Solves frontline deficit</li>
-                          <li>• Stabilizes mid-late game</li>
-                          <li>• Preserves jungle flexibility</li>
-                        </>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <p className="text-slate-300 text-xs font-semibold mb-1">If skipped:</p>
-                    <ul className="text-slate-400 text-xs space-y-0.5 ml-3">
-                      {topPick.isFlex ? (
-                        <>
-                          <li>• Loses multi-role coverage option</li>
-                          <li>• Forced into predictable role assignments</li>
-                          <li>• Opponent gains draft read advantage</li>
-                        </>
-                      ) : (
-                        <>
-                          <li>• Team lacks reliable engage</li>
-                          <li>• Jungle forced into utility role</li>
-                          <li>• Late-game teamfight risk increases</li>
-                        </>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
-          </>
+          <p className="text-[10px] text-slate-500 text-center">
+            等待对手...
+          </p>
         )}
-
-        {/* Footer */}
-        <div>
-          <Divider />
-          {isUserTurn ? (
-            <div className="bg-indigo-500/10 rounded-lg p-2.5 border border-indigo-500/30">
-              <div className="text-xs text-indigo-300 font-medium">
-                Your turn — Make your decision
-              </div>
-              <div className="text-[10px] text-gray-400 mt-0.5">
-                {isBanPhase ? 'AI highlights threats. Final call is yours.' : 'AI advises. Coach decides.'}
-              </div>
-            </div>
-          ) : (
-            <p className="text-[10px] text-slate-500 text-center">
-              Waiting for opponent...
-            </p>
-          )}
-        </div>
       </div>
     </div>
   );

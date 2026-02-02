@@ -19,6 +19,11 @@ const positionLabels: Record<Position, string> = {
   support: 'Support',
 };
 
+// Global cache for popular teams (shared across all instances)
+let popularTeamsCache: { id: string; name: string }[] | null = null;
+let popularTeamsCacheTimestamp = 0;
+const CACHE_DURATION = 60000; // 1 minute
+
 export default function TeamRosterCompact({
   rosterState,
   onRosterStateChange,
@@ -30,22 +35,42 @@ export default function TeamRosterCompact({
   const [searchResults, setSearchResults] = useState<{ players: ProPlayer[]; teams: { id: string; name: string }[] }>({ players: [], teams: [] });
   const [isSearching, setIsSearching] = useState(false);
   const [popularTeams, setPopularTeams] = useState<{ id: string; name: string }[]>([]);
+  const [isLoadingTeams, setIsLoadingTeams] = useState(false);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Load popular teams when team select dropdown opens
+  // Load popular teams when team select dropdown opens (with global cache)
   useEffect(() => {
-    if (activeTeamSelect && popularTeams.length === 0) {
+    if (!activeTeamSelect) return;
+
+    const now = Date.now();
+
+    // Use cached data if available and fresh
+    if (popularTeamsCache && now - popularTeamsCacheTimestamp < CACHE_DURATION) {
+      setPopularTeams(popularTeamsCache);
+      return;
+    }
+
+    // Only fetch if not already loading and cache is stale
+    if (!isLoadingTeams && (!popularTeamsCache || now - popularTeamsCacheTimestamp >= CACHE_DURATION)) {
+      setIsLoadingTeams(true);
       fetch('/api/lol/hierarchy?type=all-teams')
         .then(res => res.json())
         .then(data => {
           if (data.success && data.teams) {
-            setPopularTeams(data.teams.slice(0, 20).map((t: any) => ({ id: t.id, name: t.name })));
+            const teams = data.teams.slice(0, 20).map((t: any) => ({ id: t.id, name: t.name }));
+            popularTeamsCache = teams;
+            popularTeamsCacheTimestamp = now;
+            setPopularTeams(teams);
           }
         })
-        .catch(e => console.error('Failed to load teams:', e));
+        .catch(e => console.error('Failed to load teams:', e))
+        .finally(() => setIsLoadingTeams(false));
+    } else if (popularTeamsCache) {
+      // Use stale cache while loading
+      setPopularTeams(popularTeamsCache);
     }
-  }, [activeTeamSelect, popularTeams.length]);
+  }, [activeTeamSelect, isLoadingTeams]);
 
   // Search players from API
   useEffect(() => {
@@ -138,6 +163,7 @@ export default function TeamRosterCompact({
 
     onRosterStateChange({
       ...rosterState,
+      enabled: true, // Auto-enable when player is selected
       [teamKey]: {
         ...rosterState[teamKey],
         players: newPlayers,
@@ -168,6 +194,7 @@ export default function TeamRosterCompact({
 
         onRosterStateChange({
           ...rosterState,
+          enabled: true, // Auto-enable when team is selected
           [teamKey]: {
             teamName: teamName,
             teamLogo: playersData.team?.logoUrl || null,

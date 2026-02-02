@@ -1,6 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
+:root {
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -31,9 +33,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-destructive-foreground: var(--destructive-foreground);
-}
 
-:root {
   --card: #0f172a;
   --ring: #22d3ee;
   --input: #1e293b;
@@ -62,7 +62,6 @@ body {
   min-height: 100vh;
 }
 
-/* Pulse border animation for active slots */
 @keyframes pulse-border {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4);
@@ -78,7 +77,6 @@ body {
   animation: pulse-border 2s ease-in-out infinite;
 }
 
-/* Red team pulse */
 @keyframes pulse-border-red {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4);
@@ -94,7 +92,6 @@ body {
   animation: pulse-border-red 2s ease-in-out infinite;
 }
 
-/* Glass morphism card */
 .glass-card {
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
@@ -106,7 +103,6 @@ body {
   border-color: rgba(51, 65, 85, 0.8);
 }
 
-/* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #22d3ee 0%, #818cf8 50%, #f472b6 100%);
   -webkit-background-clip: text;
@@ -114,7 +110,6 @@ body {
   background-clip: text;
 }
 
-/* Glow effects */
 .glow-cyan {
   box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px rgba(34, 211, 238, 0.1);
 }
@@ -176,7 +171,6 @@ select option {
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
 }
 
-/* Slow pulse for critical items */
 @keyframes pulse-slow {
   0%, 100% {
     opacity: 1;

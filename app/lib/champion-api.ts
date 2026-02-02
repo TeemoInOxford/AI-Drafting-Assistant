@@ -21,6 +21,7 @@ export async function getChampions(version: string): Promise<Champion[]> {
     name: champ.name,
     image: `${DDRAGON_BASE}/cdn/${version}/img/champion/${champ.id}.png`,
     positions: getChampionPositions(champ.id),
+    tags: champ.tags as any[], // DDragon provides tags like ["Fighter", "Tank"]
   }));
 }
 

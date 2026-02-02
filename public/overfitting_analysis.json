@@ -1,0 +1,18 @@
+{
+  "verdict": "mild_overfitting",
+  "train_auc": 0.9895555555555555,
+  "val_auc": 0.9618666666666666,
+  "train_acc": 0.9333333333333333,
+  "val_acc": 0.8733333333333333,
+  "auc_gap": 0.027688888888888874,
+  "acc_gap": 0.06000000000000005,
+  "cv_auc_mean": 0.8413866666666667,
+  "cv_auc_std": 0.07284661321427459,
+  "samples_per_feature": 25.0,
+  "issues": [],
+  "warnings": [
+    "Moderate AUC gap (0.0277) - Mild overfitting",
+    "Moderate accuracy gap (0.0600) - Mild overfitting",
+    "High CV variance (0.0728) - Unstable model"
+  ]
+}

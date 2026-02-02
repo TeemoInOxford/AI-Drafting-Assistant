@@ -1,0 +1,78 @@
+{
+  "status": "success",
+  "timestamp": "2026-01-27T23:53:47.697886",
+  "model_info": {
+    "algorithm": "LightGBM Binary Classifier",
+    "objective": "binary",
+    "n_features": 14,
+    "best_iteration": 82
+  },
+  "metrics": {
+    "auc": 0.9208264462809918,
+    "auc_display": "0.9208"
+  },
+  "feature_importance": [
+    {
+      "feature": "hero_kda",
+      "importance": 240
+    },
+    {
+      "feature": "hero_forward_pct",
+      "importance": 238
+    },
+    {
+      "feature": "hero_kp",
+      "importance": 105
+    },
+    {
+      "feature": "ally_missing_frontline",
+      "importance": 87
+    },
+    {
+      "feature": "hero_dpm",
+      "importance": 86
+    },
+    {
+      "feature": "hero_damage_pct",
+      "importance": 84
+    },
+    {
+      "feature": "hero_dpm_per_gold",
+      "importance": 54
+    },
+    {
+      "feature": "ally_has_adc_core",
+      "importance": 53
+    },
+    {
+      "feature": "ally_has_single_core",
+      "importance": 29
+    },
+    {
+      "feature": "stage_early",
+      "importance": 16
+    },
+    {
+      "feature": "execution_difficulty",
+      "importance": 14
+    },
+    {
+      "feature": "stage_mid",
+      "importance": 12
+    },
+    {
+      "feature": "ally_missing_cc",
+      "importance": 0
+    },
+    {
+      "feature": "stage_late",
+      "importance": 0
+    }
+  ],
+  "dataset_info": {
+    "total_samples": 550,
+    "counter_cases": 275,
+    "non_counter_cases": 275,
+    "class_balance": 0.5
+  }
+}

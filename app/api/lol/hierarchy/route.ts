@@ -9,6 +9,8 @@ const DATA_DIR = path.join(process.cwd(), 'data/lol');
 let hierarchyCache: any = null;
 let cacheTimestamp = 0;
 let teamLogosCache: Map<string, string> = new Map();
+let allTeamsCache: any = null;
+let allTeamsCacheTimestamp = 0;
 const CACHE_DURATION = 60000; // 1 minute
 
 function loadHierarchy() {
@@ -246,29 +248,47 @@ export async function GET(request: NextRequest) {
       }
 
       case 'all-teams': {
-        // Return all teams with players
-        const allTeams = Object.entries(hierarchy.teams)
-          .map(([teamId, team]: [string, any]) => ({
-            id: teamId,
-            name: team.name,
-            nameShortened: team.name,
-            logoUrl: teamLogosCache.get(teamId) || null,
-            region: { code: team.leagues?.[0] || 'Unknown', name: team.leagues?.[0] || 'Unknown' },
-            playerCount: Object.keys(team.players || {}).length,
-            seriesCount: team.seriesCount || 0,
-            players: Object.entries(team.players || {}).map(([pid, pname]) => ({
-              id: pid,
-              nickname: pname
-            }))
-          }))
-          .filter(t => t.playerCount > 0)
-          .sort((a, b) => b.seriesCount - a.seriesCount);
+        // Return all teams with players - use cache
+        const now = Date.now();
+        if (allTeamsCache && now - allTeamsCacheTimestamp < CACHE_DURATION) {
+          return NextResponse.json(allTeamsCache);
+        }
 
-        return NextResponse.json({
+        // Optimize: Pre-filter and limit data processing
+        const teamEntries = Object.entries(hierarchy.teams);
+        const validTeams = teamEntries.filter(([_, team]: [string, any]) =>
+          Object.keys(team.players || {}).length > 0
+        );
+
+        // Sort by seriesCount first, then slice to top 50 teams
+        validTeams.sort((a, b) => (b[1].seriesCount || 0) - (a[1].seriesCount || 0));
+        const topTeams = validTeams.slice(0, 50);
+
+        const allTeams = topTeams.map(([teamId, team]: [string, any]) => ({
+          id: teamId,
+          name: team.name,
+          nameShortened: team.name,
+          logoUrl: teamLogosCache.get(teamId) || null,
+          region: { code: team.leagues?.[0] || 'Unknown', name: team.leagues?.[0] || 'Unknown' },
+          playerCount: Object.keys(team.players || {}).length,
+          seriesCount: team.seriesCount || 0,
+          players: Object.entries(team.players || {}).map(([pid, pname]) => ({
+            id: pid,
+            nickname: pname
+          }))
+        }));
+
+        const result = {
           success: true,
           teams: allTeams,
           total: allTeams.length
-        });
+        };
+
+        // Cache the result
+        allTeamsCache = result;
+        allTeamsCacheTimestamp = now;
+
+        return NextResponse.json(result);
       }
 
       case 'player': {

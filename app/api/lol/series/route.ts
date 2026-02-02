@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 const CENTRAL_API_URL = "https://api-op.grid.gg/central-data/graphql";
 const STATE_API_URL = "https://api-op.grid.gg/live-data-feed/series-state/graphql";
-const API_KEY = "crM9kbj1QQVhzN6vm19DiYwJUl4lMoTdSHVBlMO8";
+const API_KEY = process.env.GRID_API_KEY || "";
 const LOL_TITLE_ID = "3";
 
 // Local data paths
@@ -279,6 +279,11 @@ async function fetchAllLOLSeries(limit: number = 50): Promise<{ series: SeriesDa
       cache: 'no-store',
     });
 
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return { series: [], total: 0 };
+    }
+
     const data = await response.json();
 
     if (data.errors) {
@@ -340,6 +345,11 @@ async function fetchSeriesByTournament(tournamentId: string, limit: number = 50)
       body: JSON.stringify({ query }),
       cache: 'no-store',
     });
+
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return { series: [], total: 0 };
+    }
 
     const data = await response.json();
 
@@ -499,6 +509,11 @@ async function fetchSeriesState(seriesId: string): Promise<SeriesState | null> {
       cache: 'no-store',
     });
 
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return null;
+    }
+
     const data = await response.json();
 
     if (data.errors) {
@@ -574,6 +589,11 @@ async function fetchSeriesByPlayer(playerId: string, limit: number = 50): Promis
       cache: 'no-store',
     });
 
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return { series: [], total: 0 };
+    }
+
     const data = await response.json();
 
     if (data.errors) {
@@ -618,6 +638,11 @@ async function getTournamentSeriesCount(tournamentId: string): Promise<number> {
       body: JSON.stringify({ query }),
       cache: 'no-store',
     });
+
+    if (!response.ok) {
+      console.error(`HTTP error! status: ${response.status}`);
+      return 0;
+    }
 
     const data = await response.json();
     return data.data?.allSeries?.totalCount || 0;

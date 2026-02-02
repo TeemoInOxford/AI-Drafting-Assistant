@@ -31,14 +31,15 @@ export default function ChampionCard({
     if (isFearlessBanned) return 'border-rose-700';
     if (isInHistoryMode) {
       return historySelectMode === 'blue'
-        ? 'border-cyan-400 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30'
-        : 'border-rose-400 hover:border-rose-300 hover:shadow-lg hover:shadow-rose-500/30';
+        ? 'border-cyan-400 hover:border-cyan-300 hover:shadow-[0_8px_24px_rgba(34,211,238,0.3)]'
+        : 'border-rose-400 hover:border-rose-300 hover:shadow-[0_8px_24px_rgba(244,63,94,0.3)]';
     }
-    return 'border-slate-700 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20';
+    return 'border-slate-700 hover:border-cyan-400 hover:shadow-[0_8px_24px_rgba(34,211,238,0.3)]';
   };
 
   return (
     <motion.div
+      key={champion.id}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
         opacity: 1,
@@ -49,13 +50,13 @@ export default function ChampionCard({
         delay: Math.min(index * 0.01, 0.5),
         x: { duration: 0.5 }
       }}
-      whileHover={!disabled ? { scale: 1.1, zIndex: 10 } : {}}
+      whileHover={!disabled ? { scale: 1.05, y: -4, zIndex: 30 } : {}}
       whileTap={!disabled ? { scale: 0.95 } : {}}
       onClick={!disabled ? onClick : undefined}
       className={`
         relative flex flex-col items-center cursor-pointer transition-all duration-200
-        ${disabled ? 'cursor-not-allowed' : 'hover:z-10'}
-        ${isUsed || isFearlessBanned ? 'opacity-30 grayscale' : ''}
+        ${disabled ? 'cursor-not-allowed' : ''}
+        ${isUsed || isFearlessBanned ? 'opacity-30 grayscale pointer-events-none' : ''}
       `}
     >
       <div className={`
