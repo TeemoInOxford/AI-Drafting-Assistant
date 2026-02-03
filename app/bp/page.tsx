@@ -936,6 +936,8 @@ export default function LOLBPPage() {
                   currentStepIndex={bpState.currentStep}
                   blueBans={bpState.blueBans}
                   redBans={bpState.redBans}
+                  bluePicks={bpState.bluePicks}
+                  redPicks={bpState.redPicks}
                   blueTeamName={rosterState.blueTeam.teamName}
                   redTeamName={rosterState.redTeam.teamName}
                   champions={champions}

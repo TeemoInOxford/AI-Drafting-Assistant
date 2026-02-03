@@ -25,6 +25,8 @@ interface BanPhaseDraftingAssistantProps {
   currentStepIndex: number;
   blueBans: BanEntry[];
   redBans: BanEntry[];
+  bluePicks?: (Champion | null)[];
+  redPicks?: (Champion | null)[];
   blueTeamName?: string;
   redTeamName?: string;
   champions: Champion[];
@@ -117,6 +119,8 @@ export default function BanPhaseDraftingAssistant({
   currentStepIndex,
   blueBans,
   redBans,
+  bluePicks = [],
+  redPicks = [],
   blueTeamName,
   redTeamName,
   champions,
@@ -144,6 +148,19 @@ export default function BanPhaseDraftingAssistant({
       ...redBans.filter(Boolean).filter(b => b?.champion?.name).map(b => b.champion!.name),
     ];
   }, [blueBans, redBans]);
+
+  // Calculate already picked champions (for Ban Phase 2)
+  const alreadyPicked = useMemo(() => {
+    return [
+      ...bluePicks.filter(Boolean).filter(p => p?.name).map(p => p!.name),
+      ...redPicks.filter(Boolean).filter(p => p?.name).map(p => p!.name),
+    ];
+  }, [bluePicks, redPicks]);
+
+  // Combined unavailable champions (banned + picked)
+  const unavailableChampions = useMemo(() => {
+    return [...alreadyBanned, ...alreadyPicked];
+  }, [alreadyBanned, alreadyPicked]);
 
   // Fix 1: Build championIdMap from champions array (lowercase name -> id)
   const championIdMap = useMemo(() => {
@@ -258,7 +275,7 @@ export default function BanPhaseDraftingAssistant({
         // Generate candidates
         const result = generateBanCandidates({
           opponentTeamId,
-          alreadyBanned,
+          alreadyBanned: unavailableChampions, // Include both banned and picked champions
           league: selectedLeague,
           metaData,
           teamDenialData,
@@ -299,7 +316,7 @@ export default function BanPhaseDraftingAssistant({
     return () => {
       controller.abort();
     };
-  }, [opponentTeamId, selectedLeague, alreadyBanned, banContext, champions, ourSide, isBanPhase, additionalDisabled, championIdMap]);
+  }, [opponentTeamId, selectedLeague, unavailableChampions, banContext, champions, ourSide, isBanPhase, additionalDisabled, championIdMap]);
 
   // Calculate all PTS scores for tier classification
   const allPtsScores = useMemo(() => candidates.map(c => c.pts_score), [candidates]);
