@@ -62,6 +62,10 @@ export interface BPState {
   redPicks: (Champion | null)[];    // Red picks (5)
   usedChampions: Set<string>;       // Used champion IDs
   history: BPHistoryEntry[];        // Action history (for undo)
+
+  // Team roster information (optional, for opponent-specific analysis)
+  blueTeam?: TeamRoster;
+  redTeam?: TeamRoster;
 }
 
 // History entry
@@ -187,9 +191,11 @@ export interface DraftState {
 export interface PickLikelihoodSignals {
   opponentRoleVacancy: number;      // 0-1: Does opponent need this role?
   playerChampionPoolFreq: number;   // 0-1: How often does opponent player pick this?
-  globalMetaPresence: number;       // 0-1: How meta is this champion?
+  globalMetaPresence: number;       // 0-1: How meta is this champion? (normalized for algorithm)
+  rawPresence?: number;             // 0-1: Raw presence from pro matches (picks+bans)/total
   synergyBanSignal: number;         // 0-1: Did they ban synergies?
   championPoolStrength?: number;    // 0-1: Opponent's proficiency with this champion (from Game Theory)
+  synergyWithBans?: number;         // 0-1: Synergy with our bans
 }
 
 // Loss severity categories

@@ -26,7 +26,8 @@ import {
   BPState,
   BPStep,
   ActionType,
-  OpponentModel
+  OpponentModel,
+  TeamRoster
 } from './types';
 
 // Import optimization utilities
@@ -123,6 +124,25 @@ export const PICK_PHASE_CONFIG: PTSConfig = {
   criticalThreshold: 35,
   highThreshold: 25,
   moderateThreshold: 15,
+};
+
+// Pick阶段早期配置 - 重点：英雄强度和选手熟练度
+export const EARLY_PICK_PHASE_CONFIG: PTSConfig = {
+  // PickLikelihood: 早期更关注英雄强度和选手熟练度
+  roleVacancyWeight: 0.20,      // 降低位置权重（所有位置都空）
+  championPoolWeight: 0.35,     // 提高选手熟练度权重
+  metaPresenceWeight: 0.35,     // 提高Meta强度权重
+  synergyBanWeight: 0.10,       // 降低协同权重（无阵容）
+
+  // LossSeverity: 早期更关注英雄本身价值
+  roleCollapseWeight: 0.30,     // 降低位置崩溃权重
+  compositionLockWeight: 0.20,  // 降低阵容锁定权重
+  strategicDenialWeight: 0.50,  // 提高战略价值权重（英雄强度）
+
+  // Risk tier thresholds - 使用更低的阈值
+  criticalThreshold: 25,
+  highThreshold: 18,
+  moderateThreshold: 12,
 };
 
 /**
@@ -242,12 +262,25 @@ export function calculatePTS(
   availableChampions: Champion[],
   config?: PTSConfig,
   useNormalization: boolean = false,  // 关闭归一化，使用原始 PTS 分数
-  opponentModel?: OpponentModel      // 新增：对手模型
+  opponentModel?: OpponentModel,      // 新增：对手模型
+  opponentTeam?: TeamRoster           // 新增：对手队伍信息（用于英雄池分析）
 ): PTSResult[] {
   // 根据action自动选择配置
   if (!config) {
     const action = draftState.currentStep?.action ?? 'ban';
-    config = action === 'ban' ? BAN_PHASE_CONFIG : PICK_PHASE_CONFIG;
+    if (action === 'ban') {
+      config = BAN_PHASE_CONFIG;
+    } else {
+      // Pick阶段：根据已选英雄数量判断是否为早期
+      const totalPicks = draftState.bluePicks.filter(p => p !== null).length +
+                        draftState.redPicks.filter(p => p !== null).length;
+      // 前3个pick使用早期配置
+      config = totalPicks <= 3 ? EARLY_PICK_PHASE_CONFIG : PICK_PHASE_CONFIG;
+
+      if (typeof window === 'undefined') {
+        console.log(`[PTS] Pick phase with ${totalPicks} picks, using ${totalPicks <= 3 ? 'EARLY' : 'NORMAL'} config`);
+      }
+    }
   }
 
   const results: PTSResult[] = [];
@@ -257,7 +290,7 @@ export function calculatePTS(
 
   for (const champion of availableChampions) {
     const action = draftState.currentStep?.action ?? 'ban';
-    const pickLikelihood = calculatePickLikelihood(draftState, champion, config, opponentModel);
+    const pickLikelihood = calculatePickLikelihood(draftState, champion, config, opponentModel, opponentTeam);
     const lossSeverity = calculateLossSeverity(draftState, champion, config, action, opponentModel);
 
     let pts = pickLikelihood.total * lossSeverity.total * 100;
@@ -353,7 +386,8 @@ function calculatePickLikelihood(
   draftState: DraftState,
   champion: Champion,
   config: PTSConfig,
-  opponentModel?: OpponentModel  // 新增：对手模型
+  opponentModel?: OpponentModel,  // 新增：对手模型
+  opponentTeam?: TeamRoster       // 新增：对手队伍信息
 ): { total: number; signals: PickLikelihoodSignals } {
   const opponent = draftState.side === 'blue' ? 'red' : 'blue';
   const opponentPicks = opponent === 'blue' ? draftState.bluePicks : draftState.redPicks;
@@ -366,13 +400,14 @@ function calculatePickLikelihood(
   const roleVacancy = calculateRoleVacancyV2(champion, opponentRoleStatus);
 
   // Signal 2: Player Champion Pool Frequency
-  // TODO: Replace with actual player data when available
-  // For now, use meta presence as proxy
-  const championPoolFreq = calculateChampionPoolFrequency(champion);
+  // Use opponent team roster data if available, otherwise fall back to global data
+  const championPoolFreq = calculateChampionPoolFrequency(champion, opponentTeam);
 
   // Signal 3: Global Meta Presence
   // How popular is this champion in current meta?
-  const metaPresence = calculateMetaPresence(champion);
+  const metaPresenceResult = calculateMetaPresence(champion);
+  const metaPresence = metaPresenceResult.normalized;
+  const rawPresence = metaPresenceResult.raw;
 
   // Signal 4: Synergy Ban Signal
   // Did opponent ban champions that synergize with this one?
@@ -382,6 +417,7 @@ function calculatePickLikelihood(
     opponentRoleVacancy: roleVacancy,
     playerChampionPoolFreq: championPoolFreq,
     globalMetaPresence: metaPresence,
+    rawPresence: rawPresence,
     synergyBanSignal: synergyBan,
   };
 
@@ -507,18 +543,63 @@ function calculateRoleVacancy(champion: Champion, remainingRoles: Position[]): n
 
 /**
  * Calculate champion pool frequency
- * Now uses real pick rate data from professional matches
+ * Now uses opponent team roster data if available, otherwise falls back to professional match data
  */
-function calculateChampionPoolFrequency(champion: Champion): number {
+function calculateChampionPoolFrequency(champion: Champion, opponentTeam?: TeamRoster): number {
+  // If opponent team roster is available, use player-specific champion pool data
+  if (opponentTeam && opponentTeam.players) {
+    const opponentPlayers = opponentTeam.players.filter(p => p !== null);
+
+    if (opponentPlayers.length > 0) {
+      // Check if any opponent player has this champion in their pool
+      // For now, we'll use a simple heuristic: if the champion matches the player's role
+      // In the future, this should query actual player champion pool data from the API
+
+      // Get champion's primary position
+      const championPositions = new Set(champion.positions);
+
+      // Check each player's position (index 0=top, 1=jungle, 2=mid, 3=bot, 4=support)
+      const positionMap: Position[] = ['top', 'jungle', 'mid', 'bot', 'support'];
+      let maxPoolStrength = 0;
+
+      opponentPlayers.forEach((player, index) => {
+        if (player && index < positionMap.length) {
+          const playerPosition = positionMap[index];
+
+          // If champion can play this player's position, consider it in their pool
+          if (championPositions.has(playerPosition)) {
+            // TODO: Query actual player champion pool data from Grid API
+            // For now, use meta presence as a proxy, but weighted by position match
+            const metaPresenceResult = calculateMetaPresence(champion);
+            const baseStrength = metaPresenceResult.normalized * 0.8;
+
+            // Boost if it's the champion's primary position
+            const isPrimaryPosition = champion.positions[0] === playerPosition;
+            const positionBonus = isPrimaryPosition ? 1.2 : 1.0;
+
+            const poolStrength = Math.min(1.0, baseStrength * positionBonus);
+            maxPoolStrength = Math.max(maxPoolStrength, poolStrength);
+          }
+        }
+      });
+
+      if (maxPoolStrength > 0) {
+        console.log(`[Champion Pool] ${champion.name}: Using opponent roster data, strength=${maxPoolStrength.toFixed(3)}`);
+        return maxPoolStrength;
+      }
+    }
+  }
+
+  // Fallback to global professional match data
   if (!dataAnalyzer) {
     // Fallback to heuristic
-    return calculateMetaPresence(champion) * 0.8;
+    return calculateMetaPresence(champion).normalized * 0.8;
   }
 
   const stats = dataAnalyzer.getChampionStats(champion.name);
   if (!stats || stats.pickCount < 5) {
     // Not enough data, use meta presence as fallback
-    return calculateMetaPresence(champion) * 0.8;
+    return calculateMetaPresence(champion).normalized * 0.8;
   }
 
   // Debug specific champions
@@ -535,9 +616,10 @@ function calculateChampionPoolFrequency(champion: Champion): number {
 
 /**
  * Calculate global meta presence
- * Now uses real pick/ban rate data from professional matches
+ * Now uses real pick/ban rate data from professional matches with Min-Max normalization
+ * Returns both normalized value (for algorithm) and raw value (for display)
  */
-function calculateMetaPresence(champion: Champion): number {
+function calculateMetaPresence(champion: Champion): { normalized: number; raw: number | undefined } {
   if (!dataAnalyzer) {
     // Fallback to heuristic based on flexibility
     // More flexible champions (can play multiple roles) are generally more meta
@@ -545,36 +627,38 @@ function calculateMetaPresence(champion: Champion): number {
     // Add some variance based on champion name hash to avoid all champions having same score
     const nameHash = champion.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const variance = (nameHash % 20) / 100; // 0-0.19 variance
-    return Math.min(1.0, 0.4 + (flexibilityScore * 0.3) + variance);
+    const fallbackValue = Math.min(1.0, 0.4 + (flexibilityScore * 0.3) + variance);
+    return { normalized: fallbackValue, raw: undefined };
   }
 
   const stats = dataAnalyzer.getChampionStats(champion.name);
-
-  // Debug specific champions
-  const debugChampions = ['Lucian', 'Tristana', 'Yone'];
-  if (typeof window === 'undefined' && debugChampions.includes(champion.name)) {
-    console.log(`[META DEBUG] ${champion.name}:`, stats ? {
-      pickCount: stats.pickCount,
-      banCount: stats.banCount,
-      pickRate: stats.pickRate.toFixed(6),
-      banRate: stats.banRate.toFixed(6),
-      presence: stats.presence.toFixed(6),
-      'scaled(×2.5)': (Math.min(1.0, stats.presence * 2.5)).toFixed(6)
-    } : 'NO STATS');
-  }
 
   if (!stats) {
     // No data, use neutral value with some variance
     const nameHash = champion.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const variance = (nameHash % 20) / 100;
-    return 0.4 + variance;
+    return { normalized: 0.4 + variance, raw: undefined };
   }
 
-  // Presence = (picks + bans) / total games
-  // This is the best indicator of meta relevance
-  // 使用适度缩放（×1.5）保持合理范围，同时保留区分度
-  // presence 通常在 0.1-0.6 之间，×1.5 后在 0.15-0.9 之间
-  return Math.min(1.0, stats.presence * 1.5);
+  // Use Min-Max normalization instead of linear scaling
+  // This maps the actual presence distribution to [0, 1] range
+  const normalized = dataAnalyzer.normalizePresence(stats.presence);
+
+  // Debug specific champions
+  const debugChampions = ['Lucian', 'Tristana', 'Yone'];
+  if (typeof window === 'undefined' && debugChampions.includes(champion.name)) {
+    console.log(`[META DEBUG] ${champion.name}:`, {
+      pickCount: stats.pickCount,
+      banCount: stats.banCount,
+      pickRate: stats.pickRate.toFixed(6),
+      banRate: stats.banRate.toFixed(6),
+      rawPresence: stats.presence.toFixed(6),
+      normalized: normalized.toFixed(6),
+      'old_scaled(×1.5)': (Math.min(1.0, stats.presence * 1.5)).toFixed(6)
+    });
+  }
+
+  return { normalized, raw: stats.presence };
 }
 
 /**

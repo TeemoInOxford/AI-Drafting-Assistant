@@ -1439,44 +1439,44 @@ async function generateBanReasonWithAI(
 
 /**
  * 解析AI生成的理由
+ * 新格式：3-5行简洁的Ban理由，无标题无编号
  */
 function parseAIGeneratedReason(aiResponse: string): {
   reason: string;
   detailedReason: string[];
 } {
-  const lines = aiResponse.split('\n').filter(line => line.trim());
+  // 清理响应文本，移除代码块标记和空行
+  let cleanedResponse = aiResponse
+    .replace(/```/g, '')
+    .trim();
 
-  // 提取各个部分
-  const sections: Record<string, string> = {};
-  let currentSection = '';
+  // 按行分割，过滤空行和示例说明
+  const lines = cleanedResponse
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => {
+      // 过滤空行
+      if (!line) return false;
+      // 过滤示例说明行
+      if (line.startsWith('（') || line.startsWith('(')) return false;
+      // 过滤markdown标题
+      if (line.startsWith('#')) return false;
+      return true;
+    });
 
-  for (const line of lines) {
-    if (line.startsWith('**') && line.includes(':**')) {
-      // 这是一个标题行
-      currentSection = line.replace(/\*\*/g, '').replace(':', '').trim();
-      sections[currentSection] = '';
-    } else if (currentSection && line.trim()) {
-      // 这是内容行
-      if (sections[currentSection]) {
-        sections[currentSection] += ' ' + line.trim();
-      } else {
-        sections[currentSection] = line.trim();
-      }
-    }
+  // 如果没有有效行，返回默认值
+  if (lines.length === 0) {
+    return {
+      reason: '综合评估推荐',
+      detailedReason: ['综合评估推荐'],
+    };
   }
 
-  // 构建简短主理由（从限制原因中提取）
-  const shortReason = sections['限制原因'] || sections['针对对象'] || '综合评估推荐';
+  // 第一行作为简短主理由
+  const shortReason = lines[0];
 
-  // 构建详细理由数组
-  const detailedReason: string[] = [];
-  const sectionOrder = ['针对对象', '限制原因', '战术价值', '时机说明'];
-
-  for (const sectionName of sectionOrder) {
-    if (sections[sectionName]) {
-      detailedReason.push(`**${sectionName}:** ${sections[sectionName]}`);
-    }
-  }
+  // 所有行作为详细理由
+  const detailedReason = lines;
 
   return {
     reason: shortReason,

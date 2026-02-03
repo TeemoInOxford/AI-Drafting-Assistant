@@ -49,7 +49,7 @@ export class WeightOptimizer {
     const startTime = Date.now();
 
     // 过滤该阶段的样本
-    const phaseSamples = this.filterPhase Samples(dataset.samples, phase);
+    const phaseSamples = this.filterPhaseSamples(dataset.samples, phase);
     console.log(`[Optimizer] Phase samples: ${phaseSamples.length}`);
 
     if (phaseSamples.length < 10) {

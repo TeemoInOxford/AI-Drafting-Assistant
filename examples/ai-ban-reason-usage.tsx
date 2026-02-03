@@ -4,6 +4,13 @@
  * 本文件展示如何在前端代码中使用AI生成Ban理由功能
  */
 
+import { Champion, BPState, TeamRoster } from '@/app/lib/types';
+import { BanScoreResult } from '@/app/lib/advanced-ban-scoring.types';
+import { AIBanReasonInput } from '@/app/lib/ai-ban-reason-prompt';
+
+// Type alias for compatibility
+type TeamChampionPool = TeamRoster;
+
 // ============================================================================
 // 示例1: 在Ban Scoring API调用中启用AI生成
 // ============================================================================
@@ -123,6 +130,11 @@ function BanRecommendationPanel() {
   const [recommendations, setRecommendations] = useState<BanScoreResult[]>([]);
   const [useAI, setUseAI] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Example data - replace with actual data from your application
+  const allChampions: Champion[] = []; // Your champion data
+  const bpState: BPState = {} as BPState; // Your BP state
+  const enemyTeamPool: TeamRoster = {} as TeamRoster; // Enemy team roster
 
   const fetchRecommendations = async () => {
     setLoading(true);
@@ -334,59 +346,7 @@ async function getBanRecommendationsWithMetrics(
   }
 }
 
-// ============================================================================
-// 类型定义（参考）
-// ============================================================================
-
-interface Champion {
-  id: string;
-  name: string;
-  positions: string[];
-}
-
-interface BPState {
-  currentStep: number;
-  blueBans: any[];
-  redBans: any[];
-  bluePicks: any[];
-  redPicks: any[];
-  usedChampions: Set<string>;
-}
-
-interface TeamChampionPool {
-  teamId: string;
-  championAvailability: Map<string, any>;
-  generatedAt: Date;
-}
-
-interface BanScoreResult {
-  championId: string;
-  championName: string;
-  finalScore: number;
-  reason: string;
-  detailedReason: string[];
-  priority: 'critical' | 'high' | 'medium' | 'low';
-}
-
-interface AIBanReasonInput {
-  championName: string;
-  positionName: string;
-  playerName: string;
-  proficiencyScore: number;
-  proficiencyStars: string;
-  usageRate: number;
-  isSignature: boolean;
-  heroStrength: number;
-  metaTier: string;
-  compressionScore: number;
-  alternatives: string;
-  systemCoreScore: number;
-  systemName: string;
-  recencyScore: number;
-  targetingScore: number;
-  bpPhase: string;
-  bannedChampions: string;
-}
+// Note: Type definitions are imported from '@/app/lib/types' at the top of this file
 
 export {
   getBanRecommendationsWithAI,

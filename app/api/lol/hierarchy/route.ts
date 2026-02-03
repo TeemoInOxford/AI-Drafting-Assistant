@@ -261,7 +261,7 @@ export async function GET(request: NextRequest) {
         );
 
         // Sort by seriesCount first, then slice to top 50 teams
-        validTeams.sort((a, b) => (b[1].seriesCount || 0) - (a[1].seriesCount || 0));
+        validTeams.sort((a, b) => ((b[1] as any).seriesCount || 0) - ((a[1] as any).seriesCount || 0));
         const topTeams = validTeams.slice(0, 50);
 
         const allTeams = topTeams.map(([teamId, team]: [string, any]) => ({

@@ -68,6 +68,17 @@ export async function POST(request: NextRequest) {
     console.log(`[PTS API] Available champions: ${availableChampions.length}`);
     console.log(`[PTS API] Game Theory enabled: ${enableGameTheory}`);
 
+    // Log opponent team information if available
+    if (bpState.blueTeam || bpState.redTeam) {
+      const opponentTeam = currentStep.team === 'blue' ? bpState.redTeam : bpState.blueTeam;
+      if (opponentTeam) {
+        console.log(`[PTS API] Opponent team: ${opponentTeam.teamName || 'Unknown'}`);
+        console.log(`[PTS API] Opponent players: ${opponentTeam.players.filter(p => p).map(p => p?.name).join(', ') || 'none'}`);
+      }
+    } else {
+      console.log(`[PTS API] No opponent team information provided`);
+    }
+
     if (!currentStep || !availableChampions || availableChampions.length === 0) {
       return NextResponse.json({
         success: true,
@@ -77,6 +88,9 @@ export async function POST(request: NextRequest) {
 
     // Convert BP state to draft state
     const draftState = bpStateToDraftState(bpState, currentStep, currentStep.team);
+
+    // Get opponent team information for champion pool analysis
+    const opponentTeam = currentStep.team === 'blue' ? bpState.redTeam : bpState.blueTeam;
 
     // 构建OpponentModel（如果有Game Theory信息）
     console.log(`[PTS API] gameTheoryState:`, gameTheoryState ? `${gameTheoryState.predictedType} (${(gameTheoryState.confidence * 100).toFixed(0)}%)` : 'undefined');
@@ -93,9 +107,9 @@ export async function POST(request: NextRequest) {
       console.log(`[PTS API] OpponentModel not created (confidence too low or no gameTheoryState)`);
     }
 
-    // Calculate PTS scores with opponent model
+    // Calculate PTS scores with opponent model and team roster
     // 关闭归一化，使用原始 PTS 分数以保留绝对意义
-    let results = calculatePTS(draftState, availableChampions, undefined, false, opponentModel);
+    let results = calculatePTS(draftState, availableChampions, undefined, false, opponentModel, opponentTeam);
 
     // 注意：对手信息已经融合到PTS计算中
     // Game Theory enhancement is now integrated into PTS calculation
@@ -149,16 +163,68 @@ export async function POST(request: NextRequest) {
     });
     const remainingRoles = allRoles.filter(role => !filledRoles.has(role));
 
-    results = results.map(result =>
-      enrichPTSResult(
-        result,
-        isBanPhase,
-        ourPicks,
-        opponentPicks,
-        remainingRoles,
-        gameTheoryState
-      )
-    );
+    // Check if AI Pick reason generation is enabled
+    const useAI = process.env.AI_PICK_REASON_ENABLED === 'true' && !isBanPhase;
+    if (useAI) {
+      console.log('[PTS API] AI Pick reason generation enabled');
+    }
+
+    // Enrich results with AI support
+    // Only generate AI reasons for top 3 recommendations to avoid timeout
+    if (useAI && results.length > 0) {
+      console.log('[PTS API] Generating AI reasons for top 3 recommendations...');
+
+      // Generate AI reasons for top 3 only
+      const top3Results = results.slice(0, 3);
+      const otherResults = results.slice(3);
+
+      const enrichedTop3 = await Promise.all(
+        top3Results.map(result =>
+          enrichPTSResult(
+            result,
+            isBanPhase,
+            ourPicks,
+            opponentPicks,
+            remainingRoles,
+            gameTheoryState,
+            true // useAI for top 3
+          )
+        )
+      );
+
+      // Use rule-based for the rest
+      const enrichedOthers = await Promise.all(
+        otherResults.map(result =>
+          enrichPTSResult(
+            result,
+            isBanPhase,
+            ourPicks,
+            opponentPicks,
+            remainingRoles,
+            gameTheoryState,
+            false // rule-based for others
+          )
+        )
+      );
+
+      results = [...enrichedTop3, ...enrichedOthers];
+    } else {
+      // No AI or Ban phase - use rule-based for all
+      const enrichedResults = await Promise.all(
+        results.map(result =>
+          enrichPTSResult(
+            result,
+            isBanPhase,
+            ourPicks,
+            opponentPicks,
+            remainingRoles,
+            gameTheoryState,
+            false
+          )
+        )
+      );
+      results = enrichedResults;
+    }
 
     if (results.length > 0) {
       console.log(`[PTS API] Top 10 recommendations:`);

@@ -95,14 +95,27 @@ async function testAIGeneration() {
     // 4. 解析响应
     console.log('\n📊 步骤4: 解析响应');
     console.log('-'.repeat(80));
-    const lines = aiResponse.split('\n').filter(line => line.trim());
-    console.log(`总行数: ${lines.length}`);
 
-    const sections = ['针对对象', '限制原因', '战术价值', '时机说明'];
-    for (const section of sections) {
-      const found = lines.some(line => line.includes(section));
-      console.log(`${found ? '✅' : '❌'} ${section}`);
-    }
+    // 清理响应文本
+    const cleanedResponse = aiResponse.replace(/```/g, '').trim();
+    const lines = cleanedResponse
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => {
+        if (!line) return false;
+        if (line.startsWith('（') || line.startsWith('(')) return false;
+        if (line.startsWith('#')) return false;
+        return true;
+      });
+
+    console.log(`有效理由行数: ${lines.length}`);
+    console.log(`${lines.length >= 3 && lines.length <= 5 ? '✅' : '❌'} 理由数量在3-5行范围内`);
+
+    // 显示每一行理由
+    console.log('\n理由内容:');
+    lines.forEach((line, index) => {
+      console.log(`  ${index + 1}. ${line}`);
+    });
 
     // 5. 验证数据完整性
     console.log('\n🔍 步骤5: 验证数据完整性');

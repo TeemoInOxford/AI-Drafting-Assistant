@@ -57,14 +57,30 @@ export interface ObservedAction {
 }
 
 /**
+ * 特征重叠衰减配置
+ * 用于降低与PTS重复计算的特征权重，避免某些因素影响过大
+ */
+export const FEATURE_DECAY_CONFIG = {
+  // 重复特征的衰减系数（0.0-1.0）
+  // 0.0 = 完全移除，1.0 = 不衰减
+  PTS_DECAY: 0.3,        // f1_pts 已在PTS中计算
+  ROLE_DECAY: 0.4,       // f3_role_urgency 已在PTS的roleVacancy中计算
+  META_DECAY: 0.3,       // f5_meta_strength 已在PTS的metaPresence中计算
+
+  // 博弈论独有特征不衰减
+  STYLE_DECAY: 1.0,      // f2_style_match 博弈论独有
+  RISK_DECAY: 1.0,       // f4_risk_aversion 博弈论独有
+};
+
+/**
  * 特征函数（用于Softmax）
  */
 export interface FeatureVector {
-  f1_pts: number;           // PTS分数（归一化到0-1）
-  f2_style_match: number;   // 与对手风格匹配度
-  f3_role_urgency: number;  // 位置紧迫性
-  f4_risk_aversion: number; // 风险规避
-  f5_meta_strength: number; // Meta强度
+  f1_pts: number;           // PTS分数（归一化到0-1）- 已应用衰减
+  f2_style_match: number;   // 与对手风格匹配度 - 博弈论独有
+  f3_role_urgency: number;  // 位置紧迫性 - 已应用衰减
+  f4_risk_aversion: number; // 风险规避 - 博弈论独有
+  f5_meta_strength: number; // Meta强度 - 已应用衰减
 }
 
 /**
@@ -192,6 +208,13 @@ export function filterCandidatePool(
 
 /**
  * 计算特征向量
+ *
+ * 应用特征衰减以避免与PTS重复计算：
+ * - f1_pts: 衰减到30%（PTS已包含综合评分）
+ * - f3_role_urgency: 衰减到40%（PTS已计算roleVacancy）
+ * - f5_meta_strength: 衰减到30%（PTS已计算metaPresence）
+ * - f2_style_match: 不衰减（博弈论独有）
+ * - f4_risk_aversion: 不衰减（博弈论独有）
  */
 export function computeFeatures(
   champion: Champion,
@@ -200,23 +223,26 @@ export function computeFeatures(
   bpState: BPState,
   side: Team
 ): FeatureVector {
-  // f1: PTS分数（归一化）
-  const f1_pts = Math.min(ptsResult.pts / 100, 1.0);
+  // f1: PTS分数（归一化）- 应用衰减
+  const f1_pts_raw = Math.min(ptsResult.pts / 100, 1.0);
+  const f1_pts = f1_pts_raw * FEATURE_DECAY_CONFIG.PTS_DECAY;
 
-  // f2: 与对手风格匹配度
-  const f2_style_match = computeStyleMatch(champion, gameState.predictedType);
+  // f2: 与对手风格匹配度 - 博弈论独有，不衰减
+  const f2_style_match = computeStyleMatch(champion, gameState.predictedType) * FEATURE_DECAY_CONFIG.STYLE_DECAY;
 
-  // f3: 位置紧迫性
+  // f3: 位置紧迫性 - 应用衰减
   const ourRoles = side === 'blue'
     ? getRemainingRoles(bpState.bluePicks)
     : getRemainingRoles(bpState.redPicks);
-  const f3_role_urgency = computeRoleUrgency(champion, ourRoles);
+  const f3_role_urgency_raw = computeRoleUrgency(champion, ourRoles);
+  const f3_role_urgency = f3_role_urgency_raw * FEATURE_DECAY_CONFIG.ROLE_DECAY;
 
-  // f4: 风险规避
-  const f4_risk_aversion = computeRiskAversion(champion, bpState, side);
+  // f4: 风险规避 - 博弈论独有，不衰减
+  const f4_risk_aversion = computeRiskAversion(champion, bpState, side) * FEATURE_DECAY_CONFIG.RISK_DECAY;
 
-  // f5: Meta强度
-  const f5_meta_strength = ptsResult.signals.globalMetaPresence;
+  // f5: Meta强度 - 应用衰减
+  const f5_meta_strength_raw = ptsResult.signals.globalMetaPresence;
+  const f5_meta_strength = f5_meta_strength_raw * FEATURE_DECAY_CONFIG.META_DECAY;
 
   return {
     f1_pts,

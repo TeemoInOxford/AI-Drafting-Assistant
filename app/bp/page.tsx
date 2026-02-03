@@ -72,6 +72,19 @@ export default function LOLBPPage() {
   // AI Panel collapse state
   const [aiPanelCollapsed, setAiPanelCollapsed] = useState(false);
 
+  // Reset Game Theory State when opponent team changes
+  useEffect(() => {
+    if (rosterState.enabled) {
+      const opponentTeam = userSide === 'blue' ? rosterState.redTeam : rosterState.blueTeam;
+      const opponentTeamName = opponentTeam.teamName;
+
+      if (opponentTeamName) {
+        console.log(`[BP Page] Opponent team changed to: ${opponentTeamName}, resetting Game Theory State`);
+        setGameTheoryState(initGameTheoryState());
+      }
+    }
+  }, [rosterState.blueTeam.teamName, rosterState.redTeam.teamName, userSide, rosterState.enabled]);
+
   // Initialize draft data analyzer on mount
   useEffect(() => {
     async function initDraftData() {
@@ -137,8 +150,8 @@ export default function LOLBPPage() {
     return bpState.usedChampions;
   }, [bpState.usedChampions]);
 
-  // Get current step info
-  const currentStep = getCurrentStep(bpState);
+  // Get current step info (memoized to prevent unnecessary re-renders)
+  const currentStep = useMemo(() => getCurrentStep(bpState), [bpState.currentStep]);
   const phaseDesc = getPhaseDescription(bpState.currentStep);
 
   // Get current team
@@ -196,9 +209,23 @@ export default function LOLBPPage() {
         console.log(`[PTS Client] Requesting calculation for step ${bpState.currentStep}, team ${currentStep.team}, ${availableChamps.length} available champions`);
         console.log(`[PTS Client] Total champions: ${champions.length}, Used: ${allUsedChampions.size}, Available: ${availableChamps.length}`);
         console.log(`[PTS Client] Game Theory enabled: ${enableGameTheory}, Opponent: ${gameTheoryState.predictedType}, Confidence: ${(gameTheoryState.confidence * 100).toFixed(0)}%`);
+        console.log(`[PTS Client] Roster state enabled: ${rosterState.enabled}`);
+        console.log(`[PTS Client] Blue team: ${rosterState.blueTeam.teamName || 'none'}, Red team: ${rosterState.redTeam.teamName || 'none'}`);
+
+        // Include roster state in bpState if team has a name (regardless of enabled flag)
+        const hasBlueTeam = rosterState.blueTeam.teamName && rosterState.blueTeam.teamName.length > 0;
+        const hasRedTeam = rosterState.redTeam.teamName && rosterState.redTeam.teamName.length > 0;
+
+        const bpStateWithRoster = {
+          ...bpState,
+          blueTeam: hasBlueTeam ? rosterState.blueTeam : undefined,
+          redTeam: hasRedTeam ? rosterState.redTeam : undefined,
+        };
+
+        console.log(`[PTS Client] Passing team info - Blue: ${hasBlueTeam}, Red: ${hasRedTeam}`);
 
         const requestBody = {
-          bpState,
+          bpState: bpStateWithRoster,
           currentStep,
           availableChampions: availableChamps,
           gameTheoryState: enableGameTheory ? gameTheoryState : undefined,
@@ -286,16 +313,17 @@ export default function LOLBPPage() {
         return;
       }
 
-      // Check if enemy team is selected
-      const hasEnemyTeam = rosterState.enabled;
+      // Check if enemy team is selected (by checking if team has a name)
+      const enemyTeam = userSide === 'blue' ? rosterState.redTeam : rosterState.blueTeam;
+      const hasEnemyTeam = enemyTeam.teamName && enemyTeam.teamName.length > 0;
 
       if (!hasEnemyTeam) {
-        console.log('[Ban Scoring] Team Roster not enabled, skipping calculation');
+        console.log('[Ban Scoring] No enemy team selected, skipping calculation');
         setBanScoringResults([]);
         return;
       }
 
-      console.log('[Ban Scoring] Starting calculation with Team Roster enabled');
+      console.log('[Ban Scoring] Starting calculation for enemy team:', enemyTeam.teamName);
 
       setBanScoringLoading(true);
       try {
@@ -427,7 +455,7 @@ export default function LOLBPPage() {
     }
 
     calculateBanScoring();
-  }, [bpState.currentStep, currentStep, champions, allUsedChampions, loading, bpState, rosterState, userSide]);
+  }, [bpState.currentStep, rosterState.blueTeam.teamName, rosterState.redTeam.teamName, userSide, champions, loading]);
 
   // Get draft context for PTS board
   const draftContext = useMemo(() => {
@@ -691,6 +719,7 @@ export default function LOLBPPage() {
               {/* Ban Scoring Panel - Show during ban phases and only if Team Roster is enabled */}
               {currentStep?.action === 'ban' && champions.length > 0 && rosterState.enabled && (
                 <BanScoringPanel
+                  key={`ban-scoring-${rosterState.blueTeam.teamName}-${rosterState.redTeam.teamName}-${bpState.currentStep}`}
                   recommendations={banScoringResults}
                   onSelectChampion={(championId) => {
                     const champion = champions.find(c => c.id === championId);

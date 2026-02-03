@@ -49,6 +49,18 @@ let championStatsCache: ChampionStats | null = null;
 let synergyMapCache: Map<string, Map<string, SynergyData>> | null = null;
 let counterMapCache: Map<string, Map<string, CounterData>> | null = null;
 
+// Cache for presence statistics (for normalization)
+let presenceStatsCache: PresenceStats | null = null;
+
+export interface PresenceStats {
+  min: number;
+  max: number;
+  mean: number;
+  median: number;
+  p25: number;  // 25th percentile
+  p75: number;  // 75th percentile
+}
+
 export interface ChampionStats {
   [championName: string]: {
     pickCount: number;
@@ -142,12 +154,16 @@ export function analyzeAllDraftData(): {
         : 0.5;
     }
 
+    // Calculate presence statistics for normalization
+    presenceStatsCache = calculatePresenceStats(championStats);
+
     // Cache the results
     championStatsCache = championStats;
     synergyMapCache = synergyMap;
     counterMapCache = counterMap;
 
     console.log(`[Draft Analyzer] Analyzed ${totalGames} games, found ${Object.keys(championStats).length} champions`);
+    console.log(`[Draft Analyzer] Presence stats: min=${presenceStatsCache.min.toFixed(3)}, max=${presenceStatsCache.max.toFixed(3)}, mean=${presenceStatsCache.mean.toFixed(3)}, median=${presenceStatsCache.median.toFixed(3)}`);
 
   } catch (err) {
     console.error('Error analyzing draft data:', err);
@@ -384,10 +400,69 @@ export function getCounterScore(champ1: string, champ2: string): number {
 }
 
 /**
+ * Calculate presence statistics for normalization
+ */
+function calculatePresenceStats(championStats: ChampionStats): PresenceStats {
+  const presenceValues = Object.values(championStats)
+    .map(stats => stats.presence)
+    .filter(p => p > 0)  // Filter out champions with 0 presence
+    .sort((a, b) => a - b);
+
+  if (presenceValues.length === 0) {
+    return { min: 0, max: 1, mean: 0.5, median: 0.5, p25: 0.25, p75: 0.75 };
+  }
+
+  const min = presenceValues[0];
+  const max = presenceValues[presenceValues.length - 1];
+  const mean = presenceValues.reduce((sum, val) => sum + val, 0) / presenceValues.length;
+
+  const medianIndex = Math.floor(presenceValues.length / 2);
+  const median = presenceValues.length % 2 === 0
+    ? (presenceValues[medianIndex - 1] + presenceValues[medianIndex]) / 2
+    : presenceValues[medianIndex];
+
+  const p25Index = Math.floor(presenceValues.length * 0.25);
+  const p25 = presenceValues[p25Index];
+
+  const p75Index = Math.floor(presenceValues.length * 0.75);
+  const p75 = presenceValues[p75Index];
+
+  return { min, max, mean, median, p25, p75 };
+}
+
+/**
+ * Get presence statistics (for normalization)
+ */
+export function getPresenceStats(): PresenceStats | null {
+  if (!presenceStatsCache) {
+    analyzeAllDraftData();
+  }
+  return presenceStatsCache;
+}
+
+/**
+ * Normalize presence value using Min-Max normalization
+ * Maps the presence value from [min, max] to [0, 1]
+ */
+export function normalizePresence(presence: number): number {
+  const stats = getPresenceStats();
+  if (!stats || stats.max === stats.min) {
+    return 0.5; // Fallback if no stats available
+  }
+
+  // Min-Max normalization: (value - min) / (max - min)
+  const normalized = (presence - stats.min) / (stats.max - stats.min);
+
+  // Clamp to [0, 1] range
+  return Math.max(0, Math.min(1, normalized));
+}
+
+/**
  * Clear cache (useful for testing or data updates)
  */
 export function clearCache() {
   championStatsCache = null;
   synergyMapCache = null;
   counterMapCache = null;
+  presenceStatsCache = null;
 }

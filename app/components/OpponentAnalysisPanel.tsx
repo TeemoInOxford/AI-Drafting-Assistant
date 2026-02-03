@@ -6,9 +6,125 @@
 
 import { motion } from 'framer-motion';
 import { GameTheoryState, OpponentType } from '../lib/hybrid-game-theory';
+import { useMemo } from 'react';
 
 interface OpponentAnalysisPanelProps {
   gameState: GameTheoryState;
+}
+
+// 五边形雷达图组件
+function PentagonRadarChart({ data }: { data: { label: string; value: number; color: string }[] }) {
+  const size = 320;
+  const center = size / 2;
+  const maxRadius = size / 2 - 35;
+
+  // 计算五边形的顶点坐标
+  const getPoint = (index: number, value: number) => {
+    const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2; // 从顶部开始
+    const radius = maxRadius * value;
+    return {
+      x: center + radius * Math.cos(angle),
+      y: center + radius * Math.sin(angle),
+    };
+  };
+
+  // 生成背景网格线（5层）
+  const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
+  const gridPaths = gridLevels.map(level => {
+    const points = Array.from({ length: 5 }, (_, i) => getPoint(i, level));
+    return points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
+  });
+
+  // 生成数据多边形路径
+  const dataPoints = data.map((d, i) => getPoint(i, d.value));
+  const dataPath = dataPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
+
+  // 标签位置
+  const labelPoints = data.map((d, i) => {
+    const angle = (Math.PI * 2 * i) / 5 - Math.PI / 2;
+    const labelRadius = maxRadius + 15;
+    return {
+      x: center + labelRadius * Math.cos(angle),
+      y: center + labelRadius * Math.sin(angle),
+      label: d.label,
+      color: d.color,
+    };
+  });
+
+  return (
+    <div className="flex justify-center">
+      <svg width={size} height={size} className="overflow-visible">
+        {/* 背景网格 */}
+        {gridPaths.map((path, i) => (
+          <path
+            key={i}
+            d={path}
+            fill="none"
+            stroke="rgb(71, 85, 105)"
+            strokeWidth="1"
+            opacity={0.3}
+          />
+        ))}
+
+        {/* 从中心到顶点的线 */}
+        {Array.from({ length: 5 }).map((_, i) => {
+          const point = getPoint(i, 1);
+          return (
+            <line
+              key={i}
+              x1={center}
+              y1={center}
+              x2={point.x}
+              y2={point.y}
+              stroke="rgb(71, 85, 105)"
+              strokeWidth="1"
+              opacity={0.3}
+            />
+          );
+        })}
+
+        {/* 数据区域 */}
+        <motion.path
+          d={dataPath}
+          fill="rgba(34, 211, 238, 0.2)"
+          stroke="rgb(34, 211, 238)"
+          strokeWidth="2"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        />
+
+        {/* 数据点 */}
+        {dataPoints.map((point, i) => (
+          <motion.circle
+            key={i}
+            cx={point.x}
+            cy={point.y}
+            r="4"
+            fill={data[i].color}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+          />
+        ))}
+
+        {/* 标签 */}
+        {labelPoints.map((point, i) => (
+          <text
+            key={i}
+            x={point.x}
+            y={point.y}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="text-xs font-medium"
+            fill={point.color}
+          >
+            {point.label}
+          </text>
+        ))}
+      </svg>
+    </div>
+  );
 }
 
 // 对手类型中文名称和描述
@@ -55,7 +171,7 @@ export default function OpponentAnalysisPanel({
     <div className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-lg p-4 shadow-lg">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-bold text-cyan-400">博弈论分析</h3>
+        <h3 className="text-base font-bold text-cyan-400">对手特征分析</h3>
         <div className="px-2 py-1 rounded text-xs font-medium bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
           已启用
         </div>
@@ -92,68 +208,52 @@ export default function OpponentAnalysisPanel({
             </div>
           </div>
 
-          {/* 五维特征说明 */}
-          <div className="bg-slate-800/30 rounded-lg p-3 border border-slate-700/30">
-            <div className="text-xs font-medium text-slate-300 mb-2">五维特征分析</div>
-            <div className="grid grid-cols-1 gap-2 text-xs">
-              <div className="flex items-start gap-2">
-                <span className="text-cyan-400 font-medium min-w-[60px]">PTS威胁</span>
-                <span className="text-slate-400">基础威胁评分，数据驱动</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-purple-400 font-medium min-w-[60px]">风格匹配</span>
-                <span className="text-slate-400">针对对手类型的克制度</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-orange-400 font-medium min-w-[60px]">位置紧迫</span>
-                <span className="text-slate-400">剩余位置的填补需求</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-rose-400 font-medium min-w-[60px]">风险规避</span>
-                <span className="text-slate-400">阵容平衡与稳定性</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-blue-400 font-medium min-w-[60px]">Meta强度</span>
-                <span className="text-slate-400">版本热度与全局出现率</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Belief Distribution - 优化展示 */}
+          {/* Belief Distribution - 五边形雷达图展示 */}
           <div>
-            <div className="text-xs font-medium text-slate-300 mb-3">类型概率分布</div>
-            <div className="space-y-2">
+            <div className="text-xs font-medium text-slate-300 mb-3 text-center">特征维度分析</div>
+            <PentagonRadarChart
+              data={Object.entries(gameState.belief)
+                .filter(([type]) => type !== 'unknown')
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 5)
+                .map(([type, prob]) => {
+                  const info = OPPONENT_TYPE_INFO[type as OpponentType];
+                  // 颜色映射
+                  const colorMap: Record<string, string> = {
+                    'text-rose-400': 'rgb(251, 113, 133)',
+                    'text-blue-400': 'rgb(96, 165, 250)',
+                    'text-purple-400': 'rgb(192, 132, 252)',
+                    'text-orange-400': 'rgb(251, 146, 60)',
+                    'text-cyan-400': 'rgb(34, 211, 238)',
+                    'text-slate-400': 'rgb(148, 163, 184)',
+                  };
+                  return {
+                    label: info.name,
+                    value: prob,
+                    color: colorMap[info.color] || 'rgb(148, 163, 184)',
+                  };
+                })}
+            />
+            {/* 图例说明 */}
+            <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
               {Object.entries(gameState.belief)
                 .filter(([type]) => type !== 'unknown')
                 .sort(([, a], [, b]) => b - a)
+                .slice(0, 5)
                 .map(([type, prob]) => {
                   const info = OPPONENT_TYPE_INFO[type as OpponentType];
                   const percentage = prob * 100;
                   const isTop = type === gameState.predictedType;
 
                   return (
-                    <div key={type} className="space-y-1">
-                      <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-2">
-                          {isTop && <span className="text-cyan-400">★</span>}
-                          <span className={`font-medium ${info.color}`}>{info.name}</span>
-                        </div>
-                        <span className={`font-bold ${isTop ? 'text-cyan-400' : 'text-slate-500'}`}>
-                          {percentage.toFixed(1)}%
-                        </span>
+                    <div key={type} className="flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        {isTop && <span className="text-cyan-400 text-xs">★</span>}
+                        <span className={`font-medium ${info.color}`}>{info.name}</span>
                       </div>
-                      <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${percentage}%` }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
-                          className={`h-full ${
-                            isTop
-                              ? 'bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500'
-                              : 'bg-slate-600'
-                          }`}
-                        />
-                      </div>
+                      <span className={`font-bold ${isTop ? 'text-cyan-400' : 'text-slate-500'}`}>
+                        {percentage.toFixed(1)}%
+                      </span>
                     </div>
                   );
                 })}
