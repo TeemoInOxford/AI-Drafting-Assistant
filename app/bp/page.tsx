@@ -772,7 +772,7 @@ export default function LOLBPPage() {
         </h1>
         <p className="text-slate-400 mt-2 text-xs sm:text-sm">
           Real-time risk and timing analysis for professional drafts
-          {version && <span className="ml-2 text-slate-500">v{version}</span>}
+          {version && <span className="ml-2 text-slate-500">PATCH {version.split('.').slice(0, 2).join('.')}</span>}
         </p>
       </motion.div>
 
