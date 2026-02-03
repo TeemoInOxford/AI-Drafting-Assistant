@@ -158,13 +158,24 @@ export default function BanPhaseDraftingAssistant({
 
   // Current turn info
   const currentTurn = useMemo(() => {
-    const banNum = Math.floor(currentStepIndex / 2) + 1;
-    const side = currentStepIndex % 2 === 0 ? 'Blue' : 'Red';
-    return `${side} Ban ${banNum}`;
+    // Ban Phase 1: steps 0-5 (B1-B3 for each side)
+    // Ban Phase 2: steps 12-15 (B4-B5 for each side)
+    if (currentStepIndex <= 5) {
+      const banNum = Math.floor(currentStepIndex / 2) + 1;
+      const side = currentStepIndex % 2 === 0 ? 'Blue' : 'Red';
+      return `${side} Ban ${banNum}`;
+    } else if (currentStepIndex >= 12 && currentStepIndex <= 15) {
+      // Ban Phase 2: steps 12=RedB4, 13=BlueB4, 14=RedB5, 15=BlueB5
+      const phase2Step = currentStepIndex - 12;
+      const banNum = Math.floor(phase2Step / 2) + 4;
+      const side = phase2Step % 2 === 0 ? 'Red' : 'Blue';
+      return `${side} Ban ${banNum}`;
+    }
+    return 'Ban Phase';
   }, [currentStepIndex]);
 
-  // Gate: only fetch during ban phase (steps 0-5)
-  const isBanPhase = currentStepIndex <= 5;
+  // Gate: only fetch during ban phase (steps 0-5 and 12-15)
+  const isBanPhase = currentStepIndex <= 5 || (currentStepIndex >= 12 && currentStepIndex <= 15);
 
   // Fetch all data and generate candidates
   useEffect(() => {

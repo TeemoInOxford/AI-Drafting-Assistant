@@ -157,6 +157,21 @@ export default function PickPhaseDraftingAssistant({
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [showTendencies, setShowTendencies] = useState(false);
 
+  // Enemy picks flex data
+  interface EnemyFlexInfo {
+    championId: string;
+    championName: string;
+    roles: { role: string; probability: number }[];
+    isFlexPick: boolean;
+  }
+  const [enemyFlexData, setEnemyFlexData] = useState<EnemyFlexInfo[]>([]);
+
+  // Get enemy picks as Champion objects
+  const enemyPicksObjects = useMemo(() => {
+    const picks = ourSide === 'blue' ? redPicks : bluePicks;
+    return picks.filter((p): p is Champion => p !== null);
+  }, [ourSide, bluePicks, redPicks]);
+
   // Calculate already used champions (null-safe with filter(Boolean) first)
   const alreadyPicked = useMemo(() => [
     ...bluePicks.filter(Boolean).filter(p => p?.name).map(p => p!.name),
@@ -443,6 +458,46 @@ export default function PickPhaseDraftingAssistant({
     fetchAndGenerate();
   }, [ourTeamId, opponentTeamId, selectedLeague, alreadyPicked, alreadyBanned, currentPickInfo, champions, ourSide, ourPickedChamps, enemyPickedChamps, additionalDisabled, championIdMap]);
 
+  // Fetch flex data for enemy picks
+  useEffect(() => {
+    if (enemyPicksObjects.length === 0) {
+      setEnemyFlexData([]);
+      return;
+    }
+
+    async function fetchEnemyFlex() {
+      try {
+        const res = await fetch('/api/role-flexibility', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            champions: enemyPicksObjects,
+            league: selectedLeague,
+          }),
+          cache: 'no-store',
+        });
+
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const flexInfos: EnemyFlexInfo[] = data.results
+          .filter((r: any) => r.found && r.flexibility)
+          .map((r: any) => ({
+            championId: r.championId,
+            championName: r.championName,
+            roles: r.flexibility.roleDistribution || [],
+            isFlexPick: r.flexibility.isFlexPick || false,
+          }));
+
+        setEnemyFlexData(flexInfos);
+      } catch (error) {
+        console.error('[PickPhaseDraftingAssistant] Failed to fetch enemy flex:', error);
+      }
+    }
+
+    fetchEnemyFlex();
+  }, [enemyPicksObjects, selectedLeague]);
+
   // Safe candidates filter - ensure all have valid championName and championId for rendering
   const safeCandidates = useMemo(() =>
     candidates.filter(c => c && typeof c.championName === 'string' && c.championName.trim() && c.championId),
@@ -552,6 +607,61 @@ export default function PickPhaseDraftingAssistant({
                 📋 Opp Tendencies
               </button>
             </div>
+
+            {/* Enemy Picks with Flex Info */}
+            {enemyPicksObjects.length > 0 && (
+              <div className="bg-slate-800/30 rounded-lg p-2 border border-slate-700/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">Enemy Picks</span>
+                  <span className="text-[9px] text-slate-500">({opponentTeamName || 'Opponent'})</span>
+                </div>
+                <div className="space-y-1.5">
+                  {enemyPicksObjects.map((champ) => {
+                    const flexInfo = enemyFlexData.find(f => f.championId === champ.id);
+                    return (
+                      <div key={champ.id} className="flex items-center justify-between bg-slate-900/50 rounded px-2 py-1.5">
+                        <div className="flex items-center gap-2">
+                          <img
+                            src={champ.image}
+                            alt={champ.name}
+                            className="w-6 h-6 rounded"
+                          />
+                          <span className="text-white text-xs font-medium">{champ.name}</span>
+                          {flexInfo?.isFlexPick && (
+                            <span className="text-[8px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                              FLEX
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {flexInfo?.roles && flexInfo.roles.length > 0 ? (
+                            flexInfo.roles
+                              .filter(r => r.probability > 0.1)
+                              .slice(0, 2)
+                              .map((r, i) => (
+                                <span
+                                  key={r.role}
+                                  className={`text-[9px] px-1.5 py-0.5 rounded ${
+                                    i === 0
+                                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                                      : 'bg-slate-700/50 text-slate-400 border border-slate-600/30'
+                                  }`}
+                                >
+                                  {r.role.charAt(0).toUpperCase() + r.role.slice(1, 3)} {(r.probability * 100).toFixed(0)}%
+                                </span>
+                              ))
+                          ) : (
+                            <span className="text-[9px] text-slate-500">
+                              {champ.positions[0] ? champ.positions[0].charAt(0).toUpperCase() + champ.positions[0].slice(1) : '?'}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Top Recommendation */}
             {topCandidate && (
