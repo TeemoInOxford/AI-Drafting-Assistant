@@ -1,0 +1,5446 @@
+{
+  "metadata": {
+    "generated_at_utc": "2026-02-01T07:32:42Z",
+    "target_patch": "15.18",
+    "target_patch_index": 1518,
+    "parameters": {
+      "beta": 0.5,
+      "gamma": 2,
+      "kappa": 1,
+      "kappa_selection_method": "cross_validation",
+      "kappa_candidates": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "kappa_cv_results": [
+        {
+          "kappa": 1,
+          "log_loss": 1.0949,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 2,
+          "log_loss": 1.2803,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 4,
+          "log_loss": 1.4161,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 8,
+          "log_loss": 1.503,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 16,
+          "log_loss": 1.5533,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 32,
+          "log_loss": 1.5805,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 64,
+          "log_loss": 1.5948,
+          "top1_accuracy": 0.9456
+        },
+        {
+          "kappa": 128,
+          "log_loss": 1.6021,
+          "top1_accuracy": 0.9456
+        }
+      ],
+      "team_weight_sensitivity": 0.25,
+      "team_weight_window_days": 180,
+      "min_display_threshold": 0.05,
+      "delta_patch_cap": 16,
+      "delta_patch_stats": {
+        "games_in_major": 2063,
+        "target_major": 15,
+        "min": 0,
+        "median": 9,
+        "p90": 16,
+        "max": 17
+      }
+    },
+    "validation_split": {
+      "method": "percentile",
+      "percentile": 0.8,
+      "computed_date": "2025-06-13",
+      "train_records": 26120,
+      "val_records": 7718
+    },
+    "data_quality": {
+      "total_games_processed": 3386,
+      "games_skipped_missing_patch": 0,
+      "games_skipped_missing_team_score": 0,
+      "roles_dropped_unknown_label": 0,
+      "patches_using_fallback_start_date": 0,
+      "games_using_default_team_weight": 0
+    },
+    "total_effective_weight": 2085.5,
+    "global_role_distribution": {
+      "top": 0.1999,
+      "jungle": 0.2,
+      "mid": 0.2,
+      "bot": 0.2,
+      "support": 0.2
+    }
+  },
+  "champions": {
+    "Rumble": {
+      "champion_id": "7552f226-fa3b-3053-b692-0dcdd9c79cf4",
+      "champion_name": "Rumble",
+      "role_probabilities": {
+        "top": 0.984261,
+        "jungle": 0.003894,
+        "mid": 0.003892,
+        "bot": 0.003892,
+        "support": 0.00406
+      },
+      "raw_counts_by_role": {
+        "top": 711,
+        "jungle": 4,
+        "mid": 0,
+        "bot": 0,
+        "support": 15
+      },
+      "weighted_counts_by_role": {
+        "top": 50.377883,
+        "jungle": 5.6e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.008621
+      },
+      "effective_sample_size": 50.38656,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0639
+    },
+    "Pantheon": {
+      "champion_id": "e0e42b0a-7461-3143-b9a9-b70417c2384d",
+      "champion_name": "Pantheon",
+      "role_probabilities": {
+        "top": 0.005254,
+        "jungle": 0.978794,
+        "mid": 0.005309,
+        "bot": 0.005256,
+        "support": 0.005387
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 325,
+        "mid": 6,
+        "bot": 0,
+        "support": 23
+      },
+      "weighted_counts_by_role": {
+        "top": 2.1e-05,
+        "jungle": 37.04714,
+        "mid": 0.002014,
+        "bot": 0.0,
+        "support": 0.004971
+      },
+      "effective_sample_size": 37.054145,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0821
+    },
+    "Aurora": {
+      "champion_id": "2bf2eedb-58ef-39d3-8be6-88508b55ffc3",
+      "champion_name": "Aurora",
+      "role_probabilities": {
+        "top": 0.37518,
+        "jungle": 0.004579,
+        "mid": 0.611082,
+        "bot": 0.004579,
+        "support": 0.004579
+      },
+      "raw_counts_by_role": {
+        "top": 126,
+        "jungle": 0,
+        "mid": 284,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 16.187192,
+        "jungle": 0.0,
+        "mid": 26.4908,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 42.677993,
+      "significantRoles": [
+        "top",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.4615
+    },
+    "Corki": {
+      "champion_id": "e7a28e21-1e51-3ff4-ae76-2e7dc7a69ace",
+      "champion_name": "Corki",
+      "role_probabilities": {
+        "top": 0.003669,
+        "jungle": 0.003667,
+        "mid": 0.030683,
+        "bot": 0.958314,
+        "support": 0.003667
+      },
+      "raw_counts_by_role": {
+        "top": 7,
+        "jungle": 0,
+        "mid": 642,
+        "bot": 358,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000201,
+        "jungle": 0.0,
+        "mid": 1.473582,
+        "bot": 52.071352,
+        "support": 0.0
+      },
+      "effective_sample_size": 53.545135,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1301
+    },
+    "Neeko": {
+      "champion_id": "64a87acc-1566-3df6-ba47-c9847adb808d",
+      "champion_name": "Neeko",
+      "role_probabilities": {
+        "top": 0.005001,
+        "jungle": 0.0049,
+        "mid": 0.005305,
+        "bot": 0.0049,
+        "support": 0.979895
+      },
+      "raw_counts_by_role": {
+        "top": 3,
+        "jungle": 0,
+        "mid": 45,
+        "bot": 0,
+        "support": 325
+      },
+      "weighted_counts_by_role": {
+        "top": 0.004203,
+        "jungle": 0.0,
+        "mid": 0.016514,
+        "bot": 0.0,
+        "support": 39.798867
+      },
+      "effective_sample_size": 39.819584,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0785
+    },
+    "Ornn": {
+      "champion_id": "73de7cf4-356a-3850-89bc-41a575bd660a",
+      "champion_name": "Ornn",
+      "role_probabilities": {
+        "top": 0.957695,
+        "jungle": 0.010544,
+        "mid": 0.010627,
+        "bot": 0.010544,
+        "support": 0.01059
+      },
+      "raw_counts_by_role": {
+        "top": 204,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 51
+      },
+      "weighted_counts_by_role": {
+        "top": 17.968193,
+        "jungle": 0.0,
+        "mid": 0.001579,
+        "bot": 0.0,
+        "support": 0.000884
+      },
+      "effective_sample_size": 17.970657,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1453
+    },
+    "Trundle": {
+      "champion_id": "ab13269a-7517-3048-8d48-af87c8211b08",
+      "champion_name": "Trundle",
+      "role_probabilities": {
+        "top": 0.030903,
+        "jungle": 0.954038,
+        "mid": 0.00502,
+        "bot": 0.00502,
+        "support": 0.00502
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 214,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.031519,
+        "jungle": 37.816817,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 38.848336,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1442
+    },
+    "Orianna": {
+      "champion_id": "8708d312-6987-35a9-90a5-db14b14babac",
+      "champion_name": "Orianna",
+      "role_probabilities": {
+        "top": 0.003889,
+        "jungle": 0.003891,
+        "mid": 0.984438,
+        "bot": 0.003891,
+        "support": 0.003891
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 399,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 50.405927,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 50.405927,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0633
+    },
+    "Sivir": {
+      "champion_id": "5f3ce9cb-be45-3625-8c1d-e8068d6fee76",
+      "champion_name": "Sivir",
+      "role_probabilities": {
+        "top": 0.004367,
+        "jungle": 0.004369,
+        "mid": 0.004369,
+        "bot": 0.982526,
+        "support": 0.004369
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 216,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 44.780891,
+        "support": 0.0
+      },
+      "effective_sample_size": 44.780891,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0698
+    },
+    "Alistar": {
+      "champion_id": "9104bd4f-7d7d-3895-8151-d3210b34e3d2",
+      "champion_name": "Alistar",
+      "role_probabilities": {
+        "top": 0.003539,
+        "jungle": 0.00354,
+        "mid": 0.00354,
+        "bot": 0.00354,
+        "support": 0.98584
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 813
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 55.495912
+      },
+      "effective_sample_size": 55.495912,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0584
+    },
+    "Sion": {
+      "champion_id": "a88709a3-f874-36e6-acec-9cc31b318a50",
+      "champion_name": "Sion",
+      "role_probabilities": {
+        "top": 0.963256,
+        "jungle": 0.004003,
+        "mid": 0.024733,
+        "bot": 0.004003,
+        "support": 0.004005
+      },
+      "raw_counts_by_role": {
+        "top": 385,
+        "jungle": 0,
+        "mid": 7,
+        "bot": 1,
+        "support": 4
+      },
+      "weighted_counts_by_role": {
+        "top": 47.933871,
+        "jungle": 0.0,
+        "mid": 1.035894,
+        "bot": 1.7e-05,
+        "support": 0.000111
+      },
+      "effective_sample_size": 48.969893,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1205
+    },
+    "Naafiri": {
+      "champion_id": "e9dae12d-a8bd-3a92-9851-3a10c20acabd",
+      "champion_name": "Naafiri",
+      "role_probabilities": {
+        "top": 0.011962,
+        "jungle": 0.95218,
+        "mid": 0.011953,
+        "bot": 0.011953,
+        "support": 0.011953
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 224,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000252,
+        "jungle": 15.734131,
+        "mid": 1.2e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 15.734395,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1605
+    },
+    "Ryze": {
+      "champion_id": "642972b0-ab79-3cac-812a-29cfbdb6526a",
+      "champion_name": "Ryze",
+      "role_probabilities": {
+        "top": 0.004413,
+        "jungle": 0.004135,
+        "mid": 0.983183,
+        "bot": 0.004135,
+        "support": 0.004135
+      },
+      "raw_counts_by_role": {
+        "top": 11,
+        "jungle": 0,
+        "mid": 344,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.013573,
+        "jungle": 0.0,
+        "mid": 47.363992,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 47.377565,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0675
+    },
+    "Ziggs": {
+      "champion_id": "b4221d04-e00b-3e8a-8a6b-2d7cecc54ef7",
+      "champion_name": "Ziggs",
+      "role_probabilities": {
+        "top": 0.009045,
+        "jungle": 0.009049,
+        "mid": 0.301835,
+        "bot": 0.671021,
+        "support": 0.009049
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 48,
+        "bot": 197,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 6.471595,
+        "bot": 14.631891,
+        "support": 0.0
+      },
+      "effective_sample_size": 21.103486,
+      "significantRoles": [
+        "mid",
+        "bot"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.4703
+    },
+    "Rakan": {
+      "champion_id": "31360e91-4470-348a-9a2b-ce10e9a107b1",
+      "champion_name": "Rakan",
+      "role_probabilities": {
+        "top": 0.004049,
+        "jungle": 0.004051,
+        "mid": 0.004051,
+        "bot": 0.004051,
+        "support": 0.983797
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 757
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 48.373328
+      },
+      "effective_sample_size": 48.373328,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0654
+    },
+    "Aatrox": {
+      "champion_id": "e8ec9716-e9de-339a-add1-8dcef41ebdf4",
+      "champion_name": "Aatrox",
+      "role_probabilities": {
+        "top": 0.970804,
+        "jungle": 0.007299,
+        "mid": 0.007299,
+        "bot": 0.007299,
+        "support": 0.007299
+      },
+      "raw_counts_by_role": {
+        "top": 347,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 26.404457,
+        "jungle": 0.0,
+        "mid": 1.3e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 26.40447,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1071
+    },
+    "Vi": {
+      "champion_id": "28c76f65-a320-3efc-8dbf-f5ccd8f30078",
+      "champion_name": "Vi",
+      "role_probabilities": {
+        "top": 0.005567,
+        "jungle": 0.977724,
+        "mid": 0.00557,
+        "bot": 0.00557,
+        "support": 0.00557
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 639,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 34.911969,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 34.911969,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0855
+    },
+    "Annie": {
+      "champion_id": "b3007001-25a5-3a10-91bc-0bdb5dac0ae7",
+      "champion_name": "Annie",
+      "role_probabilities": {
+        "top": 0.004905,
+        "jungle": 0.004901,
+        "mid": 0.980358,
+        "bot": 0.004901,
+        "support": 0.004935
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 236,
+        "bot": 0,
+        "support": 3
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000244,
+        "jungle": 0.0,
+        "mid": 39.810292,
+        "bot": 0.0,
+        "support": 0.001404
+      },
+      "effective_sample_size": 39.81194,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.077
+    },
+    "Kalista": {
+      "champion_id": "a0cf8bf6-39d8-30fb-9dab-c1e8af747901",
+      "champion_name": "Kalista",
+      "role_probabilities": {
+        "top": 0.024632,
+        "jungle": 0.024642,
+        "mid": 0.024642,
+        "bot": 0.901439,
+        "support": 0.024645
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 376,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 2.1e-05,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 7.116969,
+        "support": 2e-05
+      },
+      "effective_sample_size": 7.11701,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2849
+    },
+    "Renata Glasc": {
+      "champion_id": "431d18c8-1aee-3d01-8b0a-8e46172e7761",
+      "champion_name": "Renata Glasc",
+      "role_probabilities": {
+        "top": 0.012926,
+        "jungle": 0.012933,
+        "mid": 0.012933,
+        "bot": 0.012933,
+        "support": 0.948275
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 310
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 14.465918
+      },
+      "effective_sample_size": 14.465918,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.171
+    },
+    "Renekton": {
+      "champion_id": "a6c6341f-f06c-3428-a0e3-797a0d0e2638",
+      "champion_name": "Renekton",
+      "role_probabilities": {
+        "top": 0.974522,
+        "jungle": 0.006322,
+        "mid": 0.006514,
+        "bot": 0.006322,
+        "support": 0.006322
+      },
+      "raw_counts_by_role": {
+        "top": 594,
+        "jungle": 0,
+        "mid": 5,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 30.635056,
+        "jungle": 0.0,
+        "mid": 0.006088,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 30.641144,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0957
+    },
+    "Qiyana": {
+      "champion_id": "6bb5f68a-590f-320d-9757-74ef8d41277d",
+      "champion_name": "Qiyana",
+      "role_probabilities": {
+        "top": 0.018542,
+        "jungle": 0.925806,
+        "mid": 0.018551,
+        "bot": 0.018551,
+        "support": 0.018551
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 17,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 9.782218,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 9.782218,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2282
+    },
+    "Galio": {
+      "champion_id": "aeab401d-5c3e-38d6-8bb5-fe87f6db1a6f",
+      "champion_name": "Galio",
+      "role_probabilities": {
+        "top": 0.098672,
+        "jungle": 0.004722,
+        "mid": 0.885672,
+        "bot": 0.004722,
+        "support": 0.006212
+      },
+      "raw_counts_by_role": {
+        "top": 67,
+        "jungle": 0,
+        "mid": 228,
+        "bot": 0,
+        "support": 7
+      },
+      "weighted_counts_by_role": {
+        "top": 3.979908,
+        "jungle": 0.0,
+        "mid": 37.317598,
+        "bot": 0.0,
+        "support": 0.063106
+      },
+      "effective_sample_size": 41.360612,
+      "significantRoles": [
+        "top",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.2598
+    },
+    "Tristana": {
+      "champion_id": "362848c1-8982-3378-a4fd-b49296f5bdb4",
+      "champion_name": "Tristana",
+      "role_probabilities": {
+        "top": 0.024055,
+        "jungle": 0.024061,
+        "mid": 0.561622,
+        "bot": 0.3662,
+        "support": 0.024061
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 0,
+        "mid": 342,
+        "bot": 40,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 5e-05,
+        "jungle": 0.0,
+        "mid": 4.468724,
+        "bot": 2.844188,
+        "support": 0.0
+      },
+      "effective_sample_size": 7.312962,
+      "significantRoles": [
+        "mid",
+        "bot"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.597
+    },
+    "Leona": {
+      "champion_id": "3f8c659e-ac1f-3a2e-877d-3af99bbc027b",
+      "champion_name": "Leona",
+      "role_probabilities": {
+        "top": 0.006111,
+        "jungle": 0.006114,
+        "mid": 0.006114,
+        "bot": 0.006114,
+        "support": 0.975546
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 712
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 31.713932
+      },
+      "effective_sample_size": 31.713932,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0925
+    },
+    "Jayce": {
+      "champion_id": "fa136dcc-94b9-35e2-aaff-cc4c2c46f7a3",
+      "champion_name": "Jayce",
+      "role_probabilities": {
+        "top": 0.811449,
+        "jungle": 0.01478,
+        "mid": 0.144211,
+        "bot": 0.01478,
+        "support": 0.01478
+      },
+      "raw_counts_by_role": {
+        "top": 327,
+        "jungle": 0,
+        "mid": 82,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 10.781415,
+        "jungle": 0.0,
+        "mid": 1.751585,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 12.533,
+      "significantRoles": [
+        "top",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.395
+    },
+    "Jarvan IV": {
+      "champion_id": "bbd16ab8-92ed-3f82-8748-b23c20eca335",
+      "champion_name": "Jarvan IV",
+      "role_probabilities": {
+        "top": 0.00427,
+        "jungle": 0.982915,
+        "mid": 0.004272,
+        "bot": 0.004272,
+        "support": 0.004272
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 204,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 45.823514,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 45.823514,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0684
+    },
+    "Swain": {
+      "champion_id": "9080a0e0-071c-3751-bc1c-f912b91b8c78",
+      "champion_name": "Swain",
+      "role_probabilities": {
+        "top": 0.095542,
+        "jungle": 0.070816,
+        "mid": 0.691847,
+        "bot": 0.070978,
+        "support": 0.070816
+      },
+      "raw_counts_by_role": {
+        "top": 5,
+        "jungle": 0,
+        "mid": 8,
+        "bot": 1,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.069938,
+        "jungle": 0.0,
+        "mid": 1.754092,
+        "bot": 0.000457,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.824488,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6474
+    },
+    "Kai'Sa": {
+      "champion_id": "16e85313-6510-315b-83f5-13f437b191c3",
+      "champion_name": "Kai'Sa",
+      "role_probabilities": {
+        "top": 0.004529,
+        "jungle": 0.004531,
+        "mid": 0.004533,
+        "bot": 0.981876,
+        "support": 0.004531
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 5,
+        "bot": 639,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 6.3e-05,
+        "bot": 43.141834,
+        "support": 0.0
+      },
+      "effective_sample_size": 43.141897,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0719
+    },
+    "Rell": {
+      "champion_id": "f5848d60-ffbf-3c51-93ec-797142690b59",
+      "champion_name": "Rell",
+      "role_probabilities": {
+        "top": 0.004006,
+        "jungle": 0.004042,
+        "mid": 0.004008,
+        "bot": 0.004008,
+        "support": 0.983936
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 108,
+        "mid": 0,
+        "bot": 0,
+        "support": 939
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.001679,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 48.902861
+      },
+      "effective_sample_size": 48.90454,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.065
+    },
+    "K'Sante": {
+      "champion_id": "40cc8559-a028-35a5-a6dd-5e48c4601d66",
+      "champion_name": "K'Sante",
+      "role_probabilities": {
+        "top": 0.979838,
+        "jungle": 0.00504,
+        "mid": 0.005041,
+        "bot": 0.00504,
+        "support": 0.00504
+      },
+      "raw_counts_by_role": {
+        "top": 885,
+        "jungle": 0,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 38.684616,
+        "jungle": 0.0,
+        "mid": 2.7e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 38.684643,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0787
+    },
+    "Wukong": {
+      "champion_id": "9530371e-3e7d-3e74-a17d-aa5ac56abf85",
+      "champion_name": "Wukong",
+      "role_probabilities": {
+        "top": 0.003892,
+        "jungle": 0.98461,
+        "mid": 0.003833,
+        "bot": 0.003833,
+        "support": 0.003833
+      },
+      "raw_counts_by_role": {
+        "top": 10,
+        "jungle": 412,
+        "mid": 0,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 0.003197,
+        "jungle": 51.184892,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 1.4e-05
+      },
+      "effective_sample_size": 51.188103,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0627
+    },
+    "Lissandra": {
+      "champion_id": "22b87e9f-d6fe-3983-a4fb-b642e98cd40e",
+      "champion_name": "Lissandra",
+      "role_probabilities": {
+        "top": 0.048175,
+        "jungle": 0.0482,
+        "mid": 0.807225,
+        "bot": 0.0482,
+        "support": 0.0482
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 9,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 3.149809,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 3.149809,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4706
+    },
+    "Lucian": {
+      "champion_id": "2318754b-1f27-3758-a5d7-d221fce0f02e",
+      "champion_name": "Lucian",
+      "role_probabilities": {
+        "top": 0.005637,
+        "jungle": 0.00564,
+        "mid": 0.009114,
+        "bot": 0.97397,
+        "support": 0.00564
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 146,
+        "bot": 350,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.123202,
+        "bot": 34.34308,
+        "support": 0.0
+      },
+      "effective_sample_size": 34.466282,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.097
+    },
+    "Nami": {
+      "champion_id": "ecbbe9a4-9956-3828-b9d1-e5c148eb7959",
+      "champion_name": "Nami",
+      "role_probabilities": {
+        "top": 0.041622,
+        "jungle": 0.041643,
+        "mid": 0.041643,
+        "bot": 0.041643,
+        "support": 0.833449
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 156
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 3.803222
+      },
+      "effective_sample_size": 3.803222,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4233
+    },
+    "Gnar": {
+      "champion_id": "717061ba-4e85-30e1-9340-aef80368dfa0",
+      "champion_name": "Gnar",
+      "role_probabilities": {
+        "top": 0.936682,
+        "jungle": 0.015829,
+        "mid": 0.015829,
+        "bot": 0.015829,
+        "support": 0.015829
+      },
+      "raw_counts_by_role": {
+        "top": 384,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 11.636009,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 11.636009,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2012
+    },
+    "Zyra": {
+      "champion_id": "ec7ba948-3e9d-373a-bfa4-569c749fdca7",
+      "champion_name": "Zyra",
+      "role_probabilities": {
+        "top": 0.058975,
+        "jungle": 0.763991,
+        "mid": 0.059005,
+        "bot": 0.059005,
+        "support": 0.059025
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 251,
+        "mid": 0,
+        "bot": 0,
+        "support": 4
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 2.389836,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 6.9e-05
+      },
+      "effective_sample_size": 2.389905,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5428
+    },
+    "Taliyah": {
+      "champion_id": "14fada26-63ec-357f-8bf6-e2993edca107",
+      "champion_name": "Taliyah",
+      "role_probabilities": {
+        "top": 0.004178,
+        "jungle": 0.004193,
+        "mid": 0.983267,
+        "bot": 0.004181,
+        "support": 0.004181
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 44,
+        "mid": 736,
+        "bot": 1,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0006,
+        "mid": 46.844893,
+        "bot": 2e-05,
+        "support": 0.0
+      },
+      "effective_sample_size": 46.845512,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0672
+    },
+    "Varus": {
+      "champion_id": "d5da0bd8-00ea-3bc1-9ad9-09751d791b20",
+      "champion_name": "Varus",
+      "role_probabilities": {
+        "top": 0.024605,
+        "jungle": 0.006809,
+        "mid": 0.006811,
+        "bot": 0.954965,
+        "support": 0.00681
+      },
+      "raw_counts_by_role": {
+        "top": 10,
+        "jungle": 0,
+        "mid": 5,
+        "bot": 742,
+        "support": 2
+      },
+      "weighted_counts_by_role": {
+        "top": 0.522917,
+        "jungle": 0.0,
+        "mid": 7e-05,
+        "bot": 27.8541,
+        "support": 3.3e-05
+      },
+      "effective_sample_size": 28.37712,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1473
+    },
+    "Braum": {
+      "champion_id": "787b7cb3-d9ef-3d55-91f6-7e076ba8b0c5",
+      "champion_name": "Braum",
+      "role_probabilities": {
+        "top": 0.004901,
+        "jungle": 0.004903,
+        "mid": 0.004903,
+        "bot": 0.004903,
+        "support": 0.980389
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 491
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 39.792684
+      },
+      "effective_sample_size": 39.792684,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0769
+    },
+    "Ambessa": {
+      "champion_id": "6d94812f-ea1f-3460-80b7-c38518abb709",
+      "champion_name": "Ambessa",
+      "role_probabilities": {
+        "top": 0.980554,
+        "jungle": 0.006924,
+        "mid": 0.004212,
+        "bot": 0.004155,
+        "support": 0.004155
+      },
+      "raw_counts_by_role": {
+        "top": 472,
+        "jungle": 3,
+        "mid": 14,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 47.003396,
+        "jungle": 0.133299,
+        "mid": 0.002725,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 47.13942,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.076
+    },
+    "Poppy": {
+      "champion_id": "1e6bddd1-a107-3db2-a589-5bec2044b11c",
+      "champion_name": "Poppy",
+      "role_probabilities": {
+        "top": 0.040712,
+        "jungle": 0.634644,
+        "mid": 0.00658,
+        "bot": 0.00658,
+        "support": 0.311484
+      },
+      "raw_counts_by_role": {
+        "top": 86,
+        "jungle": 214,
+        "mid": 0,
+        "bot": 0,
+        "support": 178
+      },
+      "weighted_counts_by_role": {
+        "top": 1.037584,
+        "jungle": 19.090881,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 9.267971
+      },
+      "effective_sample_size": 29.396436,
+      "significantRoles": [
+        "jungle",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5271
+    },
+    "Yunara": {
+      "champion_id": "2db51c3e-7bf3-3ea4-94bd-aac8567b0df9",
+      "champion_name": "Yunara",
+      "role_probabilities": {
+        "top": 0.005669,
+        "jungle": 0.005672,
+        "mid": 0.005672,
+        "bot": 0.977316,
+        "support": 0.005672
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 103,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 34.265967,
+        "support": 0.0
+      },
+      "effective_sample_size": 34.265967,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0868
+    },
+    "Nautilus": {
+      "champion_id": "5fb5f03b-af85-31e8-a476-bf7f73a4819a",
+      "champion_name": "Nautilus",
+      "role_probabilities": {
+        "top": 0.005155,
+        "jungle": 0.005158,
+        "mid": 0.005157,
+        "bot": 0.005157,
+        "support": 0.979373
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 814
+      },
+      "weighted_counts_by_role": {
+        "top": 1.5e-05,
+        "jungle": 2.2e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 37.785116
+      },
+      "effective_sample_size": 37.785153,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0802
+    },
+    "Xin Zhao": {
+      "champion_id": "159758c6-e12b-32cc-8b30-a3eec29d655c",
+      "champion_name": "Xin Zhao",
+      "role_probabilities": {
+        "top": 0.003616,
+        "jungle": 0.985532,
+        "mid": 0.003617,
+        "bot": 0.003617,
+        "support": 0.003617
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 769,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 54.293562,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 54.293562,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0595
+    },
+    "Akali": {
+      "champion_id": "a493c24b-17f8-34e5-ba90-0bdb40523099",
+      "champion_name": "Akali",
+      "role_probabilities": {
+        "top": 0.080331,
+        "jungle": 0.009994,
+        "mid": 0.889685,
+        "bot": 0.009994,
+        "support": 0.009994
+      },
+      "raw_counts_by_role": {
+        "top": 15,
+        "jungle": 0,
+        "mid": 187,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.407774,
+        "jungle": 0.0,
+        "mid": 17.605477,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 19.013251,
+      "significantRoles": [
+        "top",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.2763
+    },
+    "Zeri": {
+      "champion_id": "1dc7e56e-efef-35da-b827-dd31dd8812bf",
+      "champion_name": "Zeri",
+      "role_probabilities": {
+        "top": 0.012532,
+        "jungle": 0.012536,
+        "mid": 0.02461,
+        "bot": 0.937786,
+        "support": 0.012536
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 0,
+        "mid": 101,
+        "bot": 397,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 3.8e-05,
+        "jungle": 0.0,
+        "mid": 0.192655,
+        "bot": 14.763215,
+        "support": 0.0
+      },
+      "effective_sample_size": 14.955908,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1964
+    },
+    "Maokai": {
+      "champion_id": "cf8f9783-b321-3a1d-95bd-f3e3b612d4c4",
+      "champion_name": "Maokai",
+      "role_probabilities": {
+        "top": 0.009506,
+        "jungle": 0.656077,
+        "mid": 0.009495,
+        "bot": 0.009495,
+        "support": 0.315427
+      },
+      "raw_counts_by_role": {
+        "top": 15,
+        "jungle": 444,
+        "mid": 0,
+        "bot": 0,
+        "support": 62
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000331,
+        "jungle": 13.620733,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 6.444672
+      },
+      "effective_sample_size": 20.065735,
+      "significantRoles": [
+        "jungle",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.4804
+    },
+    "Yone": {
+      "champion_id": "31822a27-64be-3b58-9cfa-17fd705fc871",
+      "champion_name": "Yone",
+      "role_probabilities": {
+        "top": 0.024489,
+        "jungle": 0.011442,
+        "mid": 0.941187,
+        "bot": 0.011442,
+        "support": 0.011442
+      },
+      "raw_counts_by_role": {
+        "top": 17,
+        "jungle": 0,
+        "mid": 463,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.228185,
+        "jungle": 0.0,
+        "mid": 16.253622,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 16.481806,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1872
+    },
+    "Jhin": {
+      "champion_id": "5748a92e-ed31-3fbf-854d-a37923f7c7ae",
+      "champion_name": "Jhin",
+      "role_probabilities": {
+        "top": 0.00573,
+        "jungle": 0.005733,
+        "mid": 0.005733,
+        "bot": 0.977071,
+        "support": 0.005733
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 467,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1e-05,
+        "bot": 33.890629,
+        "support": 0.0
+      },
+      "effective_sample_size": 33.890639,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0876
+    },
+    "Ahri": {
+      "champion_id": "d50bfa6a-0179-375a-b583-e23a79a16908",
+      "champion_name": "Ahri",
+      "role_probabilities": {
+        "top": 0.01141,
+        "jungle": 0.011414,
+        "mid": 0.954349,
+        "bot": 0.011414,
+        "support": 0.011414
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 0,
+        "mid": 429,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 2.7e-05,
+        "jungle": 0.0,
+        "mid": 16.52434,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 16.524367,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1546
+    },
+    "Smolder": {
+      "champion_id": "84342d87-2ee5-3cfa-8dbb-e2ee7998fa18",
+      "champion_name": "Smolder",
+      "role_probabilities": {
+        "top": 0.099297,
+        "jungle": 0.017204,
+        "mid": 0.058326,
+        "bot": 0.807969,
+        "support": 0.017204
+      },
+      "raw_counts_by_role": {
+        "top": 10,
+        "jungle": 0,
+        "mid": 60,
+        "bot": 125,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.954535,
+        "jungle": 0.0,
+        "mid": 0.478093,
+        "bot": 9.193664,
+        "support": 0.0
+      },
+      "effective_sample_size": 10.626291,
+      "significantRoles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.4394
+    },
+    "Bard": {
+      "champion_id": "2bcecd67-6a8c-3c44-be6a-bd120bc1dcc5",
+      "champion_name": "Bard",
+      "role_probabilities": {
+        "top": 0.006891,
+        "jungle": 0.006894,
+        "mid": 0.006894,
+        "bot": 0.006894,
+        "support": 0.972427
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 185
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 28.013464
+      },
+      "effective_sample_size": 28.013464,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1022
+    },
+    "Sylas": {
+      "champion_id": "6b28be83-b1f2-3f1b-b887-85f87e172511",
+      "champion_name": "Sylas",
+      "role_probabilities": {
+        "top": 0.018099,
+        "jungle": 0.380348,
+        "mid": 0.576131,
+        "bot": 0.012712,
+        "support": 0.012712
+      },
+      "raw_counts_by_role": {
+        "top": 6,
+        "jungle": 11,
+        "mid": 204,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.084867,
+        "jungle": 5.784861,
+        "mid": 8.865569,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 14.735297,
+      "significantRoles": [
+        "jungle",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5399
+    },
+    "Ezreal": {
+      "champion_id": "3a52e342-5377-32b9-935f-b54a66688acd",
+      "champion_name": "Ezreal",
+      "role_probabilities": {
+        "top": 0.00769,
+        "jungle": 0.007693,
+        "mid": 0.007704,
+        "bot": 0.969219,
+        "support": 0.007694
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 18,
+        "bot": 771,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.000268,
+        "bot": 24.998588,
+        "support": 2.1e-05
+      },
+      "effective_sample_size": 24.998876,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1119
+    },
+    "Sejuani": {
+      "champion_id": "8092e614-e064-36f3-87b7-0c5ac018d7cc",
+      "champion_name": "Sejuani",
+      "role_probabilities": {
+        "top": 0.016426,
+        "jungle": 0.948364,
+        "mid": 0.011735,
+        "bot": 0.011735,
+        "support": 0.01174
+      },
+      "raw_counts_by_role": {
+        "top": 5,
+        "jungle": 726,
+        "mid": 0,
+        "bot": 0,
+        "support": 4
+      },
+      "weighted_counts_by_role": {
+        "top": 0.080049,
+        "jungle": 15.964481,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 7.9e-05
+      },
+      "effective_sample_size": 16.044608,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1704
+    },
+    "Karma": {
+      "champion_id": "13af2c2a-1e39-3d26-a475-a9da5267b863",
+      "champion_name": "Karma",
+      "role_probabilities": {
+        "top": 0.011454,
+        "jungle": 0.011451,
+        "mid": 0.048241,
+        "bot": 0.011451,
+        "support": 0.917402
+      },
+      "raw_counts_by_role": {
+        "top": 9,
+        "jungle": 0,
+        "mid": 63,
+        "bot": 0,
+        "support": 144
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000142,
+        "jungle": 0.0,
+        "mid": 0.642599,
+        "bot": 0.0,
+        "support": 15.82403
+      },
+      "effective_sample_size": 16.466771,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2354
+    },
+    "Jax": {
+      "champion_id": "df57a4ea-3f1a-3e5f-9a38-4589c6966fde",
+      "champion_name": "Jax",
+      "role_probabilities": {
+        "top": 0.935285,
+        "jungle": 0.033893,
+        "mid": 0.010274,
+        "bot": 0.010274,
+        "support": 0.010274
+      },
+      "raw_counts_by_role": {
+        "top": 308,
+        "jungle": 46,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 18.008479,
+        "jungle": 0.459813,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 18.468292,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1978
+    },
+    "Cho'Gath": {
+      "champion_id": "bacc778e-19db-33cb-b045-500e57bde996",
+      "champion_name": "Cho'Gath",
+      "role_probabilities": {
+        "top": 0.886754,
+        "jungle": 0.028256,
+        "mid": 0.028443,
+        "bot": 0.028256,
+        "support": 0.028292
+      },
+      "raw_counts_by_role": {
+        "top": 46,
+        "jungle": 0,
+        "mid": 3,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 6.077331,
+        "jungle": 0.0,
+        "mid": 0.001326,
+        "bot": 0.0,
+        "support": 0.000254
+      },
+      "effective_sample_size": 6.078911,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.317
+    },
+    "Azir": {
+      "champion_id": "eaea6b00-a13f-3241-a356-04d7882fb128",
+      "champion_name": "Azir",
+      "role_probabilities": {
+        "top": 0.007783,
+        "jungle": 0.007776,
+        "mid": 0.968888,
+        "bot": 0.007776,
+        "support": 0.007776
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 753,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000268,
+        "jungle": 0.0,
+        "mid": 24.721259,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 24.721527,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1129
+    },
+    "Milio": {
+      "champion_id": "e680cccf-8234-39c7-979f-4b749909b65a",
+      "champion_name": "Milio",
+      "role_probabilities": {
+        "top": 0.082872,
+        "jungle": 0.082914,
+        "mid": 0.082914,
+        "bot": 0.082914,
+        "support": 0.668386
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 88
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 1.412383
+      },
+      "effective_sample_size": 1.412383,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6804
+    },
+    "Gwen": {
+      "champion_id": "3d6dd0f6-f96f-3375-84f6-86ac9ff68538",
+      "champion_name": "Gwen",
+      "role_probabilities": {
+        "top": 0.973728,
+        "jungle": 0.00658,
+        "mid": 0.006564,
+        "bot": 0.006564,
+        "support": 0.006564
+      },
+      "raw_counts_by_role": {
+        "top": 361,
+        "jungle": 3,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 29.471316,
+        "jungle": 0.000487,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 29.471803,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.0981
+    },
+    "Lulu": {
+      "champion_id": "e5a58f35-4cf1-302e-85fc-e99e161c38ab",
+      "champion_name": "Lulu",
+      "role_probabilities": {
+        "top": 0.019452,
+        "jungle": 0.01946,
+        "mid": 0.077604,
+        "bot": 0.01946,
+        "support": 0.864025
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 128
+      },
+      "weighted_counts_by_role": {
+        "top": 1.7e-05,
+        "jungle": 0.0,
+        "mid": 0.597646,
+        "bot": 0.0,
+        "support": 8.680978
+      },
+      "effective_sample_size": 9.278642,
+      "significantRoles": [
+        "mid",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.3446
+    },
+    "Lee Sin": {
+      "champion_id": "a0b6984e-e1ec-3e4c-a98d-34a6ba4aec9f",
+      "champion_name": "Lee Sin",
+      "role_probabilities": {
+        "top": 0.02004,
+        "jungle": 0.861837,
+        "mid": 0.078027,
+        "bot": 0.020046,
+        "support": 0.020048
+      },
+      "raw_counts_by_role": {
+        "top": 3,
+        "jungle": 209,
+        "mid": 7,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 4.1e-05,
+        "jungle": 8.399253,
+        "mid": 0.578525,
+        "bot": 0.0,
+        "support": 1.9e-05
+      },
+      "effective_sample_size": 8.977837,
+      "significantRoles": [
+        "jungle",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.3494
+    },
+    "Yorick": {
+      "champion_id": "ab9c3c0e-0889-3a85-85ea-c66607d8b9e5",
+      "champion_name": "Yorick",
+      "role_probabilities": {
+        "top": 0.969072,
+        "jungle": 0.007732,
+        "mid": 0.007732,
+        "bot": 0.007732,
+        "support": 0.007732
+      },
+      "raw_counts_by_role": {
+        "top": 192,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 24.868842,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 24.868842,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1124
+    },
+    "Blitzcrank": {
+      "champion_id": "436a79b6-6087-3bbe-b340-3620c4cbd696",
+      "champion_name": "Blitzcrank",
+      "role_probabilities": {
+        "top": 0.027984,
+        "jungle": 0.027998,
+        "mid": 0.027998,
+        "bot": 0.027998,
+        "support": 0.888021
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 83
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 6.14403
+      },
+      "effective_sample_size": 6.14403,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.3143
+    },
+    "Cassiopeia": {
+      "champion_id": "b51404e9-0865-3237-90a7-9d8747f6bf30",
+      "champion_name": "Cassiopeia",
+      "role_probabilities": {
+        "top": 0.017392,
+        "jungle": 0.0174,
+        "mid": 0.930409,
+        "bot": 0.0174,
+        "support": 0.0174
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 49,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.1e-05,
+        "jungle": 0.0,
+        "mid": 10.495675,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 10.495686,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2169
+    },
+    "Xayah": {
+      "champion_id": "e5eeaee9-eaa4-330f-85a1-e90230d9e0ad",
+      "champion_name": "Xayah",
+      "role_probabilities": {
+        "top": 0.007182,
+        "jungle": 0.007185,
+        "mid": 0.007185,
+        "bot": 0.971262,
+        "support": 0.007185
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 355,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 26.837161,
+        "support": 0.0
+      },
+      "effective_sample_size": 26.837161,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1057
+    },
+    "Viktor": {
+      "champion_id": "39cd3cf0-4f19-3b16-a4fa-9b650bc71e9e",
+      "champion_name": "Viktor",
+      "role_probabilities": {
+        "top": 0.008643,
+        "jungle": 0.008647,
+        "mid": 0.946479,
+        "bot": 0.027583,
+        "support": 0.008647
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 295,
+        "bot": 1,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 21.692558,
+        "bot": 0.437999,
+        "support": 0.0
+      },
+      "effective_sample_size": 22.130557,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1704
+    },
+    "Pyke": {
+      "champion_id": "8bee9844-a12e-32cd-a20c-6d59dd9a07c4",
+      "champion_name": "Pyke",
+      "role_probabilities": {
+        "top": 0.040843,
+        "jungle": 0.040864,
+        "mid": 0.040864,
+        "bot": 0.040864,
+        "support": 0.836566
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 32
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 3.894814
+      },
+      "effective_sample_size": 3.894814,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4175
+    },
+    "Skarner": {
+      "champion_id": "52ab36ab-7b94-31c7-afa5-e74badcd74ea",
+      "champion_name": "Skarner",
+      "role_probabilities": {
+        "top": 0.009032,
+        "jungle": 0.96411,
+        "mid": 0.008953,
+        "bot": 0.008953,
+        "support": 0.008953
+      },
+      "raw_counts_by_role": {
+        "top": 124,
+        "jungle": 302,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.001877,
+        "jungle": 21.340444,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 21.342322,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.127
+    },
+    "Senna": {
+      "champion_id": "1e62a140-7265-3823-884d-621be47f2b00",
+      "champion_name": "Senna",
+      "role_probabilities": {
+        "top": 0.015174,
+        "jungle": 0.015182,
+        "mid": 0.015182,
+        "bot": 0.939196,
+        "support": 0.015267
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 289,
+        "support": 35
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 12.173982,
+        "support": 0.001118
+      },
+      "effective_sample_size": 12.1751,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1948
+    },
+    "Nocturne": {
+      "champion_id": "5179b7c8-f751-3f66-b40d-6671d54aab37",
+      "champion_name": "Nocturne",
+      "role_probabilities": {
+        "top": 0.012739,
+        "jungle": 0.949025,
+        "mid": 0.012745,
+        "bot": 0.012745,
+        "support": 0.012745
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 176,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 14.693664,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 14.693664,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.169
+    },
+    "Viego": {
+      "champion_id": "96af4071-d73d-3c52-ac51-209e46e315a7",
+      "champion_name": "Viego",
+      "role_probabilities": {
+        "top": 0.03292,
+        "jungle": 0.706224,
+        "mid": 0.194983,
+        "bot": 0.032936,
+        "support": 0.032936
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 244,
+        "mid": 4,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 4.088814,
+        "mid": 0.984092,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 5.072906,
+      "significantRoles": [
+        "jungle",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5602
+    },
+    "Urgot": {
+      "champion_id": "9a12f2ed-f7d8-3872-a108-2c1c2becc3b8",
+      "champion_name": "Urgot",
+      "role_probabilities": {
+        "top": 0.608989,
+        "jungle": 0.097753,
+        "mid": 0.097753,
+        "bot": 0.097753,
+        "support": 0.097753
+      },
+      "raw_counts_by_role": {
+        "top": 14,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.046185,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.046185,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7526
+    },
+    "Rek'Sai": {
+      "champion_id": "237ede92-5491-399c-850f-a71fde27a280",
+      "champion_name": "Rek'Sai",
+      "role_probabilities": {
+        "top": 0.84862,
+        "jungle": 0.080339,
+        "mid": 0.02368,
+        "bot": 0.02368,
+        "support": 0.02368
+      },
+      "raw_counts_by_role": {
+        "top": 39,
+        "jungle": 15,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 6.968079,
+        "jungle": 0.478577,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 7.446656,
+      "significantRoles": [
+        "top",
+        "jungle"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.3776
+    },
+    "Gragas": {
+      "champion_id": "65428cd5-ead8-3e43-9465-5789d23ec79a",
+      "champion_name": "Gragas",
+      "role_probabilities": {
+        "top": 0.646637,
+        "jungle": 0.029169,
+        "mid": 0.029505,
+        "bot": 0.029162,
+        "support": 0.265527
+      },
+      "raw_counts_by_role": {
+        "top": 103,
+        "jungle": 3,
+        "mid": 6,
+        "bot": 0,
+        "support": 19
+      },
+      "weighted_counts_by_role": {
+        "top": 4.235339,
+        "jungle": 4.7e-05,
+        "mid": 0.002351,
+        "bot": 0.0,
+        "support": 1.62122
+      },
+      "effective_sample_size": 5.858958,
+      "significantRoles": [
+        "top",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5866
+    },
+    "Hwei": {
+      "champion_id": "c06cfbca-7807-35ee-8561-9daa33b93512",
+      "champion_name": "Hwei",
+      "role_probabilities": {
+        "top": 0.049905,
+        "jungle": 0.04993,
+        "mid": 0.80027,
+        "bot": 0.049934,
+        "support": 0.049961
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 162,
+        "bot": 1,
+        "support": 7
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 3.005873,
+        "bot": 1.7e-05,
+        "support": 0.000123
+      },
+      "effective_sample_size": 3.006013,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4827
+    },
+    "Zed": {
+      "champion_id": "10dd8b87-6e5b-3618-a03b-6ef8b26ceb1c",
+      "champion_name": "Zed",
+      "role_probabilities": {
+        "top": 0.022243,
+        "jungle": 0.89607,
+        "mid": 0.037177,
+        "bot": 0.022255,
+        "support": 0.022255
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 31,
+        "mid": 5,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 7.853647,
+        "mid": 0.134117,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 7.987763,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.295
+    },
+    "Twisted Fate": {
+      "champion_id": "8c254736-e657-3ae4-8d0d-d322b2619582",
+      "champion_name": "Twisted Fate",
+      "role_probabilities": {
+        "top": 0.018163,
+        "jungle": 0.018054,
+        "mid": 0.927667,
+        "bot": 0.018061,
+        "support": 0.018054
+      },
+      "raw_counts_by_role": {
+        "top": 89,
+        "jungle": 0,
+        "mid": 41,
+        "bot": 5,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.001302,
+        "jungle": 0.0,
+        "mid": 10.077363,
+        "bot": 7.3e-05,
+        "support": 0.0
+      },
+      "effective_sample_size": 10.078739,
+      "significantRoles": [
+        "mid"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.2236
+    },
+    "Taric": {
+      "champion_id": "212b2efc-50c6-314f-88fd-613a1a0dac9d",
+      "champion_name": "Taric",
+      "role_probabilities": {
+        "top": 0.049667,
+        "jungle": 0.049692,
+        "mid": 0.049692,
+        "bot": 0.049692,
+        "support": 0.801256
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 16
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 3.025179
+      },
+      "effective_sample_size": 3.025179,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.481
+    },
+    "Gangplank": {
+      "champion_id": "0fd4fb85-d8c4-304a-9832-bc3693a15bbb",
+      "champion_name": "Gangplank",
+      "role_probabilities": {
+        "top": 0.704911,
+        "jungle": 0.073772,
+        "mid": 0.073772,
+        "bot": 0.073772,
+        "support": 0.073772
+      },
+      "raw_counts_by_role": {
+        "top": 28,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.71132,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.71132,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6311
+    },
+    "Miss Fortune": {
+      "champion_id": "ca371e80-177a-3738-b51c-62f85a56916c",
+      "champion_name": "Miss Fortune",
+      "role_probabilities": {
+        "top": 0.013511,
+        "jungle": 0.013518,
+        "mid": 0.013518,
+        "bot": 0.945934,
+        "support": 0.013518
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 466,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 13.796333,
+        "support": 0.0
+      },
+      "effective_sample_size": 13.796333,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.1772
+    },
+    "Kled": {
+      "champion_id": "db29e671-9423-3389-8e43-db2536aadce7",
+      "champion_name": "Kled",
+      "role_probabilities": {
+        "top": 0.766665,
+        "jungle": 0.058152,
+        "mid": 0.058878,
+        "bot": 0.058152,
+        "support": 0.058152
+      },
+      "raw_counts_by_role": {
+        "top": 6,
+        "jungle": 0,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 2.437095,
+        "jungle": 0.0,
+        "mid": 0.002496,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 2.439591,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5385
+    },
+    "Volibear": {
+      "champion_id": "38948526-fdcc-3ec1-8c52-7b19ed144e7a",
+      "champion_name": "Volibear",
+      "role_probabilities": {
+        "top": 0.064866,
+        "jungle": 0.742461,
+        "mid": 0.064224,
+        "bot": 0.064224,
+        "support": 0.064224
+      },
+      "raw_counts_by_role": {
+        "top": 11,
+        "jungle": 52,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.002099,
+        "jungle": 2.112293,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 2.114392,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5763
+    },
+    "Sett": {
+      "champion_id": "641ca9b8-aa6e-3f31-8e86-bd82166d5120",
+      "champion_name": "Sett",
+      "role_probabilities": {
+        "top": 0.641697,
+        "jungle": 0.077904,
+        "mid": 0.079855,
+        "bot": 0.077904,
+        "support": 0.122641
+      },
+      "raw_counts_by_role": {
+        "top": 6,
+        "jungle": 0,
+        "mid": 4,
+        "bot": 0,
+        "support": 7
+      },
+      "weighted_counts_by_role": {
+        "top": 1.447655,
+        "jungle": 0.0,
+        "mid": 0.005009,
+        "bot": 0.0,
+        "support": 0.114864
+      },
+      "effective_sample_size": 1.567528,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7093
+    },
+    "Caitlyn": {
+      "champion_id": "5f69228a-cad9-3813-9d0b-31c455503d83",
+      "champion_name": "Caitlyn",
+      "role_probabilities": {
+        "top": 0.030148,
+        "jungle": 0.030163,
+        "mid": 0.030166,
+        "bot": 0.87936,
+        "support": 0.030163
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 104,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 2.1e-05,
+        "bot": 5.631291,
+        "support": 0.0
+      },
+      "effective_sample_size": 5.631313,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.3327
+    },
+    "Camille": {
+      "champion_id": "d5df6ed8-d7a4-3964-a295-cde171d889ae",
+      "champion_name": "Camille",
+      "role_probabilities": {
+        "top": 0.734668,
+        "jungle": 0.034883,
+        "mid": 0.034883,
+        "bot": 0.034883,
+        "support": 0.160683
+      },
+      "raw_counts_by_role": {
+        "top": 129,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 10
+      },
+      "weighted_counts_by_role": {
+        "top": 4.012712,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.721347
+      },
+      "effective_sample_size": 4.734059,
+      "significantRoles": [
+        "top",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5415
+    },
+    "Ivern": {
+      "champion_id": "613fec9e-f951-31c3-9268-f529a9aea1ea",
+      "champion_name": "Ivern",
+      "role_probabilities": {
+        "top": 0.043498,
+        "jungle": 0.825942,
+        "mid": 0.04352,
+        "bot": 0.04352,
+        "support": 0.04352
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 142,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 3.596045,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 3.596045,
+      "significantRoles": [
+        "jungle"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4371
+    },
+    "Lillia": {
+      "champion_id": "7927c3c0-d37c-36f0-922a-8c422f5ce170",
+      "champion_name": "Lillia",
+      "role_probabilities": {
+        "top": 0.069517,
+        "jungle": 0.721828,
+        "mid": 0.069552,
+        "bot": 0.069552,
+        "support": 0.069552
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 296,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.875842,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.875842,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6069
+    },
+    "Vex": {
+      "champion_id": "2490d4d0-3b6b-3cd2-a34a-0bc62d54b108",
+      "champion_name": "Vex",
+      "role_probabilities": {
+        "top": 0.110092,
+        "jungle": 0.110133,
+        "mid": 0.55951,
+        "bot": 0.110133,
+        "support": 0.110133
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 3,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 2.6e-05,
+        "jungle": 0.0,
+        "mid": 0.816146,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.816173,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8057
+    },
+    "Irelia": {
+      "champion_id": "51c5338c-a9f5-3aba-8381-6f14ab9f9581",
+      "champion_name": "Irelia",
+      "role_probabilities": {
+        "top": 0.605928,
+        "jungle": 0.098515,
+        "mid": 0.098528,
+        "bot": 0.098515,
+        "support": 0.098515
+      },
+      "raw_counts_by_role": {
+        "top": 5,
+        "jungle": 0,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.030335,
+        "jungle": 0.0,
+        "mid": 2.7e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.030363,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7561
+    },
+    "Mordekaiser": {
+      "champion_id": "f9364971-c68a-3711-a550-803ea444007c",
+      "champion_name": "Mordekaiser",
+      "role_probabilities": {
+        "top": 0.814104,
+        "jungle": 0.046474,
+        "mid": 0.046474,
+        "bot": 0.046474,
+        "support": 0.046474
+      },
+      "raw_counts_by_role": {
+        "top": 44,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 3.303912,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 3.303912,
+      "significantRoles": [
+        "top"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.4585
+    },
+    "Draven": {
+      "champion_id": "5be418fd-7fab-3bb3-b545-515919c15814",
+      "champion_name": "Draven",
+      "role_probabilities": {
+        "top": 0.107433,
+        "jungle": 0.107487,
+        "mid": 0.107562,
+        "bot": 0.570032,
+        "support": 0.107487
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 7,
+        "bot": 70,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.000139,
+        "bot": 0.86074,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.860879,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7949
+    },
+    "Elise": {
+      "champion_id": "484c410a-0c65-3c5d-8f22-a34e2e883427",
+      "champion_name": "Elise",
+      "role_probabilities": {
+        "top": 0.037851,
+        "jungle": 0.037871,
+        "mid": 0.037871,
+        "bot": 0.037871,
+        "support": 0.848537
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 73
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 4.281673
+      },
+      "effective_sample_size": 4.281673,
+      "significantRoles": [
+        "support"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.3947
+    },
+    "Jinx": {
+      "champion_id": "05265249-202a-3fc6-bc2e-dfb98443b0a0",
+      "champion_name": "Jinx",
+      "role_probabilities": {
+        "top": 0.035804,
+        "jungle": 0.035822,
+        "mid": 0.035822,
+        "bot": 0.856731,
+        "support": 0.035822
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 159,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 4.583776,
+        "support": 0.0
+      },
+      "effective_sample_size": 4.583776,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.3787
+    },
+    "Veigar": {
+      "champion_id": "155730e4-d99b-380b-a430-39fe79e8dc28",
+      "champion_name": "Veigar",
+      "role_probabilities": {
+        "top": 0.090559,
+        "jungle": 0.090605,
+        "mid": 0.637625,
+        "bot": 0.090605,
+        "support": 0.090605
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 11,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1.207603,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.207603,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.719
+    },
+    "Janna": {
+      "champion_id": "725a6512-3e2e-361f-b538-5c6aa3e03d50",
+      "champion_name": "Janna",
+      "role_probabilities": {
+        "top": 0.112417,
+        "jungle": 0.112473,
+        "mid": 0.112473,
+        "bot": 0.112473,
+        "support": 0.550163
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 4
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.778378
+      },
+      "effective_sample_size": 0.778378,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.815
+    },
+    "Kennen": {
+      "champion_id": "670a5be5-c642-361c-81f7-2cfb6cbb0ae3",
+      "champion_name": "Kennen",
+      "role_probabilities": {
+        "top": 0.632852,
+        "jungle": 0.091786,
+        "mid": 0.091791,
+        "bot": 0.091786,
+        "support": 0.091786
+      },
+      "raw_counts_by_role": {
+        "top": 132,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.179193,
+        "jungle": 0.0,
+        "mid": 1e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.179203,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7247
+    },
+    "Morgana": {
+      "champion_id": "de12fffd-e620-3fd9-b3e8-e56518fcc54c",
+      "champion_name": "Morgana",
+      "role_probabilities": {
+        "top": 0.03511,
+        "jungle": 0.25989,
+        "mid": 0.632494,
+        "bot": 0.035127,
+        "support": 0.037379
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 11,
+        "mid": 6,
+        "bot": 0,
+        "support": 2
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.279828,
+        "mid": 3.401491,
+        "bot": 0.0,
+        "support": 0.012822
+      },
+      "effective_sample_size": 4.694141,
+      "significantRoles": [
+        "jungle",
+        "mid"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6201
+    },
+    "Rammus": {
+      "champion_id": "232f1506-a0e7-3e52-bb57-7cd6424c38fc",
+      "champion_name": "Rammus",
+      "role_probabilities": {
+        "top": 0.120187,
+        "jungle": 0.120269,
+        "mid": 0.120248,
+        "bot": 0.120248,
+        "support": 0.519048
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 2,
+        "mid": 0,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 3.5e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.663363
+      },
+      "effective_sample_size": 0.663398,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8445
+    },
+    "Zoe": {
+      "champion_id": "283723cf-9b0c-3c82-baec-4a2847314e8c",
+      "champion_name": "Zoe",
+      "role_probabilities": {
+        "top": 0.071036,
+        "jungle": 0.071072,
+        "mid": 0.715747,
+        "bot": 0.071072,
+        "support": 0.071072
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 11,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1.814325,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.814325,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6157
+    },
+    "Nidalee": {
+      "champion_id": "cd06d06b-453c-3046-9bed-89dfd8d7b049",
+      "champion_name": "Nidalee",
+      "role_probabilities": {
+        "top": 0.13149,
+        "jungle": 0.637788,
+        "mid": 0.076907,
+        "bot": 0.076907,
+        "support": 0.076907
+      },
+      "raw_counts_by_role": {
+        "top": 35,
+        "jungle": 212,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.142058,
+        "jungle": 1.458734,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.600793,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7117
+    },
+    "Vayne": {
+      "champion_id": "ba84e95a-729e-3b6c-9473-ad5ab6d5c9d5",
+      "champion_name": "Vayne",
+      "role_probabilities": {
+        "top": 0.078826,
+        "jungle": 0.078787,
+        "mid": 0.078792,
+        "bot": 0.684809,
+        "support": 0.078787
+      },
+      "raw_counts_by_role": {
+        "top": 10,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 5,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000202,
+        "jungle": 0.0,
+        "mid": 1.4e-05,
+        "bot": 1.538546,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.538762,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6587
+    },
+    "Yasuo": {
+      "champion_id": "a47b3139-8e2b-3e42-a61e-e347b6302dde",
+      "champion_name": "Yasuo",
+      "role_probabilities": {
+        "top": 0.224381,
+        "jungle": 0.104741,
+        "mid": 0.458325,
+        "bot": 0.107812,
+        "support": 0.104741
+      },
+      "raw_counts_by_role": {
+        "top": 12,
+        "jungle": 0,
+        "mid": 24,
+        "bot": 5,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.228572,
+        "jungle": 0.0,
+        "mid": 0.675227,
+        "bot": 0.005864,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.909664,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8734
+    },
+    "Seraphine": {
+      "champion_id": "7889d995-c5bd-3d3a-a142-cbec510a328e",
+      "champion_name": "Seraphine",
+      "role_probabilities": {
+        "top": 0.10793,
+        "jungle": 0.107985,
+        "mid": 0.107985,
+        "bot": 0.10831,
+        "support": 0.567791
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 17,
+        "support": 35
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.000602,
+        "support": 0.851703
+      },
+      "effective_sample_size": 0.852305,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7972
+    },
+    "Ashe": {
+      "champion_id": "cdfefdba-3f62-3d3a-b20d-62e9d7a474e1",
+      "champion_name": "Ashe",
+      "role_probabilities": {
+        "top": 0.101864,
+        "jungle": 0.101916,
+        "mid": 0.101916,
+        "bot": 0.584355,
+        "support": 0.109949
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 357,
+        "support": 56
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.946838,
+        "support": 0.015767
+      },
+      "effective_sample_size": 0.962605,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7797
+    },
+    "Tahm Kench": {
+      "champion_id": "5f05fb4d-0c78-3ebd-bcdf-a2c6f1b8a3f2",
+      "champion_name": "Tahm Kench",
+      "role_probabilities": {
+        "top": 0.054292,
+        "jungle": 0.054319,
+        "mid": 0.054319,
+        "bot": 0.054319,
+        "support": 0.78275
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 81
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 2.682305
+      },
+      "effective_sample_size": 2.682305,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5123
+    },
+    "Thresh": {
+      "champion_id": "8df23a54-cc3b-3df9-9801-6b6d30a02cc0",
+      "champion_name": "Thresh",
+      "role_probabilities": {
+        "top": 0.063891,
+        "jungle": 0.063924,
+        "mid": 0.063924,
+        "bot": 0.063924,
+        "support": 0.744338
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 34
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 2.12905
+      },
+      "effective_sample_size": 2.12905,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5734
+    },
+    "Aphelios": {
+      "champion_id": "24553764-d70e-3d37-ab9b-51b37ff3e287",
+      "champion_name": "Aphelios",
+      "role_probabilities": {
+        "top": 0.029003,
+        "jungle": 0.029018,
+        "mid": 0.029018,
+        "bot": 0.883942,
+        "support": 0.029018
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 118,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 5.892939,
+        "support": 0.0
+      },
+      "effective_sample_size": 5.892939,
+      "significantRoles": [
+        "bot"
+      ],
+      "isFlexPick": false,
+      "flexibilityScore": 0.323
+    },
+    "Udyr": {
+      "champion_id": "feae77fb-662d-3591-b06c-179f7697a1c3",
+      "champion_name": "Udyr",
+      "role_probabilities": {
+        "top": 0.660665,
+        "jungle": 0.084834,
+        "mid": 0.084834,
+        "bot": 0.084834,
+        "support": 0.084834
+      },
+      "raw_counts_by_role": {
+        "top": 122,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 1.357788,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.357788,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6903
+    },
+    "Kindred": {
+      "champion_id": "dad13cc6-586d-3cf3-b149-6c70969ab14c",
+      "champion_name": "Kindred",
+      "role_probabilities": {
+        "top": 0.076203,
+        "jungle": 0.695072,
+        "mid": 0.076242,
+        "bot": 0.076242,
+        "support": 0.076242
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 39,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.6235,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.6235,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6448
+    },
+    "Kassadin": {
+      "champion_id": "87bbea6b-6b92-3200-8c4e-7344f3e9c3e5",
+      "champion_name": "Kassadin",
+      "role_probabilities": {
+        "top": 0.086454,
+        "jungle": 0.086498,
+        "mid": 0.654052,
+        "bot": 0.086498,
+        "support": 0.086498
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 8,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1.312429,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.312429,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6987
+    },
+    "Olaf": {
+      "champion_id": "9b65df29-1753-3ea0-ab0f-6719b5c07fa7",
+      "champion_name": "Olaf",
+      "role_probabilities": {
+        "top": 0.253019,
+        "jungle": 0.580321,
+        "mid": 0.055553,
+        "bot": 0.055553,
+        "support": 0.055553
+      },
+      "raw_counts_by_role": {
+        "top": 46,
+        "jungle": 13,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.711075,
+        "jungle": 1.889425,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 2.600501,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7116
+    },
+    "Syndra": {
+      "champion_id": "a6ba29b1-2523-38e5-9a2c-69a35156f2df",
+      "champion_name": "Syndra",
+      "role_probabilities": {
+        "top": 0.078127,
+        "jungle": 0.078167,
+        "mid": 0.687373,
+        "bot": 0.078167,
+        "support": 0.078167
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 32,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1.558892,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.558892,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.6552
+    },
+    "Twitch": {
+      "champion_id": "98527618-a1d8-3dd1-8e28-95c7733067b3",
+      "champion_name": "Twitch",
+      "role_probabilities": {
+        "top": 0.131702,
+        "jungle": 0.131769,
+        "mid": 0.131769,
+        "bot": 0.47299,
+        "support": 0.131769
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 6,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.51796,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.51796,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8837
+    },
+    "LeBlanc": {
+      "champion_id": "8a23d389-2c48-35ec-9d16-a225fc7c3dfd",
+      "champion_name": "LeBlanc",
+      "role_probabilities": {
+        "top": 0.05653,
+        "jungle": 0.056558,
+        "mid": 0.773784,
+        "bot": 0.056558,
+        "support": 0.05657
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 99,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 2.536501,
+        "bot": 0.0,
+        "support": 4.2e-05
+      },
+      "effective_sample_size": 2.536543,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.5271
+    },
+    "Tryndamere": {
+      "champion_id": "bb82ee66-49c4-395c-8a9e-be14c4283bd0",
+      "champion_name": "Tryndamere",
+      "role_probabilities": {
+        "top": 0.09382,
+        "jungle": 0.303166,
+        "mid": 0.415279,
+        "bot": 0.093867,
+        "support": 0.093867
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 5,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.445992,
+        "mid": 0.684892,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.130884,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8655
+    },
+    "Zac": {
+      "champion_id": "22f797fc-a9b2-3bbd-bd69-89eb10661ad8",
+      "champion_name": "Zac",
+      "role_probabilities": {
+        "top": 0.136852,
+        "jungle": 0.453356,
+        "mid": 0.1366,
+        "bot": 0.136596,
+        "support": 0.136596
+      },
+      "raw_counts_by_role": {
+        "top": 30,
+        "jungle": 14,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000475,
+        "jungle": 0.463836,
+        "mid": 5e-06,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.464317,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8988
+    },
+    "Mel": {
+      "champion_id": "e1b040d3-fb07-3de5-9482-b88ab576c66b",
+      "champion_name": "Mel",
+      "role_probabilities": {
+        "top": 0.094778,
+        "jungle": 0.094826,
+        "mid": 0.617857,
+        "bot": 0.097712,
+        "support": 0.094826
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 13,
+        "bot": 4,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 1.103246,
+        "bot": 0.006087,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.109332,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7424
+    },
+    "Vladimir": {
+      "champion_id": "5d2048ce-467c-3674-97fe-93c4eddf6609",
+      "champion_name": "Vladimir",
+      "role_probabilities": {
+        "top": 0.469314,
+        "jungle": 0.132659,
+        "mid": 0.132708,
+        "bot": 0.132659,
+        "support": 0.132659
+      },
+      "raw_counts_by_role": {
+        "top": 12,
+        "jungle": 0,
+        "mid": 5,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.5077,
+        "jungle": 0.0,
+        "mid": 7.3e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.507772,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.8866
+    },
+    "Brand": {
+      "champion_id": "3c5e97bf-06f1-39dd-bf3b-d3dde17221bf",
+      "champion_name": "Brand",
+      "role_probabilities": {
+        "top": 0.108222,
+        "jungle": 0.566949,
+        "mid": 0.108277,
+        "bot": 0.108277,
+        "support": 0.108277
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 172,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.847309,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.847309,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.7981
+    },
+    "Dr. Mundo": {
+      "champion_id": "682a5d5e-4e20-3f12-89c8-943f80995220",
+      "champion_name": "Dr. Mundo",
+      "role_probabilities": {
+        "top": 0.339053,
+        "jungle": 0.319293,
+        "mid": 0.113885,
+        "bot": 0.113885,
+        "support": 0.113885
+      },
+      "raw_counts_by_role": {
+        "top": 10,
+        "jungle": 11,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.395572,
+        "jungle": 0.360766,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.756338,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9155
+    },
+    "Anivia": {
+      "champion_id": "42ba3161-73e4-3370-b909-0cc4e30f4b79",
+      "champion_name": "Anivia",
+      "role_probabilities": {
+        "top": 0.170639,
+        "jungle": 0.167361,
+        "mid": 0.327279,
+        "bot": 0.167361,
+        "support": 0.167361
+      },
+      "raw_counts_by_role": {
+        "top": 7,
+        "jungle": 0,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.004019,
+        "jungle": 0.0,
+        "mid": 0.191125,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.195144,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9723
+    },
+    "Garen": {
+      "champion_id": "af280fdf-8f98-369c-9864-1b8be91a7912",
+      "champion_name": "Garen",
+      "role_probabilities": {
+        "top": 0.342934,
+        "jungle": 0.164256,
+        "mid": 0.164297,
+        "bot": 0.164256,
+        "support": 0.164256
+      },
+      "raw_counts_by_role": {
+        "top": 15,
+        "jungle": 0,
+        "mid": 3,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.217684,
+        "jungle": 0.0,
+        "mid": 5e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.217734,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9655
+    },
+    "Amumu": {
+      "champion_id": "7d32face-a9ea-34d5-a9c5-da2488edf133",
+      "champion_name": "Amumu",
+      "role_probabilities": {
+        "top": 0.172015,
+        "jungle": 0.311677,
+        "mid": 0.172102,
+        "bot": 0.172102,
+        "support": 0.172102
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 18,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.162216,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.162216,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9784
+    },
+    "Shen": {
+      "champion_id": "dbdf46d6-7941-3291-bfd7-aaf8bf553022",
+      "champion_name": "Shen",
+      "role_probabilities": {
+        "top": 0.314833,
+        "jungle": 0.122703,
+        "mid": 0.122207,
+        "bot": 0.122207,
+        "support": 0.318051
+      },
+      "raw_counts_by_role": {
+        "top": 23,
+        "jungle": 2,
+        "mid": 0,
+        "bot": 0,
+        "support": 16
+      },
+      "weighted_counts_by_role": {
+        "top": 0.31538,
+        "jungle": 0.000813,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.320545
+      },
+      "effective_sample_size": 0.636738,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9316
+    },
+    "Ekko": {
+      "champion_id": "f00c1e78-fce4-3d63-aeb7-fc69ae670576",
+      "champion_name": "Ekko",
+      "role_probabilities": {
+        "top": 0.154607,
+        "jungle": 0.154685,
+        "mid": 0.381338,
+        "bot": 0.154685,
+        "support": 0.154685
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.293081,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.293081,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9459
+    },
+    "Singed": {
+      "champion_id": "2ffc16a2-20a1-342e-80f6-627a69b018e3",
+      "champion_name": "Singed",
+      "role_probabilities": {
+        "top": 0.326055,
+        "jungle": 0.168486,
+        "mid": 0.168486,
+        "bot": 0.168486,
+        "support": 0.168486
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.18716,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.18716,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9728
+    },
+    "Hecarim": {
+      "champion_id": "a39baef9-4ea6-3044-aa7a-06e1325f84dd",
+      "champion_name": "Hecarim",
+      "role_probabilities": {
+        "top": 0.181805,
+        "jungle": 0.272502,
+        "mid": 0.181897,
+        "bot": 0.181897,
+        "support": 0.181897
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.099632,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.099632,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9906
+    },
+    "Malzahar": {
+      "champion_id": "638e56c5-dadc-3f9b-9761-d3e63aa3b6f1",
+      "champion_name": "Malzahar",
+      "role_probabilities": {
+        "top": 0.169506,
+        "jungle": 0.169592,
+        "mid": 0.321718,
+        "bot": 0.169592,
+        "support": 0.169592
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 6,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.179421,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.179421,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9745
+    },
+    "Kha'Zix": {
+      "champion_id": "18bbaf79-9f2e-3952-9fc4-d32b49eda925",
+      "champion_name": "Kha'Zix",
+      "role_probabilities": {
+        "top": 0.197666,
+        "jungle": 0.209036,
+        "mid": 0.197766,
+        "bot": 0.197766,
+        "support": 0.197766
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 12,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.011398,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.011398,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9998
+    },
+    "Soraka": {
+      "champion_id": "2c0abcf2-b8df-3c44-a10e-b41cda08e460",
+      "champion_name": "Soraka",
+      "role_probabilities": {
+        "top": 0.197149,
+        "jungle": 0.197249,
+        "mid": 0.197249,
+        "bot": 0.197249,
+        "support": 0.211105
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 5
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.014051
+      },
+      "effective_sample_size": 0.014051,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9998
+    },
+    "Fiora": {
+      "champion_id": "ef57c581-c11e-3a5d-afff-f9cea4ed3037",
+      "champion_name": "Fiora",
+      "role_probabilities": {
+        "top": 0.209077,
+        "jungle": 0.197731,
+        "mid": 0.197731,
+        "bot": 0.197731,
+        "support": 0.197731
+      },
+      "raw_counts_by_role": {
+        "top": 9,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.011579,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.011579,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9998
+    },
+    "Kog'Maw": {
+      "champion_id": "2586fac1-20d7-3166-bc7e-3fe163b8e081",
+      "champion_name": "Kog'Maw",
+      "role_probabilities": {
+        "top": 0.197736,
+        "jungle": 0.197836,
+        "mid": 0.197836,
+        "bot": 0.208754,
+        "support": 0.197836
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 8,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.011039,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.011039,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9999
+    },
+    "Yuumi": {
+      "champion_id": "0568d58e-1dc0-3727-abec-f72abd3f8bee",
+      "champion_name": "Yuumi",
+      "role_probabilities": {
+        "top": 0.198146,
+        "jungle": 0.198246,
+        "mid": 0.198246,
+        "bot": 0.198246,
+        "support": 0.207115
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 15
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.008949
+      },
+      "effective_sample_size": 0.008949,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9999
+    },
+    "Diana": {
+      "champion_id": "b781cc63-bbf9-375a-9526-b97bd5aca6c2",
+      "champion_name": "Diana",
+      "role_probabilities": {
+        "top": 0.198306,
+        "jungle": 0.208276,
+        "mid": 0.19783,
+        "bot": 0.197794,
+        "support": 0.197794
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 16,
+        "mid": 2,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000618,
+        "jungle": 0.010599,
+        "mid": 3.6e-05,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.011253,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9999
+    },
+    "Riven": {
+      "champion_id": "d145cf79-4e2b-36af-ad03-6769d0fee146",
+      "champion_name": "Riven",
+      "role_probabilities": {
+        "top": 0.205156,
+        "jungle": 0.198711,
+        "mid": 0.198711,
+        "bot": 0.198711,
+        "support": 0.198711
+      },
+      "raw_counts_by_role": {
+        "top": 4,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.006589,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.006589,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9999
+    },
+    "Nilah": {
+      "champion_id": "c45c8a39-aab4-3828-a73b-ac860069b4aa",
+      "champion_name": "Nilah",
+      "role_probabilities": {
+        "top": 0.199023,
+        "jungle": 0.199123,
+        "mid": 0.199123,
+        "bot": 0.203608,
+        "support": 0.199123
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 12,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.004505,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.004505,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Aurelion Sol": {
+      "champion_id": "43d222a4-eb0c-37d3-8d03-a892e4364bb4",
+      "champion_name": "Aurelion Sol",
+      "role_probabilities": {
+        "top": 0.197571,
+        "jungle": 0.197671,
+        "mid": 0.209417,
+        "bot": 0.197671,
+        "support": 0.197671
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 52,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.011885,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.011885,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 0.9998
+    },
+    "Nasus": {
+      "champion_id": "ba89b029-9ad9-3c4c-9d74-c2996aca6544",
+      "champion_name": "Nasus",
+      "role_probabilities": {
+        "top": 0.203604,
+        "jungle": 0.199069,
+        "mid": 0.19919,
+        "bot": 0.199069,
+        "support": 0.199069
+      },
+      "raw_counts_by_role": {
+        "top": 17,
+        "jungle": 0,
+        "mid": 7,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.004658,
+        "jungle": 0.0,
+        "mid": 0.000122,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.00478,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Talon": {
+      "champion_id": "2f7c27ad-7feb-3f26-b5b6-5b6b166b3e2a",
+      "champion_name": "Talon",
+      "role_probabilities": {
+        "top": 0.199018,
+        "jungle": 0.203624,
+        "mid": 0.199119,
+        "bot": 0.199119,
+        "support": 0.199119
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 2,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.004525,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.004525,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Fiddlesticks": {
+      "champion_id": "4835049f-0f16-3cf3-8df3-503a58d0e472",
+      "champion_name": "Fiddlesticks",
+      "role_probabilities": {
+        "top": 0.199231,
+        "jungle": 0.19982,
+        "mid": 0.199318,
+        "bot": 0.199318,
+        "support": 0.202313
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 3,
+        "mid": 0,
+        "bot": 0,
+        "support": 3
+      },
+      "weighted_counts_by_role": {
+        "top": 1.3e-05,
+        "jungle": 0.000504,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.003005
+      },
+      "effective_sample_size": 0.003522,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Warwick": {
+      "champion_id": "b12907e7-015e-3450-96be-2a91b38f3c1d",
+      "champion_name": "Warwick",
+      "role_probabilities": {
+        "top": 0.202523,
+        "jungle": 0.199369,
+        "mid": 0.199369,
+        "bot": 0.199369,
+        "support": 0.199369
+      },
+      "raw_counts_by_role": {
+        "top": 4,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.003265,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.003265,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Xerath": {
+      "champion_id": "dee322c5-5368-33bf-a204-4dda2ec79f4f",
+      "champion_name": "Xerath",
+      "role_probabilities": {
+        "top": 0.199161,
+        "jungle": 0.199262,
+        "mid": 0.203053,
+        "bot": 0.199262,
+        "support": 0.199262
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 7,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.003805,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.003805,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Graves": {
+      "champion_id": "a87a6934-4a42-3e70-9044-eaca5123630b",
+      "champion_name": "Graves",
+      "role_probabilities": {
+        "top": 0.199397,
+        "jungle": 0.202111,
+        "mid": 0.199497,
+        "bot": 0.199497,
+        "support": 0.199497
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 23,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.002621,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.002621,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Lux": {
+      "champion_id": "d669c933-56be-378d-80b1-4377e697eac5",
+      "champion_name": "Lux",
+      "role_probabilities": {
+        "top": 0.199274,
+        "jungle": 0.199375,
+        "mid": 0.199375,
+        "bot": 0.199375,
+        "support": 0.202603
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 7
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.003239
+      },
+      "effective_sample_size": 0.003239,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Malphite": {
+      "champion_id": "7aea6394-c423-3453-8f75-f556829d311f",
+      "champion_name": "Malphite",
+      "role_probabilities": {
+        "top": 0.201403,
+        "jungle": 0.199649,
+        "mid": 0.199649,
+        "bot": 0.199649,
+        "support": 0.199649
+      },
+      "raw_counts_by_role": {
+        "top": 18,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.001858,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.001858,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Zilean": {
+      "champion_id": "8cb6045a-b506-3df7-8f1e-375f0efa9882",
+      "champion_name": "Zilean",
+      "role_probabilities": {
+        "top": 0.199896,
+        "jungle": 0.199997,
+        "mid": 0.200057,
+        "bot": 0.199997,
+        "support": 0.200052
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 3,
+        "bot": 0,
+        "support": 3
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 5.9e-05,
+        "bot": 0.0,
+        "support": 5.5e-05
+      },
+      "effective_sample_size": 0.000114,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Karthus": {
+      "champion_id": "6efd1bca-5ac3-3463-9342-c58051d9cb0e",
+      "champion_name": "Karthus",
+      "role_probabilities": {
+        "top": 0.199738,
+        "jungle": 0.200744,
+        "mid": 0.199839,
+        "bot": 0.199839,
+        "support": 0.199839
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 61,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.000905,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.000905,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Rengar": {
+      "champion_id": "cfe47841-f8e0-32be-a06e-17fba6f56185",
+      "champion_name": "Rengar",
+      "role_probabilities": {
+        "top": 0.199903,
+        "jungle": 0.200083,
+        "mid": 0.200004,
+        "bot": 0.200004,
+        "support": 0.200004
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 6,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 7.9e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 7.9e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Darius": {
+      "champion_id": "585121a8-6e0c-3877-bc4a-02e5f79903b4",
+      "champion_name": "Darius",
+      "role_probabilities": {
+        "top": 0.200078,
+        "jungle": 0.199981,
+        "mid": 0.199981,
+        "bot": 0.199981,
+        "support": 0.199981
+      },
+      "raw_counts_by_role": {
+        "top": 14,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.000198,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.000198,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Samira": {
+      "champion_id": "07fa49df-26ae-3053-a131-0289d9930098",
+      "champion_name": "Samira",
+      "role_probabilities": {
+        "top": 0.199914,
+        "jungle": 0.200015,
+        "mid": 0.200015,
+        "bot": 0.200042,
+        "support": 0.200015
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 2,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 2.7e-05,
+        "support": 0.0
+      },
+      "effective_sample_size": 2.7e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Evelynn": {
+      "champion_id": "417f487f-67aa-39c7-99f7-78243e796950",
+      "champion_name": "Evelynn",
+      "role_probabilities": {
+        "top": 0.199917,
+        "jungle": 0.20003,
+        "mid": 0.200018,
+        "bot": 0.200018,
+        "support": 0.200018
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.2e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.2e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Kayn": {
+      "champion_id": "dd1568ba-0fcc-3ee9-9bb0-265c8247f3cd",
+      "champion_name": "Kayn",
+      "role_probabilities": {
+        "top": 0.199917,
+        "jungle": 0.20003,
+        "mid": 0.200018,
+        "bot": 0.200018,
+        "support": 0.200018
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.2e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.2e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Shyvana": {
+      "champion_id": "63a21e1b-d633-36ab-8de6-29a67b891af5",
+      "champion_name": "Shyvana",
+      "role_probabilities": {
+        "top": 0.199904,
+        "jungle": 0.200184,
+        "mid": 0.199971,
+        "bot": 0.199971,
+        "support": 0.199971
+      },
+      "raw_counts_by_role": {
+        "top": 2,
+        "jungle": 14,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 3.4e-05,
+        "jungle": 0.000214,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 0.000248,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Quinn": {
+      "champion_id": "4e689ca9-fd65-35d8-8a02-5da66c1aab77",
+      "champion_name": "Quinn",
+      "role_probabilities": {
+        "top": 0.199967,
+        "jungle": 0.200008,
+        "mid": 0.200008,
+        "bot": 0.200008,
+        "support": 0.200008
+      },
+      "raw_counts_by_role": {
+        "top": 3,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 6e-05,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 6e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Sona": {
+      "champion_id": "ac22a3e4-a3c0-3b90-beee-f6b502d84773",
+      "champion_name": "Sona",
+      "role_probabilities": {
+        "top": 0.199911,
+        "jungle": 0.200012,
+        "mid": 0.200012,
+        "bot": 0.200012,
+        "support": 0.200051
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 2
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 3.9e-05
+      },
+      "effective_sample_size": 3.9e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Shaco": {
+      "champion_id": "9e4dce05-85f7-3d4a-af76-4774ad4190a3",
+      "champion_name": "Shaco",
+      "role_probabilities": {
+        "top": 0.199916,
+        "jungle": 0.200031,
+        "mid": 0.200017,
+        "bot": 0.200017,
+        "support": 0.200017
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 1.4e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 1.4e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Bel'Veth": {
+      "champion_id": "5affb379-5701-370d-b33b-160d6151bff7",
+      "champion_name": "Bel'Veth",
+      "role_probabilities": {
+        "top": 0.199908,
+        "jungle": 0.200063,
+        "mid": 0.200009,
+        "bot": 0.200009,
+        "support": 0.200009
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 3,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 5.4e-05,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 5.4e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Akshan": {
+      "champion_id": "3947fd4d-3092-3293-b5ff-515650c03d2b",
+      "champion_name": "Akshan",
+      "role_probabilities": {
+        "top": 0.199926,
+        "jungle": 0.200019,
+        "mid": 0.200019,
+        "bot": 0.200019,
+        "support": 0.200019
+      },
+      "raw_counts_by_role": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "weighted_counts_by_role": {
+        "top": 9e-06,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 0.0
+      },
+      "effective_sample_size": 9e-06,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    },
+    "Heimerdinger": {
+      "champion_id": "96a4f5e1-ecb7-3342-8b29-c16dd0146a03",
+      "champion_name": "Heimerdinger",
+      "role_probabilities": {
+        "top": 0.199916,
+        "jungle": 0.200017,
+        "mid": 0.200017,
+        "bot": 0.200017,
+        "support": 0.200031
+      },
+      "raw_counts_by_role": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 1
+      },
+      "weighted_counts_by_role": {
+        "top": 0.0,
+        "jungle": 0.0,
+        "mid": 0.0,
+        "bot": 0.0,
+        "support": 1.4e-05
+      },
+      "effective_sample_size": 1.4e-05,
+      "significantRoles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "isFlexPick": true,
+      "flexibilityScore": 1.0
+    }
+  }
+}

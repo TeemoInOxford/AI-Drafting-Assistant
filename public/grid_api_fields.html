@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid.gg API 四版本字段对比表</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .stat-card h3 { font-size: 0.75rem; color: #888; margin-bottom: 5px; }
+        .stat-card .value { font-size: 2rem; font-weight: bold; }
+        .stat-card .time { font-size: 0.7rem; color: #666; margin-top: 3px; }
+        .stat-card.v1 .value { color: #00ff88; }
+        .stat-card.v2 .value { color: #00d4ff; }
+        .stat-card.v3 .value { color: #ffc107; }
+        .stat-card.v4 .value { color: #ff6b6b; }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .check { color: #00ff88; font-weight: bold; font-size: 1.1rem; }
+        .cross { color: #ff4757; font-weight: bold; font-size: 1.1rem; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grid.gg API 四版本字段对比表</h1>
+        <p class="subtitle">Series State API - LOL 比赛数据完整字段对照</p>
+
+        <div class="stats">
+            <div class="stat-card v1">
+                <h3>v3.40+ (完整版)</h3>
+                <div class="value">70</div>
+                <div class="time">2025.5月后</div>
+            </div>
+            <div class="stat-card v2">
+                <h3>v3.15-3.40 (旧版)</h3>
+                <div class="value">38</div>
+                <div class="time">2025.1-5月</div>
+            </div>
+            <div class="stat-card v3">
+                <h3>v3.14-3.15 (最简)</h3>
+                <div class="value">25</div>
+                <div class="time">2024下半年</div>
+            </div>
+            <div class="stat-card v4">
+                <h3>&lt;v3.14 (超简)</h3>
+                <div class="value">24</div>
+                <div class="time">2024上半年</div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><span class="check">✓</span> 支持</div>
+            <div class="legend-item"><span class="cross">✗</span> 不支持</div>
+        </div>
+
+        <div id="tables"></div>
+    </div>
+
+<script>
+const data = [
+    {
+        title: "Series 级别字段",
+        fields: [
+            ["id", 1, 1, 1, 1],
+            ["format", 1, 1, 1, 1],
+            ["started", 1, 1, 1, 1],
+            ["finished", 1, 1, 1, 1],
+            ["startedAt", 1, 1, 1, 1],
+            ["duration", 1, 1, 1, 0, true]
+        ]
+    },
+    {
+        title: "Series Teams 字段",
+        fields: [
+            ["teams.id", 1, 1, 1, 1],
+            ["teams.name", 1, 1, 1, 1],
+            ["teams.score", 1, 1, 1, 1],
+            ["teams.won", 1, 1, 1, 1],
+            ["teams.kills", 1, 1, 1, 1],
+            ["teams.deaths", 1, 1, 1, 1],
+            ["teams.players.id", 1, 1, 1, 1],
+            ["teams.players.name", 1, 1, 1, 1]
+        ]
+    },
+    {
+        title: "Games 基础字段",
+        fields: [
+            ["games.id", 1, 1, 1, 1],
+            ["games.sequenceNumber", 1, 1, 1, 1],
+            ["games.started", 1, 1, 1, 1],
+            ["games.finished", 1, 1, 1, 1],
+            ["games.startedAt", 1, 1, 1, 1],
+            ["games.duration", 1, 1, 0, 0, true]
+        ]
+    },
+    {
+        title: "Draft Actions 字段",
+        fields: [
+            ["draftActions.type", 1, 1, 1, 1],
+            ["draftActions.sequenceNumber", 1, 1, 1, 1],
+            ["draftActions.drafter.id", 1, 1, 1, 1],
+            ["draftActions.drafter.type", 1, 1, 1, 1],
+            ["draftActions.draftable.id", 1, 1, 1, 1],
+            ["draftActions.draftable.type", 1, 1, 1, 1],
+            ["draftActions.draftable.name", 1, 1, 1, 1]
+        ]
+    },
+    {
+        title: "Game Teams 基础字段",
+        fields: [
+            ["teams.id", 1, 1, 1, 1],
+            ["teams.name", 1, 1, 1, 1],
+            ["teams.side", 1, 1, 1, 1],
+            ["teams.won", 1, 1, 1, 1],
+            ["teams.kills", 1, 1, 1, 1],
+            ["teams.deaths", 1, 1, 1, 1],
+            ["teams.netWorth", 1, 1, 0, 0, true]
+        ]
+    },
+    {
+        title: "Game Teams LOL扩展 (GameTeamStateLol)",
+        fields: [
+            ["damageDealt", 1, 0, 0, 0],
+            ["damageTaken", 1, 0, 0, 0],
+            ["damagePerMinute", 1, 0, 0, 0],
+            ["damagePerMoney", 1, 0, 0, 0],
+            ["visionScore", 1, 0, 0, 0],
+            ["visionScorePerMinute", 1, 0, 0, 0],
+            ["experiencePoints", 1, 0, 0, 0],
+            ["moneyDifference", 1, 0, 0, 0],
+            ["moneyPerMinute", 1, 0, 0, 0],
+            ["totalMoneyEarned", 1, 0, 0, 0],
+            ["majorMoneyLead", 1, 0, 0, 0],
+            ["majorMoneyDeficit", 1, 0, 0, 0],
+            ["forwardPercentage", 1, 0, 0, 0],
+            ["kdaRatio", 1, 0, 0, 0],
+            ["killsAndAssists", 1, 0, 0, 0],
+            ["firstKill", 1, 0, 0, 0],
+            ["baronPowerPlays.id", 1, 0, 0, 0],
+            ["baronPowerPlays.value", 1, 0, 0, 0]
+        ]
+    },
+    {
+        title: "Game Teams Objectives 字段",
+        fields: [
+            ["objectives.id", 1, 1, 0, 0],
+            ["objectives.type", 1, 1, 0, 0],
+            ["objectives.completedFirst", 1, 1, 0, 0],
+            ["objectives.completionCount", 1, 1, 0, 0]
+        ]
+    },
+    {
+        title: "Game Players 基础字段",
+        fields: [
+            ["players.id", 1, 1, 1, 1],
+            ["players.name", 1, 1, 1, 1],
+            ["players.character.id", 1, 1, 1, 1],
+            ["players.character.name", 1, 1, 1, 1],
+            ["players.kills", 1, 1, 1, 1],
+            ["players.deaths", 1, 1, 1, 1],
+            ["players.killAssistsGiven", 0, 1, 0, 0, true],
+            ["players.netWorth", 0, 1, 0, 0, true]
+        ]
+    },
+    {
+        title: "Game Players LOL扩展 (GamePlayerStateLol)",
+        fields: [
+            ["damageDealt", 1, 0, 0, 0],
+            ["damageTaken", 1, 0, 0, 0],
+            ["damagePercentage", 1, 0, 0, 0],
+            ["damagePerMinute", 1, 0, 0, 0],
+            ["damagePerMoney", 1, 0, 0, 0],
+            ["visionScore", 1, 0, 0, 0],
+            ["visionScorePerMinute", 1, 0, 0, 0],
+            ["kdaRatio", 1, 0, 0, 0],
+            ["killParticipation", 1, 0, 0, 0],
+            ["killsAndAssists", 1, 0, 0, 0],
+            ["experiencePoints", 1, 0, 0, 0],
+            ["moneyPercentage", 1, 0, 0, 0],
+            ["moneyPerMinute", 1, 0, 0, 0],
+            ["totalMoneyEarned", 1, 0, 0, 0],
+            ["forwardPercentage", 1, 0, 0, 0],
+            ["alive", 1, 0, 0, 0],
+            ["currentHealth", 1, 0, 0, 0],
+            ["maxHealth", 1, 0, 0, 0],
+            ["currentArmor", 1, 0, 0, 0],
+            ["respawnClock.currentSeconds", 1, 0, 0, 0]
+        ]
+    },
+    {
+        title: "Game Players Inventory 字段",
+        fields: [
+            ["inventory.items.id", 1, 1, 0, 0],
+            ["inventory.items.name", 1, 1, 0, 0],
+            ["inventory.items.quantity", 1, 1, 0, 0]
+        ]
+    },
+    {
+        title: "Game Players Objectives 字段",
+        fields: [
+            ["objectives.id", 1, 1, 0, 0],
+            ["objectives.type", 1, 1, 0, 0],
+            ["objectives.completedFirst", 1, 1, 0, 0],
+            ["objectives.completionCount", 1, 1, 0, 0]
+        ]
+    }
+];
+
+const container = document.getElementById('tables');
+const style = document.createElement('style');
+style.textContent = `
+    .section {
+        background: rgba(255,255,255,0.03);
+        border-radius: 10px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .section-title {
+        background: linear-gradient(90deg, rgba(0,212,255,0.15), rgba(123,44,191,0.15));
+        padding: 10px 18px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+        padding: 8px 12px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    th {
+        background: rgba(0,0,0,0.25);
+        font-weight: 600;
+        font-size: 0.75rem;
+        color: #999;
+    }
+    th:first-child, td:first-child {
+        text-align: left;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 0.82rem;
+    }
+    tr:hover { background: rgba(255,255,255,0.02); }
+    .highlight { background: rgba(255,193,7,0.08) !important; }
+    .highlight td:first-child { color: #ffc107; font-weight: 600; }
+    .c1 { color: #00ff88; }
+    .c2 { color: #00d4ff; }
+    .c3 { color: #ffc107; }
+    .c4 { color: #ff6b6b; }
+    .footer {
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+        color: #00d4ff;
+    }
+    .footer ul {
+        list-style: none;
+        font-size: 0.85rem;
+        line-height: 1.8;
+    }
+    .footer li { padding-left: 20px; position: relative; }
+    .footer li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #7b2cbf;
+    }
+    .footer code {
+        background: rgba(0,212,255,0.15);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'Consolas', monospace;
+        color: #00d4ff;
+    }
+`;
+document.head.appendChild(style);
+
+data.forEach(section => {
+    const div = document.createElement('div');
+    div.className = 'section';
+    let html = `<div class="section-title">${section.title}</div>
+    <table>
+        <tr>
+            <th style="width:40%">字段名</th>
+            <th class="c1">v3.40+</th>
+            <th class="c2">v3.15-3.40</th>
+            <th class="c3">v3.14-3.15</th>
+            <th class="c4">&lt;v3.14</th>
+        </tr>`;
+    section.fields.forEach(f => {
+        const hl = f[5] ? ' class="highlight"' : '';
+        html += `<tr${hl}>
+            <td>${f[0]}</td>
+            <td>${f[1] ? '<span class="check">✓</span>' : '<span class="cross">✗</span>'}</td>
+            <td>${f[2] ? '<span class="check">✓</span>' : '<span class="cross">✗</span>'}</td>
+            <td>${f[3] ? '<span class="check">✓</span>' : '<span class="cross">✗</span>'}</td>
+            <td>${f[4] ? '<span class="check">✓</span>' : '<span class="cross">✗</span>'}</td>
+        </tr>`;
+    });
+    html += '</table>';
+    div.innerHTML = html;
+    container.appendChild(div);
+});
+
+const footer = document.createElement('div');
+footer.className = 'footer';
+footer.innerHTML = `
+    <h3>关键版本差异说明</h3>
+    <ul>
+        <li><code>v3.40</code> 引入全部 LOL 专属扩展字段 (伤害/视野/经济详细统计)</li>
+        <li><code>v3.15</code> 引入 <code>games.duration</code>, <code>netWorth</code>, <code>inventory</code>, <code>objectives</code></li>
+        <li><code>v3.14</code> 引入 <code>seriesState.duration</code></li>
+        <li>黄色高亮行表示该字段在不同版本间有差异</li>
+    </ul>
+`;
+container.appendChild(footer);
+</script>
+</body>
+</html>

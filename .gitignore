@@ -48,3 +48,7 @@ scripts/grid-data-fetcher/data/*.log
 # large data files
 data/lol/states.json
 data/lol/backup/
+
+# Large JSON files (exceeds GitHub 100MB limit)
+data/grid_v2/_valid_games.json
+data/lol/threat-signals.json

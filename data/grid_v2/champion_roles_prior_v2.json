@@ -1,0 +1,2707 @@
+{
+  "meta": {
+    "generatedAt": "2026-01-31T18:39:16.841Z",
+    "totalChampions": 169,
+    "championsWithAddedRoles": 85,
+    "totalRolesAdded": 118,
+    "additionThreshold": 0.2,
+    "sources": {
+      "base": "app/lib/positions.ts → CHAMPION_POSITIONS",
+      "canon": "data/grid_v2/champion_roles_canon.json"
+    }
+  },
+  "champions": {
+    "Aatrox": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Ahri": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.9,
+          "samples": 9
+        }
+      }
+    },
+    "Akali": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [
+        "bot"
+      ],
+      "evidence": {
+        "bot": {
+          "share": 0.2778,
+          "samples": 10
+        }
+      }
+    },
+    "Akshan": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Alistar": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3226,
+          "samples": 10
+        },
+        "jungle": {
+          "share": 0.6774,
+          "samples": 21
+        }
+      }
+    },
+    "Ambessa": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.2,
+          "samples": 1
+        },
+        "mid": {
+          "share": 0.8,
+          "samples": 4
+        }
+      }
+    },
+    "Amumu": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "jungle",
+        "support"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.6667,
+          "samples": 2
+        }
+      }
+    },
+    "Anivia": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Annie": {
+      "roles": [
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support"
+      ],
+      "addedRoles": [
+        "jungle",
+        "bot"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.3103,
+          "samples": 18
+        },
+        "bot": {
+          "share": 0.3966,
+          "samples": 23
+        }
+      }
+    },
+    "Aphelios": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Ashe": {
+      "roles": [
+        "jungle",
+        "mid",
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "bot",
+        "support"
+      ],
+      "addedRoles": [
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.2182,
+          "samples": 24
+        },
+        "mid": {
+          "share": 0.3818,
+          "samples": 42
+        }
+      }
+    },
+    "AurelionSol": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Aurora": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Azir": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.7692,
+          "samples": 10
+        }
+      }
+    },
+    "Bard": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.25,
+          "samples": 1
+        },
+        "jungle": {
+          "share": 0.5,
+          "samples": 2
+        },
+        "mid": {
+          "share": 0.25,
+          "samples": 1
+        }
+      }
+    },
+    "Belveth": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Blitzcrank": {
+      "roles": [
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.8333,
+          "samples": 5
+        }
+      }
+    },
+    "Brand": {
+      "roles": [
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.3893,
+          "samples": 51
+        }
+      }
+    },
+    "Braum": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3333,
+          "samples": 4
+        },
+        "jungle": {
+          "share": 0.6667,
+          "samples": 8
+        }
+      }
+    },
+    "Briar": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Caitlyn": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Camille": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 4
+        }
+      }
+    },
+    "Cassiopeia": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [
+        "jungle",
+        "bot"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.2,
+          "samples": 2
+        },
+        "bot": {
+          "share": 0.6,
+          "samples": 6
+        }
+      }
+    },
+    "Chogath": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "top",
+        "mid"
+      ],
+      "addedRoles": [
+        "bot"
+      ],
+      "evidence": {
+        "bot": {
+          "share": 0.25,
+          "samples": 1
+        }
+      }
+    },
+    "Corki": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "bot"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.2182,
+          "samples": 12
+        },
+        "bot": {
+          "share": 0.7818,
+          "samples": 43
+        }
+      }
+    },
+    "Darius": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Diana": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "jungle",
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.2,
+          "samples": 1
+        }
+      }
+    },
+    "Draven": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "DrMundo": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "top",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Ekko": {
+      "roles": [
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "jungle",
+        "mid"
+      ],
+      "addedRoles": [
+        "bot"
+      ],
+      "evidence": {
+        "bot": {
+          "share": 0.5,
+          "samples": 1
+        }
+      }
+    },
+    "Elise": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top",
+        "mid",
+        "support"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.2857,
+          "samples": 6
+        },
+        "mid": {
+          "share": 0.2381,
+          "samples": 5
+        },
+        "support": {
+          "share": 0.4286,
+          "samples": 9
+        }
+      }
+    },
+    "Evelynn": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Ezreal": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top",
+        "mid"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.4375,
+          "samples": 7
+        },
+        "mid": {
+          "share": 0.4375,
+          "samples": 7
+        }
+      }
+    },
+    "Fiddlesticks": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top",
+        "support"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.5,
+          "samples": 1
+        },
+        "support": {
+          "share": 0.5,
+          "samples": 1
+        }
+      }
+    },
+    "Fiora": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Fizz": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Galio": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3875,
+          "samples": 31
+        },
+        "jungle": {
+          "share": 0.2125,
+          "samples": 17
+        }
+      }
+    },
+    "Gangplank": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Garen": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Gnar": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Gragas": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Graves": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 3
+        }
+      }
+    },
+    "Gwen": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.5,
+          "samples": 1
+        },
+        "mid": {
+          "share": 0.5,
+          "samples": 1
+        }
+      }
+    },
+    "Hecarim": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Heimerdinger": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support",
+        "top"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Hwei": {
+      "roles": [
+        "mid",
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support"
+      ],
+      "addedRoles": [
+        "bot"
+      ],
+      "evidence": {
+        "bot": {
+          "share": 0.2593,
+          "samples": 7
+        }
+      }
+    },
+    "Illaoi": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Irelia": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "top",
+        "mid"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.5,
+          "samples": 1
+        }
+      }
+    },
+    "Ivern": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "Janna": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "JarvanIV": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 6
+        }
+      }
+    },
+    "Jax": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "top",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Jayce": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "top",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Jhin": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top",
+        "mid"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3333,
+          "samples": 3
+        },
+        "mid": {
+          "share": 0.6667,
+          "samples": 6
+        }
+      }
+    },
+    "Jinx": {
+      "roles": [
+        "jungle",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "Kaisa": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 0.6667,
+          "samples": 4
+        }
+      }
+    },
+    "Kalista": {
+      "roles": [
+        "jungle",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Karma": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Karthus": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "jungle",
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "bot"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.375,
+          "samples": 3
+        },
+        "bot": {
+          "share": 0.25,
+          "samples": 2
+        }
+      }
+    },
+    "Kassadin": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Katarina": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Kayle": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Kayn": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Kennen": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Khazix": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Kindred": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "Kled": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "KogMaw": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "KSante": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Leblanc": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "LeeSin": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.8571,
+          "samples": 18
+        }
+      }
+    },
+    "Leona": {
+      "roles": [
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.8649,
+          "samples": 32
+        }
+      }
+    },
+    "Lillia": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 8
+        }
+      }
+    },
+    "Lissandra": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Lucian": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Lulu": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3,
+          "samples": 3
+        },
+        "jungle": {
+          "share": 0.7,
+          "samples": 7
+        }
+      }
+    },
+    "Lux": {
+      "roles": [
+        "top",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Malphite": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "baseRoles": [
+        "top",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Malzahar": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Maokai": {
+      "roles": [
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "MasterYi": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Milio": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.5714,
+          "samples": 4
+        },
+        "jungle": {
+          "share": 0.4286,
+          "samples": 3
+        }
+      }
+    },
+    "MissFortune": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.4286,
+          "samples": 6
+        },
+        "jungle": {
+          "share": 0.2857,
+          "samples": 4
+        },
+        "mid": {
+          "share": 0.2857,
+          "samples": 4
+        }
+      }
+    },
+    "Mordekaiser": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Morgana": {
+      "roles": [
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.3333,
+          "samples": 4
+        }
+      }
+    },
+    "Naafiri": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Nami": {
+      "roles": [
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.8462,
+          "samples": 11
+        }
+      }
+    },
+    "Nasus": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "Nautilus": {
+      "roles": [
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.8293,
+          "samples": 34
+        }
+      }
+    },
+    "Neeko": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Nidalee": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 16
+        }
+      }
+    },
+    "Nilah": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Nocturne": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 8
+        }
+      }
+    },
+    "Nunu": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Olaf": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Orianna": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "bot"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.6667,
+          "samples": 2
+        },
+        "bot": {
+          "share": 0.3333,
+          "samples": 1
+        }
+      }
+    },
+    "Ornn": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "mid",
+        "bot"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 0.3182,
+          "samples": 7
+        },
+        "bot": {
+          "share": 0.5455,
+          "samples": 12
+        }
+      }
+    },
+    "Pantheon": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid",
+        "top"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.7669,
+          "samples": 204
+        }
+      }
+    },
+    "Poppy": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Pyke": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Qiyana": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Quinn": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Rakan": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.2727,
+          "samples": 6
+        },
+        "jungle": {
+          "share": 0.7273,
+          "samples": 16
+        }
+      }
+    },
+    "Rammus": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "RekSai": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 3
+        }
+      }
+    },
+    "Rell": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.2222,
+          "samples": 6
+        },
+        "jungle": {
+          "share": 0.7778,
+          "samples": 21
+        }
+      }
+    },
+    "Renata": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.3889,
+          "samples": 7
+        },
+        "jungle": {
+          "share": 0.6111,
+          "samples": 11
+        }
+      }
+    },
+    "Renekton": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Rengar": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Riven": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Rumble": {
+      "roles": [
+        "top",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "top",
+        "mid"
+      ],
+      "addedRoles": [
+        "support"
+      ],
+      "evidence": {
+        "support": {
+          "share": 0.2727,
+          "samples": 12
+        }
+      }
+    },
+    "Ryze": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.375,
+          "samples": 3
+        },
+        "jungle": {
+          "share": 0.5,
+          "samples": 4
+        }
+      }
+    },
+    "Samira": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Sejuani": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.9545,
+          "samples": 21
+        }
+      }
+    },
+    "Senna": {
+      "roles": [
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Seraphine": {
+      "roles": [
+        "mid",
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid",
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Sett": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "baseRoles": [
+        "top",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Shaco": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Shen": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "baseRoles": [
+        "top",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Shyvana": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Singed": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Sion": {
+      "roles": [
+        "top",
+        "jungle",
+        "bot"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "jungle",
+        "bot"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 0.6667,
+          "samples": 2
+        },
+        "bot": {
+          "share": 0.3333,
+          "samples": 1
+        }
+      }
+    },
+    "Sivir": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Skarner": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 5
+        }
+      }
+    },
+    "Smolder": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Sona": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Soraka": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Swain": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Sylas": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.5,
+          "samples": 1
+        },
+        "jungle": {
+          "share": 0.5,
+          "samples": 1
+        }
+      }
+    },
+    "Syndra": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "TahmKench": {
+      "roles": [
+        "top",
+        "bot",
+        "support"
+      ],
+      "baseRoles": [
+        "top",
+        "support"
+      ],
+      "addedRoles": [
+        "bot"
+      ],
+      "evidence": {
+        "bot": {
+          "share": 0.3968,
+          "samples": 25
+        }
+      }
+    },
+    "Taliyah": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "jungle",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Talon": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Taric": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Teemo": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Thresh": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Tristana": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Trundle": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [
+        "mid",
+        "bot"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 0.2,
+          "samples": 2
+        },
+        "bot": {
+          "share": 0.2,
+          "samples": 2
+        }
+      }
+    },
+    "Tryndamere": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "TwistedFate": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Twitch": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Udyr": {
+      "roles": [
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Urgot": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Varus": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.25,
+          "samples": 1
+        },
+        "jungle": {
+          "share": 0.5,
+          "samples": 2
+        },
+        "mid": {
+          "share": 0.25,
+          "samples": 1
+        }
+      }
+    },
+    "Vayne": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot",
+        "top"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 0.4,
+          "samples": 2
+        }
+      }
+    },
+    "Veigar": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "mid",
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Velkoz": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Vex": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Vi": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 18
+        }
+      }
+    },
+    "Viego": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 20
+        }
+      }
+    },
+    "Viktor": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top",
+        "bot"
+      ],
+      "evidence": {
+        "top": {
+          "share": 0.6667,
+          "samples": 2
+        },
+        "bot": {
+          "share": 0.3333,
+          "samples": 1
+        }
+      }
+    },
+    "Vladimir": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Volibear": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "top",
+        "jungle"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Warwick": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Wukong": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Xayah": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 2
+        }
+      }
+    },
+    "Xerath": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "XinZhao": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 26
+        }
+      }
+    },
+    "Yasuo": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "mid",
+        "top",
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Yone": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid",
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Yorick": {
+      "roles": [
+        "top"
+      ],
+      "baseRoles": [
+        "top"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Yuumi": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Zac": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "baseRoles": [
+        "jungle"
+      ],
+      "addedRoles": [
+        "mid"
+      ],
+      "evidence": {
+        "mid": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Zed": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [
+        "top"
+      ],
+      "evidence": {
+        "top": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Zeri": {
+      "roles": [
+        "bot"
+      ],
+      "baseRoles": [
+        "bot"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Ziggs": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "baseRoles": [
+        "bot",
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Zilean": {
+      "roles": [
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "baseRoles": [
+        "support",
+        "mid"
+      ],
+      "addedRoles": [
+        "jungle"
+      ],
+      "evidence": {
+        "jungle": {
+          "share": 1,
+          "samples": 1
+        }
+      }
+    },
+    "Zoe": {
+      "roles": [
+        "mid"
+      ],
+      "baseRoles": [
+        "mid"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    },
+    "Zyra": {
+      "roles": [
+        "support"
+      ],
+      "baseRoles": [
+        "support"
+      ],
+      "addedRoles": [],
+      "evidence": {}
+    }
+  }
+}

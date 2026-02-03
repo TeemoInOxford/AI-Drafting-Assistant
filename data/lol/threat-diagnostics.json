@@ -1,0 +1,1832 @@
+{
+  "generatedAt": "2026-01-22T22:31:28.862Z",
+  "scoringVersion": "log-sigmoid-v1",
+  "scoringParams": {
+    "k": 1.9009484773288297,
+    "raw_p90": 1.1558569858893337,
+    "smoothingFactor": 0.005,
+    "credibleLevel": 0.8,
+    "priorStrengthM": 11
+  },
+  "scoreDistribution": {
+    "team": {
+      "bins": {
+        "0": {
+          "count": 44148,
+          "percentage": 95.62467509963611
+        },
+        "100": {
+          "count": 0,
+          "percentage": 0
+        },
+        "(0-10]": {
+          "count": 1546,
+          "percentage": 3.3486397504765204
+        },
+        "(10-20]": {
+          "count": 52,
+          "percentage": 0.11263212614798128
+        },
+        "(20-30]": {
+          "count": 41,
+          "percentage": 0.0888060994628314
+        },
+        "(30-40]": {
+          "count": 51,
+          "percentage": 0.11046612372205857
+        },
+        "(40-50]": {
+          "count": 38,
+          "percentage": 0.08230809218506326
+        },
+        "(50-60]": {
+          "count": 148,
+          "percentage": 0.3205683590365621
+        },
+        "(60-70]": {
+          "count": 68,
+          "percentage": 0.14728816496274477
+        },
+        "(70-80]": {
+          "count": 40,
+          "percentage": 0.08664009703690868
+        },
+        "(80-90]": {
+          "count": 24,
+          "percentage": 0.051984058222145205
+        },
+        "(90-100)": {
+          "count": 12,
+          "percentage": 0.025992029111072602
+        }
+      },
+      "total": 46168
+    },
+    "player": {
+      "bins": {
+        "0": {
+          "count": 229559,
+          "percentage": 95.2202984876515
+        },
+        "100": {
+          "count": 0,
+          "percentage": 0
+        },
+        "(0-10]": {
+          "count": 5986,
+          "percentage": 2.4829725985349382
+        },
+        "(10-20]": {
+          "count": 2244,
+          "percentage": 0.9308036269816908
+        },
+        "(20-30]": {
+          "count": 472,
+          "percentage": 0.1957840071013182
+        },
+        "(30-40]": {
+          "count": 393,
+          "percentage": 0.1630150737093603
+        },
+        "(40-50]": {
+          "count": 304,
+          "percentage": 0.1260981740652558
+        },
+        "(50-60]": {
+          "count": 1022,
+          "percentage": 0.42392215096937974
+        },
+        "(60-70]": {
+          "count": 514,
+          "percentage": 0.2132054653603338
+        },
+        "(70-80]": {
+          "count": 322,
+          "percentage": 0.13356451331911964
+        },
+        "(80-90]": {
+          "count": 169,
+          "percentage": 0.07010062966127709
+        },
+        "(90-100)": {
+          "count": 97,
+          "percentage": 0.04023527264582175
+        }
+      },
+      "total": 241082
+    }
+  },
+  "saturation100": {
+    "team": {
+      "percentage": 0,
+      "count": 0,
+      "total": 46168,
+      "top20Champions": []
+    },
+    "player": {
+      "percentage": 0,
+      "count": 0,
+      "total": 241082,
+      "top20Champions": []
+    }
+  },
+  "lowExpAnalysis": {
+    "buckets": [
+      {
+        "range": "<0.5%",
+        "entryCount": 325,
+        "score100Percentage": 0,
+        "medianScore": 0,
+        "p90Score": 59.39698771578959
+      },
+      {
+        "range": "0.5-1%",
+        "entryCount": 464,
+        "score100Percentage": 0,
+        "medianScore": 0,
+        "p90Score": 4.979003013635024
+      },
+      {
+        "range": "1-2%",
+        "entryCount": 1100,
+        "score100Percentage": 0,
+        "medianScore": 0,
+        "p90Score": 1.398119957775145
+      },
+      {
+        "range": "2-5%",
+        "entryCount": 3776,
+        "score100Percentage": 0,
+        "medianScore": 0,
+        "p90Score": 0
+      },
+      {
+        "range": ">=5%",
+        "entryCount": 40503,
+        "score100Percentage": 0,
+        "medianScore": 0,
+        "p90Score": 0
+      }
+    ]
+  },
+  "perTeamSanityCheck": {
+    "samples": [
+      {
+        "teamId": "48179",
+        "gamesPlayed": 247,
+        "score100Count": 0,
+        "totalChampions": 100,
+        "top10": [
+          {
+            "championName": "LeBlanc",
+            "score": 80.3788244611081,
+            "observed": 0.20242914979757085,
+            "obsLower": 0.16588629310717806,
+            "expected": 0.07638483965014577,
+            "ratio": 2.548744344637894,
+            "rawObs": 0.9356008240273203,
+            "rawLower": 0.7418093721555094,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Lee Sin",
+            "score": 80.1403403644396,
+            "observed": 0.13360323886639677,
+            "obsLower": 0.10380465356865898,
+            "expected": 0.04723032069970846,
+            "ratio": 2.653693046674524,
+            "rawObs": 0.9759522723540719,
+            "rawLower": 0.7338909227048047,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Rek'Sai",
+            "score": 79.94618460090099,
+            "observed": 0.04048582995951417,
+            "obsLower": 0.024660422175657004,
+            "expected": 0.009329446064139942,
+            "ratio": 3.174290880185831,
+            "rawObs": 1.1550842625761253,
+            "rawLower": 0.7274969850318981,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Gangplank",
+            "score": 73.66713278743823,
+            "observed": 0.020242914979757085,
+            "obsLower": 0.009600649500498548,
+            "expected": 0.003498542274052478,
+            "ratio": 2.9702640953882264,
+            "rawObs": 1.0886508698675068,
+            "rawLower": 0.5411713624416673,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Kassadin",
+            "score": 58.86462632585654,
+            "observed": 0.008097165991902834,
+            "obsLower": 0.0020934137573931366,
+            "expected": 0.0008746355685131195,
+            "ratio": 2.229443144031103,
+            "rawObs": 0.8017518430921804,
+            "rawLower": 0.18852268650457174,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Zed",
+            "score": 57.27733955423351,
+            "observed": 0.016194331983805668,
+            "obsLower": 0.00695668239495717,
+            "expected": 0.0052478134110787176,
+            "ratio": 2.0681809019759156,
+            "rawObs": 0.7266694295978345,
+            "rawLower": 0.15422596123747012,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Zilean",
+            "score": 51.16425155081491,
+            "observed": 0.004048582995951417,
+            "obsLower": 0.00042280417983420193,
+            "expected": 0.0002915451895043732,
+            "ratio": 1.710007695653629,
+            "rawObs": 0.536497870886681,
+            "rawLower": 0.024502758478717485,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Ashe",
+            "score": 0,
+            "observed": 0.10121457489878542,
+            "obsLower": 0.08412991877412423,
+            "expected": 0.26384839650145775,
+            "ratio": 0.39507237640604453,
+            "rawObs": -0.9286862994581315,
+            "rawLower": -1.1040525721279049,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Rumble",
+            "score": 0,
+            "observed": 0.1902834008097166,
+            "obsLower": 0.1682469836086966,
+            "expected": 0.40816326530612246,
+            "ratio": 0.47265431660538965,
+            "rawObs": -0.7493909893789581,
+            "rawLower": -0.8691246030652028,
+            "gamesPlayed": 247
+          },
+          {
+            "championName": "Taliyah",
+            "score": 0,
+            "observed": 0.12955465587044535,
+            "obsLower": 0.10634229733841494,
+            "expected": 0.20349854227405248,
+            "ratio": 0.6453505832841048,
+            "rawObs": -0.4379615698753555,
+            "rawLower": -0.6273228336399267,
+            "gamesPlayed": 247
+          }
+        ]
+      },
+      {
+        "teamId": "47494",
+        "gamesPlayed": 238,
+        "score100Count": 0,
+        "totalChampions": 91,
+        "top10": [
+          {
+            "championName": "Bard",
+            "score": 79.9107280040172,
+            "observed": 0.1134453781512605,
+            "obsLower": 0.08550534231471829,
+            "expected": 0.03877551020408163,
+            "ratio": 2.705745235157,
+            "rawObs": 0.9953773771851928,
+            "rawLower": 0.7263343468139825,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Vayne",
+            "score": 79.40658311084609,
+            "observed": 0.02100840336134454,
+            "obsLower": 0.009913460264215246,
+            "expected": 0.0023323615160349854,
+            "ratio": 3.5470705180680624,
+            "rawObs": 1.2661220566392675,
+            "rawLower": 0.7099665432245714,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Caitlyn",
+            "score": 75.54802801386963,
+            "observed": 0.10084033613445378,
+            "obsLower": 0.07476866961224005,
+            "expected": 0.03906705539358601,
+            "ratio": 2.4018018719231,
+            "rawObs": 0.8762192356275629,
+            "rawLower": 0.5934183559406818,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Tahm Kench",
+            "score": 67.37319410446536,
+            "observed": 0.025210084033613446,
+            "obsLower": 0.012995512661291286,
+            "expected": 0.007288629737609329,
+            "ratio": 2.4583769450840833,
+            "rawObs": 0.8995013537736017,
+            "rawLower": 0.3814480069516587,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Nasus",
+            "score": 62.25851602956334,
+            "observed": 0.03361344537815126,
+            "obsLower": 0.019336374098202214,
+            "expected": 0.01370262390670554,
+            "ratio": 2.064600430975196,
+            "rawObs": 0.7249367117944612,
+            "rawLower": 0.2633082777290839,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Orianna",
+            "score": 57.18269542073313,
+            "observed": 0.18067226890756302,
+            "obsLower": 0.1478126277506817,
+            "expected": 0.1262390670553936,
+            "ratio": 1.4147637062155751,
+            "rawObs": 0.34696252507667363,
+            "rawLower": 0.15219191628848558,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Ashe",
+            "score": 56.39254687136579,
+            "observed": 0.3445378151260504,
+            "obsLower": 0.3027847289631609,
+            "expected": 0.26384839650145775,
+            "ratio": 1.3001298117251563,
+            "rawObs": 0.26246411465549224,
+            "rawLower": 0.13525296771802126,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Renata Glasc",
+            "score": 0,
+            "observed": 0.1092436974789916,
+            "obsLower": 0.08442274740082212,
+            "expected": 0.10233236151603499,
+            "ratio": 1.0643919118645693,
+            "rawObs": 0.06240366131816441,
+            "rawLower": -0.18255510762374602,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Nocturne",
+            "score": 0,
+            "observed": 0.1134453781512605,
+            "obsLower": 0.0877933228330221,
+            "expected": 0.09650145772594752,
+            "ratio": 1.1669327791435402,
+            "rawObs": 0.15437875022597633,
+            "rawLower": -0.08969847523760345,
+            "gamesPlayed": 238
+          },
+          {
+            "championName": "Lee Sin",
+            "score": 0,
+            "observed": 0.046218487394957986,
+            "obsLower": 0.030188614648068324,
+            "expected": 0.04723032069970846,
+            "ratio": 0.9806274728702533,
+            "rawObs": -0.019562633769271764,
+            "rawLower": -0.3949405997875461,
+            "gamesPlayed": 238
+          }
+        ]
+      },
+      {
+        "teamId": "406",
+        "gamesPlayed": 232,
+        "score100Count": 0,
+        "totalChampions": 90,
+        "top10": [
+          {
+            "championName": "Maokai",
+            "score": 80.85628105425582,
+            "observed": 0.40948275862068967,
+            "obsLower": 0.3583918123622425,
+            "expected": 0.1653061224489796,
+            "ratio": 2.4337513687733723,
+            "rawObs": 0.8894338401174157,
+            "rawLower": 0.7578840870741881,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Anivia",
+            "score": 71.742007789278,
+            "observed": 0.01293103448275862,
+            "obsLower": 0.0045904503494966775,
+            "expected": 0.0008746355685131195,
+            "ratio": 3.0522803114571744,
+            "rawObs": 1.1158889543741555,
+            "rawLower": 0.49012382090080897,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Yone",
+            "score": 55.383223102542146,
+            "observed": 0.3448275862068966,
+            "obsLower": 0.3027597514737863,
+            "expected": 0.2696793002915452,
+            "ratio": 1.2735855444352335,
+            "rawObs": 0.24183618588279027,
+            "rawLower": 0.11371521452052535,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Rakan",
+            "score": 51.66066814672132,
+            "observed": 0.19827586206896552,
+            "obsLower": 0.1644206772907637,
+            "expected": 0.158600583090379,
+            "ratio": 1.2425130658407766,
+            "rawObs": 0.21713599470058106,
+            "rawLower": 0.03495684841353428,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Milio",
+            "score": 0,
+            "observed": 0.017241379310344827,
+            "obsLower": 0.0075500520470086485,
+            "expected": 0.010495626822157435,
+            "ratio": 1.4353326629253578,
+            "rawObs": 0.3613966431991902,
+            "rawLower": -0.210833030868911,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Vi",
+            "score": 0,
+            "observed": 0.30603448275862066,
+            "obsLower": 0.27287510223686695,
+            "expected": 0.4055393586005831,
+            "ratio": 0.7576240285921733,
+            "rawObs": -0.27756802088649984,
+            "rawLower": -0.39030006374845444,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Corki",
+            "score": 0,
+            "observed": 0.04741379310344827,
+            "obsLower": 0.03422910821973346,
+            "expected": 0.13527696793002916,
+            "ratio": 0.3736450386466332,
+            "rawObs": -0.9844490267707134,
+            "rawLower": -1.2741997827610587,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Sejuani",
+            "score": 0,
+            "observed": 0.15517241379310345,
+            "obsLower": 0.1265250437427312,
+            "expected": 0.1653061224489796,
+            "ratio": 0.9404970971674138,
+            "rawObs": -0.06134671672384407,
+            "rawLower": -0.25840025778737774,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "Azir",
+            "score": 0,
+            "observed": 0.09913793103448276,
+            "obsLower": 0.08280467131407931,
+            "expected": 0.282798833819242,
+            "ratio": 0.36184278321255725,
+            "rawObs": -1.0165454620099479,
+            "rawLower": -1.1871470391338086,
+            "gamesPlayed": 232
+          },
+          {
+            "championName": "K'Sante",
+            "score": 0,
+            "observed": 0.05172413793103448,
+            "obsLower": 0.03736908224527724,
+            "expected": 0.12769679300291545,
+            "ratio": 0.4274718073238455,
+            "rawObs": -0.8498669405604511,
+            "rawLower": -1.1416478698539432,
+            "gamesPlayed": 232
+          }
+        ]
+      },
+      {
+        "teamId": "47558",
+        "gamesPlayed": 224,
+        "score100Count": 0,
+        "totalChampions": 94,
+        "top10": [
+          {
+            "championName": "Nidalee",
+            "score": 73.58070814947884,
+            "observed": 0.20982142857142858,
+            "obsLower": 0.17147210138500668,
+            "expected": 0.09795918367346938,
+            "ratio": 2.0864717542120914,
+            "rawObs": 0.7354744835564927,
+            "rawLower": 0.5388301633952248,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Kha'Zix",
+            "score": 51.52672182569087,
+            "observed": 0.004464285714285714,
+            "obsLower": 0.00046435321564786136,
+            "expected": 0.0002915451895043732,
+            "ratio": 1.7885674931129476,
+            "rawObs": 0.581415016278007,
+            "rawLower": 0.032135464798378637,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Udyr",
+            "score": 0,
+            "observed": 0.026785714285714284,
+            "obsLower": 0.01440590710262768,
+            "expected": 0.025364431486880466,
+            "ratio": 1.0468074891982717,
+            "rawObs": 0.04574504602184913,
+            "rawLower": -0.4476943969813,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Rumble",
+            "score": 0,
+            "observed": 0.23660714285714285,
+            "obsLower": 0.20922544971108437,
+            "expected": 0.40816326530612246,
+            "ratio": 0.5847740182761175,
+            "rawObs": -0.5365297999259504,
+            "rawLower": -0.6568138665561423,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Vi",
+            "score": 0,
+            "observed": 0.11160714285714286,
+            "obsLower": 0.09847863097093068,
+            "expected": 0.4055393586005831,
+            "ratio": 0.28403401626247204,
+            "rawObs": -1.2586612724213675,
+            "rawLower": -1.3781066766168861,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Sejuani",
+            "score": 0,
+            "observed": 0.08482142857142858,
+            "obsLower": 0.06573044290416874,
+            "expected": 0.1653061224489796,
+            "ratio": 0.5274116237267825,
+            "rawObs": -0.6397739656266732,
+            "rawLower": -0.8787214650572741,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Poppy",
+            "score": 0,
+            "observed": 0.125,
+            "obsLower": 0.10467053516185842,
+            "expected": 0.2790087463556851,
+            "ratio": 0.45773238207668226,
+            "rawObs": -0.7814705842584652,
+            "rawLower": -0.9515242982067911,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Corki",
+            "score": 0,
+            "observed": 0.13839285714285715,
+            "obsLower": 0.11015517427586019,
+            "expected": 0.13527696793002916,
+            "ratio": 1.0222124077730437,
+            "rawObs": 0.02196930558109676,
+            "rawLower": -0.1973382502752758,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Lucian",
+            "score": 0,
+            "observed": 0.11607142857142858,
+            "obsLower": 0.09219478454906493,
+            "expected": 0.16559766763848396,
+            "ratio": 0.7096898231222764,
+            "rawObs": -0.34292727324363464,
+            "rawLower": -0.5625909103187405,
+            "gamesPlayed": 224
+          },
+          {
+            "championName": "Brand",
+            "score": 0,
+            "observed": 0.008928571428571428,
+            "obsLower": 0.003282289340859279,
+            "expected": 0.03935860058309038,
+            "ratio": 0.3139993427538613,
+            "rawObs": -1.1583643862166433,
+            "rawLower": -1.6781871945424593,
+            "gamesPlayed": 224
+          }
+        ]
+      },
+      {
+        "teamId": "407",
+        "gamesPlayed": 219,
+        "score100Count": 0,
+        "totalChampions": 84,
+        "top10": [
+          {
+            "championName": "Ivern",
+            "score": 56.529888864759705,
+            "observed": 0.1141552511415525,
+            "obsLower": 0.08643724134890363,
+            "expected": 0.07463556851311953,
+            "ratio": 1.4962566773403811,
+            "rawObs": 0.40296644059713466,
+            "rawLower": 0.13819201639233966,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Syndra",
+            "score": 55.789079802726725,
+            "observed": 0.0136986301369863,
+            "obsLower": 0.004934245807817206,
+            "expected": 0.0037900874635568515,
+            "ratio": 2.1272405097798677,
+            "rawObs": 0.754825604475323,
+            "rawLower": 0.1223632984764155,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Taliyah",
+            "score": 52.08514065959454,
+            "observed": 0.2511415525114155,
+            "obsLower": 0.21285578492097557,
+            "expected": 0.20349854227405248,
+            "ratio": 1.2285052438148014,
+            "rawObs": 0.20579818143950368,
+            "rawLower": 0.04390125709409171,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Mel",
+            "score": 51.13849692954287,
+            "observed": 0.0182648401826484,
+            "obsLower": 0.007885242899646983,
+            "expected": 0.007580174927113703,
+            "ratio": 1.8493256506717037,
+            "rawObs": 0.6148210594887359,
+            "rawLower": 0.023960538925228914,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Caitlyn",
+            "score": 50.569274422388354,
+            "observed": 0.0593607305936073,
+            "obsLower": 0.0395981207548175,
+            "expected": 0.03906705539358601,
+            "ratio": 1.4605180677212906,
+            "rawObs": 0.37879121368409363,
+            "rawLower": 0.011979262548464351,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Poppy",
+            "score": 0,
+            "observed": 0.1141552511415525,
+            "obsLower": 0.09520179990795441,
+            "expected": 0.2790087463556851,
+            "ratio": 0.41954782263052415,
+            "rawObs": -0.8685777604530349,
+            "rawLower": -1.041818883071381,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Ashe",
+            "score": 0,
+            "observed": 0.2100456621004566,
+            "obsLower": 0.17865036154398695,
+            "expected": 0.26384839650145775,
+            "ratio": 0.7998770492919439,
+            "rawObs": -0.2232972515105499,
+            "rawLower": -0.3811138980295261,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Vi",
+            "score": 0,
+            "observed": 0.1598173515981735,
+            "obsLower": 0.14041133248247206,
+            "expected": 0.4055393586005831,
+            "ratio": 0.40146540921189866,
+            "rawObs": -0.9126339031999345,
+            "rawLower": -1.0379053018499313,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Bard",
+            "score": 0,
+            "observed": 0.0045662100456621,
+            "obsLower": 0.0011392217129468918,
+            "expected": 0.03877551020408163,
+            "ratio": 0.21852880756990348,
+            "rawObs": -1.5208374307117534,
+            "rawLower": -1.9643765559758084,
+            "gamesPlayed": 219
+          },
+          {
+            "championName": "Nocturne",
+            "score": 0,
+            "observed": 0.0273972602739726,
+            "obsLower": 0.01729072054149583,
+            "expected": 0.09650145772594752,
+            "ratio": 0.3191802462723711,
+            "rawObs": -1.141999300433065,
+            "rawLower": -1.5159026875616939,
+            "gamesPlayed": 219
+          }
+        ]
+      },
+      {
+        "teamId": "375",
+        "gamesPlayed": 206,
+        "score100Count": 0,
+        "totalChampions": 85,
+        "top10": [
+          {
+            "championName": "Qiyana",
+            "score": 72.31094515931231,
+            "observed": 0.038834951456310676,
+            "obsLower": 0.022124707262264565,
+            "expected": 0.011370262390670554,
+            "ratio": 2.67771831692156,
+            "rawObs": 0.9849650576148462,
+            "rawLower": 0.5049785996212057,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Mordekaiser",
+            "score": 67.93909612925462,
+            "observed": 0.02912621359223301,
+            "obsLower": 0.014973155193729326,
+            "expected": 0.008454810495626823,
+            "ratio": 2.536357803279723,
+            "rawObs": 0.9307291162441168,
+            "rawLower": 0.39505243185803873,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Naafiri",
+            "score": 67.5635283384157,
+            "observed": 0.1553398058252427,
+            "obsLower": 0.12115854898001999,
+            "expected": 0.08075801749271137,
+            "ratio": 1.869677151047365,
+            "rawObs": 0.6257657694626377,
+            "rawLower": 0.38600986102942325,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Senna",
+            "score": 0,
+            "observed": 0.05825242718446602,
+            "obsLower": 0.04378950517275371,
+            "expected": 0.17201166180758018,
+            "ratio": 0.3573348023432734,
+            "rawObs": -1.0290821149926697,
+            "rawLower": -1.2887003845265266,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Maokai",
+            "score": 0,
+            "observed": 0.038834951456310676,
+            "obsLower": 0.02831675499328412,
+            "expected": 0.1653061224489796,
+            "ratio": 0.25738916972549103,
+            "rawObs": -1.3571660603638591,
+            "rawLower": -1.6315371145864384,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Varus",
+            "score": 0,
+            "observed": 0.21359223300970873,
+            "obsLower": 0.18523925702902488,
+            "expected": 0.35364431486880465,
+            "ratio": 0.6094958819845555,
+            "rawObs": -0.49512308646664516,
+            "rawLower": -0.6340486034782012,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Rumble",
+            "score": 0,
+            "observed": 0.2621359223300971,
+            "obsLower": 0.23145085317082703,
+            "expected": 0.40816326530612246,
+            "ratio": 0.6465626176426158,
+            "rawObs": -0.4360852290914115,
+            "rawLower": -0.5581024530217755,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Poppy",
+            "score": 0,
+            "observed": 0.12135922330097088,
+            "obsLower": 0.10101091387332417,
+            "expected": 0.2790087463556851,
+            "ratio": 0.44491314060702164,
+            "rawObs": -0.8098762055150176,
+            "rawLower": -0.9854629848330116,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Vi",
+            "score": 0,
+            "observed": 0.25728155339805825,
+            "obsLower": 0.22693721114774235,
+            "expected": 0.4055393586005831,
+            "ratio": 0.6388706658774561,
+            "rawObs": -0.4480532459081646,
+            "rawLower": -0.5710051105249921,
+            "gamesPlayed": 206
+          },
+          {
+            "championName": "Nautilus",
+            "score": 0,
+            "observed": 0.07766990291262135,
+            "obsLower": 0.05985355834127404,
+            "expected": 0.17959183673469387,
+            "ratio": 0.447852431477993,
+            "rawObs": -0.8032914948516161,
+            "rawLower": -1.0460153201258777,
+            "gamesPlayed": 206
+          }
+        ]
+      },
+      {
+        "teamId": "52822",
+        "gamesPlayed": 202,
+        "score100Count": 0,
+        "totalChampions": 84,
+        "top10": [
+          {
+            "championName": "Qiyana",
+            "score": 72.89172306351847,
+            "observed": 0.039603960396039604,
+            "obsLower": 0.022544546256540343,
+            "expected": 0.011370262390670554,
+            "ratio": 2.724694285991377,
+            "rawObs": 1.002356233194575,
+            "rawLower": 0.5203381379757306,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Lucian",
+            "score": 53.76614708761157,
+            "observed": 0.21782178217821782,
+            "obsLower": 0.17969505142536946,
+            "expected": 0.16559766763848396,
+            "ratio": 1.3061244345403522,
+            "rawObs": 0.2670643054428469,
+            "rawLower": 0.07939813090398885,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Camille",
+            "score": 0,
+            "observed": 0.024752475247524754,
+            "obsLower": 0.012707104004221037,
+            "expected": 0.03206997084548105,
+            "ratio": 0.8026031466693663,
+            "rawObs": -0.21989490056223138,
+            "rawLower": -0.7388413154616598,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Jax",
+            "score": 0,
+            "observed": 0.0297029702970297,
+            "obsLower": 0.019583914370741695,
+            "expected": 0.11924198250728862,
+            "ratio": 0.2793175832894799,
+            "rawObs": -1.2754058531630272,
+            "rawLower": -1.6201387940979495,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Tristana",
+            "score": 0,
+            "observed": 0.08415841584158416,
+            "obsLower": 0.06298813826288097,
+            "expected": 0.13323615160349855,
+            "ratio": 0.6449717733557602,
+            "rawObs": -0.4385487253830908,
+            "rawLower": -0.7096302135023125,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "LeBlanc",
+            "score": 0,
+            "observed": 0.039603960396039604,
+            "obsLower": 0.025187498569721356,
+            "expected": 0.07638483965014577,
+            "ratio": 0.548062275330166,
+            "rawObs": -0.601366357377342,
+            "rawLower": -0.9917611265455615,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Corki",
+            "score": 0,
+            "observed": 0.04950495049504951,
+            "obsLower": 0.03523189065163024,
+            "expected": 0.13527696793002916,
+            "ratio": 0.3885523853227056,
+            "rawObs": -0.9453272783090405,
+            "rawLower": -1.2489588297037535,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Senna",
+            "score": 0,
+            "observed": 0.04950495049504951,
+            "obsLower": 0.03679458316764794,
+            "expected": 0.17201166180758018,
+            "ratio": 0.3079172860051384,
+            "rawObs": -1.1779240840064586,
+            "rawLower": -1.4434488744794056,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Twisted Fate",
+            "score": 0,
+            "observed": 0.039603960396039604,
+            "obsLower": 0.02572492530453019,
+            "expected": 0.08950437317784257,
+            "ratio": 0.47197773918993,
+            "rawObs": -0.7508234572419774,
+            "rawLower": -1.1235718860914843,
+            "gamesPlayed": 202
+          },
+          {
+            "championName": "Zac",
+            "score": 0,
+            "observed": 0.0049504950495049506,
+            "obsLower": 0.000605671462835744,
+            "expected": 0.006705539358600583,
+            "ratio": 0.8500671985006719,
+            "rawObs": -0.16243987556300554,
+            "rawLower": -0.7362833327497998,
+            "gamesPlayed": 202
+          }
+        ]
+      },
+      {
+        "teamId": "52747",
+        "gamesPlayed": 201,
+        "score100Count": 0,
+        "totalChampions": 90,
+        "top10": [
+          {
+            "championName": "Shen",
+            "score": 96.12441681761906,
+            "observed": 0.1044776119402985,
+            "obsLower": 0.07416919400566258,
+            "expected": 0.009620991253644314,
+            "ratio": 7.487701075876847,
+            "rawObs": 2.01326181795602,
+            "rawLower": 1.689129005348975,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Elise",
+            "score": 92.34506020304006,
+            "observed": 0.13930348258706468,
+            "obsLower": 0.10429077316075563,
+            "expected": 0.024489795918367346,
+            "ratio": 4.893336087727453,
+            "rawObs": 1.5878742974051832,
+            "rawLower": 1.3099676716238065,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Nilah",
+            "score": 79.40363592049536,
+            "observed": 0.024875621890547265,
+            "obsLower": 0.011690819403156638,
+            "expected": 0.003206997084548105,
+            "ratio": 3.6402622765391515,
+            "rawObs": 1.2920557330471574,
+            "rawLower": 0.7098717385165108,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Udyr",
+            "score": 57.69301114428729,
+            "observed": 0.04975124378109453,
+            "obsLower": 0.03074623880092986,
+            "expected": 0.025364431486880466,
+            "ratio": 1.8031374572170353,
+            "rawObs": 0.5895281793723538,
+            "rawLower": 0.1631731487104974,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Sejuani",
+            "score": 52.92598902556276,
+            "observed": 0.21393034825870647,
+            "obsLower": 0.17613398371031508,
+            "expected": 0.1653061224489796,
+            "ratio": 1.2855107327353643,
+            "rawObs": 0.25115609676352735,
+            "rawLower": 0.06163946093036787,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Smolder",
+            "score": 50.92875722959735,
+            "observed": 0.07960199004975124,
+            "obsLower": 0.05569370783632621,
+            "expected": 0.05451895043731778,
+            "ratio": 1.4214294678944246,
+            "rawObs": 0.3516630327944839,
+            "rawLower": 0.019545276077069643,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "K'Sante",
+            "score": 0,
+            "observed": 0.11442786069651742,
+            "obsLower": 0.08794304978800938,
+            "expected": 0.12769679300291545,
+            "ratio": 0.900005629328913,
+            "rawObs": -0.10535426086748417,
+            "rawLower": -0.35607983606484483,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Kalista",
+            "score": 0,
+            "observed": 0.13930348258706468,
+            "obsLower": 0.12286963939550333,
+            "expected": 0.41895043731778425,
+            "ratio": 0.34037819019608145,
+            "rawObs": -1.0776979554399024,
+            "rawLower": -1.1986052525486717,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "LeBlanc",
+            "score": 0,
+            "observed": 0.009950248756218905,
+            "obsLower": 0.004772747663082555,
+            "expected": 0.07638483965014577,
+            "ratio": 0.18369820252133565,
+            "rawObs": -1.6944610716682886,
+            "rawLower": -2.119591349356391,
+            "gamesPlayed": 201
+          },
+          {
+            "championName": "Skarner",
+            "score": 0,
+            "observed": 0.1044776119402985,
+            "obsLower": 0.08302624177304097,
+            "expected": 0.20291545189504373,
+            "ratio": 0.5265487049782288,
+            "rawObs": -0.6414114446054667,
+            "rawLower": -0.8594965438003708,
+            "gamesPlayed": 201
+          }
+        ]
+      },
+      {
+        "teamId": "4035",
+        "gamesPlayed": 196,
+        "score100Count": 0,
+        "totalChampions": 86,
+        "top10": [
+          {
+            "championName": "Yasuo",
+            "score": 68.21880201887845,
+            "observed": 0.03571428571428571,
+            "obsLower": 0.019466129801003262,
+            "expected": 0.011370262390670554,
+            "ratio": 2.487088156723063,
+            "rawObs": 0.9111126112067335,
+            "rawLower": 0.4018232839667249,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Irelia",
+            "score": 53.88125597122353,
+            "observed": 0.01020408163265306,
+            "obsLower": 0.0026412303850520402,
+            "expected": 0.0020408163265306124,
+            "ratio": 2.1594202898550723,
+            "rawObs": 0.7698398013481997,
+            "rawLower": 0.08183451645519531,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Akali",
+            "score": 0,
+            "observed": 0.04591836734693878,
+            "obsLower": 0.0291877165727783,
+            "expected": 0.06239067055393586,
+            "ratio": 0.7555699762059269,
+            "rawObs": -0.28028287918139344,
+            "rawLower": -0.6786401742415038,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "LeBlanc",
+            "score": 0,
+            "observed": 0.04591836734693878,
+            "obsLower": 0.0297858061385341,
+            "expected": 0.07638483965014577,
+            "ratio": 0.6256492924950744,
+            "rawObs": -0.46896530050352836,
+            "rawLower": -0.8499795765818683,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Kalista",
+            "score": 0,
+            "observed": 0.336734693877551,
+            "obsLower": 0.29925303367781453,
+            "expected": 0.41895043731778425,
+            "ratio": 0.8060722759000103,
+            "rawObs": -0.21558186816331304,
+            "rawLower": -0.33175685245956604,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "K'Sante",
+            "score": 0,
+            "observed": 0.0663265306122449,
+            "obsLower": 0.048022668779594824,
+            "expected": 0.12769679300291545,
+            "ratio": 0.5375151049104692,
+            "rawObs": -0.620798417216165,
+            "rawLower": -0.9173472388418396,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Gnar",
+            "score": 0,
+            "observed": 0.03571428571428571,
+            "obsLower": 0.021927105932263657,
+            "expected": 0.07142857142857142,
+            "ratio": 0.5327102803738317,
+            "rawObs": -0.6297775666273562,
+            "rawLower": -1.043223163102402,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Orianna",
+            "score": 0,
+            "observed": 0.05612244897959184,
+            "obsLower": 0.03986099999747239,
+            "expected": 0.1262390670553936,
+            "ratio": 0.46573364434077524,
+            "rawObs": -0.7641413869377143,
+            "rawLower": -1.0734517790155866,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Lucian",
+            "score": 0,
+            "observed": 0.08163265306122448,
+            "obsLower": 0.0621465320000425,
+            "expected": 0.16559766763848396,
+            "ratio": 0.5078185080748526,
+            "rawObs": -0.6776311628081055,
+            "rawLower": -0.9324306873763457,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Poppy",
+            "score": 0,
+            "observed": 0.12244897959183673,
+            "obsLower": 0.10163346954504959,
+            "expected": 0.2790087463556851,
+            "ratio": 0.44875019247549147,
+            "rawObs": -0.8012889102649962,
+            "rawLower": -0.9796075990434785,
+            "gamesPlayed": 196
+          }
+        ]
+      },
+      {
+        "teamId": "52796",
+        "gamesPlayed": 196,
+        "score100Count": 0,
+        "totalChampions": 89,
+        "top10": [
+          {
+            "championName": "Kindred",
+            "score": 92.199182226109,
+            "observed": 0.08673469387755102,
+            "obsLower": 0.059295308572473004,
+            "expected": 0.012536443148688046,
+            "ratio": 5.231088944305902,
+            "rawObs": 1.6546194675522545,
+            "rawLower": 1.2992054857910575,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Mordekaiser",
+            "score": 61.397922455953804,
+            "observed": 0.025510204081632654,
+            "obsLower": 0.012175125564681366,
+            "expected": 0.008454810495626823,
+            "ratio": 2.267605633802817,
+            "rawObs": 0.8187244879431477,
+            "rawLower": 0.24412544920915447,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Lissandra",
+            "score": 55.821807595651116,
+            "observed": 0.01020408163265306,
+            "obsLower": 0.002633114025229588,
+            "expected": 0.001749271137026239,
+            "ratio": 2.2526997840172784,
+            "rawObs": 0.8121294009145383,
+            "rawLower": 0.12306137180569839,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Nidalee",
+            "score": 53.57728498642524,
+            "observed": 0.1377551020408163,
+            "obsLower": 0.10602275203564204,
+            "expected": 0.09795918367346938,
+            "ratio": 1.3865213082259662,
+            "rawObs": 0.32679795431187214,
+            "rawLower": 0.07540251892516837,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Qiyana",
+            "score": 52.58483599563111,
+            "observed": 0.025510204081632654,
+            "obsLower": 0.012286146491533145,
+            "expected": 0.011370262390670554,
+            "ratio": 1.8637577916295636,
+            "rawObs": 0.6225947677075565,
+            "rawLower": 0.054438979864651696,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Twisted Fate",
+            "score": 0,
+            "observed": 0.05612244897959184,
+            "obsLower": 0.03824370171059854,
+            "expected": 0.08950437317784257,
+            "ratio": 0.6467684713867036,
+            "rawObs": -0.4357668980042332,
+            "rawLower": -0.7817945128581183,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Rakan",
+            "score": 0,
+            "observed": 0.1326530612244898,
+            "obsLower": 0.10457210839376785,
+            "expected": 0.158600583090379,
+            "ratio": 0.8413971308919185,
+            "rawObs": -0.17269151775318653,
+            "rawLower": -0.4008451316157426,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Kalista",
+            "score": 0,
+            "observed": 0.23469387755102042,
+            "obsLower": 0.20680396049283445,
+            "expected": 0.41895043731778425,
+            "ratio": 0.5653818381872572,
+            "rawObs": -0.5702539562986048,
+            "rawLower": -0.6939554230777747,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Vi",
+            "score": 0,
+            "observed": 0.2193877551020408,
+            "obsLower": 0.19247366243507713,
+            "expected": 0.4055393586005831,
+            "ratio": 0.546568192309058,
+            "rawObs": -0.6040961990784601,
+            "rawLower": -0.7318665832671581,
+            "gamesPlayed": 196
+          },
+          {
+            "championName": "Xin Zhao",
+            "score": 0,
+            "observed": 0.030612244897959183,
+            "obsLower": 0.018676150910323486,
+            "expected": 0.08279883381924198,
+            "ratio": 0.40561182135148593,
+            "rawObs": -0.9023586817859807,
+            "rawLower": -1.3105799675248568,
+            "gamesPlayed": 196
+          }
+        ]
+      }
+    ]
+  },
+  "smallSampleAnalysis": {
+    "team": {
+      "all": [
+        {
+          "range": "<20",
+          "entries": 36746,
+          "pctScoreGt0": 4.258966962390464,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.6951643487600001,
+          "p90RawLower": -0.18484838394286107,
+          "medianObsGap": 0.10510994259190434
+        },
+        {
+          "range": "20-50",
+          "entries": 1609,
+          "pctScoreGt0": 3.2939714108141707,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0508433407861784,
+          "p90RawLower": -0.32560983448522585,
+          "medianObsGap": 0.03199417490901871
+        },
+        {
+          "range": "50-100",
+          "entries": 2470,
+          "pctScoreGt0": 5.182186234817814,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.061389696902969,
+          "p90RawLower": -0.23592809664657283,
+          "medianObsGap": 0.021138201588941745
+        },
+        {
+          "range": "100-200",
+          "entries": 3907,
+          "pctScoreGt0": 5.37496800614282,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0119680558303585,
+          "p90RawLower": -0.21387982932144656,
+          "medianObsGap": 0.014505129503237284
+        },
+        {
+          "range": ">=200",
+          "entries": 1436,
+          "pctScoreGt0": 4.456824512534819,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.978081980930391,
+          "p90RawLower": -0.22773079336972485,
+          "medianObsGap": 0.012432995056125488
+        }
+      ],
+      "candidate": [
+        {
+          "range": "<20",
+          "entries": 36746,
+          "pctScoreGt0": 4.258966962390464,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.6951643487600001,
+          "p90RawLower": -0.18484838394286107,
+          "medianObsGap": 0.10510994259190434
+        },
+        {
+          "range": "20-50",
+          "entries": 1609,
+          "pctScoreGt0": 3.2939714108141707,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0508433407861784,
+          "p90RawLower": -0.32560983448522585,
+          "medianObsGap": 0.03199417490901871
+        },
+        {
+          "range": "50-100",
+          "entries": 2470,
+          "pctScoreGt0": 5.182186234817814,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.061389696902969,
+          "p90RawLower": -0.23592809664657283,
+          "medianObsGap": 0.021138201588941745
+        },
+        {
+          "range": "100-200",
+          "entries": 3907,
+          "pctScoreGt0": 5.37496800614282,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0119680558303585,
+          "p90RawLower": -0.21387982932144656,
+          "medianObsGap": 0.014505129503237284
+        },
+        {
+          "range": ">=200",
+          "entries": 1436,
+          "pctScoreGt0": 4.456824512534819,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.978081980930391,
+          "p90RawLower": -0.22773079336972485,
+          "medianObsGap": 0.012432995056125488
+        }
+      ]
+    },
+    "player": {
+      "all": [
+        {
+          "range": "<20",
+          "entries": 189098,
+          "pctScoreGt0": 4.440025806724555,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.6904362848541015,
+          "p90RawLower": -0.17805039036689457,
+          "medianObsGap": 0.10714308473203951
+        },
+        {
+          "range": "20-50",
+          "entries": 15018,
+          "pctScoreGt0": 7.557597549607138,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0058851220129565,
+          "p90RawLower": -0.11298308161184306,
+          "medianObsGap": 0.03405482681693094
+        },
+        {
+          "range": "50-100",
+          "entries": 14346,
+          "pctScoreGt0": 6.238672800780706,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0624620259900013,
+          "p90RawLower": -0.17549898037475645,
+          "medianObsGap": 0.021494582246844342
+        },
+        {
+          "range": "100-200",
+          "entries": 17036,
+          "pctScoreGt0": 5.024653674571495,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0219407083179601,
+          "p90RawLower": -0.2104766314321852,
+          "medianObsGap": 0.01474794107197442
+        },
+        {
+          "range": ">=200",
+          "entries": 5584,
+          "pctScoreGt0": 4.315902578796561,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.9651171668819891,
+          "p90RawLower": -0.21701734196908057,
+          "medianObsGap": 0.012387004805966512
+        }
+      ],
+      "candidate": [
+        {
+          "range": "<20",
+          "entries": 189098,
+          "pctScoreGt0": 4.440025806724555,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.6904362848541015,
+          "p90RawLower": -0.17805039036689457,
+          "medianObsGap": 0.10714308473203951
+        },
+        {
+          "range": "20-50",
+          "entries": 15018,
+          "pctScoreGt0": 7.557597549607138,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0058851220129565,
+          "p90RawLower": -0.11298308161184306,
+          "medianObsGap": 0.03405482681693094
+        },
+        {
+          "range": "50-100",
+          "entries": 14346,
+          "pctScoreGt0": 6.238672800780706,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0624620259900013,
+          "p90RawLower": -0.17549898037475645,
+          "medianObsGap": 0.021494582246844342
+        },
+        {
+          "range": "100-200",
+          "entries": 17036,
+          "pctScoreGt0": 5.024653674571495,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -1.0219407083179601,
+          "p90RawLower": -0.2104766314321852,
+          "medianObsGap": 0.01474794107197442
+        },
+        {
+          "range": ">=200",
+          "entries": 5584,
+          "pctScoreGt0": 4.315902578796561,
+          "medianScore": 0,
+          "p90Score": 0,
+          "medianRawLower": -0.9651171668819891,
+          "p90RawLower": -0.21701734196908057,
+          "medianObsGap": 0.012387004805966512
+        }
+      ]
+    }
+  },
+  "bigGapExamples": [
+    {
+      "targetId": "48610",
+      "championName": "Ambessa",
+      "x": 1,
+      "n": 1,
+      "obs": 1,
+      "obsLower": 0.052672025514766574,
+      "gap": 0.9473279744852334,
+      "exp": 0.0967930029154519,
+      "rawObs": 2.2898014523789803,
+      "rawLower": -0.5681691386003335,
+      "score": 0
+    },
+    {
+      "targetId": "48610",
+      "championName": "Ezreal",
+      "x": 1,
+      "n": 1,
+      "obs": 1,
+      "obsLower": 0.10310273349750787,
+      "gap": 0.8968972665024921,
+      "exp": 0.1793002915451895,
+      "rawObs": 1.696176373913118,
+      "rawLower": -0.5334844355061461,
+      "score": 0
+    },
+    {
+      "targetId": "48610",
+      "championName": "Skarner",
+      "x": 1,
+      "n": 1,
+      "obs": 1,
+      "obsLower": 0.11903582094237208,
+      "gap": 0.8809641790576279,
+      "exp": 0.20291545189504373,
+      "rawObs": 1.5756113047015932,
+      "rawLower": -0.5165611133364085,
+      "score": 0
+    },
+    {
+      "targetId": "48610",
+      "championName": "Ashe",
+      "x": 1,
+      "n": 1,
+      "obs": 1,
+      "obsLower": 0.16261312284041196,
+      "gap": 0.837386877159588,
+      "exp": 0.26384839650145775,
+      "rawObs": 1.3185951815422094,
+      "rawLower": -0.47248915539767977,
+      "score": 0
+    },
+    {
+      "targetId": "48610",
+      "championName": "Kalista",
+      "x": 1,
+      "n": 1,
+      "obs": 1,
+      "obsLower": 0.2868249482708052,
+      "gap": 0.7131750517291948,
+      "exp": 0.41895043731778425,
+      "rawObs": 0.8631262652121847,
+      "rawLower": -0.3734624250032921,
+      "score": 0
+    },
+    {
+      "targetId": "55749",
+      "championName": "Yunara",
+      "x": 4,
+      "n": 8,
+      "obs": 0.5,
+      "obsLower": 0.13825636537512764,
+      "gap": 0.36174363462487236,
+      "exp": 0.08338192419825073,
+      "rawObs": 1.7428909579354686,
+      "rawLower": 0.4829683186961985,
+      "score": 5.15066219247687
+    },
+    {
+      "targetId": "55749",
+      "championName": "Aurora",
+      "x": 4,
+      "n": 8,
+      "obs": 0.5,
+      "obsLower": 0.15403016773052514,
+      "gap": 0.34596983226947486,
+      "exp": 0.11690962099125364,
+      "rawObs": 1.4212784706256736,
+      "rawLower": 0.2658139597275432,
+      "score": 4.495161955921848
+    },
+    {
+      "targetId": "55749",
+      "championName": "Nautilus",
+      "x": 3,
+      "n": 8,
+      "obs": 0.375,
+      "obsLower": 0.14072724722791463,
+      "gap": 0.23427275277208537,
+      "exp": 0.17959183673469387,
+      "rawObs": 0.7220241530016626,
+      "rawLower": -0.23641039488760118,
+      "score": 0
+    },
+    {
+      "targetId": "52572",
+      "championName": "Ivern",
+      "x": 16,
+      "n": 29,
+      "obs": 0.5517241379310345,
+      "obsLower": 0.32183005020488054,
+      "gap": 0.22989408772615394,
+      "exp": 0.07463556851311953,
+      "rawObs": 1.9446090195420234,
+      "rawLower": 1.411979477985873,
+      "score": 24.45619353743624
+    },
+    {
+      "targetId": "55749",
+      "championName": "Darius",
+      "x": 2,
+      "n": 8,
+      "obs": 0.25,
+      "obsLower": 0.03282693889923394,
+      "gap": 0.21717306110076606,
+      "exp": 0.008746355685131196,
+      "rawObs": 2.920489797256808,
+      "rawLower": 1.012247770187657,
+      "score": 6.289077382820978
+    },
+    {
+      "targetId": "52572",
+      "championName": "Jayce",
+      "x": 15,
+      "n": 29,
+      "obs": 0.5172413793103449,
+      "obsLower": 0.3249102811096236,
+      "gap": 0.19233109820072125,
+      "exp": 0.1772594752186589,
+      "rawObs": 1.0526985337117034,
+      "rawLower": 0.5933893823071592,
+      "score": 19.737507262374322
+    },
+    {
+      "targetId": "55749",
+      "championName": "Azir",
+      "x": 3,
+      "n": 8,
+      "obs": 0.375,
+      "obsLower": 0.1904737797449343,
+      "gap": 0.1845262202550657,
+      "exp": 0.282798833819242,
+      "rawObs": 0.2779095103280421,
+      "rawLower": -0.3868354909134624,
+      "score": 0
+    },
+    {
+      "targetId": "55749",
+      "championName": "Rell",
+      "x": 2,
+      "n": 8,
+      "obs": 0.25,
+      "obsLower": 0.07468421233352274,
+      "gap": 0.17531578766647726,
+      "exp": 0.12040816326530612,
+      "rawObs": 0.7096898212689176,
+      "rawLower": -0.45350224637894354,
+      "score": 0
+    },
+    {
+      "targetId": "48070",
+      "championName": "Varus",
+      "x": 18,
+      "n": 30,
+      "obs": 0.6,
+      "obsLower": 0.4341038224520162,
+      "gap": 0.1658961775479838,
+      "exp": 0.35364431486880465,
+      "rawObs": 0.52289732705816,
+      "rawLower": 0.20240475175413103,
+      "score": 16.08164551941861
+    },
+    {
+      "targetId": "47922",
+      "championName": "Jax",
+      "x": 12,
+      "n": 33,
+      "obs": 0.36363636363636365,
+      "obsLower": 0.21632856730138883,
+      "gap": 0.14730779633497482,
+      "exp": 0.11924198250728862,
+      "rawObs": 1.0875795579606846,
+      "rawLower": 0.577417191509164,
+      "score": 22.291877973518346
+    },
+    {
+      "targetId": "47922",
+      "championName": "Ashe",
+      "x": 15,
+      "n": 33,
+      "obs": 0.45454545454545453,
+      "obsLower": 0.31329839234240353,
+      "gap": 0.141247062203051,
+      "exp": 0.26384839650145775,
+      "rawObs": 0.5360902197052347,
+      "rawLower": 0.16884164456216255,
+      "score": 17.23010315150274
+    },
+    {
+      "targetId": "54198",
+      "championName": "Yone",
+      "x": 15,
+      "n": 33,
+      "obs": 0.45454545454545453,
+      "obsLower": 0.3146872406359762,
+      "gap": 0.13985821390947833,
+      "exp": 0.2696793002915452,
+      "rawObs": 0.5146336222655503,
+      "rawLower": 0.15173890845010138,
+      "score": 16.993992096123666
+    },
+    {
+      "targetId": "55749",
+      "championName": "Taliyah",
+      "x": 2,
+      "n": 8,
+      "obs": 0.25,
+      "obsLower": 0.11018117278581485,
+      "gap": 0.13981882721418515,
+      "exp": 0.20349854227405248,
+      "rawObs": 0.2013314954353657,
+      "rawLower": -0.5934257454962087,
+      "score": 0
+    },
+    {
+      "targetId": "52541",
+      "championName": "Ivern",
+      "x": 16,
+      "n": 44,
+      "obs": 0.36363636363636365,
+      "obsLower": 0.2281565119046718,
+      "gap": 0.13547985173169186,
+      "exp": 0.07463556851311953,
+      "rawObs": 1.5323498600872647,
+      "rawLower": 1.0742491193083774,
+      "score": 35.08687403384626
+    },
+    {
+      "targetId": "47922",
+      "championName": "Tristana",
+      "x": 11,
+      "n": 33,
+      "obs": 0.3333333333333333,
+      "obsLower": 0.1990280759637244,
+      "gap": 0.1343052573696089,
+      "exp": 0.13323615160349855,
+      "rawObs": 0.89506813665589,
+      "rawLower": 0.389294145495723,
+      "score": 20.127086598619034
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "gamma": 2,
+  "min_loss": 46.7679,
+  "patches_used": 20,
+  "beta_fixed": 0.5,
+  "search_range": {
+    "min": 1,
+    "max": 21,
+    "step": 1,
+    "unit": "days"
+  },
+  "description": {
+    "gamma_meaning": "characteristic days for patch maturity",
+    "maturity_formula": "1 - exp(-d / gamma)",
+    "at_gamma_days": "maturity factor = 0.632 (63.2%)"
+  },
+  "grid_search_results": [
+    {
+      "gamma": 1,
+      "loss": 46.8104
+    },
+    {
+      "gamma": 2,
+      "loss": 46.7679
+    },
+    {
+      "gamma": 3,
+      "loss": 46.7698
+    },
+    {
+      "gamma": 4,
+      "loss": 46.7927
+    },
+    {
+      "gamma": 5,
+      "loss": 46.8244
+    },
+    {
+      "gamma": 6,
+      "loss": 46.859
+    },
+    {
+      "gamma": 7,
+      "loss": 46.8933
+    },
+    {
+      "gamma": 8,
+      "loss": 46.9261
+    },
+    {
+      "gamma": 9,
+      "loss": 46.9567
+    },
+    {
+      "gamma": 10,
+      "loss": 46.985
+    },
+    {
+      "gamma": 11,
+      "loss": 47.011
+    },
+    {
+      "gamma": 12,
+      "loss": 47.0349
+    },
+    {
+      "gamma": 13,
+      "loss": 47.0568
+    },
+    {
+      "gamma": 14,
+      "loss": 47.077
+    },
+    {
+      "gamma": 15,
+      "loss": 47.0955
+    },
+    {
+      "gamma": 16,
+      "loss": 47.1125
+    },
+    {
+      "gamma": 17,
+      "loss": 47.1282
+    },
+    {
+      "gamma": 18,
+      "loss": 47.1428
+    },
+    {
+      "gamma": 19,
+      "loss": 47.1563
+    },
+    {
+      "gamma": 20,
+      "loss": 47.1688
+    },
+    {
+      "gamma": 21,
+      "loss": 47.1805
+    }
+  ]
+}

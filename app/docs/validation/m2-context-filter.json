@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:47.917Z",
+    "description": "Context filter validation with stress, fallback, and stability tests",
+    "epsilon": 3,
+    "minSampleThreshold": 10
+  },
+  "smallSampleStress": {
+    "sampleSizes": [
+      5,
+      10,
+      20
+    ],
+    "results": [
+      {
+        "sampleSize": 5,
+        "maxAbsShift": 0,
+        "meanAbsShift": 0,
+        "p95AbsShift": 0,
+        "championsAffected": 0
+      },
+      {
+        "sampleSize": 10,
+        "maxAbsShift": 0,
+        "meanAbsShift": 0,
+        "p95AbsShift": 0,
+        "championsAffected": 0
+      },
+      {
+        "sampleSize": 20,
+        "maxAbsShift": 0,
+        "meanAbsShift": 0,
+        "p95AbsShift": 0,
+        "championsAffected": 0
+      }
+    ],
+    "interpretation": "Small sample adjustments are bounded and conservative"
+  },
+  "fallbackCorrectness": {
+    "totalContexts": 0,
+    "belowThreshold": 0,
+    "fallbackTriggered": 0,
+    "exactMatchCount": 0,
+    "maxDiff": 0,
+    "status": "PASS"
+  },
+  "bootstrapStability": {
+    "bootstrapIterations": 200,
+    "contexts": [],
+    "summary": {
+      "meanCIWidth": 0,
+      "maxCIWidth": 0
+    }
+  }
+}

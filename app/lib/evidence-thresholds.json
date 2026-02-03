@@ -1,0 +1,292 @@
+{
+  "meta": {
+    "calibrationDate": "2026-01-23T00:45:07.635Z",
+    "dataSource": "bayesian-role-posteriors.json, player-pools.json, champion-position-stats.json",
+    "description": "Data-driven thresholds for evidence strength attribution (Step 4.2 + 4.3)"
+  },
+  "coverage": {
+    "championsWithPosterior": 162,
+    "championsWithProGames": 162,
+    "championsUsedForEntropyCalibration": 162,
+    "totalPlayersInPool": 413,
+    "lowSamplePlayerCount": 27,
+    "lowSampleThreshold": 10
+  },
+  "ROLE_FLEX_PRESSURE": {
+    "entropyThreshold": 0.4435,
+    "percentileUsed": "P85",
+    "distribution": {
+      "p50": 0.1824,
+      "p75": 0.3777,
+      "p85": 0.4435,
+      "p90": 0.5497,
+      "p95": 0.6566
+    },
+    "sampleSize": 162,
+    "strongFlexPercent": 16,
+    "examplesNearThreshold": [
+      {
+        "champion": "Xerath",
+        "entropy": 0.3992
+      },
+      {
+        "champion": "Vladimir",
+        "entropy": 0.4061
+      },
+      {
+        "champion": "Zed",
+        "entropy": 0.4087
+      },
+      {
+        "champion": "Jarvan IV",
+        "entropy": 0.4185
+      },
+      {
+        "champion": "Elise",
+        "entropy": 0.4197
+      }
+    ],
+    "top20HighEntropy": [
+      {
+        "champion": "Bel'Veth",
+        "entropy": 0.9962,
+        "topRoles": "jg:25% / top:19%"
+      },
+      {
+        "champion": "Kog'Maw",
+        "entropy": 0.9744,
+        "topRoles": "bot:32% / top:17%"
+      },
+      {
+        "champion": "Mel",
+        "entropy": 0.9605,
+        "topRoles": "mid:34% / bot:21%"
+      },
+      {
+        "champion": "Kha'Zix",
+        "entropy": 0.9598,
+        "topRoles": "jg:35% / top:16%"
+      },
+      {
+        "champion": "Dr. Mundo",
+        "entropy": 0.9577,
+        "topRoles": "top:29% / jg:29%"
+      },
+      {
+        "champion": "Rek'Sai",
+        "entropy": 0.8532,
+        "topRoles": "top:46% / jg:25%"
+      },
+      {
+        "champion": "Cho'Gath",
+        "entropy": 0.8035,
+        "topRoles": "top:56% / mid:13%"
+      },
+      {
+        "champion": "Aurelion Sol",
+        "entropy": 0.7496,
+        "topRoles": "mid:61% / top:10%"
+      },
+      {
+        "champion": "Twisted Fate",
+        "entropy": 0.7472,
+        "topRoles": "top:54% / mid:27%"
+      },
+      {
+        "champion": "Poppy",
+        "entropy": 0.6566,
+        "topRoles": "jg:45% / sup:37%"
+      },
+      {
+        "champion": "Tahm Kench",
+        "entropy": 0.639,
+        "topRoles": "sup:70% / top:8%"
+      },
+      {
+        "champion": "Gragas",
+        "entropy": 0.6017,
+        "topRoles": "top:64% / jg:22%"
+      },
+      {
+        "champion": "LeBlanc",
+        "entropy": 0.5997,
+        "topRoles": "mid:73% / sup:7%"
+      },
+      {
+        "champion": "Morgana",
+        "entropy": 0.5996,
+        "topRoles": "sup:57% / mid:27%"
+      },
+      {
+        "champion": "Swain",
+        "entropy": 0.5853,
+        "topRoles": "sup:59% / mid:32%"
+      },
+      {
+        "champion": "Yunara",
+        "entropy": 0.5822,
+        "topRoles": "bot:74% / top:7%"
+      },
+      {
+        "champion": "Yasuo",
+        "entropy": 0.5734,
+        "topRoles": "mid:62% / top:22%"
+      },
+      {
+        "champion": "Heimerdinger",
+        "entropy": 0.5497,
+        "topRoles": "mid:65% / sup:18%"
+      },
+      {
+        "champion": "Seraphine",
+        "entropy": 0.5038,
+        "topRoles": "sup:68% / bot:24%"
+      },
+      {
+        "champion": "Sett",
+        "entropy": 0.502,
+        "topRoles": "top:65% / sup:29%"
+      }
+    ],
+    "bottom20LowEntropy": [
+      {
+        "champion": "Gnar",
+        "entropy": 0,
+        "topRoles": "top:100%"
+      },
+      {
+        "champion": "Aphelios",
+        "entropy": 0,
+        "topRoles": "bot:100%"
+      },
+      {
+        "champion": "Milio",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Orianna",
+        "entropy": 0,
+        "topRoles": "mid:100%"
+      },
+      {
+        "champion": "Nilah",
+        "entropy": 0,
+        "topRoles": "bot:100%"
+      },
+      {
+        "champion": "Syndra",
+        "entropy": 0,
+        "topRoles": "mid:100%"
+      },
+      {
+        "champion": "Darius",
+        "entropy": 0,
+        "topRoles": "top:100%"
+      },
+      {
+        "champion": "Yuumi",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Pyke",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Kassadin",
+        "entropy": 0,
+        "topRoles": "mid:100%"
+      },
+      {
+        "champion": "Graves",
+        "entropy": 0,
+        "topRoles": "jg:100%"
+      },
+      {
+        "champion": "Jinx",
+        "entropy": 0,
+        "topRoles": "bot:100%"
+      },
+      {
+        "champion": "Sivir",
+        "entropy": 0,
+        "topRoles": "bot:100%"
+      },
+      {
+        "champion": "Lissandra",
+        "entropy": 0,
+        "topRoles": "mid:100%"
+      },
+      {
+        "champion": "Thresh",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Sona",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Kindred",
+        "entropy": 0,
+        "topRoles": "jg:100%"
+      },
+      {
+        "champion": "Quinn",
+        "entropy": 0,
+        "topRoles": "top:100%"
+      },
+      {
+        "champion": "Blitzcrank",
+        "entropy": 0,
+        "topRoles": "sup:100%"
+      },
+      {
+        "champion": "Urgot",
+        "entropy": 0,
+        "topRoles": "top:100%"
+      }
+    ]
+  },
+  "PLAYER_SPECIALTY": {
+    "strongPickCount": 9,
+    "strongPickShare": 0.1111,
+    "moderatePickCount": 6,
+    "lowSampleThreshold": 10,
+    "percentileUsed": {
+      "strongPickCount": "P85",
+      "strongPickShare": "P85",
+      "moderatePickCount": "P75"
+    },
+    "distribution": {
+      "pickCount": {
+        "p50": 3,
+        "p75": 6,
+        "p85": 9,
+        "p90": 11,
+        "p95": 16
+      },
+      "pickShare": {
+        "p50": 0.0488,
+        "p75": 0.087,
+        "p85": 0.1111,
+        "p90": 0.1304,
+        "p95": 0.1667
+      },
+      "playerGames": {
+        "p10": 12,
+        "p25": 25,
+        "p50": 57,
+        "p75": 116,
+        "p90": 158
+      }
+    },
+    "sampleSize": 6525,
+    "strongSpecialtyPercent": 5.4,
+    "moderateSpecialtyPercent": 22.9,
+    "lowSamplePlayerPercent": 6.5
+  }
+}

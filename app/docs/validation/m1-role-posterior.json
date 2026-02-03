@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:46.838Z",
+    "description": "Bayesian role posterior validation with temporal split",
+    "dataSource": "states.json"
+  },
+  "temporalSplit": {
+    "trainPeriod": {
+      "start": "14.1",
+      "end": "15.5",
+      "games": 2412
+    },
+    "testPeriod": {
+      "start": "15.5",
+      "end": "15.9",
+      "games": 1034
+    },
+    "metrics": {
+      "logLoss": 1.4784135821797988,
+      "brierScore": 0.4187188532841524,
+      "accuracy": 0.56937893081761
+    },
+    "perChampionMetrics": [
+      {
+        "champion": "Xin Zhao",
+        "testGames": 303,
+        "logLoss": 1.5118260171993863,
+        "brierScore": 0.3707868892949911,
+        "accuracy": 0.6171617161716172
+      },
+      {
+        "champion": "Rumble",
+        "testGames": 294,
+        "logLoss": 1.4012348600934637,
+        "brierScore": 0.36176545179168484,
+        "accuracy": 0.6258503401360545
+      },
+      {
+        "champion": "Alistar",
+        "testGames": 282,
+        "logLoss": 1.5755376794193587,
+        "brierScore": 0.36931483167997897,
+        "accuracy": 0.6205673758865248
+      },
+      {
+        "champion": "Rell",
+        "testGames": 264,
+        "logLoss": 1.614536847405134,
+        "brierScore": 0.37314827639210335,
+        "accuracy": 0.6212121212121212
+      },
+      {
+        "champion": "Taliyah",
+        "testGames": 261,
+        "logLoss": 1.6323189520890073,
+        "brierScore": 0.4152719691482023,
+        "accuracy": 0.5632183908045977
+      },
+      {
+        "champion": "Wukong",
+        "testGames": 256,
+        "logLoss": 1.1962505870226041,
+        "brierScore": 0.352996234198724,
+        "accuracy": 0.640625
+      },
+      {
+        "champion": "Rakan",
+        "testGames": 246,
+        "logLoss": 1.5538012973608097,
+        "brierScore": 0.36748066167347215,
+        "accuracy": 0.6219512195121951
+      },
+      {
+        "champion": "Sion",
+        "testGames": 240,
+        "logLoss": 1.0896763350340837,
+        "brierScore": 0.3190550091966298,
+        "accuracy": 0.6833333333333333
+      },
+      {
+        "champion": "Corki",
+        "testGames": 232,
+        "logLoss": 2.3960644005586604,
+        "brierScore": 0.6905945379236498,
+        "accuracy": 0.14224137931034483
+      },
+      {
+        "champion": "Ambessa",
+        "testGames": 220,
+        "logLoss": 1.2823956863415704,
+        "brierScore": 0.35879828362446575,
+        "accuracy": 0.6272727272727273
+      },
+      {
+        "champion": "Nautilus",
+        "testGames": 214,
+        "logLoss": 1.3620405804008981,
+        "brierScore": 0.31853973815536346,
+        "accuracy": 0.6728971962616822
+      },
+      {
+        "champion": "Ryze",
+        "testGames": 212,
+        "logLoss": 1.4388150425279094,
+        "brierScore": 0.44168209863788654,
+        "accuracy": 0.5377358490566038
+      },
+      {
+        "champion": "Orianna",
+        "testGames": 210,
+        "logLoss": 1.3669025335012077,
+        "brierScore": 0.38397787654515364,
+        "accuracy": 0.6
+      },
+      {
+        "champion": "Annie",
+        "testGames": 202,
+        "logLoss": 1.2290879346050916,
+        "brierScore": 0.43706060059130875,
+        "accuracy": 0.6039603960396039
+      },
+      {
+        "champion": "Aurora",
+        "testGames": 202,
+        "logLoss": 1.494889171481521,
+        "brierScore": 0.46949795789555215,
+        "accuracy": 0.47029702970297027
+      },
+      {
+        "champion": "Kai'Sa",
+        "testGames": 194,
+        "logLoss": 1.53646081100218,
+        "brierScore": 0.38339861855670104,
+        "accuracy": 0.6030927835051546
+      },
+      {
+        "champion": "Neeko",
+        "testGames": 190,
+        "logLoss": 1.4100903828732878,
+        "brierScore": 0.4394999179911179,
+        "accuracy": 0.531578947368421
+      },
+      {
+        "champion": "Trundle",
+        "testGames": 188,
+        "logLoss": 1.2582252444347704,
+        "brierScore": 0.4673594330170343,
+        "accuracy": 0.601063829787234
+      },
+      {
+        "champion": "Pantheon",
+        "testGames": 187,
+        "logLoss": 1.0469144199985099,
+        "brierScore": 0.3179319022549188,
+        "accuracy": 0.7165775401069518
+      },
+      {
+        "champion": "Jhin",
+        "testGames": 186,
+        "logLoss": 1.7491517802500727,
+        "brierScore": 0.4623510202385585,
+        "accuracy": 0.5161290322580645
+      }
+    ]
+  },
+  "calibration": {
+    "buckets": [
+      {
+        "range": "0.0-0.1",
+        "predictedMean": 0.0376552735491569,
+        "observedFrequency": 0.10088888888888889,
+        "count": 33750,
+        "gap": 0.06323361533973199
+      },
+      {
+        "range": "0.1-0.2",
+        "predictedMean": 0.13193631018067412,
+        "observedFrequency": 0.13129998140226892,
+        "count": 5377,
+        "gap": 0.000636328778405193
+      },
+      {
+        "range": "0.2-0.3",
+        "predictedMean": 0.24081595386776755,
+        "observedFrequency": 0.17003367003367004,
+        "count": 1188,
+        "gap": 0.07078228383409751
+      },
+      {
+        "range": "0.3-0.4",
+        "predictedMean": 0.3546192178301266,
+        "observedFrequency": 0.2922374429223744,
+        "count": 657,
+        "gap": 0.06238177490775221
+      },
+      {
+        "range": "0.4-0.5",
+        "predictedMean": 0.45980217845062366,
+        "observedFrequency": 0.44413793103448274,
+        "count": 725,
+        "gap": 0.01566424741614092
+      },
+      {
+        "range": "0.5-0.6",
+        "predictedMean": 0.5506593274431272,
+        "observedFrequency": 0.5723076923076923,
+        "count": 975,
+        "gap": 0.021648364864565117
+      },
+      {
+        "range": "0.6-0.7",
+        "predictedMean": 0.6645193775784941,
+        "observedFrequency": 0.5643153526970954,
+        "count": 1205,
+        "gap": 0.10020402488139868
+      },
+      {
+        "range": "0.7-0.8",
+        "predictedMean": 0.7532614299655,
+        "observedFrequency": 0.5165016501650165,
+        "count": 1818,
+        "gap": 0.23675977980048357
+      },
+      {
+        "range": "0.8-0.9",
+        "predictedMean": 0.8480588412642391,
+        "observedFrequency": 0.5935046395431834,
+        "count": 2802,
+        "gap": 0.2545542017210557
+      },
+      {
+        "range": "0.9-1.0",
+        "predictedMean": 0.9196744842815416,
+        "observedFrequency": 0.6089588377723971,
+        "count": 2478,
+        "gap": 0.3107156465091445
+      }
+    ],
+    "ece": 0.08493346438288997,
+    "mce": 0.3107156465091445
+  },
+  "alphaSensitivity": {
+    "alphaValues": [
+      10,
+      25,
+      50,
+      100
+    ],
+    "results": [
+      {
+        "alpha": 10,
+        "logLoss": 1.813692524897798,
+        "meanEntropy": 0.5177786160517042,
+        "stabilityScore": 0.9149051444358105
+      },
+      {
+        "alpha": 25,
+        "logLoss": 1.613094931265821,
+        "meanEntropy": 0.6266479369112825,
+        "stabilityScore": 0.9209577845757502
+      },
+      {
+        "alpha": 50,
+        "logLoss": 1.4784135821797988,
+        "meanEntropy": 0.712726542682595,
+        "stabilityScore": 0.9361116490908676
+      },
+      {
+        "alpha": 100,
+        "logLoss": 1.377191347787847,
+        "meanEntropy": 0.7975145147827233,
+        "stabilityScore": 0.9567116858584193
+      }
+    ],
+    "recommendation": "alpha=100 achieves lowest log loss (1.3772)"
+  }
+}

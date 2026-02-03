@@ -1,13 +1,13 @@
 import { Champion, DDragonChampionData } from './types';
 import { getChampionPositions } from './positions';
+import { getChampionClass } from './classes';
 
 const DDRAGON_BASE = 'https://ddragon.leagueoflegends.com';
 
 // Get latest version
 export async function getLatestVersion(): Promise<string> {
-  const res = await fetch(`${DDRAGON_BASE}/api/versions.json`);
-  const versions: string[] = await res.json();
-  return versions[0];
+  // Hardcoded to 15.17 for stability
+  return '15.17.1';
 }
 
 // Get champion data
@@ -21,6 +21,7 @@ export async function getChampions(version: string): Promise<Champion[]> {
     name: champ.name,
     image: `${DDRAGON_BASE}/cdn/${version}/img/champion/${champ.id}.png`,
     positions: getChampionPositions(champ.id),
+    class: getChampionClass(champ.id),
   }));
 }
 

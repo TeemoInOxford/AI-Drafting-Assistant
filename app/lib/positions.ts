@@ -40,7 +40,7 @@ export const CHAMPION_POSITIONS: Record<string, Position[]> = {
   Camille: ['top'],
   Cassiopeia: ['mid', 'top'],
   Chogath: ['top', 'mid'],
-  Corki: ['mid'],
+  Corki: ['mid', 'bot'],
   Darius: ['top'],
   Diana: ['jungle', 'mid'],
   Draven: ['bot'],
@@ -49,7 +49,7 @@ export const CHAMPION_POSITIONS: Record<string, Position[]> = {
   Ekko: ['jungle', 'mid'],
   Elise: ['jungle'],
   Evelynn: ['jungle'],
-  Ezreal: ['bot'],
+  Ezreal: ['bot', 'mid'],
   // F
   Fiddlesticks: ['jungle'],
   Fiora: ['top'],

@@ -1,41 +1,84 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+
 export default function ERDPage() {
   return (
-    <div className="min-h-screen bg-gray-900 p-4 text-white">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen text-white relative overflow-hidden selection:bg-cyan-500/30">
+      {/* Background Grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
-          <a href="/" className="text-blue-400 hover:text-blue-300">
-            ← Home
-          </a>
-          <h1 className="text-2xl font-bold">LOL Esports Data - Entity Relationship Diagram</h1>
-          <div></div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                Entity <span className="text-cyan-400">Relationship Diagram</span>
+              </h1>
+              <p className="text-slate-400 mt-2">
+                LOL esports data structure from Grid API
+              </p>
+            </div>
+            <Link
+              href="/"
+              className="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+            >
+              <span>←</span> Back to Home
+            </Link>
+          </div>
+
+          {/* Usage Description */}
+          <div className="bg-slate-800/30 rounded-lg p-4 mb-6 border border-slate-700/50">
+            <p className="text-slate-400 text-sm">
+              This diagram illustrates the data model used by the AI Drafting Assistant.
+              Use it to understand how entities (Regions, Tournaments, Teams, Players, Series, Games)
+              relate to each other. This is useful for developers extending the system or understanding
+              the underlying data structure.
+            </p>
+          </div>
+        </motion.div>
 
         {/* Data Source Info */}
-        <div className="bg-gray-800 rounded-lg p-4 mb-6">
-          <h2 className="text-lg font-bold text-cyan-400 mb-2">数据来源: Grid Esports API</h2>
-          <div className="text-sm text-gray-300 space-y-1">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="glass-card rounded-xl p-4 mb-6"
+        >
+          <h2 className="text-lg font-bold text-cyan-400 mb-2">Data Source: Grid Esports API</h2>
+          <div className="text-sm text-slate-300 space-y-1">
             <p>• <strong>Central Data API:</strong> https://api-op.grid.gg/central-data/graphql</p>
             <p>• <strong>Series State API:</strong> https://api-op.grid.gg/live-data-feed/series-state/graphql</p>
-            <p>• <strong>数据完全从API下载:</strong> 所有数据均原样保存，未做任何修改</p>
-            <p>• <strong>API总数据量:</strong> 1632场LOL比赛 | <strong>已下载:</strong> 1632场比赛 + 1488场状态数据 (100%)</p>
+            <p>• <strong>Data Collection:</strong> All data downloaded directly from API without modification</p>
+            <p>• <strong>API Coverage:</strong> 1,632 LOL series | <strong>Downloaded:</strong> 1,632 series + 1,488 state records (100%)</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* ERD Diagram */}
-        <div className="bg-gray-800 rounded-lg p-6 overflow-x-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="glass-card rounded-xl p-6 overflow-x-auto"
+        >
           <div className="min-w-[1200px]">
             {/* Row 1: Hierarchy Data */}
             <div className="mb-4 text-center">
-              <span className="bg-cyan-600 text-white px-3 py-1 rounded text-sm">层级数据 (Central Data API)</span>
+              <span className="bg-cyan-600 text-white px-3 py-1 rounded text-sm">Hierarchy Data (Central Data API)</span>
             </div>
             <div className="flex justify-center gap-8 mb-8">
               {/* Region */}
               <Entity
                 title="Region"
-                subtitle="赛区"
+                subtitle="Region"
                 color="cyan"
                 fields={[
                   { name: 'code', type: 'string', pk: true },
@@ -48,7 +91,7 @@ export default function ERDPage() {
               {/* Tournament */}
               <Entity
                 title="Tournament"
-                subtitle="联赛"
+                subtitle="League"
                 color="cyan"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -61,7 +104,7 @@ export default function ERDPage() {
               {/* Team */}
               <Entity
                 title="Team"
-                subtitle="战队"
+                subtitle="Team"
                 color="cyan"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -74,7 +117,7 @@ export default function ERDPage() {
               {/* Player */}
               <Entity
                 title="Player"
-                subtitle="选手"
+                subtitle="Player"
                 color="cyan"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -97,13 +140,13 @@ export default function ERDPage() {
 
             {/* Row 2: Series Data */}
             <div className="mb-4 text-center">
-              <span className="bg-pink-600 text-white px-3 py-1 rounded text-sm">比赛数据 (Central Data API + Series State API)</span>
+              <span className="bg-pink-600 text-white px-3 py-1 rounded text-sm">Match Data (Central Data API + Series State API)</span>
             </div>
             <div className="flex justify-center gap-8 mb-8">
               {/* Series */}
               <Entity
                 title="Series"
-                subtitle="系列赛"
+                subtitle="Series"
                 color="pink"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -118,7 +161,7 @@ export default function ERDPage() {
               {/* SeriesState */}
               <Entity
                 title="SeriesState"
-                subtitle="系列赛状态"
+                subtitle="Series State"
                 color="pink"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -137,7 +180,7 @@ export default function ERDPage() {
               {/* SeriesTeam */}
               <Entity
                 title="SeriesTeam"
-                subtitle="系列赛战队统计"
+                subtitle="Series Team Stats"
                 color="yellow"
                 fields={[
                   { name: 'id', type: 'string', fk: true },
@@ -153,7 +196,7 @@ export default function ERDPage() {
               {/* Game */}
               <Entity
                 title="Game"
-                subtitle="单局游戏"
+                subtitle="Single Game"
                 color="yellow"
                 fields={[
                   { name: 'id', type: 'string', pk: true },
@@ -168,7 +211,7 @@ export default function ERDPage() {
               {/* GameTeam */}
               <Entity
                 title="GameTeamLol"
-                subtitle="单局战队统计"
+                subtitle="Game Team Stats"
                 color="yellow"
                 fields={[
                   { name: 'id', type: 'string', fk: true },
@@ -190,7 +233,7 @@ export default function ERDPage() {
               {/* DraftAction */}
               <Entity
                 title="DraftAction"
-                subtitle="BP动作"
+                subtitle="Draft Action"
                 color="green"
                 fields={[
                   { name: 'type', type: 'ban|pick' },
@@ -203,7 +246,7 @@ export default function ERDPage() {
               {/* GamePlayer */}
               <Entity
                 title="GamePlayerLol"
-                subtitle="单局选手统计"
+                subtitle="Game Player Stats"
                 color="green"
                 fields={[
                   { name: 'id', type: 'string', fk: true },
@@ -220,155 +263,155 @@ export default function ERDPage() {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Legend */}
-        <div className="mt-6 bg-gray-800 rounded-lg p-4">
-          <h3 className="font-bold mb-3">图例</h3>
+        <div className="mt-6 glass-card rounded-xl p-4">
+          <h3 className="font-bold mb-3 text-slate-200">Legend</h3>
           <div className="flex flex-wrap gap-6 text-sm">
             <div className="flex items-center gap-2">
               <span className="text-cyan-400 font-bold">PK</span>
-              <span className="text-gray-300">Primary Key (主键)</span>
+              <span className="text-slate-300">Primary Key</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-pink-400 font-bold">FK</span>
-              <span className="text-gray-300">Foreign Key (外键)</span>
+              <span className="text-slate-300">Foreign Key</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">1:N</span>
-              <span className="text-gray-300">一对多关系</span>
+              <span className="text-slate-400">1:N</span>
+              <span className="text-slate-300">One-to-Many</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">N:M</span>
-              <span className="text-gray-300">多对多关系</span>
+              <span className="text-slate-400">N:M</span>
+              <span className="text-slate-300">Many-to-Many</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">1:1</span>
-              <span className="text-gray-300">一对一关系</span>
+              <span className="text-slate-400">1:1</span>
+              <span className="text-slate-300">One-to-One</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-yellow-400">*</span>
-              <span className="text-gray-300">LOL专属扩展字段 (需API版本3.23+)</span>
+              <span className="text-slate-300">LOL-specific extension (requires API v3.23+)</span>
             </div>
           </div>
         </div>
 
         {/* Data Flow */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gray-800 rounded-lg p-4">
-            <h3 className="font-bold text-cyan-400 mb-3">数据下载流程</h3>
-            <ol className="text-sm text-gray-300 space-y-2 list-decimal list-inside">
-              <li>调用 Central Data API 获取所有 Series 列表</li>
-              <li>对每个 Series 调用 Series State API 获取详细状态</li>
-              <li>原样保存到 data/lol/series.json 和 states.json</li>
-              <li>从状态数据中提取选手-战队关系构建层级</li>
+          <div className="glass-card rounded-xl p-4">
+            <h3 className="font-bold text-cyan-400 mb-3">Data Download Process</h3>
+            <ol className="text-sm text-slate-300 space-y-2 list-decimal list-inside">
+              <li>Call Central Data API to get all Series list</li>
+              <li>For each Series, call Series State API to get detailed state</li>
+              <li>Save raw data to data/lol/series.json and states.json</li>
+              <li>Extract player-team relationships from state data to build hierarchy</li>
             </ol>
           </div>
-          <div className="bg-gray-800 rounded-lg p-4">
-            <h3 className="font-bold text-pink-400 mb-3">本地数据文件</h3>
-            <ul className="text-sm text-gray-300 space-y-2">
-              <li><code className="bg-gray-700 px-1 rounded">data/lol/series.json</code> - 比赛列表 (1.69 MB, 1632场)</li>
-              <li><code className="bg-gray-700 px-1 rounded">data/lol/states.json</code> - 状态数据 (111.9 MB, 1488场)</li>
-              <li><code className="bg-gray-700 px-1 rounded">data/lol/index.json</code> - 索引文件 (358 KB)</li>
+          <div className="glass-card rounded-xl p-4">
+            <h3 className="font-bold text-pink-400 mb-3">Local Data Files</h3>
+            <ul className="text-sm text-slate-300 space-y-2">
+              <li><code className="bg-slate-700 px-1 rounded">data/lol/series.json</code> - Series list (1.69 MB, 1,632 series)</li>
+              <li><code className="bg-slate-700 px-1 rounded">data/lol/states.json</code> - State data (111.9 MB, 1,488 series)</li>
+              <li><code className="bg-slate-700 px-1 rounded">data/lol/index.json</code> - Index file (358 KB)</li>
             </ul>
           </div>
         </div>
 
         {/* LOL Extended Fields - Complete List */}
-        <div className="mt-6 bg-gray-800 rounded-lg p-4">
-          <h3 className="font-bold text-yellow-400 mb-3">LOL专属扩展字段 (GameTeamStateLol / GamePlayerStateLol) - 完整列表</h3>
+        <div className="mt-6 glass-card rounded-xl p-4">
+          <h3 className="font-bold text-yellow-400 mb-3">LOL-Specific Extension Fields (GameTeamStateLol / GamePlayerStateLol) - Complete List</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <h4 className="text-gray-400 mb-2">战队级别 (GameTeamStateLol) - 17个扩展字段</h4>
-              <ul className="text-gray-300 space-y-1">
-                <li><code className="text-green-400">damageDealt</code> - 总伤害输出 (int)</li>
-                <li><code className="text-green-400">damageTaken</code> - 总承受伤害 (int)</li>
-                <li><code className="text-green-400">damagePerMinute</code> - 每分钟伤害 (float)</li>
-                <li><code className="text-green-400">damagePerMoney</code> - 每金币伤害效率 (float)</li>
-                <li><code className="text-green-400">visionScore</code> - 视野得分 (float)</li>
-                <li><code className="text-green-400">visionScorePerMinute</code> - 每分钟视野得分 (float)</li>
-                <li><code className="text-green-400">experiencePoints</code> - 总经验值 (int)</li>
-                <li><code className="text-green-400">baronPowerPlays</code> - 大龙强势期数据 (array)</li>
-                <li><code className="text-green-400">moneyDifference</code> - 经济差 (int)</li>
-                <li><code className="text-green-400">moneyPerMinute</code> - 每分钟经济 (float)</li>
-                <li><code className="text-green-400">totalMoneyEarned</code> - 总获得金币 (int)</li>
-                <li><code className="text-green-400">majorMoneyLead</code> - 最大经济领先 (float)</li>
-                <li><code className="text-green-400">majorMoneyDeficit</code> - 最大经济落后 (float)</li>
-                <li><code className="text-green-400">forwardPercentage</code> - 前压比例 (float)</li>
-                <li><code className="text-green-400">kdaRatio</code> - 团队KDA比率 (float)</li>
-                <li><code className="text-green-400">killsAndAssists</code> - 击杀+助攻数 (float)</li>
-                <li><code className="text-green-400">firstKill</code> - 是否一血 (boolean)</li>
+              <h4 className="text-slate-400 mb-2">Team Level (GameTeamStateLol) - 17 extension fields</h4>
+              <ul className="text-slate-300 space-y-1">
+                <li><code className="text-green-400">damageDealt</code> - Total damage dealt (int)</li>
+                <li><code className="text-green-400">damageTaken</code> - Total damage taken (int)</li>
+                <li><code className="text-green-400">damagePerMinute</code> - Damage per minute (float)</li>
+                <li><code className="text-green-400">damagePerMoney</code> - Damage per gold efficiency (float)</li>
+                <li><code className="text-green-400">visionScore</code> - Vision score (float)</li>
+                <li><code className="text-green-400">visionScorePerMinute</code> - Vision score per minute (float)</li>
+                <li><code className="text-green-400">experiencePoints</code> - Total experience (int)</li>
+                <li><code className="text-green-400">baronPowerPlays</code> - Baron power play data (array)</li>
+                <li><code className="text-green-400">moneyDifference</code> - Gold difference (int)</li>
+                <li><code className="text-green-400">moneyPerMinute</code> - Gold per minute (float)</li>
+                <li><code className="text-green-400">totalMoneyEarned</code> - Total gold earned (int)</li>
+                <li><code className="text-green-400">majorMoneyLead</code> - Maximum gold lead (float)</li>
+                <li><code className="text-green-400">majorMoneyDeficit</code> - Maximum gold deficit (float)</li>
+                <li><code className="text-green-400">forwardPercentage</code> - Forward percentage (float)</li>
+                <li><code className="text-green-400">kdaRatio</code> - Team KDA ratio (float)</li>
+                <li><code className="text-green-400">killsAndAssists</code> - Kills + assists (float)</li>
+                <li><code className="text-green-400">firstKill</code> - First blood (boolean)</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-400 mb-2">选手级别 (GamePlayerStateLol) - 19个扩展字段</h4>
-              <ul className="text-gray-300 space-y-1">
-                <li><code className="text-green-400">damageDealt</code> - 伤害输出 (int)</li>
-                <li><code className="text-green-400">damageTaken</code> - 承受伤害 (int)</li>
-                <li><code className="text-green-400">damagePercentage</code> - 伤害占比 (float)</li>
-                <li><code className="text-green-400">damagePerMinute</code> - 每分钟伤害 (float)</li>
-                <li><code className="text-green-400">damagePerMoney</code> - 每金币伤害效率 (float)</li>
-                <li><code className="text-green-400">visionScore</code> - 视野得分 (float)</li>
-                <li><code className="text-green-400">visionScorePerMinute</code> - 每分钟视野得分 (float)</li>
-                <li><code className="text-green-400">kdaRatio</code> - KDA比率 (float)</li>
-                <li><code className="text-green-400">killParticipation</code> - 参战率 (float)</li>
-                <li><code className="text-green-400">killsAndAssists</code> - 击杀+助攻数 (float)</li>
-                <li><code className="text-green-400">experiencePoints</code> - 经验值 (int)</li>
-                <li><code className="text-green-400">moneyPercentage</code> - 经济占比 (float)</li>
-                <li><code className="text-green-400">moneyPerMinute</code> - 每分钟经济 (float)</li>
-                <li><code className="text-green-400">totalMoneyEarned</code> - 总获得金币 (int)</li>
-                <li><code className="text-green-400">forwardPercentage</code> - 前压比例 (float)</li>
-                <li><code className="text-green-400">alive</code> - 存活状态 (boolean)</li>
-                <li><code className="text-green-400">currentHealth/maxHealth</code> - 当前/最大生命值 (int)</li>
-                <li><code className="text-green-400">currentArmor</code> - 当前护甲 (int)</li>
-                <li><code className="text-green-400">respawnClock</code> - 复活倒计时 (ClockState)</li>
+              <h4 className="text-slate-400 mb-2">Player Level (GamePlayerStateLol) - 19 extension fields</h4>
+              <ul className="text-slate-300 space-y-1">
+                <li><code className="text-green-400">damageDealt</code> - Damage dealt (int)</li>
+                <li><code className="text-green-400">damageTaken</code> - Damage taken (int)</li>
+                <li><code className="text-green-400">damagePercentage</code> - Damage share (float)</li>
+                <li><code className="text-green-400">damagePerMinute</code> - Damage per minute (float)</li>
+                <li><code className="text-green-400">damagePerMoney</code> - Damage per gold efficiency (float)</li>
+                <li><code className="text-green-400">visionScore</code> - Vision score (float)</li>
+                <li><code className="text-green-400">visionScorePerMinute</code> - Vision score per minute (float)</li>
+                <li><code className="text-green-400">kdaRatio</code> - KDA ratio (float)</li>
+                <li><code className="text-green-400">killParticipation</code> - Kill participation (float)</li>
+                <li><code className="text-green-400">killsAndAssists</code> - Kills + assists (float)</li>
+                <li><code className="text-green-400">experiencePoints</code> - Experience points (int)</li>
+                <li><code className="text-green-400">moneyPercentage</code> - Gold share (float)</li>
+                <li><code className="text-green-400">moneyPerMinute</code> - Gold per minute (float)</li>
+                <li><code className="text-green-400">totalMoneyEarned</code> - Total gold earned (int)</li>
+                <li><code className="text-green-400">forwardPercentage</code> - Forward percentage (float)</li>
+                <li><code className="text-green-400">alive</code> - Alive status (boolean)</li>
+                <li><code className="text-green-400">currentHealth/maxHealth</code> - Current/max health (int)</li>
+                <li><code className="text-green-400">currentArmor</code> - Current armor (int)</li>
+                <li><code className="text-green-400">respawnClock</code> - Respawn countdown (ClockState)</li>
               </ul>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mt-3">* 这些字段需要API版本3.23+，较旧的比赛数据可能没有。使用 GraphQL fragment: <code className="text-gray-400">... on GameTeamStateLol</code></p>
+          <p className="text-xs text-slate-500 mt-3">* These fields require API version 3.23+. Older match data may not have them. Use GraphQL fragment: <code className="text-slate-400">... on GameTeamStateLol</code></p>
         </div>
 
         {/* Additional API Fields */}
-        <div className="mt-6 bg-gray-800 rounded-lg p-4">
-          <h3 className="font-bold text-orange-400 mb-3">其他可用API字段 (当前未下载)</h3>
+        <div className="mt-6 glass-card rounded-xl p-4">
+          <h3 className="font-bold text-orange-400 mb-3">Other Available API Fields (Currently Not Downloaded)</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <h4 className="text-gray-400 mb-2">SeriesState 扩展</h4>
-              <ul className="text-gray-300 space-y-1">
-                <li><code className="text-orange-400">version</code> - API版本号</li>
-                <li><code className="text-orange-400">title</code> - 游戏标题信息</li>
-                <li><code className="text-orange-400">forfeited</code> - 是否弃权</li>
-                <li><code className="text-orange-400">duration</code> - 比赛时长</li>
-                <li><code className="text-orange-400">draftActions</code> - 系列赛BP</li>
+              <h4 className="text-slate-400 mb-2">SeriesState Extensions</h4>
+              <ul className="text-slate-300 space-y-1">
+                <li><code className="text-orange-400">version</code> - API version number</li>
+                <li><code className="text-orange-400">title</code> - Game title info</li>
+                <li><code className="text-orange-400">forfeited</code> - Forfeit status</li>
+                <li><code className="text-orange-400">duration</code> - Match duration</li>
+                <li><code className="text-orange-400">draftActions</code> - Series draft</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-400 mb-2">GameState 扩展</h4>
-              <ul className="text-gray-300 space-y-1">
-                <li><code className="text-orange-400">titleVersion</code> - 游戏版本</li>
-                <li><code className="text-orange-400">type</code> - 比赛类型</li>
-                <li><code className="text-orange-400">startedAt</code> - 开始时间</li>
-                <li><code className="text-orange-400">duration</code> - 单局时长</li>
-                <li><code className="text-orange-400">structures</code> - 建筑状态</li>
-                <li><code className="text-orange-400">nonPlayerCharacters</code> - NPC状态</li>
-                <li><code className="text-orange-400">segments</code> - 比赛阶段</li>
-                <li><code className="text-orange-400">externalLinks</code> - 外部链接</li>
+              <h4 className="text-slate-400 mb-2">GameState Extensions</h4>
+              <ul className="text-slate-300 space-y-1">
+                <li><code className="text-orange-400">titleVersion</code> - Game version</li>
+                <li><code className="text-orange-400">type</code> - Match type</li>
+                <li><code className="text-orange-400">startedAt</code> - Start time</li>
+                <li><code className="text-orange-400">duration</code> - Game duration</li>
+                <li><code className="text-orange-400">structures</code> - Structure status</li>
+                <li><code className="text-orange-400">nonPlayerCharacters</code> - NPC status</li>
+                <li><code className="text-orange-400">segments</code> - Match phases</li>
+                <li><code className="text-orange-400">externalLinks</code> - External links</li>
               </ul>
             </div>
             <div>
-              <h4 className="text-gray-400 mb-2">Player 扩展</h4>
-              <ul className="text-gray-300 space-y-1">
-                <li><code className="text-orange-400">roles</code> - 位置角色</li>
-                <li><code className="text-orange-400">position</code> - 地图坐标</li>
-                <li><code className="text-orange-400">abilities</code> - 技能状态</li>
-                <li><code className="text-orange-400">statusEffects</code> - 状态效果</li>
-                <li><code className="text-orange-400">unitKills</code> - 单位击杀</li>
-                <li><code className="text-orange-400">firstKill</code> - 是否一血</li>
-                <li><code className="text-orange-400">structuresDestroyed</code> - 拆塔数</li>
+              <h4 className="text-slate-400 mb-2">Player Extensions</h4>
+              <ul className="text-slate-300 space-y-1">
+                <li><code className="text-orange-400">roles</code> - Position roles</li>
+                <li><code className="text-orange-400">position</code> - Map coordinates</li>
+                <li><code className="text-orange-400">abilities</code> - Ability status</li>
+                <li><code className="text-orange-400">statusEffects</code> - Status effects</li>
+                <li><code className="text-orange-400">unitKills</code> - Unit kills</li>
+                <li><code className="text-orange-400">firstKill</code> - First blood</li>
+                <li><code className="text-orange-400">structuresDestroyed</code> - Structures destroyed</li>
               </ul>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mt-3">这些字段API支持但当前下载脚本未获取，可根据需要扩展下载</p>
+          <p className="text-xs text-slate-500 mt-3">These fields are supported by the API but not currently fetched by the download script. Can be extended as needed.</p>
         </div>
       </div>
     </div>

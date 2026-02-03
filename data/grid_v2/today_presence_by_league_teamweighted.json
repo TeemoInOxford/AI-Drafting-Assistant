@@ -1,0 +1,3570 @@
+{
+  "target_patch": "15.18",
+  "target_patch_index": 1518,
+  "beta_used": 0.5,
+  "gamma_used": 2,
+  "team_weighting": {
+    "method": "percentile_linear",
+    "w_min": 0.75,
+    "w_max": 1.25
+  },
+  "generated_at_utc": "2026-01-27T02:45:38Z",
+  "definition": "action_share_presence",
+  "leagues": {
+    "LCK": {
+      "total_actions_used": 20900,
+      "total_weight_sum": 1108.46,
+      "heroes": [
+        {
+          "hero": "Azir",
+          "value": 0.044325,
+          "support_weight": 49.13
+        },
+        {
+          "hero": "Yunara",
+          "value": 0.033603,
+          "support_weight": 37.25
+        },
+        {
+          "hero": "Pantheon",
+          "value": 0.03273,
+          "support_weight": 36.28
+        },
+        {
+          "hero": "Wukong",
+          "value": 0.03195,
+          "support_weight": 35.42
+        },
+        {
+          "hero": "Neeko",
+          "value": 0.028738,
+          "support_weight": 31.85
+        },
+        {
+          "hero": "Poppy",
+          "value": 0.028362,
+          "support_weight": 31.44
+        },
+        {
+          "hero": "Taliyah",
+          "value": 0.027615,
+          "support_weight": 30.61
+        },
+        {
+          "hero": "Aurora",
+          "value": 0.026112,
+          "support_weight": 28.94
+        },
+        {
+          "hero": "Alistar",
+          "value": 0.025803,
+          "support_weight": 28.6
+        },
+        {
+          "hero": "Rakan",
+          "value": 0.024917,
+          "support_weight": 27.62
+        },
+        {
+          "hero": "Sivir",
+          "value": 0.023643,
+          "support_weight": 26.21
+        },
+        {
+          "hero": "Rumble",
+          "value": 0.022956,
+          "support_weight": 25.45
+        },
+        {
+          "hero": "Kai'Sa",
+          "value": 0.021964,
+          "support_weight": 24.35
+        },
+        {
+          "hero": "Trundle",
+          "value": 0.021685,
+          "support_weight": 24.04
+        },
+        {
+          "hero": "Orianna",
+          "value": 0.021229,
+          "support_weight": 23.53
+        },
+        {
+          "hero": "Gwen",
+          "value": 0.020607,
+          "support_weight": 22.84
+        },
+        {
+          "hero": "Annie",
+          "value": 0.020333,
+          "support_weight": 22.54
+        },
+        {
+          "hero": "Vi",
+          "value": 0.019965,
+          "support_weight": 22.13
+        },
+        {
+          "hero": "Bard",
+          "value": 0.019886,
+          "support_weight": 22.04
+        },
+        {
+          "hero": "Ambessa",
+          "value": 0.018601,
+          "support_weight": 20.62
+        },
+        {
+          "hero": "Corki",
+          "value": 0.018332,
+          "support_weight": 20.32
+        },
+        {
+          "hero": "Yone",
+          "value": 0.017284,
+          "support_weight": 19.16
+        },
+        {
+          "hero": "Jarvan IV",
+          "value": 0.017206,
+          "support_weight": 19.07
+        },
+        {
+          "hero": "Xin Zhao",
+          "value": 0.016922,
+          "support_weight": 18.76
+        },
+        {
+          "hero": "Jhin",
+          "value": 0.0166,
+          "support_weight": 18.4
+        },
+        {
+          "hero": "Lucian",
+          "value": 0.016599,
+          "support_weight": 18.4
+        },
+        {
+          "hero": "Ryze",
+          "value": 0.01639,
+          "support_weight": 18.17
+        },
+        {
+          "hero": "Varus",
+          "value": 0.016071,
+          "support_weight": 17.81
+        },
+        {
+          "hero": "Renekton",
+          "value": 0.014007,
+          "support_weight": 15.53
+        },
+        {
+          "hero": "Sion",
+          "value": 0.013992,
+          "support_weight": 15.51
+        },
+        {
+          "hero": "Galio",
+          "value": 0.013843,
+          "support_weight": 15.34
+        },
+        {
+          "hero": "Braum",
+          "value": 0.013207,
+          "support_weight": 14.64
+        },
+        {
+          "hero": "Rell",
+          "value": 0.012868,
+          "support_weight": 14.26
+        },
+        {
+          "hero": "Ornn",
+          "value": 0.01267,
+          "support_weight": 14.04
+        },
+        {
+          "hero": "Xayah",
+          "value": 0.012293,
+          "support_weight": 13.63
+        },
+        {
+          "hero": "Nautilus",
+          "value": 0.012147,
+          "support_weight": 13.46
+        },
+        {
+          "hero": "Leona",
+          "value": 0.010983,
+          "support_weight": 12.17
+        },
+        {
+          "hero": "Lulu",
+          "value": 0.009918,
+          "support_weight": 10.99
+        },
+        {
+          "hero": "Nocturne",
+          "value": 0.009445,
+          "support_weight": 10.47
+        },
+        {
+          "hero": "K'Sante",
+          "value": 0.00928,
+          "support_weight": 10.29
+        },
+        {
+          "hero": "Ahri",
+          "value": 0.009068,
+          "support_weight": 10.05
+        },
+        {
+          "hero": "Ziggs",
+          "value": 0.008863,
+          "support_weight": 9.82
+        },
+        {
+          "hero": "Jax",
+          "value": 0.008217,
+          "support_weight": 9.11
+        },
+        {
+          "hero": "Maokai",
+          "value": 0.008111,
+          "support_weight": 8.99
+        },
+        {
+          "hero": "Yorick",
+          "value": 0.008034,
+          "support_weight": 8.91
+        },
+        {
+          "hero": "Aatrox",
+          "value": 0.007954,
+          "support_weight": 8.82
+        },
+        {
+          "hero": "Viktor",
+          "value": 0.007923,
+          "support_weight": 8.78
+        },
+        {
+          "hero": "Zeri",
+          "value": 0.007685,
+          "support_weight": 8.52
+        },
+        {
+          "hero": "Ezreal",
+          "value": 0.006992,
+          "support_weight": 7.75
+        },
+        {
+          "hero": "Sylas",
+          "value": 0.006531,
+          "support_weight": 7.24
+        },
+        {
+          "hero": "Twisted Fate",
+          "value": 0.006343,
+          "support_weight": 7.03
+        },
+        {
+          "hero": "Renata Glasc",
+          "value": 0.006329,
+          "support_weight": 7.02
+        },
+        {
+          "hero": "Skarner",
+          "value": 0.006061,
+          "support_weight": 6.72
+        },
+        {
+          "hero": "Jayce",
+          "value": 0.005795,
+          "support_weight": 6.42
+        },
+        {
+          "hero": "Cassiopeia",
+          "value": 0.005558,
+          "support_weight": 6.16
+        },
+        {
+          "hero": "Karma",
+          "value": 0.005458,
+          "support_weight": 6.05
+        },
+        {
+          "hero": "Smolder",
+          "value": 0.005192,
+          "support_weight": 5.76
+        },
+        {
+          "hero": "Akali",
+          "value": 0.004953,
+          "support_weight": 5.49
+        },
+        {
+          "hero": "Kalista",
+          "value": 0.004801,
+          "support_weight": 5.32
+        },
+        {
+          "hero": "Lee Sin",
+          "value": 0.00476,
+          "support_weight": 5.28
+        },
+        {
+          "hero": "Qiyana",
+          "value": 0.004126,
+          "support_weight": 4.57
+        },
+        {
+          "hero": "Tristana",
+          "value": 0.00406,
+          "support_weight": 4.5
+        },
+        {
+          "hero": "Sejuani",
+          "value": 0.003833,
+          "support_weight": 4.25
+        },
+        {
+          "hero": "Zed",
+          "value": 0.003566,
+          "support_weight": 3.95
+        },
+        {
+          "hero": "Miss Fortune",
+          "value": 0.003411,
+          "support_weight": 3.78
+        },
+        {
+          "hero": "Blitzcrank",
+          "value": 0.003319,
+          "support_weight": 3.68
+        },
+        {
+          "hero": "Naafiri",
+          "value": 0.003314,
+          "support_weight": 3.67
+        },
+        {
+          "hero": "Camille",
+          "value": 0.002924,
+          "support_weight": 3.24
+        },
+        {
+          "hero": "Gragas",
+          "value": 0.002882,
+          "support_weight": 3.19
+        },
+        {
+          "hero": "Gnar",
+          "value": 0.00273,
+          "support_weight": 3.03
+        },
+        {
+          "hero": "Shen",
+          "value": 0.002239,
+          "support_weight": 2.48
+        },
+        {
+          "hero": "Tahm Kench",
+          "value": 0.002226,
+          "support_weight": 2.47
+        },
+        {
+          "hero": "Elise",
+          "value": 0.001906,
+          "support_weight": 2.11
+        },
+        {
+          "hero": "Morgana",
+          "value": 0.001905,
+          "support_weight": 2.11
+        },
+        {
+          "hero": "Senna",
+          "value": 0.001891,
+          "support_weight": 2.1
+        },
+        {
+          "hero": "Ivern",
+          "value": 0.001735,
+          "support_weight": 1.92
+        },
+        {
+          "hero": "Lissandra",
+          "value": 0.001591,
+          "support_weight": 1.76
+        },
+        {
+          "hero": "Zoe",
+          "value": 0.001568,
+          "support_weight": 1.74
+        },
+        {
+          "hero": "Jinx",
+          "value": 0.001545,
+          "support_weight": 1.71
+        },
+        {
+          "hero": "Mel",
+          "value": 0.001392,
+          "support_weight": 1.54
+        },
+        {
+          "hero": "Pyke",
+          "value": 0.001338,
+          "support_weight": 1.48
+        },
+        {
+          "hero": "Aphelios",
+          "value": 0.001337,
+          "support_weight": 1.48
+        },
+        {
+          "hero": "Thresh",
+          "value": 0.001237,
+          "support_weight": 1.37
+        },
+        {
+          "hero": "Caitlyn",
+          "value": 0.001229,
+          "support_weight": 1.36
+        },
+        {
+          "hero": "Syndra",
+          "value": 0.001128,
+          "support_weight": 1.25
+        },
+        {
+          "hero": "Rek'Sai",
+          "value": 0.001091,
+          "support_weight": 1.21
+        },
+        {
+          "hero": "Lillia",
+          "value": 0.00106,
+          "support_weight": 1.17
+        },
+        {
+          "hero": "Viego",
+          "value": 0.001049,
+          "support_weight": 1.16
+        },
+        {
+          "hero": "Olaf",
+          "value": 0.000841,
+          "support_weight": 0.93
+        },
+        {
+          "hero": "Nidalee",
+          "value": 0.000731,
+          "support_weight": 0.81
+        },
+        {
+          "hero": "LeBlanc",
+          "value": 0.000653,
+          "support_weight": 0.72
+        },
+        {
+          "hero": "Janna",
+          "value": 0.000614,
+          "support_weight": 0.68
+        },
+        {
+          "hero": "Vex",
+          "value": 0.00056,
+          "support_weight": 0.62
+        },
+        {
+          "hero": "Kennen",
+          "value": 0.00056,
+          "support_weight": 0.62
+        },
+        {
+          "hero": "Gangplank",
+          "value": 0.000544,
+          "support_weight": 0.6
+        },
+        {
+          "hero": "Rammus",
+          "value": 0.000493,
+          "support_weight": 0.55
+        },
+        {
+          "hero": "Veigar",
+          "value": 0.000493,
+          "support_weight": 0.55
+        },
+        {
+          "hero": "Tryndamere",
+          "value": 0.000475,
+          "support_weight": 0.53
+        },
+        {
+          "hero": "Draven",
+          "value": 0.000471,
+          "support_weight": 0.52
+        },
+        {
+          "hero": "Taric",
+          "value": 0.000431,
+          "support_weight": 0.48
+        },
+        {
+          "hero": "Cho'Gath",
+          "value": 0.000412,
+          "support_weight": 0.46
+        },
+        {
+          "hero": "Vayne",
+          "value": 0.00041,
+          "support_weight": 0.45
+        },
+        {
+          "hero": "Milio",
+          "value": 0.000229,
+          "support_weight": 0.25
+        },
+        {
+          "hero": "Nami",
+          "value": 0.000223,
+          "support_weight": 0.25
+        },
+        {
+          "hero": "Kindred",
+          "value": 0.000199,
+          "support_weight": 0.22
+        },
+        {
+          "hero": "Hecarim",
+          "value": 8.9e-05,
+          "support_weight": 0.1
+        },
+        {
+          "hero": "Hwei",
+          "value": 8e-05,
+          "support_weight": 0.09
+        },
+        {
+          "hero": "Ashe",
+          "value": 7.1e-05,
+          "support_weight": 0.08
+        },
+        {
+          "hero": "Malzahar",
+          "value": 6.1e-05,
+          "support_weight": 0.07
+        },
+        {
+          "hero": "Sett",
+          "value": 6e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Nilah",
+          "value": 4e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Anivia",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zyra",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Fiddlesticks",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Soraka",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Vladimir",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Talon",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Fiora",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Diana",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Karthus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Twitch",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zilean",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Yuumi",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Yasuo",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mordekaiser",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Aurelion Sol",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kled",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Irelia",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Amumu",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zac",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Swain",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Brand",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Udyr",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Xerath",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Urgot",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lux",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kog'Maw",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Seraphine",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nasus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Shyvana",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Garen",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malphite",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Quinn",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Samira",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kha'Zix",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kassadin",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Volibear",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Graves",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Darius",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Sona",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Bel'Veth",
+          "value": 0.0,
+          "support_weight": 0.0
+        }
+      ]
+    },
+    "LPL": {
+      "total_actions_used": 22740,
+      "total_weight_sum": 1370.71,
+      "heroes": [
+        {
+          "hero": "Azir",
+          "value": 0.036646,
+          "support_weight": 50.23
+        },
+        {
+          "hero": "Poppy",
+          "value": 0.03332,
+          "support_weight": 45.67
+        },
+        {
+          "hero": "Pantheon",
+          "value": 0.033089,
+          "support_weight": 45.35
+        },
+        {
+          "hero": "Yunara",
+          "value": 0.028903,
+          "support_weight": 39.62
+        },
+        {
+          "hero": "Neeko",
+          "value": 0.027143,
+          "support_weight": 37.21
+        },
+        {
+          "hero": "Rumble",
+          "value": 0.025547,
+          "support_weight": 35.02
+        },
+        {
+          "hero": "Varus",
+          "value": 0.025426,
+          "support_weight": 34.85
+        },
+        {
+          "hero": "Trundle",
+          "value": 0.025364,
+          "support_weight": 34.77
+        },
+        {
+          "hero": "Alistar",
+          "value": 0.024609,
+          "support_weight": 33.73
+        },
+        {
+          "hero": "Rakan",
+          "value": 0.023722,
+          "support_weight": 32.52
+        },
+        {
+          "hero": "Annie",
+          "value": 0.022852,
+          "support_weight": 31.32
+        },
+        {
+          "hero": "Wukong",
+          "value": 0.022503,
+          "support_weight": 30.84
+        },
+        {
+          "hero": "Gwen",
+          "value": 0.021402,
+          "support_weight": 29.34
+        },
+        {
+          "hero": "Sivir",
+          "value": 0.020894,
+          "support_weight": 28.64
+        },
+        {
+          "hero": "Galio",
+          "value": 0.020839,
+          "support_weight": 28.56
+        },
+        {
+          "hero": "Aurora",
+          "value": 0.020773,
+          "support_weight": 28.47
+        },
+        {
+          "hero": "Taliyah",
+          "value": 0.020282,
+          "support_weight": 27.8
+        },
+        {
+          "hero": "Jarvan IV",
+          "value": 0.020254,
+          "support_weight": 27.76
+        },
+        {
+          "hero": "Kai'Sa",
+          "value": 0.01987,
+          "support_weight": 27.24
+        },
+        {
+          "hero": "Vi",
+          "value": 0.019649,
+          "support_weight": 26.93
+        },
+        {
+          "hero": "Ambessa",
+          "value": 0.018765,
+          "support_weight": 25.72
+        },
+        {
+          "hero": "Corki",
+          "value": 0.018715,
+          "support_weight": 25.65
+        },
+        {
+          "hero": "Braum",
+          "value": 0.018455,
+          "support_weight": 25.3
+        },
+        {
+          "hero": "Xin Zhao",
+          "value": 0.018176,
+          "support_weight": 24.91
+        },
+        {
+          "hero": "Sion",
+          "value": 0.018022,
+          "support_weight": 24.7
+        },
+        {
+          "hero": "Rell",
+          "value": 0.017843,
+          "support_weight": 24.46
+        },
+        {
+          "hero": "Nautilus",
+          "value": 0.017066,
+          "support_weight": 23.39
+        },
+        {
+          "hero": "Orianna",
+          "value": 0.016404,
+          "support_weight": 22.49
+        },
+        {
+          "hero": "Qiyana",
+          "value": 0.016331,
+          "support_weight": 22.39
+        },
+        {
+          "hero": "Renekton",
+          "value": 0.015728,
+          "support_weight": 21.56
+        },
+        {
+          "hero": "Lucian",
+          "value": 0.013478,
+          "support_weight": 18.47
+        },
+        {
+          "hero": "K'Sante",
+          "value": 0.012779,
+          "support_weight": 17.52
+        },
+        {
+          "hero": "Ryze",
+          "value": 0.012438,
+          "support_weight": 17.05
+        },
+        {
+          "hero": "Sylas",
+          "value": 0.012088,
+          "support_weight": 16.57
+        },
+        {
+          "hero": "Akali",
+          "value": 0.011539,
+          "support_weight": 15.82
+        },
+        {
+          "hero": "Naafiri",
+          "value": 0.010897,
+          "support_weight": 14.94
+        },
+        {
+          "hero": "Xayah",
+          "value": 0.01059,
+          "support_weight": 14.52
+        },
+        {
+          "hero": "Yorick",
+          "value": 0.010229,
+          "support_weight": 14.02
+        },
+        {
+          "hero": "Yone",
+          "value": 0.010182,
+          "support_weight": 13.96
+        },
+        {
+          "hero": "Leona",
+          "value": 0.010096,
+          "support_weight": 13.84
+        },
+        {
+          "hero": "Skarner",
+          "value": 0.009928,
+          "support_weight": 13.61
+        },
+        {
+          "hero": "Ornn",
+          "value": 0.009781,
+          "support_weight": 13.41
+        },
+        {
+          "hero": "Bard",
+          "value": 0.009574,
+          "support_weight": 13.12
+        },
+        {
+          "hero": "Renata Glasc",
+          "value": 0.009312,
+          "support_weight": 12.76
+        },
+        {
+          "hero": "Ezreal",
+          "value": 0.009232,
+          "support_weight": 12.65
+        },
+        {
+          "hero": "Karma",
+          "value": 0.008873,
+          "support_weight": 12.16
+        },
+        {
+          "hero": "Jhin",
+          "value": 0.008055,
+          "support_weight": 11.04
+        },
+        {
+          "hero": "Aatrox",
+          "value": 0.007978,
+          "support_weight": 10.94
+        },
+        {
+          "hero": "Viktor",
+          "value": 0.007637,
+          "support_weight": 10.47
+        },
+        {
+          "hero": "Jax",
+          "value": 0.007106,
+          "support_weight": 9.74
+        },
+        {
+          "hero": "Ahri",
+          "value": 0.006966,
+          "support_weight": 9.55
+        },
+        {
+          "hero": "Kalista",
+          "value": 0.006796,
+          "support_weight": 9.32
+        },
+        {
+          "hero": "Miss Fortune",
+          "value": 0.006764,
+          "support_weight": 9.27
+        },
+        {
+          "hero": "Ziggs",
+          "value": 0.006677,
+          "support_weight": 9.15
+        },
+        {
+          "hero": "Senna",
+          "value": 0.00623,
+          "support_weight": 8.54
+        },
+        {
+          "hero": "Nocturne",
+          "value": 0.006162,
+          "support_weight": 8.45
+        },
+        {
+          "hero": "Zeri",
+          "value": 0.005808,
+          "support_weight": 7.96
+        },
+        {
+          "hero": "Jayce",
+          "value": 0.005372,
+          "support_weight": 7.36
+        },
+        {
+          "hero": "Gnar",
+          "value": 0.004874,
+          "support_weight": 6.68
+        },
+        {
+          "hero": "Zed",
+          "value": 0.004814,
+          "support_weight": 6.6
+        },
+        {
+          "hero": "Twisted Fate",
+          "value": 0.004156,
+          "support_weight": 5.7
+        },
+        {
+          "hero": "Lulu",
+          "value": 0.003873,
+          "support_weight": 5.31
+        },
+        {
+          "hero": "Viego",
+          "value": 0.003665,
+          "support_weight": 5.02
+        },
+        {
+          "hero": "Caitlyn",
+          "value": 0.003628,
+          "support_weight": 4.97
+        },
+        {
+          "hero": "Maokai",
+          "value": 0.003359,
+          "support_weight": 4.6
+        },
+        {
+          "hero": "Sejuani",
+          "value": 0.003272,
+          "support_weight": 4.48
+        },
+        {
+          "hero": "Kindred",
+          "value": 0.003223,
+          "support_weight": 4.42
+        },
+        {
+          "hero": "Lee Sin",
+          "value": 0.003091,
+          "support_weight": 4.24
+        },
+        {
+          "hero": "Mordekaiser",
+          "value": 0.00308,
+          "support_weight": 4.22
+        },
+        {
+          "hero": "Morgana",
+          "value": 0.002854,
+          "support_weight": 3.91
+        },
+        {
+          "hero": "Lissandra",
+          "value": 0.002797,
+          "support_weight": 3.83
+        },
+        {
+          "hero": "Smolder",
+          "value": 0.002169,
+          "support_weight": 2.97
+        },
+        {
+          "hero": "Elise",
+          "value": 0.002017,
+          "support_weight": 2.76
+        },
+        {
+          "hero": "Tristana",
+          "value": 0.002,
+          "support_weight": 2.74
+        },
+        {
+          "hero": "Cassiopeia",
+          "value": 0.001927,
+          "support_weight": 2.64
+        },
+        {
+          "hero": "Nidalee",
+          "value": 0.001771,
+          "support_weight": 2.43
+        },
+        {
+          "hero": "Swain",
+          "value": 0.001602,
+          "support_weight": 2.2
+        },
+        {
+          "hero": "Olaf",
+          "value": 0.001504,
+          "support_weight": 2.06
+        },
+        {
+          "hero": "Blitzcrank",
+          "value": 0.001496,
+          "support_weight": 2.05
+        },
+        {
+          "hero": "Draven",
+          "value": 0.001325,
+          "support_weight": 1.82
+        },
+        {
+          "hero": "Cho'Gath",
+          "value": 0.001279,
+          "support_weight": 1.75
+        },
+        {
+          "hero": "LeBlanc",
+          "value": 0.001271,
+          "support_weight": 1.74
+        },
+        {
+          "hero": "Rek'Sai",
+          "value": 0.001228,
+          "support_weight": 1.68
+        },
+        {
+          "hero": "Jinx",
+          "value": 0.001182,
+          "support_weight": 1.62
+        },
+        {
+          "hero": "Nami",
+          "value": 0.001038,
+          "support_weight": 1.42
+        },
+        {
+          "hero": "Udyr",
+          "value": 0.00099,
+          "support_weight": 1.36
+        },
+        {
+          "hero": "Aphelios",
+          "value": 0.000903,
+          "support_weight": 1.24
+        },
+        {
+          "hero": "Kassadin",
+          "value": 0.000886,
+          "support_weight": 1.21
+        },
+        {
+          "hero": "Kennen",
+          "value": 0.00078,
+          "support_weight": 1.07
+        },
+        {
+          "hero": "Taric",
+          "value": 0.000738,
+          "support_weight": 1.01
+        },
+        {
+          "hero": "Gragas",
+          "value": 0.00069,
+          "support_weight": 0.95
+        },
+        {
+          "hero": "Zyra",
+          "value": 0.000464,
+          "support_weight": 0.64
+        },
+        {
+          "hero": "Camille",
+          "value": 0.000457,
+          "support_weight": 0.63
+        },
+        {
+          "hero": "Yasuo",
+          "value": 0.000438,
+          "support_weight": 0.6
+        },
+        {
+          "hero": "Veigar",
+          "value": 0.000435,
+          "support_weight": 0.6
+        },
+        {
+          "hero": "Mel",
+          "value": 0.00043,
+          "support_weight": 0.59
+        },
+        {
+          "hero": "Syndra",
+          "value": 0.000427,
+          "support_weight": 0.59
+        },
+        {
+          "hero": "Pyke",
+          "value": 0.000421,
+          "support_weight": 0.58
+        },
+        {
+          "hero": "Gangplank",
+          "value": 0.000393,
+          "support_weight": 0.54
+        },
+        {
+          "hero": "Vayne",
+          "value": 0.000391,
+          "support_weight": 0.54
+        },
+        {
+          "hero": "Lillia",
+          "value": 0.000322,
+          "support_weight": 0.44
+        },
+        {
+          "hero": "Ekko",
+          "value": 0.000245,
+          "support_weight": 0.34
+        },
+        {
+          "hero": "Shen",
+          "value": 0.000223,
+          "support_weight": 0.31
+        },
+        {
+          "hero": "Hwei",
+          "value": 0.000176,
+          "support_weight": 0.24
+        },
+        {
+          "hero": "Brand",
+          "value": 0.000149,
+          "support_weight": 0.2
+        },
+        {
+          "hero": "Ashe",
+          "value": 8.6e-05,
+          "support_weight": 0.12
+        },
+        {
+          "hero": "Thresh",
+          "value": 8.3e-05,
+          "support_weight": 0.11
+        },
+        {
+          "hero": "Sett",
+          "value": 8.3e-05,
+          "support_weight": 0.11
+        },
+        {
+          "hero": "Tryndamere",
+          "value": 4.5e-05,
+          "support_weight": 0.06
+        },
+        {
+          "hero": "Milio",
+          "value": 1.9e-05,
+          "support_weight": 0.03
+        },
+        {
+          "hero": "Volibear",
+          "value": 1.4e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Yuumi",
+          "value": 1.1e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Seraphine",
+          "value": 9e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Diana",
+          "value": 7e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Tahm Kench",
+          "value": 7e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Fiora",
+          "value": 7e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Soraka",
+          "value": 6e-06,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Nasus",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Graves",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Aurelion Sol",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lux",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Talon",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kled",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Vladimir",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Ivern",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Singed",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zac",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Karthus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Twitch",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malphite",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kog'Maw",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Irelia",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Rengar",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kha'Zix",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nilah",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Shyvana",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Darius",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Garen",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malzahar",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Dr. Mundo",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Samira",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Akshan",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Urgot",
+          "value": 0.0,
+          "support_weight": 0.0
+        }
+      ]
+    },
+    "LEC": {
+      "total_actions_used": 10360,
+      "total_weight_sum": 465.34,
+      "heroes": [
+        {
+          "hero": "Yunara",
+          "value": 0.042754,
+          "support_weight": 19.9
+        },
+        {
+          "hero": "Azir",
+          "value": 0.042661,
+          "support_weight": 19.85
+        },
+        {
+          "hero": "Neeko",
+          "value": 0.033784,
+          "support_weight": 15.72
+        },
+        {
+          "hero": "Pantheon",
+          "value": 0.031338,
+          "support_weight": 14.58
+        },
+        {
+          "hero": "Poppy",
+          "value": 0.028142,
+          "support_weight": 13.1
+        },
+        {
+          "hero": "Varus",
+          "value": 0.027695,
+          "support_weight": 12.89
+        },
+        {
+          "hero": "Ambessa",
+          "value": 0.026197,
+          "support_weight": 12.19
+        },
+        {
+          "hero": "Rakan",
+          "value": 0.024856,
+          "support_weight": 11.57
+        },
+        {
+          "hero": "Annie",
+          "value": 0.023949,
+          "support_weight": 11.14
+        },
+        {
+          "hero": "Rumble",
+          "value": 0.023516,
+          "support_weight": 10.94
+        },
+        {
+          "hero": "Sivir",
+          "value": 0.023286,
+          "support_weight": 10.84
+        },
+        {
+          "hero": "Taliyah",
+          "value": 0.022974,
+          "support_weight": 10.69
+        },
+        {
+          "hero": "Nautilus",
+          "value": 0.02269,
+          "support_weight": 10.56
+        },
+        {
+          "hero": "Vi",
+          "value": 0.021033,
+          "support_weight": 9.79
+        },
+        {
+          "hero": "Xayah",
+          "value": 0.02102,
+          "support_weight": 9.78
+        },
+        {
+          "hero": "Jarvan IV",
+          "value": 0.020612,
+          "support_weight": 9.59
+        },
+        {
+          "hero": "Orianna",
+          "value": 0.019806,
+          "support_weight": 9.22
+        },
+        {
+          "hero": "Braum",
+          "value": 0.019442,
+          "support_weight": 9.05
+        },
+        {
+          "hero": "Alistar",
+          "value": 0.018331,
+          "support_weight": 8.53
+        },
+        {
+          "hero": "Trundle",
+          "value": 0.018007,
+          "support_weight": 8.38
+        },
+        {
+          "hero": "Sion",
+          "value": 0.017586,
+          "support_weight": 8.18
+        },
+        {
+          "hero": "Wukong",
+          "value": 0.017575,
+          "support_weight": 8.18
+        },
+        {
+          "hero": "Gwen",
+          "value": 0.017526,
+          "support_weight": 8.16
+        },
+        {
+          "hero": "Aurora",
+          "value": 0.016857,
+          "support_weight": 7.84
+        },
+        {
+          "hero": "Ezreal",
+          "value": 0.015931,
+          "support_weight": 7.41
+        },
+        {
+          "hero": "Xin Zhao",
+          "value": 0.015656,
+          "support_weight": 7.29
+        },
+        {
+          "hero": "Rell",
+          "value": 0.015462,
+          "support_weight": 7.2
+        },
+        {
+          "hero": "Viktor",
+          "value": 0.015148,
+          "support_weight": 7.05
+        },
+        {
+          "hero": "K'Sante",
+          "value": 0.014748,
+          "support_weight": 6.86
+        },
+        {
+          "hero": "Galio",
+          "value": 0.014663,
+          "support_weight": 6.82
+        },
+        {
+          "hero": "Kai'Sa",
+          "value": 0.014586,
+          "support_weight": 6.79
+        },
+        {
+          "hero": "Ryze",
+          "value": 0.014235,
+          "support_weight": 6.62
+        },
+        {
+          "hero": "Corki",
+          "value": 0.013303,
+          "support_weight": 6.19
+        },
+        {
+          "hero": "Jayce",
+          "value": 0.012415,
+          "support_weight": 5.78
+        },
+        {
+          "hero": "Yorick",
+          "value": 0.012091,
+          "support_weight": 5.63
+        },
+        {
+          "hero": "Yone",
+          "value": 0.012085,
+          "support_weight": 5.62
+        },
+        {
+          "hero": "Maokai",
+          "value": 0.011953,
+          "support_weight": 5.56
+        },
+        {
+          "hero": "Bard",
+          "value": 0.011788,
+          "support_weight": 5.49
+        },
+        {
+          "hero": "Ziggs",
+          "value": 0.010472,
+          "support_weight": 4.87
+        },
+        {
+          "hero": "Lucian",
+          "value": 0.010461,
+          "support_weight": 4.87
+        },
+        {
+          "hero": "Nocturne",
+          "value": 0.009876,
+          "support_weight": 4.6
+        },
+        {
+          "hero": "Sejuani",
+          "value": 0.00899,
+          "support_weight": 4.18
+        },
+        {
+          "hero": "Zeri",
+          "value": 0.008113,
+          "support_weight": 3.78
+        },
+        {
+          "hero": "Karma",
+          "value": 0.007879,
+          "support_weight": 3.67
+        },
+        {
+          "hero": "Jax",
+          "value": 0.007626,
+          "support_weight": 3.55
+        },
+        {
+          "hero": "Leona",
+          "value": 0.007568,
+          "support_weight": 3.52
+        },
+        {
+          "hero": "Cassiopeia",
+          "value": 0.006866,
+          "support_weight": 3.2
+        },
+        {
+          "hero": "Renata Glasc",
+          "value": 0.00683,
+          "support_weight": 3.18
+        },
+        {
+          "hero": "Gragas",
+          "value": 0.006316,
+          "support_weight": 2.94
+        },
+        {
+          "hero": "Aatrox",
+          "value": 0.006223,
+          "support_weight": 2.9
+        },
+        {
+          "hero": "Renekton",
+          "value": 0.006194,
+          "support_weight": 2.88
+        },
+        {
+          "hero": "Ornn",
+          "value": 0.005801,
+          "support_weight": 2.7
+        },
+        {
+          "hero": "Rek'Sai",
+          "value": 0.005736,
+          "support_weight": 2.67
+        },
+        {
+          "hero": "Pyke",
+          "value": 0.005421,
+          "support_weight": 2.52
+        },
+        {
+          "hero": "Caitlyn",
+          "value": 0.005233,
+          "support_weight": 2.43
+        },
+        {
+          "hero": "Kled",
+          "value": 0.005128,
+          "support_weight": 2.39
+        },
+        {
+          "hero": "Skarner",
+          "value": 0.005044,
+          "support_weight": 2.35
+        },
+        {
+          "hero": "Jhin",
+          "value": 0.005016,
+          "support_weight": 2.33
+        },
+        {
+          "hero": "Naafiri",
+          "value": 0.004747,
+          "support_weight": 2.21
+        },
+        {
+          "hero": "Volibear",
+          "value": 0.004675,
+          "support_weight": 2.18
+        },
+        {
+          "hero": "Akali",
+          "value": 0.004674,
+          "support_weight": 2.17
+        },
+        {
+          "hero": "Thresh",
+          "value": 0.004449,
+          "support_weight": 2.07
+        },
+        {
+          "hero": "Aphelios",
+          "value": 0.004311,
+          "support_weight": 2.01
+        },
+        {
+          "hero": "Ivern",
+          "value": 0.004224,
+          "support_weight": 1.97
+        },
+        {
+          "hero": "Jinx",
+          "value": 0.004178,
+          "support_weight": 1.94
+        },
+        {
+          "hero": "Yasuo",
+          "value": 0.003508,
+          "support_weight": 1.63
+        },
+        {
+          "hero": "Hwei",
+          "value": 0.003189,
+          "support_weight": 1.48
+        },
+        {
+          "hero": "Twisted Fate",
+          "value": 0.002664,
+          "support_weight": 1.24
+        },
+        {
+          "hero": "Zyra",
+          "value": 0.002653,
+          "support_weight": 1.23
+        },
+        {
+          "hero": "LeBlanc",
+          "value": 0.002593,
+          "support_weight": 1.21
+        },
+        {
+          "hero": "Gnar",
+          "value": 0.002582,
+          "support_weight": 1.2
+        },
+        {
+          "hero": "Cho'Gath",
+          "value": 0.002545,
+          "support_weight": 1.18
+        },
+        {
+          "hero": "Sett",
+          "value": 0.002411,
+          "support_weight": 1.12
+        },
+        {
+          "hero": "Aurelion Sol",
+          "value": 0.002287,
+          "support_weight": 1.06
+        },
+        {
+          "hero": "Taric",
+          "value": 0.002241,
+          "support_weight": 1.04
+        },
+        {
+          "hero": "Tristana",
+          "value": 0.00211,
+          "support_weight": 0.98
+        },
+        {
+          "hero": "Twitch",
+          "value": 0.002014,
+          "support_weight": 0.94
+        },
+        {
+          "hero": "Sylas",
+          "value": 0.001883,
+          "support_weight": 0.88
+        },
+        {
+          "hero": "Dr. Mundo",
+          "value": 0.001497,
+          "support_weight": 0.7
+        },
+        {
+          "hero": "Brand",
+          "value": 0.001442,
+          "support_weight": 0.67
+        },
+        {
+          "hero": "Lulu",
+          "value": 0.001433,
+          "support_weight": 0.67
+        },
+        {
+          "hero": "Lillia",
+          "value": 0.001414,
+          "support_weight": 0.66
+        },
+        {
+          "hero": "Milio",
+          "value": 0.001386,
+          "support_weight": 0.65
+        },
+        {
+          "hero": "Smolder",
+          "value": 0.00131,
+          "support_weight": 0.61
+        },
+        {
+          "hero": "Blitzcrank",
+          "value": 0.001242,
+          "support_weight": 0.58
+        },
+        {
+          "hero": "Nami",
+          "value": 0.001157,
+          "support_weight": 0.54
+        },
+        {
+          "hero": "Vayne",
+          "value": 0.001102,
+          "support_weight": 0.51
+        },
+        {
+          "hero": "Nidalee",
+          "value": 0.000987,
+          "support_weight": 0.46
+        },
+        {
+          "hero": "Zoe",
+          "value": 0.000925,
+          "support_weight": 0.43
+        },
+        {
+          "hero": "Morgana",
+          "value": 0.000906,
+          "support_weight": 0.42
+        },
+        {
+          "hero": "Zed",
+          "value": 0.000906,
+          "support_weight": 0.42
+        },
+        {
+          "hero": "Tahm Kench",
+          "value": 0.000906,
+          "support_weight": 0.42
+        },
+        {
+          "hero": "Darius",
+          "value": 0.000563,
+          "support_weight": 0.26
+        },
+        {
+          "hero": "Miss Fortune",
+          "value": 0.000541,
+          "support_weight": 0.25
+        },
+        {
+          "hero": "Draven",
+          "value": 0.000421,
+          "support_weight": 0.2
+        },
+        {
+          "hero": "Olaf",
+          "value": 0.000412,
+          "support_weight": 0.19
+        },
+        {
+          "hero": "Ahri",
+          "value": 0.000261,
+          "support_weight": 0.12
+        },
+        {
+          "hero": "Kalista",
+          "value": 0.000167,
+          "support_weight": 0.08
+        },
+        {
+          "hero": "Syndra",
+          "value": 0.000133,
+          "support_weight": 0.06
+        },
+        {
+          "hero": "Camille",
+          "value": 0.000123,
+          "support_weight": 0.06
+        },
+        {
+          "hero": "Garen",
+          "value": 0.000114,
+          "support_weight": 0.05
+        },
+        {
+          "hero": "Senna",
+          "value": 7.4e-05,
+          "support_weight": 0.03
+        },
+        {
+          "hero": "Ashe",
+          "value": 4.1e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Warwick",
+          "value": 4e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Vladimir",
+          "value": 1.1e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Swain",
+          "value": 1e-05,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Elise",
+          "value": 1e-05,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Seraphine",
+          "value": 1e-05,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Shen",
+          "value": 8e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Fiddlesticks",
+          "value": 6e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kog'Maw",
+          "value": 5e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kennen",
+          "value": 4e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mel",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malphite",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Urgot",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Anivia",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Viego",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lee Sin",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Diana",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zilean",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Yuumi",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Karthus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nilah",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Irelia",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Amumu",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zac",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mordekaiser",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lux",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Udyr",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Veigar",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Janna",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Bel'Veth",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Heimerdinger",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Graves",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Akshan",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Sona",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lissandra",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Xerath",
+          "value": 0.0,
+          "support_weight": 0.0
+        }
+      ]
+    },
+    "LTA_N": {
+      "total_actions_used": 7730,
+      "total_weight_sum": 472.71,
+      "heroes": [
+        {
+          "hero": "Pantheon",
+          "value": 0.037508,
+          "support_weight": 17.73
+        },
+        {
+          "hero": "Aurora",
+          "value": 0.034883,
+          "support_weight": 16.49
+        },
+        {
+          "hero": "Azir",
+          "value": 0.034842,
+          "support_weight": 16.47
+        },
+        {
+          "hero": "Rakan",
+          "value": 0.033748,
+          "support_weight": 15.95
+        },
+        {
+          "hero": "Poppy",
+          "value": 0.032994,
+          "support_weight": 15.6
+        },
+        {
+          "hero": "Yone",
+          "value": 0.032954,
+          "support_weight": 15.58
+        },
+        {
+          "hero": "Annie",
+          "value": 0.032928,
+          "support_weight": 15.57
+        },
+        {
+          "hero": "Renekton",
+          "value": 0.028608,
+          "support_weight": 13.52
+        },
+        {
+          "hero": "Alistar",
+          "value": 0.026589,
+          "support_weight": 12.57
+        },
+        {
+          "hero": "Neeko",
+          "value": 0.026203,
+          "support_weight": 12.39
+        },
+        {
+          "hero": "Trundle",
+          "value": 0.024145,
+          "support_weight": 11.41
+        },
+        {
+          "hero": "Wukong",
+          "value": 0.02413,
+          "support_weight": 11.41
+        },
+        {
+          "hero": "Gwen",
+          "value": 0.024045,
+          "support_weight": 11.37
+        },
+        {
+          "hero": "Vi",
+          "value": 0.023187,
+          "support_weight": 10.96
+        },
+        {
+          "hero": "Bard",
+          "value": 0.021389,
+          "support_weight": 10.11
+        },
+        {
+          "hero": "Karma",
+          "value": 0.019729,
+          "support_weight": 9.33
+        },
+        {
+          "hero": "Rumble",
+          "value": 0.019507,
+          "support_weight": 9.22
+        },
+        {
+          "hero": "Sylas",
+          "value": 0.018561,
+          "support_weight": 8.77
+        },
+        {
+          "hero": "Rell",
+          "value": 0.018363,
+          "support_weight": 8.68
+        },
+        {
+          "hero": "Taliyah",
+          "value": 0.017454,
+          "support_weight": 8.25
+        },
+        {
+          "hero": "Lucian",
+          "value": 0.017268,
+          "support_weight": 8.16
+        },
+        {
+          "hero": "Varus",
+          "value": 0.016732,
+          "support_weight": 7.91
+        },
+        {
+          "hero": "Ambessa",
+          "value": 0.015912,
+          "support_weight": 7.52
+        },
+        {
+          "hero": "Corki",
+          "value": 0.015657,
+          "support_weight": 7.4
+        },
+        {
+          "hero": "Senna",
+          "value": 0.015535,
+          "support_weight": 7.34
+        },
+        {
+          "hero": "Sivir",
+          "value": 0.015263,
+          "support_weight": 7.21
+        },
+        {
+          "hero": "Ezreal",
+          "value": 0.01434,
+          "support_weight": 6.78
+        },
+        {
+          "hero": "Yunara",
+          "value": 0.014186,
+          "support_weight": 6.71
+        },
+        {
+          "hero": "Ryze",
+          "value": 0.014079,
+          "support_weight": 6.66
+        },
+        {
+          "hero": "Orianna",
+          "value": 0.013962,
+          "support_weight": 6.6
+        },
+        {
+          "hero": "Galio",
+          "value": 0.013875,
+          "support_weight": 6.56
+        },
+        {
+          "hero": "Sejuani",
+          "value": 0.013547,
+          "support_weight": 6.4
+        },
+        {
+          "hero": "Jhin",
+          "value": 0.013236,
+          "support_weight": 6.26
+        },
+        {
+          "hero": "Akali",
+          "value": 0.013228,
+          "support_weight": 6.25
+        },
+        {
+          "hero": "Sion",
+          "value": 0.01304,
+          "support_weight": 6.16
+        },
+        {
+          "hero": "Ziggs",
+          "value": 0.012956,
+          "support_weight": 6.12
+        },
+        {
+          "hero": "Maokai",
+          "value": 0.012299,
+          "support_weight": 5.81
+        },
+        {
+          "hero": "Braum",
+          "value": 0.012205,
+          "support_weight": 5.77
+        },
+        {
+          "hero": "Aatrox",
+          "value": 0.011808,
+          "support_weight": 5.58
+        },
+        {
+          "hero": "Xin Zhao",
+          "value": 0.011609,
+          "support_weight": 5.49
+        },
+        {
+          "hero": "K'Sante",
+          "value": 0.011067,
+          "support_weight": 5.23
+        },
+        {
+          "hero": "Jax",
+          "value": 0.010683,
+          "support_weight": 5.05
+        },
+        {
+          "hero": "Yorick",
+          "value": 0.010576,
+          "support_weight": 5.0
+        },
+        {
+          "hero": "Jarvan IV",
+          "value": 0.009975,
+          "support_weight": 4.72
+        },
+        {
+          "hero": "Cassiopeia",
+          "value": 0.00845,
+          "support_weight": 3.99
+        },
+        {
+          "hero": "Viktor",
+          "value": 0.007817,
+          "support_weight": 3.7
+        },
+        {
+          "hero": "Kai'Sa",
+          "value": 0.007545,
+          "support_weight": 3.57
+        },
+        {
+          "hero": "Nocturne",
+          "value": 0.007304,
+          "support_weight": 3.45
+        },
+        {
+          "hero": "Skarner",
+          "value": 0.007218,
+          "support_weight": 3.41
+        },
+        {
+          "hero": "Smolder",
+          "value": 0.006934,
+          "support_weight": 3.28
+        },
+        {
+          "hero": "Leona",
+          "value": 0.006832,
+          "support_weight": 3.23
+        },
+        {
+          "hero": "Renata Glasc",
+          "value": 0.006761,
+          "support_weight": 3.2
+        },
+        {
+          "hero": "Xayah",
+          "value": 0.006384,
+          "support_weight": 3.02
+        },
+        {
+          "hero": "Lee Sin",
+          "value": 0.006236,
+          "support_weight": 2.95
+        },
+        {
+          "hero": "Nautilus",
+          "value": 0.00614,
+          "support_weight": 2.9
+        },
+        {
+          "hero": "Miss Fortune",
+          "value": 0.005643,
+          "support_weight": 2.67
+        },
+        {
+          "hero": "Gnar",
+          "value": 0.005192,
+          "support_weight": 2.45
+        },
+        {
+          "hero": "Ivern",
+          "value": 0.004613,
+          "support_weight": 2.18
+        },
+        {
+          "hero": "Ornn",
+          "value": 0.003844,
+          "support_weight": 1.82
+        },
+        {
+          "hero": "Jayce",
+          "value": 0.00319,
+          "support_weight": 1.51
+        },
+        {
+          "hero": "Hwei",
+          "value": 0.002631,
+          "support_weight": 1.24
+        },
+        {
+          "hero": "Urgot",
+          "value": 0.002466,
+          "support_weight": 1.17
+        },
+        {
+          "hero": "Zyra",
+          "value": 0.002427,
+          "support_weight": 1.15
+        },
+        {
+          "hero": "Irelia",
+          "value": 0.002423,
+          "support_weight": 1.15
+        },
+        {
+          "hero": "Aphelios",
+          "value": 0.002345,
+          "support_weight": 1.11
+        },
+        {
+          "hero": "Sett",
+          "value": 0.002332,
+          "support_weight": 1.1
+        },
+        {
+          "hero": "Ashe",
+          "value": 0.002089,
+          "support_weight": 0.99
+        },
+        {
+          "hero": "Viego",
+          "value": 0.00203,
+          "support_weight": 0.96
+        },
+        {
+          "hero": "Twisted Fate",
+          "value": 0.001822,
+          "support_weight": 0.86
+        },
+        {
+          "hero": "Tryndamere",
+          "value": 0.00174,
+          "support_weight": 0.82
+        },
+        {
+          "hero": "Ahri",
+          "value": 0.001718,
+          "support_weight": 0.81
+        },
+        {
+          "hero": "Blitzcrank",
+          "value": 0.001589,
+          "support_weight": 0.75
+        },
+        {
+          "hero": "Zeri",
+          "value": 0.001435,
+          "support_weight": 0.68
+        },
+        {
+          "hero": "Syndra",
+          "value": 0.001418,
+          "support_weight": 0.67
+        },
+        {
+          "hero": "Gragas",
+          "value": 0.001285,
+          "support_weight": 0.61
+        },
+        {
+          "hero": "Naafiri",
+          "value": 0.001234,
+          "support_weight": 0.58
+        },
+        {
+          "hero": "Shen",
+          "value": 0.001161,
+          "support_weight": 0.55
+        },
+        {
+          "hero": "Vladimir",
+          "value": 0.001139,
+          "support_weight": 0.54
+        },
+        {
+          "hero": "Qiyana",
+          "value": 0.001037,
+          "support_weight": 0.49
+        },
+        {
+          "hero": "Zac",
+          "value": 0.000996,
+          "support_weight": 0.47
+        },
+        {
+          "hero": "Camille",
+          "value": 0.000989,
+          "support_weight": 0.47
+        },
+        {
+          "hero": "Nami",
+          "value": 0.000965,
+          "support_weight": 0.46
+        },
+        {
+          "hero": "Taric",
+          "value": 0.000953,
+          "support_weight": 0.45
+        },
+        {
+          "hero": "Olaf",
+          "value": 0.000753,
+          "support_weight": 0.36
+        },
+        {
+          "hero": "Gangplank",
+          "value": 0.000686,
+          "support_weight": 0.32
+        },
+        {
+          "hero": "Rek'Sai",
+          "value": 0.000685,
+          "support_weight": 0.32
+        },
+        {
+          "hero": "Tristana",
+          "value": 0.000541,
+          "support_weight": 0.26
+        },
+        {
+          "hero": "Cho'Gath",
+          "value": 0.000474,
+          "support_weight": 0.22
+        },
+        {
+          "hero": "Garen",
+          "value": 0.000465,
+          "support_weight": 0.22
+        },
+        {
+          "hero": "Jinx",
+          "value": 0.000423,
+          "support_weight": 0.2
+        },
+        {
+          "hero": "Singed",
+          "value": 0.00039,
+          "support_weight": 0.18
+        },
+        {
+          "hero": "Kalista",
+          "value": 0.000386,
+          "support_weight": 0.18
+        },
+        {
+          "hero": "Anivia",
+          "value": 0.000347,
+          "support_weight": 0.16
+        },
+        {
+          "hero": "Thresh",
+          "value": 0.000323,
+          "support_weight": 0.15
+        },
+        {
+          "hero": "Malzahar",
+          "value": 0.000214,
+          "support_weight": 0.1
+        },
+        {
+          "hero": "LeBlanc",
+          "value": 0.000203,
+          "support_weight": 0.1
+        },
+        {
+          "hero": "Seraphine",
+          "value": 0.00019,
+          "support_weight": 0.09
+        },
+        {
+          "hero": "Swain",
+          "value": 0.000151,
+          "support_weight": 0.07
+        },
+        {
+          "hero": "Tahm Kench",
+          "value": 0.000137,
+          "support_weight": 0.06
+        },
+        {
+          "hero": "Kled",
+          "value": 0.000134,
+          "support_weight": 0.06
+        },
+        {
+          "hero": "Lulu",
+          "value": 6e-05,
+          "support_weight": 0.03
+        },
+        {
+          "hero": "Caitlyn",
+          "value": 5.1e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Milio",
+          "value": 4.2e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Lillia",
+          "value": 3.8e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Nidalee",
+          "value": 3.2e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Kha'Zix",
+          "value": 2.3e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Dr. Mundo",
+          "value": 2.2e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Elise",
+          "value": 1.9e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Kog'Maw",
+          "value": 1.8e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Draven",
+          "value": 1.7e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Riven",
+          "value": 1.5e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Mordekaiser",
+          "value": 9e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kindred",
+          "value": 7e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Volibear",
+          "value": 4e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Xerath",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Janna",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malphite",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mel",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Aurelion Sol",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Pyke",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Amumu",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Udyr",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nasus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Brand",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Yasuo",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kennen",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Evelynn",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Darius",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nilah",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kayn",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Karthus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Vayne",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Morgana",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zilean",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Diana",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Veigar",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Graves",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Shaco",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Soraka",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Hecarim",
+          "value": 0.0,
+          "support_weight": 0.0
+        }
+      ]
+    },
+    "LTA_S": {
+      "total_actions_used": 5990,
+      "total_weight_sum": 511.64,
+      "heroes": [
+        {
+          "hero": "Pantheon",
+          "value": 0.037364,
+          "support_weight": 19.12
+        },
+        {
+          "hero": "Azir",
+          "value": 0.031891,
+          "support_weight": 16.32
+        },
+        {
+          "hero": "Poppy",
+          "value": 0.027245,
+          "support_weight": 13.94
+        },
+        {
+          "hero": "Rumble",
+          "value": 0.026829,
+          "support_weight": 13.73
+        },
+        {
+          "hero": "Neeko",
+          "value": 0.025242,
+          "support_weight": 12.91
+        },
+        {
+          "hero": "Sion",
+          "value": 0.024407,
+          "support_weight": 12.49
+        },
+        {
+          "hero": "Orianna",
+          "value": 0.023705,
+          "support_weight": 12.13
+        },
+        {
+          "hero": "Kai'Sa",
+          "value": 0.02296,
+          "support_weight": 11.75
+        },
+        {
+          "hero": "Taliyah",
+          "value": 0.022913,
+          "support_weight": 11.72
+        },
+        {
+          "hero": "Yunara",
+          "value": 0.022846,
+          "support_weight": 11.69
+        },
+        {
+          "hero": "Gwen",
+          "value": 0.022511,
+          "support_weight": 11.52
+        },
+        {
+          "hero": "Trundle",
+          "value": 0.022422,
+          "support_weight": 11.47
+        },
+        {
+          "hero": "Yone",
+          "value": 0.022288,
+          "support_weight": 11.4
+        },
+        {
+          "hero": "Varus",
+          "value": 0.022248,
+          "support_weight": 11.38
+        },
+        {
+          "hero": "Alistar",
+          "value": 0.021311,
+          "support_weight": 10.9
+        },
+        {
+          "hero": "Ryze",
+          "value": 0.021304,
+          "support_weight": 10.9
+        },
+        {
+          "hero": "Corki",
+          "value": 0.020677,
+          "support_weight": 10.58
+        },
+        {
+          "hero": "Ambessa",
+          "value": 0.02036,
+          "support_weight": 10.42
+        },
+        {
+          "hero": "Xin Zhao",
+          "value": 0.019781,
+          "support_weight": 10.12
+        },
+        {
+          "hero": "Aurora",
+          "value": 0.019334,
+          "support_weight": 9.89
+        },
+        {
+          "hero": "Lucian",
+          "value": 0.019169,
+          "support_weight": 9.81
+        },
+        {
+          "hero": "Wukong",
+          "value": 0.018983,
+          "support_weight": 9.71
+        },
+        {
+          "hero": "Rakan",
+          "value": 0.018117,
+          "support_weight": 9.27
+        },
+        {
+          "hero": "Jarvan IV",
+          "value": 0.018006,
+          "support_weight": 9.21
+        },
+        {
+          "hero": "Sivir",
+          "value": 0.017339,
+          "support_weight": 8.87
+        },
+        {
+          "hero": "Annie",
+          "value": 0.016682,
+          "support_weight": 8.54
+        },
+        {
+          "hero": "Galio",
+          "value": 0.016668,
+          "support_weight": 8.53
+        },
+        {
+          "hero": "Nautilus",
+          "value": 0.016231,
+          "support_weight": 8.3
+        },
+        {
+          "hero": "Vi",
+          "value": 0.01603,
+          "support_weight": 8.2
+        },
+        {
+          "hero": "Rell",
+          "value": 0.015952,
+          "support_weight": 8.16
+        },
+        {
+          "hero": "Jax",
+          "value": 0.014774,
+          "support_weight": 7.56
+        },
+        {
+          "hero": "Bard",
+          "value": 0.014747,
+          "support_weight": 7.55
+        },
+        {
+          "hero": "Ezreal",
+          "value": 0.013738,
+          "support_weight": 7.03
+        },
+        {
+          "hero": "Skarner",
+          "value": 0.012949,
+          "support_weight": 6.63
+        },
+        {
+          "hero": "Senna",
+          "value": 0.012405,
+          "support_weight": 6.35
+        },
+        {
+          "hero": "K'Sante",
+          "value": 0.012254,
+          "support_weight": 6.27
+        },
+        {
+          "hero": "Nocturne",
+          "value": 0.012169,
+          "support_weight": 6.23
+        },
+        {
+          "hero": "Maokai",
+          "value": 0.011988,
+          "support_weight": 6.13
+        },
+        {
+          "hero": "Renekton",
+          "value": 0.011479,
+          "support_weight": 5.87
+        },
+        {
+          "hero": "Yorick",
+          "value": 0.011358,
+          "support_weight": 5.81
+        },
+        {
+          "hero": "Ziggs",
+          "value": 0.011036,
+          "support_weight": 5.65
+        },
+        {
+          "hero": "Sejuani",
+          "value": 0.01078,
+          "support_weight": 5.52
+        },
+        {
+          "hero": "Akali",
+          "value": 0.010646,
+          "support_weight": 5.45
+        },
+        {
+          "hero": "Sylas",
+          "value": 0.00899,
+          "support_weight": 4.6
+        },
+        {
+          "hero": "Zeri",
+          "value": 0.008847,
+          "support_weight": 4.53
+        },
+        {
+          "hero": "Jhin",
+          "value": 0.008706,
+          "support_weight": 4.45
+        },
+        {
+          "hero": "Braum",
+          "value": 0.008463,
+          "support_weight": 4.33
+        },
+        {
+          "hero": "Cho'Gath",
+          "value": 0.008116,
+          "support_weight": 4.15
+        },
+        {
+          "hero": "Xayah",
+          "value": 0.007601,
+          "support_weight": 3.89
+        },
+        {
+          "hero": "Miss Fortune",
+          "value": 0.00652,
+          "support_weight": 3.34
+        },
+        {
+          "hero": "Aatrox",
+          "value": 0.006455,
+          "support_weight": 3.3
+        },
+        {
+          "hero": "Leona",
+          "value": 0.00611,
+          "support_weight": 3.13
+        },
+        {
+          "hero": "Cassiopeia",
+          "value": 0.006072,
+          "support_weight": 3.11
+        },
+        {
+          "hero": "Renata Glasc",
+          "value": 0.005767,
+          "support_weight": 2.95
+        },
+        {
+          "hero": "Ahri",
+          "value": 0.005583,
+          "support_weight": 2.86
+        },
+        {
+          "hero": "Volibear",
+          "value": 0.00538,
+          "support_weight": 2.75
+        },
+        {
+          "hero": "Gnar",
+          "value": 0.005101,
+          "support_weight": 2.61
+        },
+        {
+          "hero": "Jinx",
+          "value": 0.004512,
+          "support_weight": 2.31
+        },
+        {
+          "hero": "Viktor",
+          "value": 0.004493,
+          "support_weight": 2.3
+        },
+        {
+          "hero": "Viego",
+          "value": 0.004396,
+          "support_weight": 2.25
+        },
+        {
+          "hero": "Jayce",
+          "value": 0.00436,
+          "support_weight": 2.23
+        },
+        {
+          "hero": "Qiyana",
+          "value": 0.004133,
+          "support_weight": 2.11
+        },
+        {
+          "hero": "Aphelios",
+          "value": 0.003761,
+          "support_weight": 1.92
+        },
+        {
+          "hero": "Ornn",
+          "value": 0.003752,
+          "support_weight": 1.92
+        },
+        {
+          "hero": "Rek'Sai",
+          "value": 0.003339,
+          "support_weight": 1.71
+        },
+        {
+          "hero": "Blitzcrank",
+          "value": 0.003242,
+          "support_weight": 1.66
+        },
+        {
+          "hero": "Tristana",
+          "value": 0.003141,
+          "support_weight": 1.61
+        },
+        {
+          "hero": "Kalista",
+          "value": 0.003055,
+          "support_weight": 1.56
+        },
+        {
+          "hero": "Ashe",
+          "value": 0.002789,
+          "support_weight": 1.43
+        },
+        {
+          "hero": "Nami",
+          "value": 0.002767,
+          "support_weight": 1.42
+        },
+        {
+          "hero": "Pyke",
+          "value": 0.002674,
+          "support_weight": 1.37
+        },
+        {
+          "hero": "Karma",
+          "value": 0.002668,
+          "support_weight": 1.37
+        },
+        {
+          "hero": "Gragas",
+          "value": 0.002381,
+          "support_weight": 1.22
+        },
+        {
+          "hero": "Camille",
+          "value": 0.002377,
+          "support_weight": 1.22
+        },
+        {
+          "hero": "Lulu",
+          "value": 0.002308,
+          "support_weight": 1.18
+        },
+        {
+          "hero": "Milio",
+          "value": 0.002305,
+          "support_weight": 1.18
+        },
+        {
+          "hero": "Dr. Mundo",
+          "value": 0.002285,
+          "support_weight": 1.17
+        },
+        {
+          "hero": "Zyra",
+          "value": 0.002202,
+          "support_weight": 1.13
+        },
+        {
+          "hero": "Naafiri",
+          "value": 0.002198,
+          "support_weight": 1.12
+        },
+        {
+          "hero": "Smolder",
+          "value": 0.002166,
+          "support_weight": 1.11
+        },
+        {
+          "hero": "Morgana",
+          "value": 0.002048,
+          "support_weight": 1.05
+        },
+        {
+          "hero": "Vayne",
+          "value": 0.002042,
+          "support_weight": 1.04
+        },
+        {
+          "hero": "Zed",
+          "value": 0.00169,
+          "support_weight": 0.86
+        },
+        {
+          "hero": "Lee Sin",
+          "value": 0.001669,
+          "support_weight": 0.85
+        },
+        {
+          "hero": "Seraphine",
+          "value": 0.001626,
+          "support_weight": 0.83
+        },
+        {
+          "hero": "Garen",
+          "value": 0.001547,
+          "support_weight": 0.79
+        },
+        {
+          "hero": "Caitlyn",
+          "value": 0.001166,
+          "support_weight": 0.6
+        },
+        {
+          "hero": "Twisted Fate",
+          "value": 0.001085,
+          "support_weight": 0.56
+        },
+        {
+          "hero": "Nidalee",
+          "value": 0.001081,
+          "support_weight": 0.55
+        },
+        {
+          "hero": "Syndra",
+          "value": 0.00106,
+          "support_weight": 0.54
+        },
+        {
+          "hero": "Tahm Kench",
+          "value": 0.000904,
+          "support_weight": 0.46
+        },
+        {
+          "hero": "Olaf",
+          "value": 0.000886,
+          "support_weight": 0.45
+        },
+        {
+          "hero": "Ivern",
+          "value": 0.000627,
+          "support_weight": 0.32
+        },
+        {
+          "hero": "Gangplank",
+          "value": 0.000447,
+          "support_weight": 0.23
+        },
+        {
+          "hero": "LeBlanc",
+          "value": 0.000392,
+          "support_weight": 0.2
+        },
+        {
+          "hero": "Draven",
+          "value": 0.000387,
+          "support_weight": 0.2
+        },
+        {
+          "hero": "Amumu",
+          "value": 0.000372,
+          "support_weight": 0.19
+        },
+        {
+          "hero": "Lillia",
+          "value": 0.000343,
+          "support_weight": 0.18
+        },
+        {
+          "hero": "Thresh",
+          "value": 0.000249,
+          "support_weight": 0.13
+        },
+        {
+          "hero": "Zoe",
+          "value": 7.7e-05,
+          "support_weight": 0.04
+        },
+        {
+          "hero": "Warwick",
+          "value": 4e-05,
+          "support_weight": 0.02
+        },
+        {
+          "hero": "Yasuo",
+          "value": 2.1e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Kassadin",
+          "value": 1.6e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Hwei",
+          "value": 1.4e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Xerath",
+          "value": 1e-05,
+          "support_weight": 0.01
+        },
+        {
+          "hero": "Fiddlesticks",
+          "value": 9e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mel",
+          "value": 8e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Lux",
+          "value": 8e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Fiora",
+          "value": 6e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Veigar",
+          "value": 4e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Soraka",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kennen",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Shen",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Kindred",
+          "value": 3e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Aurelion Sol",
+          "value": 2e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Irelia",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Vladimir",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Sett",
+          "value": 1e-06,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Elise",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Vex",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Urgot",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Zac",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Janna",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Mordekaiser",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Brand",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Udyr",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Swain",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nasus",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Malphite",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Rengar",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Nilah",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Bel'Veth",
+          "value": 0.0,
+          "support_weight": 0.0
+        },
+        {
+          "hero": "Heimerdinger",
+          "value": 0.0,
+          "support_weight": 0.0
+        }
+      ]
+    }
+  }
+}

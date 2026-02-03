@@ -1,0 +1,346 @@
+{
+  "config": {
+    "beta": 0.15,
+    "weights": {
+      "PICK_1": {
+        "meta": 0.35,
+        "role": 0.25,
+        "synergy": 0.1,
+        "counter": 0.15,
+        "team": 0.15
+      },
+      "PICK_2": {
+        "meta": 0.3,
+        "role": 0.25,
+        "synergy": 0.15,
+        "counter": 0.15,
+        "team": 0.15
+      },
+      "PICK_3": {
+        "meta": 0.25,
+        "role": 0.2,
+        "synergy": 0.2,
+        "counter": 0.2,
+        "team": 0.15
+      },
+      "PICK_4": {
+        "meta": 0.2,
+        "role": 0.15,
+        "synergy": 0.25,
+        "counter": 0.25,
+        "team": 0.15
+      },
+      "PICK_5": {
+        "meta": 0.15,
+        "role": 0.1,
+        "synergy": 0.3,
+        "counter": 0.3,
+        "team": 0.15
+      }
+    }
+  },
+  "stats": {
+    "champions": 159,
+    "synergyPairs": 5160,
+    "counterPairs": 8202,
+    "teams": 55
+  },
+  "slotRolePrior": {
+    "blue": {
+      "PICK_1": {
+        "top": 0.2880954644960102,
+        "jungle": 0.27447785780676726,
+        "mid": 0.24531535744483854,
+        "bot": 0.1563329741307841,
+        "support": 0.035778346121599955
+      },
+      "PICK_2": {
+        "top": 0.1795654381357684,
+        "jungle": 0.41404128144402924,
+        "mid": 0.1445561551386362,
+        "bot": 0.208405349541017,
+        "support": 0.05343177574054922
+      },
+      "PICK_3": {
+        "top": 0.21055215227296012,
+        "jungle": 0.11557157889627931,
+        "mid": 0.32618479238047393,
+        "bot": 0.1501142141957961,
+        "support": 0.19757726225449052
+      },
+      "PICK_4": {
+        "top": 0.16213942776516918,
+        "jungle": 0.09661981075186446,
+        "mid": 0.13377686523622234,
+        "bot": 0.42667218181201894,
+        "support": 0.18079171443472503
+      },
+      "PICK_5": {
+        "top": 0.1596475173300922,
+        "jungle": 0.09928947110105951,
+        "mid": 0.150166829799829,
+        "bot": 0.05847528032038397,
+        "support": 0.5324209014486353
+      }
+    },
+    "red": {
+      "PICK_1": {
+        "top": 0.31397084161211847,
+        "jungle": 0.21979665949668312,
+        "mid": 0.19252007861015155,
+        "bot": 0.23018280515554052,
+        "support": 0.04352961512550628
+      },
+      "PICK_2": {
+        "top": 0.11004126388836877,
+        "jungle": 0.4287698441371744,
+        "mid": 0.19808936707472183,
+        "bot": 0.17582875660824138,
+        "support": 0.08727076829149372
+      },
+      "PICK_3": {
+        "top": 0.2688123981106389,
+        "jungle": 0.173695055054683,
+        "mid": 0.2929696626645446,
+        "bot": 0.12982221825389179,
+        "support": 0.13470066591624177
+      },
+      "PICK_4": {
+        "top": 0.11736992434459875,
+        "jungle": 0.12270598138674647,
+        "mid": 0.1564520765007427,
+        "bot": 0.32640203279729124,
+        "support": 0.2770699849706208
+      },
+      "PICK_5": {
+        "top": 0.1890630141396786,
+        "jungle": 0.055208855003645994,
+        "mid": 0.16026634157446965,
+        "bot": 0.13789602892032013,
+        "support": 0.4575657603618856
+      }
+    }
+  },
+  "topSynergies": [
+    {
+      "pair": [
+        "Alistar",
+        "Varus"
+      ],
+      "games": 89,
+      "winRate": 0.6291137713161379
+    },
+    {
+      "pair": [
+        "Varus",
+        "Rell"
+      ],
+      "games": 126,
+      "winRate": 0.6150713053942216
+    },
+    {
+      "pair": [
+        "Kai'Sa",
+        "Neeko"
+      ],
+      "games": 45,
+      "winRate": 0.6100272476417608
+    },
+    {
+      "pair": [
+        "Rakan",
+        "Xayah"
+      ],
+      "games": 159,
+      "winRate": 0.6059805471197203
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Rumble"
+      ],
+      "games": 77,
+      "winRate": 0.5990197038050046
+    },
+    {
+      "pair": [
+        "Taliyah",
+        "Xin Zhao"
+      ],
+      "games": 102,
+      "winRate": 0.595383607496659
+    },
+    {
+      "pair": [
+        "Taliyah",
+        "Alistar"
+      ],
+      "games": 82,
+      "winRate": 0.5893397777116085
+    },
+    {
+      "pair": [
+        "Renata Glasc",
+        "Kalista"
+      ],
+      "games": 134,
+      "winRate": 0.5782862953559542
+    },
+    {
+      "pair": [
+        "Rumble",
+        "Rell"
+      ],
+      "games": 96,
+      "winRate": 0.5724491178300868
+    },
+    {
+      "pair": [
+        "Yone",
+        "Sejuani"
+      ],
+      "games": 146,
+      "winRate": 0.567857311030283
+    },
+    {
+      "pair": [
+        "Rumble",
+        "Alistar"
+      ],
+      "games": 90,
+      "winRate": 0.5449690505740415
+    },
+    {
+      "pair": [
+        "Rumble",
+        "Varus"
+      ],
+      "games": 78,
+      "winRate": 0.5356499792317153
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Rakan"
+      ],
+      "games": 69,
+      "winRate": 0.5301722734109287
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Ahri"
+      ],
+      "games": 58,
+      "winRate": 0.529393808702329
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Alistar"
+      ],
+      "games": 57,
+      "winRate": 0.5248635239499878
+    },
+    {
+      "pair": [
+        "Taliyah",
+        "Nautilus"
+      ],
+      "games": 111,
+      "winRate": 0.5216939810822722
+    },
+    {
+      "pair": [
+        "Taliyah",
+        "Ezreal"
+      ],
+      "games": 66,
+      "winRate": 0.5017771234987236
+    },
+    {
+      "pair": [
+        "Miss Fortune",
+        "Rell"
+      ],
+      "games": 110,
+      "winRate": 0.48609586237139396
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Varus"
+      ],
+      "games": 84,
+      "winRate": 0.48299770152961224
+    },
+    {
+      "pair": [
+        "Ezreal",
+        "Alistar"
+      ],
+      "games": 111,
+      "winRate": 0.4808538166555601
+    },
+    {
+      "pair": [
+        "Jhin",
+        "Rell"
+      ],
+      "games": 78,
+      "winRate": 0.47652938126417294
+    },
+    {
+      "pair": [
+        "Lucian",
+        "Nami"
+      ],
+      "games": 138,
+      "winRate": 0.4652453925800258
+    },
+    {
+      "pair": [
+        "Vi",
+        "Ahri"
+      ],
+      "games": 85,
+      "winRate": 0.4642792860508414
+    },
+    {
+      "pair": [
+        "Xin Zhao",
+        "Azir"
+      ],
+      "games": 102,
+      "winRate": 0.43932600034400743
+    },
+    {
+      "pair": [
+        "Ezreal",
+        "Leona"
+      ],
+      "games": 178,
+      "winRate": 0.39179537201394043
+    }
+  ],
+  "topCounters": [
+    {
+      "oppPick": "Rumble",
+      "ourCounter": "Rell",
+      "games": 74,
+      "winRate": 0.586317433869056
+    },
+    {
+      "oppPick": "Rumble",
+      "ourCounter": "Alistar",
+      "games": 67,
+      "winRate": 0.5021581127943547
+    },
+    {
+      "oppPick": "Taliyah",
+      "ourCounter": "Alistar",
+      "games": 61,
+      "winRate": 0.36473275781870057
+    }
+  ]
+}

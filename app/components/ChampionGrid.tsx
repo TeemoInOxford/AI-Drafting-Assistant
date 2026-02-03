@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Champion, HistorySelectMode } from '../lib/types';
+import { ThreatLevel } from '../lib/threat-types';
 import ChampionCard from './ChampionCard';
 
 interface ChampionGridProps {
@@ -12,6 +13,9 @@ interface ChampionGridProps {
   fearlessPool?: Set<string>;
   historySelectMode?: HistorySelectMode;
   shakeChampionId?: string | null;
+  threatData?: Map<string, { level: ThreatLevel; score: number }>;
+  /** Unified disabled IDs set (includes used + fearless) */
+  disabledIds?: Set<string>;
 }
 
 export default function ChampionGrid({
@@ -22,6 +26,8 @@ export default function ChampionGrid({
   fearlessPool,
   historySelectMode = 'off',
   shakeChampionId,
+  threatData,
+  disabledIds,
 }: ChampionGridProps) {
   return (
     <div className="w-full pb-8 flex justify-center px-4">
@@ -35,10 +41,16 @@ export default function ChampionGrid({
         {champions.map((champion, index) => {
           const isUsed = usedChampions.has(champion.id);
           const isFearlessBanned = fearlessPool?.has(champion.id) || false;
+
+          // Use unified disabledIds if provided, otherwise fall back to old logic
           const isDisabled = historySelectMode !== 'off'
             ? isFearlessBanned
-            : (disabled || isUsed);
+            : disabledIds
+              ? disabledIds.has(champion.id) || disabled
+              : disabled || isUsed || isFearlessBanned;
+
           const shouldShake = shakeChampionId === champion.id;
+          const threat = threatData?.get(champion.name);
 
           return (
             <ChampionCard
@@ -51,6 +63,8 @@ export default function ChampionGrid({
               index={index}
               historySelectMode={historySelectMode}
               shouldShake={shouldShake}
+              threatLevel={threat?.level}
+              threatScore={threat?.score}
             />
           );
         })}

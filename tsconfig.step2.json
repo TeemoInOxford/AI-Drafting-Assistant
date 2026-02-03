@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "app/lib/weighted-role-types.ts",
+    "app/lib/weighted-role-loader.ts",
+    "app/api/roles/champion/route.ts",
+    "app/api/roles/flex/route.ts"
+  ]
+}

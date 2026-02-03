@@ -23,6 +23,71 @@ let localStatesCache: Record<string, any> | null = null;
 let localIndexCache: any | null = null;
 let localHierarchyCache: any | null = null;
 
+// Fill in missing player names from hierarchy and deduplicate players
+function fillMissingPlayerNames(state: any): any {
+  if (!state) return state;
+
+  const hierarchy = loadLocalHierarchy();
+  if (!hierarchy) return state;
+
+  // Deep clone to avoid modifying cache
+  const filledState = JSON.parse(JSON.stringify(state));
+
+  for (const game of (filledState.games || [])) {
+    for (const team of (game.teams || [])) {
+      // Fill missing names
+      for (const player of (team.players || [])) {
+        if (!player.name || player.name.trim() === '') {
+          const playerInfo = hierarchy.players?.[player.id];
+          if (playerInfo?.name) {
+            player.name = playerInfo.name;
+          }
+        }
+      }
+
+      // Deduplicate players - keep the one with more data (higher kills or non-zero stats)
+      const playerMap = new Map<string, any>();
+      for (const player of (team.players || [])) {
+        const existingPlayer = playerMap.get(player.id);
+        if (!existingPlayer) {
+          playerMap.set(player.id, player);
+        } else {
+          // Keep the player with more meaningful data
+          const existingScore = (existingPlayer.kills || 0) + (existingPlayer.deaths || 0) + (existingPlayer.killAssistsGiven || 0);
+          const newScore = (player.kills || 0) + (player.deaths || 0) + (player.killAssistsGiven || 0);
+          if (newScore > existingScore) {
+            playerMap.set(player.id, player);
+          }
+        }
+      }
+      team.players = Array.from(playerMap.values());
+    }
+  }
+
+  // Also fill series-level team players
+  for (const team of (filledState.teams || [])) {
+    for (const player of (team.players || [])) {
+      if (!player.name || player.name.trim() === '') {
+        const playerInfo = hierarchy.players?.[player.id];
+        if (playerInfo?.name) {
+          player.name = playerInfo.name;
+        }
+      }
+    }
+
+    // Deduplicate series-level players
+    const playerMap = new Map<string, any>();
+    for (const player of (team.players || [])) {
+      if (!playerMap.has(player.id)) {
+        playerMap.set(player.id, player);
+      }
+    }
+    team.players = Array.from(playerMap.values());
+  }
+
+  return filledState;
+}
+
 // Load local data
 function loadLocalSeries(): any[] {
   if (localSeriesCache) return localSeriesCache;
@@ -76,11 +141,28 @@ function loadLocalHierarchy(): any {
   return null;
 }
 
-// Get all series IDs for a league (by league name)
-function getSeriesIdsForLeague(leagueName: string): string[] {
+// Get all series IDs for a league (by league name and optional region)
+function getSeriesIdsForLeague(leagueName: string, regionCode?: string): string[] {
   const hierarchy = loadLocalHierarchy();
   if (!hierarchy) return [];
 
+  // If region is specified, search only in that region
+  if (regionCode && hierarchy.regions[regionCode]) {
+    const region = hierarchy.regions[regionCode];
+    if (region.leagues[leagueName]) {
+      const league = region.leagues[leagueName];
+      const seriesIds: string[] = [];
+      Object.values(league.tournaments).forEach((t: any) => {
+        if (t.seriesIds) {
+          seriesIds.push(...t.seriesIds);
+        }
+      });
+      return seriesIds;
+    }
+    return [];
+  }
+
+  // Otherwise search across all regions (original behavior)
   for (const region of Object.values(hierarchy.regions) as any[]) {
     if (region.leagues[leagueName]) {
       const league = region.leagues[leagueName];
@@ -631,6 +713,7 @@ export async function GET(request: NextRequest) {
   const tournamentId = searchParams.get('tournament');
   const seriesId = searchParams.get('seriesId');
   const playerId = searchParams.get('player');
+  const regionCode = searchParams.get('region');
   const type = searchParams.get('type') || 'tournament';
   const includeState = searchParams.get('includeState') === 'true';
   const useLocal = hasLocalData(); // Check if local data is available
@@ -640,7 +723,7 @@ export async function GET(request: NextRequest) {
     if (type === 'count' && tournamentId) {
       if (useLocal) {
         // First try to get series by league name from hierarchy
-        const leagueSeriesIds = getSeriesIdsForLeague(tournamentId);
+        const leagueSeriesIds = getSeriesIdsForLeague(tournamentId, regionCode || undefined);
 
         if (leagueSeriesIds.length > 0) {
           // tournamentId is a league name
@@ -673,22 +756,22 @@ export async function GET(request: NextRequest) {
     if (type === 'player' && playerId) {
       if (useLocal) {
         const index = loadLocalIndex();
-        const playerData = index?.players?.[playerId];
-        if (playerData) {
+        const playerSeriesIds = index?.byPlayer?.[playerId] || [];
+        if (playerSeriesIds.length > 0) {
           const allSeries = loadLocalSeries();
           const allStates = loadLocalStates();
-          const playerSeriesIds = playerData.seriesIds || [];
+          const seriesIdSet = new Set(playerSeriesIds);
           const playerSeries = allSeries
-            .filter((s: any) => playerSeriesIds.includes(s.id))
+            .filter((s: any) => seriesIdSet.has(s.id))
             .sort((a: any, b: any) =>
-              new Date(b.startTimeScheduled).getTime() - new Date(a.startTimeScheduled).getTime()
+              new Date(b.startedAt || b.startTimeScheduled).getTime() - new Date(a.startedAt || a.startTimeScheduled).getTime()
             );
 
           let seriesWithState = playerSeries;
           if (includeState) {
             seriesWithState = playerSeries.map((s: any) => ({
               ...s,
-              state: allStates[s.id] || null
+              state: fillMissingPlayerNames(allStates[s.id]) || null
             }));
           }
 
@@ -729,7 +812,7 @@ export async function GET(request: NextRequest) {
           return NextResponse.json({
             success: true,
             seriesId,
-            state,
+            state: fillMissingPlayerNames(state),
             source: 'local'
           });
         }
@@ -758,7 +841,7 @@ export async function GET(request: NextRequest) {
         if (includeState) {
           seriesWithState = allSeries.map((s: any) => ({
             ...s,
-            state: allStates[s.id] || null
+            state: fillMissingPlayerNames(allStates[s.id]) || null
           }));
         }
 
@@ -795,7 +878,7 @@ export async function GET(request: NextRequest) {
         const allStates = loadLocalStates();
 
         // First try to get series by league name from hierarchy
-        const leagueSeriesIds = getSeriesIdsForLeague(tournamentId);
+        const leagueSeriesIds = getSeriesIdsForLeague(tournamentId, regionCode || undefined);
         let matchingSeries: any[] = [];
 
         if (leagueSeriesIds.length > 0) {
@@ -816,7 +899,7 @@ export async function GET(request: NextRequest) {
         if (includeState) {
           seriesWithState = matchingSeries.map((s: any) => ({
             ...s,
-            state: allStates[s.id] || null
+            state: fillMissingPlayerNames(allStates[s.id]) || null
           }));
         }
 

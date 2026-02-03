@@ -1,0 +1,434 @@
+{
+  "generated_at": "2026-02-03T00:20:25.325Z",
+  "feature_names": [
+    "our_meta_sum",
+    "opp_meta_sum",
+    "our_synergy",
+    "opp_synergy",
+    "counter_for",
+    "counter_against",
+    "power_diff",
+    "role_coverage",
+    "pick_progress"
+  ],
+  "training_config": {
+    "learning_rate_init": 0.5,
+    "l2_lambda": 0.01,
+    "max_iterations": 2000,
+    "convergence_tol": 1e-7,
+    "split_method": "chronological_2/3_train_1/3_val",
+    "normalization": "z_score_from_train_set"
+  },
+  "models": [
+    {
+      "slot": "PICK_1",
+      "features": [
+        "our_meta_sum",
+        "opp_meta_sum",
+        "our_synergy",
+        "opp_synergy",
+        "counter_for",
+        "counter_against",
+        "power_diff",
+        "role_coverage",
+        "pick_progress"
+      ],
+      "weights": {
+        "our_meta_sum": 0.001394,
+        "opp_meta_sum": -0.144464,
+        "our_synergy": 0,
+        "opp_synergy": 0,
+        "counter_for": -0.039902,
+        "counter_against": 0,
+        "power_diff": 0.76596,
+        "role_coverage": 0,
+        "pick_progress": 0
+      },
+      "bias": -0.000602,
+      "normalization": {
+        "our_meta_sum": {
+          "mean": 0.019306,
+          "std": 0.011022
+        },
+        "opp_meta_sum": {
+          "mean": 0.009626,
+          "std": 0.012372
+        },
+        "our_synergy": {
+          "mean": 0.5,
+          "std": 0
+        },
+        "opp_synergy": {
+          "mean": 0.5,
+          "std": 0
+        },
+        "counter_for": {
+          "mean": 0.49925,
+          "std": 0.10519
+        },
+        "counter_against": {
+          "mean": 0.5,
+          "std": 0
+        },
+        "power_diff": {
+          "mean": 0,
+          "std": 0.157843
+        },
+        "role_coverage": {
+          "mean": 1,
+          "std": 0
+        },
+        "pick_progress": {
+          "mean": 0.2,
+          "std": 0
+        }
+      },
+      "metrics": {
+        "train": {
+          "accuracy": 0.6455,
+          "log_loss": 0.625,
+          "brier_score": 0.2177,
+          "auc": 0.7067,
+          "n": 4502,
+          "win_rate": 0.5
+        },
+        "val": {
+          "accuracy": 0.6399,
+          "log_loss": 0.6353,
+          "brier_score": 0.2225,
+          "auc": 0.6918,
+          "n": 2252,
+          "win_rate": 0.5
+        }
+      }
+    },
+    {
+      "slot": "PICK_2",
+      "features": [
+        "our_meta_sum",
+        "opp_meta_sum",
+        "our_synergy",
+        "opp_synergy",
+        "counter_for",
+        "counter_against",
+        "power_diff",
+        "role_coverage",
+        "pick_progress"
+      ],
+      "weights": {
+        "our_meta_sum": -0.021017,
+        "opp_meta_sum": 0.102587,
+        "our_synergy": -0.021464,
+        "opp_synergy": 0.010893,
+        "counter_for": 0.008746,
+        "counter_against": -0.019298,
+        "power_diff": 0.762313,
+        "role_coverage": 0,
+        "pick_progress": 0
+      },
+      "bias": 0.000279,
+      "normalization": {
+        "our_meta_sum": {
+          "mean": 0.037451,
+          "std": 0.016375
+        },
+        "opp_meta_sum": {
+          "mean": 0.028877,
+          "std": 0.017071
+        },
+        "our_synergy": {
+          "mean": 0.516053,
+          "std": 0.136059
+        },
+        "opp_synergy": {
+          "mean": 0.506698,
+          "std": 0.094796
+        },
+        "counter_for": {
+          "mean": 0.499094,
+          "std": 0.154323
+        },
+        "counter_against": {
+          "mean": 0.499556,
+          "std": 0.108425
+        },
+        "power_diff": {
+          "mean": 0,
+          "std": 0.157843
+        },
+        "role_coverage": {
+          "mean": 1,
+          "std": 0
+        },
+        "pick_progress": {
+          "mean": 0.4,
+          "std": 0
+        }
+      },
+      "metrics": {
+        "train": {
+          "accuracy": 0.6435,
+          "log_loss": 0.6263,
+          "brier_score": 0.2183,
+          "auc": 0.7052,
+          "n": 4502,
+          "win_rate": 0.5
+        },
+        "val": {
+          "accuracy": 0.647,
+          "log_loss": 0.6354,
+          "brier_score": 0.2226,
+          "auc": 0.6903,
+          "n": 2252,
+          "win_rate": 0.5
+        }
+      }
+    },
+    {
+      "slot": "PICK_3",
+      "features": [
+        "our_meta_sum",
+        "opp_meta_sum",
+        "our_synergy",
+        "opp_synergy",
+        "counter_for",
+        "counter_against",
+        "power_diff",
+        "role_coverage",
+        "pick_progress"
+      ],
+      "weights": {
+        "our_meta_sum": 0.025764,
+        "opp_meta_sum": -0.082756,
+        "our_synergy": 0.030713,
+        "opp_synergy": -0.020085,
+        "counter_for": 0.03197,
+        "counter_against": -0.018737,
+        "power_diff": 0.762157,
+        "role_coverage": 0,
+        "pick_progress": 0
+      },
+      "bias": -0.000014,
+      "normalization": {
+        "our_meta_sum": {
+          "mean": 0.055188,
+          "std": 0.021173
+        },
+        "opp_meta_sum": {
+          "mean": 0.0467,
+          "std": 0.020564
+        },
+        "our_synergy": {
+          "mean": 0.516338,
+          "std": 0.11814
+        },
+        "opp_synergy": {
+          "mean": 0.516424,
+          "std": 0.127061
+        },
+        "counter_for": {
+          "mean": 0.498595,
+          "std": 0.149062
+        },
+        "counter_against": {
+          "mean": 0.497613,
+          "std": 0.144324
+        },
+        "power_diff": {
+          "mean": 0,
+          "std": 0.157843
+        },
+        "role_coverage": {
+          "mean": 1,
+          "std": 0
+        },
+        "pick_progress": {
+          "mean": 0.6,
+          "std": 0
+        }
+      },
+      "metrics": {
+        "train": {
+          "accuracy": 0.6535,
+          "log_loss": 0.6265,
+          "brier_score": 0.2185,
+          "auc": 0.7041,
+          "n": 4502,
+          "win_rate": 0.5
+        },
+        "val": {
+          "accuracy": 0.6359,
+          "log_loss": 0.6358,
+          "brier_score": 0.2227,
+          "auc": 0.6914,
+          "n": 2252,
+          "win_rate": 0.5
+        }
+      }
+    },
+    {
+      "slot": "PICK_4",
+      "features": [
+        "our_meta_sum",
+        "opp_meta_sum",
+        "our_synergy",
+        "opp_synergy",
+        "counter_for",
+        "counter_against",
+        "power_diff",
+        "role_coverage",
+        "pick_progress"
+      ],
+      "weights": {
+        "our_meta_sum": -0.021841,
+        "opp_meta_sum": 0.069701,
+        "our_synergy": 0.045915,
+        "opp_synergy": -0.037784,
+        "counter_for": -0.057379,
+        "counter_against": -0.030415,
+        "power_diff": 0.759042,
+        "role_coverage": 0,
+        "pick_progress": 0
+      },
+      "bias": -0.000144,
+      "normalization": {
+        "our_meta_sum": {
+          "mean": 0.071765,
+          "std": 0.024671
+        },
+        "opp_meta_sum": {
+          "mean": 0.063639,
+          "std": 0.024573
+        },
+        "our_synergy": {
+          "mean": 0.51153,
+          "std": 0.101594
+        },
+        "opp_synergy": {
+          "mean": 0.515232,
+          "std": 0.110244
+        },
+        "counter_for": {
+          "mean": 0.494694,
+          "std": 0.141243
+        },
+        "counter_against": {
+          "mean": 0.496722,
+          "std": 0.126535
+        },
+        "power_diff": {
+          "mean": 0,
+          "std": 0.157843
+        },
+        "role_coverage": {
+          "mean": 1,
+          "std": 0
+        },
+        "pick_progress": {
+          "mean": 0.8,
+          "std": 0
+        }
+      },
+      "metrics": {
+        "train": {
+          "accuracy": 0.6417,
+          "log_loss": 0.6262,
+          "brier_score": 0.2183,
+          "auc": 0.7049,
+          "n": 4502,
+          "win_rate": 0.5
+        },
+        "val": {
+          "accuracy": 0.647,
+          "log_loss": 0.6348,
+          "brier_score": 0.2223,
+          "auc": 0.6915,
+          "n": 2252,
+          "win_rate": 0.5
+        }
+      }
+    },
+    {
+      "slot": "PICK_5",
+      "features": [
+        "our_meta_sum",
+        "opp_meta_sum",
+        "our_synergy",
+        "opp_synergy",
+        "counter_for",
+        "counter_against",
+        "power_diff",
+        "role_coverage",
+        "pick_progress"
+      ],
+      "weights": {
+        "our_meta_sum": -0.006961,
+        "opp_meta_sum": -0.039944,
+        "our_synergy": 0.036183,
+        "opp_synergy": -0.030883,
+        "counter_for": -0.009913,
+        "counter_against": 0.015123,
+        "power_diff": 0.760316,
+        "role_coverage": 0,
+        "pick_progress": 0
+      },
+      "bias": 0.000106,
+      "normalization": {
+        "our_meta_sum": {
+          "mean": 0.086868,
+          "std": 0.027529
+        },
+        "opp_meta_sum": {
+          "mean": 0.08003,
+          "std": 0.027385
+        },
+        "our_synergy": {
+          "mean": 0.509151,
+          "std": 0.09004
+        },
+        "opp_synergy": {
+          "mean": 0.509957,
+          "std": 0.09565
+        },
+        "counter_for": {
+          "mean": 0.496613,
+          "std": 0.131259
+        },
+        "counter_against": {
+          "mean": 0.495997,
+          "std": 0.109161
+        },
+        "power_diff": {
+          "mean": 0,
+          "std": 0.157843
+        },
+        "role_coverage": {
+          "mean": 1,
+          "std": 0
+        },
+        "pick_progress": {
+          "mean": 1,
+          "std": 0
+        }
+      },
+      "metrics": {
+        "train": {
+          "accuracy": 0.6515,
+          "log_loss": 0.6273,
+          "brier_score": 0.2188,
+          "auc": 0.7035,
+          "n": 4502,
+          "win_rate": 0.5
+        },
+        "val": {
+          "accuracy": 0.6439,
+          "log_loss": 0.6362,
+          "brier_score": 0.2229,
+          "auc": 0.6907,
+          "n": 2252,
+          "win_rate": 0.5
+        }
+      }
+    }
+  ]
+}

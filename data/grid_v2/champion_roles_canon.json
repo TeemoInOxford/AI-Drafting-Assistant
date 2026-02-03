@@ -1,0 +1,1581 @@
+{
+  "meta": {
+    "generatedAt": "2026-01-31T18:22:54.339Z",
+    "totalSamplesUsed": 4364,
+    "uniqueMatchesUsed": 2661,
+    "uniqueChampions": 115,
+    "rules": {
+      "roleShareThreshold": 0.15,
+      "confidenceThreshold": 0.8,
+      "excludedSwapMatches": 256,
+      "excludedSwapSamples": 286
+    },
+    "source": "role_shift_diagnosis.json (all events where estimatedRole!=null && confidence>=0.8 && !player_role_swap)"
+  },
+  "champions": {
+    "Jax": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.9807692307692307,
+        "mid": 0.019230769230769232,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 52
+    },
+    "Yone": {
+      "roles": [
+        "top",
+        "jungle",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6575342465753424,
+        "jungle": 0.1780821917808219,
+        "mid": 0,
+        "bot": 0.1506849315068493,
+        "support": 0.0136986301369863
+      },
+      "total": 73
+    },
+    "Poppy": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "shares": {
+        "top": 0.30364372469635625,
+        "jungle": 0,
+        "mid": 0.12550607287449392,
+        "bot": 0.02834008097165992,
+        "support": 0.5425101214574899
+      },
+      "total": 247
+    },
+    "Aurora": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6601941747572816,
+        "jungle": 0.13592233009708737,
+        "mid": 0,
+        "bot": 0.18446601941747573,
+        "support": 0.019417475728155338
+      },
+      "total": 103
+    },
+    "Vi": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 18
+    },
+    "Trundle": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6,
+        "jungle": 0,
+        "mid": 0.2,
+        "bot": 0.2,
+        "support": 0
+      },
+      "total": 10
+    },
+    "Maokai": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.0893371757925072,
+        "jungle": 0.8962536023054755,
+        "mid": 0.005763688760806916,
+        "bot": 0.008645533141210375,
+        "support": 0
+      },
+      "total": 347
+    },
+    "Nocturne": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 8
+    },
+    "Sejuani": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.9545454545454546,
+        "jungle": 0,
+        "mid": 0.045454545454545456,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 22
+    },
+    "Brand": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.06870229007633588,
+        "jungle": 0.3893129770992366,
+        "mid": 0.5419847328244275,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 131
+    },
+    "Taliyah": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0.03776978417266187,
+        "jungle": 0,
+        "mid": 0.8920863309352518,
+        "bot": 0.06654676258992806,
+        "support": 0.0035971223021582736
+      },
+      "total": 556
+    },
+    "Tristana": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0.08888888888888889,
+        "jungle": 0.057777777777777775,
+        "mid": 0.8533333333333334,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 225
+    },
+    "Karma": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.08860759493670886,
+        "jungle": 0.16455696202531644,
+        "mid": 0.7341772151898734,
+        "bot": 0.012658227848101266,
+        "support": 0
+      },
+      "total": 79
+    },
+    "Jayce": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.038461538461538464,
+        "mid": 0.8717948717948718,
+        "bot": 0.08974358974358974,
+        "support": 0
+      },
+      "total": 78
+    },
+    "Senna": {
+      "roles": [
+        "bot"
+      ],
+      "shares": {
+        "top": 0.005434782608695652,
+        "jungle": 0.02717391304347826,
+        "mid": 0.04891304347826087,
+        "bot": 0.9184782608695652,
+        "support": 0
+      },
+      "total": 184
+    },
+    "Ziggs": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0.056818181818181816,
+        "jungle": 0.022727272727272728,
+        "mid": 0.9204545454545454,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 88
+    },
+    "Ashe": {
+      "roles": [
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "shares": {
+        "top": 0.045454545454545456,
+        "jungle": 0.21818181818181817,
+        "mid": 0.38181818181818183,
+        "bot": 0,
+        "support": 0.35454545454545455
+      },
+      "total": 110
+    },
+    "Lucian": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0.05714285714285714,
+        "jungle": 0.13333333333333333,
+        "mid": 0.8095238095238095,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 105
+    },
+    "Seraphine": {
+      "roles": [
+        "jungle",
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.03225806451612903,
+        "jungle": 0.16129032258064516,
+        "mid": 0.2903225806451613,
+        "bot": 0.5161290322580645,
+        "support": 0
+      },
+      "total": 31
+    },
+    "Rakan": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.2727272727272727,
+        "jungle": 0.7272727272727273,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 22
+    },
+    "Nami": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.15384615384615385,
+        "jungle": 0.8461538461538461,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 13
+    },
+    "TahmKench": {
+      "roles": [
+        "bot",
+        "support"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.09523809523809523,
+        "mid": 0.031746031746031744,
+        "bot": 0.3968253968253968,
+        "support": 0.47619047619047616
+      },
+      "total": 63
+    },
+    "Renata": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.3888888888888889,
+        "jungle": 0.6111111111111112,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 18
+    },
+    "Lulu": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.3,
+        "jungle": 0.7,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 10
+    },
+    "Neeko": {
+      "roles": [
+        "support"
+      ],
+      "shares": {
+        "top": 0.02158273381294964,
+        "jungle": 0.04316546762589928,
+        "mid": 0,
+        "bot": 0.014388489208633094,
+        "support": 0.920863309352518
+      },
+      "total": 278
+    },
+    "Leona": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.13513513513513514,
+        "jungle": 0.8648648648648649,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 37
+    },
+    "Elise": {
+      "roles": [
+        "top",
+        "mid",
+        "support"
+      ],
+      "shares": {
+        "top": 0.2857142857142857,
+        "jungle": 0,
+        "mid": 0.23809523809523808,
+        "bot": 0.047619047619047616,
+        "support": 0.42857142857142855
+      },
+      "total": 21
+    },
+    "Viego": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 20
+    },
+    "XinZhao": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 26
+    },
+    "Pantheon": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.03383458646616541,
+        "jungle": 0.7669172932330827,
+        "mid": 0.18045112781954886,
+        "bot": 0.018796992481203006,
+        "support": 0
+      },
+      "total": 266
+    },
+    "Naafiri": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.03361344537815126,
+        "jungle": 0.9495798319327731,
+        "mid": 0,
+        "bot": 0,
+        "support": 0.01680672268907563
+      },
+      "total": 119
+    },
+    "Smolder": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0.07272727272727272,
+        "jungle": 0.05454545454545454,
+        "mid": 0.8727272727272727,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 55
+    },
+    "Akali": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6111111111111112,
+        "jungle": 0.1111111111111111,
+        "mid": 0,
+        "bot": 0.2777777777777778,
+        "support": 0
+      },
+      "total": 36
+    },
+    "Galio": {
+      "roles": [
+        "top",
+        "jungle",
+        "support"
+      ],
+      "shares": {
+        "top": 0.3875,
+        "jungle": 0.2125,
+        "mid": 0,
+        "bot": 0.0875,
+        "support": 0.3125
+      },
+      "total": 80
+    },
+    "Ezreal": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.4375,
+        "jungle": 0.125,
+        "mid": 0.4375,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 16
+    },
+    "Milio": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.5714285714285714,
+        "jungle": 0.42857142857142855,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 7
+    },
+    "Varus": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.25,
+        "jungle": 0.5,
+        "mid": 0.25,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 4
+    },
+    "Rell": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.2222222222222222,
+        "jungle": 0.7777777777777778,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 27
+    },
+    "Ornn": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.13636363636363635,
+        "mid": 0.3181818181818182,
+        "bot": 0.5454545454545454,
+        "support": 0
+      },
+      "total": 22
+    },
+    "Vayne": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.6,
+        "jungle": 0,
+        "mid": 0.4,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 5
+    },
+    "Olaf": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.9,
+        "jungle": 0,
+        "mid": 0.1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 30
+    },
+    "LeeSin": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.8571428571428571,
+        "jungle": 0,
+        "mid": 0.14285714285714285,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 21
+    },
+    "Nidalee": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 16
+    },
+    "Talon": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Hwei": {
+      "roles": [
+        "bot",
+        "support"
+      ],
+      "shares": {
+        "top": 0.1111111111111111,
+        "jungle": 0.07407407407407407,
+        "mid": 0,
+        "bot": 0.25925925925925924,
+        "support": 0.5555555555555556
+      },
+      "total": 27
+    },
+    "Yasuo": {
+      "roles": [
+        "top",
+        "jungle",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.3888888888888889,
+        "jungle": 0.16666666666666666,
+        "mid": 0,
+        "bot": 0.4444444444444444,
+        "support": 0
+      },
+      "total": 18
+    },
+    "Nasus": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Ambessa": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.2,
+        "mid": 0.8,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 5
+    },
+    "Annie": {
+      "roles": [
+        "jungle",
+        "bot",
+        "support"
+      ],
+      "shares": {
+        "top": 0.13793103448275862,
+        "jungle": 0.3103448275862069,
+        "mid": 0,
+        "bot": 0.39655172413793105,
+        "support": 0.15517241379310345
+      },
+      "total": 58
+    },
+    "Ryze": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.375,
+        "jungle": 0.5,
+        "mid": 0,
+        "bot": 0.125,
+        "support": 0
+      },
+      "total": 8
+    },
+    "TwistedFate": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Rumble": {
+      "roles": [
+        "mid",
+        "support"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.09090909090909091,
+        "mid": 0.5454545454545454,
+        "bot": 0.09090909090909091,
+        "support": 0.2727272727272727
+      },
+      "total": 44
+    },
+    "Alistar": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.3225806451612903,
+        "jungle": 0.6774193548387096,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 31
+    },
+    "Shen": {
+      "roles": [
+        "support"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.11764705882352941,
+        "mid": 0,
+        "bot": 0,
+        "support": 0.8823529411764706
+      },
+      "total": 17
+    },
+    "Zilean": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Gragas": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.8307692307692308,
+        "jungle": 0,
+        "mid": 0.07692307692307693,
+        "bot": 0,
+        "support": 0.09230769230769231
+      },
+      "total": 65
+    },
+    "Karthus": {
+      "roles": [
+        "top",
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.375,
+        "jungle": 0,
+        "mid": 0.375,
+        "bot": 0.25,
+        "support": 0
+      },
+      "total": 8
+    },
+    "Skarner": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 5
+    },
+    "Azir": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.7692307692307693,
+        "jungle": 0.15384615384615385,
+        "mid": 0,
+        "bot": 0.07692307692307693,
+        "support": 0
+      },
+      "total": 13
+    },
+    "Corki": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.21818181818181817,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0.7818181818181819,
+        "support": 0
+      },
+      "total": 55
+    },
+    "Sylas": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.5,
+        "jungle": 0.5,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Viktor": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6666666666666666,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0.3333333333333333,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Sett": {
+      "roles": [
+        "jungle",
+        "mid",
+        "support"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.16666666666666666,
+        "mid": 0.16666666666666666,
+        "bot": 0,
+        "support": 0.6666666666666666
+      },
+      "total": 12
+    },
+    "Jhin": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.3333333333333333,
+        "jungle": 0,
+        "mid": 0.6666666666666666,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 9
+    },
+    "Blitzcrank": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.16666666666666666,
+        "jungle": 0.8333333333333334,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 6
+    },
+    "Volibear": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 46
+    },
+    "Diana": {
+      "roles": [
+        "top",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.2,
+        "jungle": 0,
+        "mid": 0.8,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 5
+    },
+    "Xerath": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0.8571428571428571,
+        "bot": 0.14285714285714285,
+        "support": 0
+      },
+      "total": 7
+    },
+    "Tryndamere": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Chogath": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0.75,
+        "bot": 0.25,
+        "support": 0
+      },
+      "total": 4
+    },
+    "Cassiopeia": {
+      "roles": [
+        "top",
+        "jungle",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.2,
+        "jungle": 0.2,
+        "mid": 0,
+        "bot": 0.6,
+        "support": 0
+      },
+      "total": 10
+    },
+    "Samira": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Bard": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.25,
+        "jungle": 0.5,
+        "mid": 0.25,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 4
+    },
+    "Wukong": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.7586206896551724,
+        "jungle": 0,
+        "mid": 0.13793103448275862,
+        "bot": 0.06896551724137931,
+        "support": 0.034482758620689655
+      },
+      "total": 29
+    },
+    "Irelia": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.5,
+        "mid": 0.5,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Ahri": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 0.9,
+        "jungle": 0.1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 10
+    },
+    "Orianna": {
+      "roles": [
+        "top",
+        "bot"
+      ],
+      "shares": {
+        "top": 0.6666666666666666,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0.3333333333333333,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Swain": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 10
+    },
+    "Nautilus": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.17073170731707318,
+        "jungle": 0.8292682926829268,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 41
+    },
+    "Fiddlesticks": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "shares": {
+        "top": 0.5,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0.5
+      },
+      "total": 2
+    },
+    "Morgana": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.3333333333333333,
+        "mid": 0.6666666666666666,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 12
+    },
+    "Amumu": {
+      "roles": [
+        "top",
+        "support"
+      ],
+      "shares": {
+        "top": 0.6666666666666666,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0.3333333333333333
+      },
+      "total": 3
+    },
+    "Camille": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 4
+    },
+    "Lux": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Braum": {
+      "roles": [
+        "top",
+        "jungle"
+      ],
+      "shares": {
+        "top": 0.3333333333333333,
+        "jungle": 0.6666666666666666,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 12
+    },
+    "Jinx": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "DrMundo": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 8
+    },
+    "RekSai": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Gwen": {
+      "roles": [
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.5,
+        "mid": 0.5,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Kaisa": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.16666666666666666,
+        "jungle": 0.16666666666666666,
+        "mid": 0.6666666666666666,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 6
+    },
+    "MissFortune": {
+      "roles": [
+        "top",
+        "jungle",
+        "mid"
+      ],
+      "shares": {
+        "top": 0.42857142857142855,
+        "jungle": 0.2857142857142857,
+        "mid": 0.2857142857142857,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 14
+    },
+    "Heimerdinger": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "JarvanIV": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 6
+    },
+    "Belveth": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Rengar": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Xayah": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Qiyana": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Garen": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Aphelios": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Vladimir": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 5
+    },
+    "Ivern": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Zac": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Sion": {
+      "roles": [
+        "jungle",
+        "bot"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0.6666666666666666,
+        "mid": 0,
+        "bot": 0.3333333333333333,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Lillia": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 8
+    },
+    "AurelionSol": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Renekton": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Kennen": {
+      "roles": [
+        "mid"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 1,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Lissandra": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Graves": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 3
+    },
+    "Khazix": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Pyke": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Kindred": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Ekko": {
+      "roles": [
+        "mid",
+        "bot"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 0,
+        "mid": 0.5,
+        "bot": 0.5,
+        "support": 0
+      },
+      "total": 2
+    },
+    "Kalista": {
+      "roles": [
+        "jungle"
+      ],
+      "shares": {
+        "top": 0,
+        "jungle": 1,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    },
+    "Zed": {
+      "roles": [
+        "top"
+      ],
+      "shares": {
+        "top": 1,
+        "jungle": 0,
+        "mid": 0,
+        "bot": 0,
+        "support": 0
+      },
+      "total": 1
+    }
+  }
+}

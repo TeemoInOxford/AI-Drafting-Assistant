@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:55.794Z",
+    "description": "Draft decision layer validation with state machine and action safety tests"
+  },
+  "stateMachineTests": {
+    "totalTests": 9,
+    "passed": 9,
+    "failed": 0,
+    "results": [
+      {
+        "name": "Ban Phase 1 - blue-ban-1 shows ban evidence",
+        "phase": "ban-phase-1",
+        "expectedBehavior": "showBanEvidence=true",
+        "actualBehavior": "{\"showBanEvidence\":true,\"showPickEvidence\":false,\"showActionPanel\":true,\"actionPanelMode\":\"ban\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban Phase 1 - blue-ban-1 shows action panel for blue",
+        "phase": "ban-phase-1",
+        "expectedBehavior": "showActionPanel=true, mode=ban",
+        "actualBehavior": "{\"showBanEvidence\":true,\"showPickEvidence\":false,\"showActionPanel\":true,\"actionPanelMode\":\"ban\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban Phase 1 - blue-ban-1 hides action panel for red",
+        "phase": "ban-phase-1",
+        "expectedBehavior": "showActionPanel=false",
+        "actualBehavior": "{\"showBanEvidence\":true,\"showPickEvidence\":false,\"showActionPanel\":false,\"actionPanelMode\":\"ban\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Pick Phase 1 - blue-pick-1 hides ban evidence",
+        "phase": "pick-phase-1",
+        "expectedBehavior": "showBanEvidence=false",
+        "actualBehavior": "{\"showBanEvidence\":false,\"showPickEvidence\":true,\"showActionPanel\":true,\"actionPanelMode\":\"pick\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Pick Phase 1 - blue-pick-1 shows pick evidence",
+        "phase": "pick-phase-1",
+        "expectedBehavior": "showPickEvidence=true",
+        "actualBehavior": "{\"showBanEvidence\":false,\"showPickEvidence\":true,\"showActionPanel\":true,\"actionPanelMode\":\"pick\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Pick Phase 1 - blue-pick-1 shows action panel in pick mode",
+        "phase": "pick-phase-1",
+        "expectedBehavior": "showActionPanel=true, mode=pick",
+        "actualBehavior": "{\"showBanEvidence\":false,\"showPickEvidence\":true,\"showActionPanel\":true,\"actionPanelMode\":\"pick\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban Phase 2 - red-ban-4 shows ban evidence again",
+        "phase": "ban-phase-2",
+        "expectedBehavior": "showBanEvidence=true",
+        "actualBehavior": "{\"showBanEvidence\":true,\"showPickEvidence\":false,\"showActionPanel\":true,\"actionPanelMode\":\"ban\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban Phase 2 - blue-ban-4 shows action panel for blue",
+        "phase": "ban-phase-2",
+        "expectedBehavior": "showActionPanel=true, mode=ban",
+        "actualBehavior": "{\"showBanEvidence\":true,\"showPickEvidence\":false,\"showActionPanel\":true,\"actionPanelMode\":\"ban\"}",
+        "status": "PASS"
+      },
+      {
+        "name": "Complete - hides all evidence and action panel",
+        "phase": "complete",
+        "expectedBehavior": "all hidden",
+        "actualBehavior": "{\"showBanEvidence\":false,\"showPickEvidence\":false,\"showActionPanel\":false,\"actionPanelMode\":\"none\"}",
+        "status": "PASS"
+      }
+    ]
+  },
+  "actionSafetyTests": {
+    "totalTests": 7,
+    "passed": 7,
+    "failed": 0,
+    "results": [
+      {
+        "name": "View action does not trigger ban",
+        "action": "view",
+        "expectedOutcome": "No champion affected",
+        "actualOutcome": "{\"success\":true,\"action\":\"view\",\"championAffected\":false}",
+        "status": "PASS"
+      },
+      {
+        "name": "View action does not trigger pick",
+        "action": "view",
+        "expectedOutcome": "No champion affected",
+        "actualOutcome": "{\"success\":true,\"action\":\"view\",\"championAffected\":false}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban action only works on our ban turn",
+        "action": "ban",
+        "expectedOutcome": "Ban succeeds",
+        "actualOutcome": "{\"success\":true,\"action\":\"ban\",\"championAffected\":true}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban action fails on opponent turn",
+        "action": "ban",
+        "expectedOutcome": "Ban fails",
+        "actualOutcome": "{\"success\":false,\"action\":\"none\",\"championAffected\":false}",
+        "status": "PASS"
+      },
+      {
+        "name": "Ban action fails during pick phase",
+        "action": "ban",
+        "expectedOutcome": "Ban fails",
+        "actualOutcome": "{\"success\":false,\"action\":\"none\",\"championAffected\":false}",
+        "status": "PASS"
+      },
+      {
+        "name": "Pick action only works on our pick turn",
+        "action": "pick",
+        "expectedOutcome": "Pick succeeds",
+        "actualOutcome": "{\"success\":true,\"action\":\"pick\",\"championAffected\":true}",
+        "status": "PASS"
+      },
+      {
+        "name": "Pick action fails during ban phase",
+        "action": "pick",
+        "expectedOutcome": "Pick fails",
+        "actualOutcome": "{\"success\":false,\"action\":\"none\",\"championAffected\":false}",
+        "status": "PASS"
+      }
+    ]
+  },
+  "phaseTransitionTests": {
+    "totalTransitions": 23,
+    "validTransitions": 20,
+    "invalidTransitions": 3,
+    "results": [
+      {
+        "from": "blue-ban-1",
+        "to": "red-ban-1",
+        "valid": true
+      },
+      {
+        "from": "red-ban-1",
+        "to": "blue-ban-2",
+        "valid": true
+      },
+      {
+        "from": "blue-ban-2",
+        "to": "red-ban-2",
+        "valid": true
+      },
+      {
+        "from": "red-ban-2",
+        "to": "blue-ban-3",
+        "valid": true
+      },
+      {
+        "from": "blue-ban-3",
+        "to": "red-ban-3",
+        "valid": true
+      },
+      {
+        "from": "red-ban-3",
+        "to": "blue-pick-1",
+        "valid": true
+      },
+      {
+        "from": "blue-pick-1",
+        "to": "red-pick-1",
+        "valid": true
+      },
+      {
+        "from": "red-pick-1",
+        "to": "red-pick-2",
+        "valid": true
+      },
+      {
+        "from": "red-pick-2",
+        "to": "blue-pick-2",
+        "valid": true
+      },
+      {
+        "from": "blue-pick-2",
+        "to": "blue-pick-3",
+        "valid": true
+      },
+      {
+        "from": "blue-pick-3",
+        "to": "red-pick-3",
+        "valid": true
+      },
+      {
+        "from": "red-pick-3",
+        "to": "red-ban-4",
+        "valid": true
+      },
+      {
+        "from": "red-ban-4",
+        "to": "blue-ban-4",
+        "valid": true
+      },
+      {
+        "from": "blue-ban-4",
+        "to": "red-ban-5",
+        "valid": true
+      },
+      {
+        "from": "red-ban-5",
+        "to": "blue-ban-5",
+        "valid": true
+      },
+      {
+        "from": "blue-ban-5",
+        "to": "red-pick-4",
+        "valid": true
+      },
+      {
+        "from": "red-pick-4",
+        "to": "blue-pick-4",
+        "valid": true
+      },
+      {
+        "from": "blue-pick-4",
+        "to": "blue-pick-5",
+        "valid": true
+      },
+      {
+        "from": "blue-pick-5",
+        "to": "red-pick-5",
+        "valid": true
+      },
+      {
+        "from": "red-pick-5",
+        "to": "complete",
+        "valid": true
+      },
+      {
+        "from": "blue-ban-1",
+        "to": "blue-pick-1",
+        "valid": false
+      },
+      {
+        "from": "blue-pick-1",
+        "to": "blue-ban-1",
+        "valid": false
+      },
+      {
+        "from": "complete",
+        "to": "blue-ban-1",
+        "valid": false
+      }
+    ]
+  }
+}

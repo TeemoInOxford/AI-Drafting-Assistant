@@ -1,0 +1,75 @@
+{
+  "beta_LCK": 0.5,
+  "beta_LPL": 0.5,
+  "beta_LEC": 0.5,
+  "beta_global": 0.5,
+  "details": {
+    "LCK": {
+      "beta": 0.5,
+      "loss": 31.45439102915933,
+      "patches": 16
+    },
+    "LPL": {
+      "beta": 0.5,
+      "loss": 37.7208841389705,
+      "patches": 19
+    },
+    "LEC": {
+      "beta": 0.5,
+      "loss": 24.930486571132434,
+      "patches": 14
+    },
+    "global": {
+      "beta": 0.5,
+      "loss": 39.68982838295713,
+      "patches": 14,
+      "leagues": [
+        "LCS",
+        "LTA",
+        "LTA_N",
+        "LTA_S"
+      ]
+    },
+    "global_weighted": {
+      "beta": 0.5,
+      "loss": 156.2583194993158,
+      "patches": 25,
+      "leagues": [
+        "LCK",
+        "LPL",
+        "LEC",
+        "LCS",
+        "LTA",
+        "LTA_N",
+        "LTA_S"
+      ],
+      "mean_RSS": {
+        "2024": 1681.75,
+        "2025": 1388.8
+      },
+      "RSS_TABLE": {
+        "2024": {
+          "LCK": 1873,
+          "LPL": 1826,
+          "LEC": 1542,
+          "LCS": 1486
+        },
+        "2025": {
+          "LCK": 1738,
+          "LPL": 1508,
+          "LEC": 1339,
+          "LTA_N": 1305,
+          "LTA_S": 1054
+        }
+      }
+    },
+    "gamma": {
+      "gamma": 2,
+      "loss": 46.76789678780992,
+      "patches_used": 20,
+      "beta_fixed": 0.5
+    }
+  },
+  "beta_global_weighted": 0.5,
+  "gamma": 2
+}

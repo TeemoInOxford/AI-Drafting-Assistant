@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Champion, HistorySelectMode } from '../lib/types';
+import { ThreatLevel } from '../lib/threat-types';
 
 interface ChampionCardProps {
   champion: Champion;
@@ -12,6 +13,8 @@ interface ChampionCardProps {
   index: number;
   historySelectMode?: HistorySelectMode;
   shouldShake?: boolean;
+  threatLevel?: ThreatLevel;
+  threatScore?: number;
 }
 
 export default function ChampionCard({
@@ -23,6 +26,8 @@ export default function ChampionCard({
   index,
   historySelectMode = 'off',
   shouldShake = false,
+  threatLevel,
+  threatScore,
 }: ChampionCardProps) {
   const isInHistoryMode = historySelectMode !== 'off';
 
@@ -77,6 +82,16 @@ export default function ChampionCard({
         {isFearlessBanned && !isUsed && (
           <div className="absolute inset-0 bg-rose-950/70 flex items-center justify-center">
             <span className="text-rose-300 text-sm">🚫</span>
+          </div>
+        )}
+        {/* Threat Indicator */}
+        {threatLevel && threatLevel !== 'low' && !isUsed && !isFearlessBanned && (
+          <div className={`absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shadow-lg z-10 ${
+            threatLevel === 'high'
+              ? 'bg-red-500 text-white ring-2 ring-red-400/50'
+              : 'bg-orange-500 text-white ring-2 ring-orange-400/50'
+          }`}>
+            !
           </div>
         )}
       </div>

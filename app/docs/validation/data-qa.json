@@ -1,0 +1,428 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:40.851Z",
+    "dataDirectory": "/www/wwwroot/AI-Drafting-Assistant/data/lol"
+  },
+  "datasets": {
+    "states": {
+      "fileName": "states.json",
+      "fileSize": 117327952,
+      "recordCount": 1488,
+      "fieldAnalysis": [
+        {
+          "field": "gameId",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "platformGameId",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.patch",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.blueTeam.id",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.redTeam.id",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.blueTeam.bans",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.redTeam.bans",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.blueTeam.picks",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "state.redTeam.picks",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 1488,
+          "emptyStringCount": 0,
+          "coverage": 0
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {
+        "gameId": 1488,
+        "platformGameId": 1488,
+        "state.patch": 1488,
+        "state.blueTeam.id": 1488,
+        "state.redTeam.id": 1488,
+        "state.blueTeam.bans": 1488,
+        "state.redTeam.bans": 1488,
+        "state.blueTeam.picks": 1488,
+        "state.redTeam.picks": 1488
+      },
+      "warnings": []
+    },
+    "bayesian-role-posteriors": {
+      "fileName": "bayesian-role-posteriors.json",
+      "fileSize": 34677,
+      "recordCount": 162,
+      "fieldAnalysis": [
+        {
+          "field": "posterior.top",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "posterior.jungle",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "posterior.mid",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "posterior.bot",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "posterior.support",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "observedMatches",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "alpha",
+          "presentCount": 162,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {},
+      "warnings": []
+    },
+    "player-pools": {
+      "fileName": "player-pools.json",
+      "fileSize": 4338276,
+      "recordCount": 6525,
+      "fieldAnalysis": [
+        {
+          "field": "playerId",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "playerName",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "totalGames",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "championId",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "championName",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "pickCount",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "pickRateWithinPlayer",
+          "presentCount": 6525,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {},
+      "warnings": [
+        "27 players have <10 games (low-sample gating applies)"
+      ]
+    },
+    "threat-signals": {
+      "fileName": "threat-signals.json",
+      "fileSize": 181014589,
+      "recordCount": 0,
+      "fieldAnalysis": [
+        {
+          "field": "championId",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "championName",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "entityType",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "entityId",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "score",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "rawLift",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "obsLower",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "exp",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "n",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {},
+      "warnings": [
+        "Score distribution: 0 positive, 0 zero, 0 negative"
+      ]
+    },
+    "ban-baselines": {
+      "fileName": "ban-baselines.json",
+      "fileSize": 1201582,
+      "recordCount": 0,
+      "fieldAnalysis": [
+        {
+          "field": "championId",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "championName",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "totalBans",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "totalGames",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        },
+        {
+          "field": "banRate",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 0
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {},
+      "warnings": []
+    },
+    "patch-region-stats": {
+      "fileName": "patch-region-stats.json",
+      "fileSize": 562775,
+      "recordCount": 7870,
+      "fieldAnalysis": [
+        {
+          "field": "patch",
+          "presentCount": 7870,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "region",
+          "presentCount": 7870,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "championName",
+          "presentCount": 7870,
+          "nullCount": 0,
+          "undefinedCount": 0,
+          "emptyStringCount": 0,
+          "coverage": 1
+        },
+        {
+          "field": "games",
+          "presentCount": 0,
+          "nullCount": 0,
+          "undefinedCount": 7870,
+          "emptyStringCount": 0,
+          "coverage": 0
+        }
+      ],
+      "nullCounts": {},
+      "undefinedCounts": {
+        "games": 7870
+      },
+      "coverageDates": {
+        "earliest": "Aatrox",
+        "latest": "Zyra"
+      },
+      "warnings": [
+        "Patches covered: 162 (Aatrox to Zyra)",
+        "Regions covered: global, byPatch, byRegion, gamesByPatch, gamesByRegion"
+      ]
+    }
+  },
+  "summary": {
+    "totalDatasets": 6,
+    "totalRecords": 16045,
+    "totalNullFields": 0,
+    "totalMissingFields": 21262,
+    "fallbackCounts": {},
+    "imputationCheck": "PASS",
+    "imputationDetails": []
+  }
+}

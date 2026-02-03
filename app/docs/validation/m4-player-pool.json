@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:54.263Z",
+    "description": "Player pool validation with temporal stability, gating, and coverage tests",
+    "dataSource": "player-pools.json, states.json"
+  },
+  "temporalStability": {
+    "trainPeriod": {
+      "start": "14.1",
+      "end": "15.5"
+    },
+    "testPeriod": {
+      "start": "15.5",
+      "end": "15.9"
+    },
+    "recallAtK": [
+      {
+        "k": 5,
+        "recall": 0.4399999999999999,
+        "playersEvaluated": 255
+      },
+      {
+        "k": 10,
+        "recall": 0.5853773584905659,
+        "playersEvaluated": 212
+      }
+    ],
+    "interpretation": "Moderate temporal stability"
+  },
+  "lowSampleGating": {
+    "threshold": 10,
+    "totalPlayers": 413,
+    "lowSamplePlayers": 27,
+    "lowSamplePercent": 6.5375302663438255,
+    "strongRateForLowSample": 0,
+    "strongCountForLowSample": 0,
+    "status": "PASS"
+  },
+  "coverage": {
+    "totalPlayers": 413,
+    "totalChampionEntries": 6525,
+    "uniqueChampions": 162,
+    "playersWithPool": 413,
+    "avgPoolSize": 15.799031476997579,
+    "medianPoolSize": 15,
+    "missingFields": {
+      "playerId": 0,
+      "playerName": 0,
+      "totalGames": 0,
+      "champions": 0
+    }
+  }
+}

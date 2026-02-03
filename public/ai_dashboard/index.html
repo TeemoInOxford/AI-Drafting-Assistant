@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draft Quality Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0f172a; color: #e2e8f0; }
+    .card { background: #1e293b; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+    .highlight { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-left: 4px solid #3b82f6; }
+    table th { background: #334155; }
+    table td { border-bottom: 1px solid #334155; }
+    .improve { color: #4ade80; }
+    .decline { color: #f87171; }
+    .neutral { color: #94a3b8; }
+    .badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .badge-v0 { background: #475569; }
+    .badge-v1 { background: #2563eb; }
+    .badge-v2 { background: #059669; }
+    .sample-row:hover { background: #334155; }
+    .scrollable { max-height: 400px; overflow-y: auto; }
+  </style>
+</head>
+<body class="p-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-white mb-2">Draft Quality Dashboard</h1>
+      <p class="text-slate-400" id="meta-info">Loading...</p>
+    </header>
+
+    <!-- Overview Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="card" id="card-v0">
+        <div class="flex items-center justify-between mb-4">
+          <span class="badge badge-v0">v0 (baseline)</span>
+        </div>
+        <div class="space-y-3">
+          <div><span class="text-slate-400 text-sm">Avg Percentile</span><p class="text-2xl font-bold" id="v0-pctl">-</p></div>
+          <div><span class="text-slate-400 text-sm">Avg Regret</span><p class="text-xl" id="v0-regret">-</p></div>
+          <div><span class="text-slate-400 text-sm">Top 3%</span><p class="text-xl" id="v0-top3">-</p></div>
+        </div>
+      </div>
+      <div class="card" id="card-v1">
+        <div class="flex items-center justify-between mb-4">
+          <span class="badge badge-v1">v1 (fix)</span>
+        </div>
+        <div class="space-y-3">
+          <div><span class="text-slate-400 text-sm">Avg Percentile</span><p class="text-2xl font-bold improve" id="v1-pctl">-</p></div>
+          <div><span class="text-slate-400 text-sm">Avg Regret</span><p class="text-xl" id="v1-regret">-</p></div>
+          <div><span class="text-slate-400 text-sm">Top 3%</span><p class="text-xl" id="v1-top3">-</p></div>
+        </div>
+      </div>
+      <div class="card" id="card-v2">
+        <div class="flex items-center justify-between mb-4">
+          <span class="badge badge-v2">v2 (shrink)</span>
+        </div>
+        <div class="space-y-3">
+          <div><span class="text-slate-400 text-sm">Avg Percentile</span><p class="text-2xl font-bold improve" id="v2-pctl">-</p></div>
+          <div><span class="text-slate-400 text-sm">Avg Regret</span><p class="text-xl" id="v2-regret">-</p></div>
+          <div><span class="text-slate-400 text-sm">Top 3%</span><p class="text-xl" id="v2-top3">-</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart -->
+    <section class="card mb-8">
+      <h2 class="text-xl font-semibold mb-4">Per-Slot Avg Percentile Comparison</h2>
+      <div style="height: 300px;">
+        <canvas id="slotChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Slot Table -->
+    <section class="card mb-8">
+      <h2 class="text-xl font-semibold mb-4">Slot Metrics Table</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr>
+              <th class="p-3 text-left">Slot</th>
+              <th class="p-3 text-center">v0 Pctl</th>
+              <th class="p-3 text-center">v1 Pctl</th>
+              <th class="p-3 text-center">v2 Pctl</th>
+              <th class="p-3 text-center">v0 Regret</th>
+              <th class="p-3 text-center">v1 Regret</th>
+              <th class="p-3 text-center">v2 Regret</th>
+              <th class="p-3 text-center">v0 bestCov05%</th>
+              <th class="p-3 text-center">v1 bestCov05%</th>
+            </tr>
+          </thead>
+          <tbody id="slot-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="card highlight mb-8">
+      <h2 class="text-xl font-semibold mb-4">🔍 Key Findings</h2>
+      <ul class="space-y-2" id="highlights-list"></ul>
+    </section>
+
+    <!-- Samples -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">PICK_2 Sample Cases</h2>
+        <div class="overflow-x-auto scrollable">
+          <table class="w-full text-xs">
+            <thead>
+              <tr>
+                <th class="p-2 text-left">Actual</th>
+                <th class="p-2 text-left">Best</th>
+                <th class="p-2 text-center">Rank</th>
+                <th class="p-2 text-center">CF Count</th>
+                <th class="p-2 text-center">Best=Actual</th>
+              </tr>
+            </thead>
+            <tbody id="samples-pick2"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="text-xl font-semibold mb-4">PICK_4 Sample Cases</h2>
+        <div class="overflow-x-auto scrollable">
+          <table class="w-full text-xs">
+            <thead>
+              <tr>
+                <th class="p-2 text-left">Actual</th>
+                <th class="p-2 text-left">Best</th>
+                <th class="p-2 text-center">Rank</th>
+                <th class="p-2 text-center">bestCov</th>
+                <th class="p-2 text-center">Best=Actual</th>
+              </tr>
+            </thead>
+            <tbody id="samples-pick4"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-slate-500 text-sm mt-8">
+      <p>Generated by Draft Quality Eval v0/v1/v2</p>
+    </footer>
+  </div>
+
+  <script>
+    let dashboardData = null;
+
+    async function loadData() {
+      try {
+        const resp = await fetch('/ai_dashboard/draft_quality_dashboard.json');
+        if (!resp.ok) throw new Error('Failed to load');
+        dashboardData = await resp.json();
+        render();
+      } catch (e) {
+        console.error(e);
+        document.getElementById('meta-info').textContent = 'Error loading data: ' + e.message;
+      }
+    }
+
+    function render() {
+      const d = dashboardData;
+
+      // Meta
+      document.getElementById('meta-info').textContent =
+        `Generated: ${new Date(d.meta.generated_at).toLocaleString()} | Data: ${d.meta.data_version} | Params: role_penalty=${d.meta.params.role_penalty}, cf_k=${d.meta.params.cf_k}`;
+
+      // Overview cards
+      for (const ver of ['v0', 'v1', 'v2']) {
+        const o = d.overview[ver];
+        if (o) {
+          document.getElementById(`${ver}-pctl`).textContent = o.avg_percentile + '%';
+          document.getElementById(`${ver}-regret`).textContent = o.avg_regret.toFixed(4);
+          document.getElementById(`${ver}-top3`).textContent = o.top3_pct + '%';
+        }
+      }
+
+      // Slot table
+      const tbody = document.getElementById('slot-table-body');
+      tbody.innerHTML = '';
+      for (const slot of d.slots) {
+        const tr = document.createElement('tr');
+        const pctlDiff1 = ((slot.v1_AvgPctl || 0) - (slot.v0_AvgPctl || 0));
+        const pctlDiff2 = ((slot.v2_AvgPctl || 0) - (slot.v0_AvgPctl || 0));
+        const regretDiff1 = ((slot.v0_AvgRegret || 0) - (slot.v1_AvgRegret || 0));
+        const regretDiff2 = ((slot.v0_AvgRegret || 0) - (slot.v2_AvgRegret || 0));
+        tr.innerHTML = `
+          <td class="p-3 font-semibold">${slot.slot}</td>
+          <td class="p-3 text-center">${slot.v0_AvgPctl}%</td>
+          <td class="p-3 text-center ${pctlDiff1 > 5 ? 'improve' : ''}">${slot.v1_AvgPctl}%</td>
+          <td class="p-3 text-center ${pctlDiff2 > 5 ? 'improve' : ''}">${slot.v2_AvgPctl}%</td>
+          <td class="p-3 text-center">${slot.v0_AvgRegret}</td>
+          <td class="p-3 text-center ${regretDiff1 > 0.01 ? 'improve' : ''}">${slot.v1_AvgRegret}</td>
+          <td class="p-3 text-center ${regretDiff2 > 0.01 ? 'improve' : ''}">${slot.v2_AvgRegret}</td>
+          <td class="p-3 text-center ${slot.v0_bestRoleCov05 > 0 ? 'decline' : ''}">${slot.v0_bestRoleCov05}%</td>
+          <td class="p-3 text-center ${slot.v1_bestRoleCov05 === 0 ? 'improve' : ''}">${slot.v1_bestRoleCov05}%</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      // Highlights
+      const hlList = document.getElementById('highlights-list');
+      hlList.innerHTML = '';
+      for (const hl of d.highlights) {
+        const li = document.createElement('li');
+        li.className = 'text-slate-300';
+        li.textContent = '• ' + hl;
+        hlList.appendChild(li);
+      }
+
+      // Samples
+      renderSamples('samples-pick2', d.samples.PICK_2, false);
+      renderSamples('samples-pick4', d.samples.PICK_4, true);
+
+      // Chart
+      renderChart(d.slots);
+    }
+
+    function renderSamples(tbodyId, samples, showCov) {
+      const tbody = document.getElementById(tbodyId);
+      tbody.innerHTML = '';
+      for (const s of samples || []) {
+        const tr = document.createElement('tr');
+        tr.className = 'sample-row';
+        if (showCov) {
+          tr.innerHTML = `
+            <td class="p-2">${s.actual} (${s.actualRole || '-'})</td>
+            <td class="p-2">${s.bestPick}</td>
+            <td class="p-2 text-center">${s.rank1}/${s.candidates}</td>
+            <td class="p-2 text-center ${s.bestRoleCov === 0.5 ? 'decline' : ''}">${s.bestRoleCov}</td>
+            <td class="p-2 text-center">${s.bestIsActual ? '✓' : ''}</td>
+          `;
+        } else {
+          tr.innerHTML = `
+            <td class="p-2">${s.actual} (${s.actualRole || '-'})</td>
+            <td class="p-2">${s.bestPick}</td>
+            <td class="p-2 text-center">${s.rank1}/${s.candidates}</td>
+            <td class="p-2 text-center">${s.actualCF_count}</td>
+            <td class="p-2 text-center">${s.bestIsActual ? '✓' : ''}</td>
+          `;
+        }
+        tbody.appendChild(tr);
+      }
+    }
+
+    function renderChart(slots) {
+      const ctx = document.getElementById('slotChart').getContext('2d');
+      const labels = slots.map(s => s.slot);
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'v0', data: slots.map(s => s.v0_AvgPctl), backgroundColor: '#475569' },
+            { label: 'v1', data: slots.map(s => s.v1_AvgPctl), backgroundColor: '#2563eb' },
+            { label: 'v2', data: slots.map(s => s.v2_AvgPctl), backgroundColor: '#059669' },
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { color: '#94a3b8' } },
+          },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' }, max: 100 }
+          }
+        }
+      });
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

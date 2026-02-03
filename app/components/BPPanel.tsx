@@ -170,10 +170,10 @@ export default function BPPanel({
 
           {/* Center Section */}
           <div className="flex flex-col items-center justify-start relative" style={{ minWidth: '200px' }}>
-            {/* Fearless Champions - Same row as bans */}
-            <div className="h-10 flex items-center mb-4">
-              {fearlessChampions.length > 0 && (
-                <div className="flex flex-wrap gap-1 max-w-xs justify-center">
+            {/* Fearless Champions - Positioned between bans, doesn't affect layout */}
+            {fearlessChampions.length > 0 && (
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center justify-center" style={{ width: '800px' }}>
+                <div className="grid grid-cols-20 gap-1.5">
                   {fearlessChampions.map((champ) => (
                     <div
                       key={champ.id}
@@ -188,11 +188,11 @@ export default function BPPanel({
                     </div>
                   ))}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Spacer to align with center of picks */}
-            <div style={{ height: '80px' }} />
+            <div style={{ height: '120px' }} />
 
             {/* Team Icons and Names with Triangle - center aligned with picks */}
             <div className="flex items-center gap-6">

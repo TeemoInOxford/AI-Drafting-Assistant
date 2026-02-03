@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:52.099Z",
+    "description": "Threat signal validation with monotonicity, robustness, conservatism, and permutation tests",
+    "dataSource": "threat-signals.json"
+  },
+  "monotonicity": {
+    "spearmanCorr": -0.4237186158310404,
+    "pValue": "< 0.001",
+    "sampleSize": 13543,
+    "interpretation": "Weak or no monotonicity detected"
+  },
+  "lowExposureRobustness": {
+    "buckets": [
+      {
+        "expRange": "0-1%",
+        "count": 1814,
+        "highScoreCount": 560,
+        "highScoreRate": 0.308710033076075
+      },
+      {
+        "expRange": "1-5%",
+        "count": 2525,
+        "highScoreCount": 590,
+        "highScoreRate": 0.23366336633663368
+      },
+      {
+        "expRange": "5-10%",
+        "count": 2554,
+        "highScoreCount": 480,
+        "highScoreRate": 0.18794048551292092
+      },
+      {
+        "expRange": "10-20%",
+        "count": 3326,
+        "highScoreCount": 277,
+        "highScoreRate": 0.08328322309079976
+      },
+      {
+        "expRange": "20%+",
+        "count": 3324,
+        "highScoreCount": 125,
+        "highScoreRate": 0.037605294825511434
+      }
+    ],
+    "coldChampionDominance": true,
+    "interpretation": "WARNING: Cold champions may be over-represented in high scores"
+  },
+  "conservatism": {
+    "buckets": [
+      {
+        "nRange": "1-10",
+        "count": 7202,
+        "meanObsLowerGap": 0.4455126023900281,
+        "maxObsLowerGap": 0.9860350045200903
+      },
+      {
+        "nRange": "10-50",
+        "count": 3947,
+        "meanObsLowerGap": 0.2075576161299034,
+        "maxObsLowerGap": 0.5684435559987006
+      },
+      {
+        "nRange": "50-100",
+        "count": 1023,
+        "meanObsLowerGap": 0.05607290091391876,
+        "maxObsLowerGap": 0.13685262602795023
+      },
+      {
+        "nRange": "100-500",
+        "count": 1371,
+        "meanObsLowerGap": 0.029088490539882866,
+        "maxObsLowerGap": 0.1016400946615692
+      },
+      {
+        "nRange": "500+",
+        "count": 0,
+        "meanObsLowerGap": 0,
+        "maxObsLowerGap": 0
+      }
+    ],
+    "overallMeanGap": 0.30458942416324314,
+    "interpretation": "Conservatism active: obsLower is on average 30.5% below obs"
+  },
+  "permutationTest": {
+    "iterations": 100,
+    "realTopKMean": 97.95432501255378,
+    "permutedTopKMean": 97.95432501255362,
+    "permutedTopKStd": 1.5631940186722204e-13,
+    "zScore": 1,
+    "interpretation": "No significant difference from random"
+  }
+}

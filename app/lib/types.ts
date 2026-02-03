@@ -5,10 +5,21 @@ export interface Champion {
   name: string;         // Display name
   image: string;        // Avatar URL
   positions: Position[]; // Positions
+  class: ChampionClass; // Champion class/role
 }
 
 // Position type
 export type Position = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
+
+// Champion class/role type
+export type ChampionClass =
+  | 'AD Bruiser' | 'AP Bruiser'
+  | 'Burst mage' | 'Control mage' | 'Poke mage'
+  | 'AD Assasin' | 'AP Assasin'
+  | 'Engage Tank' | 'Defensive Tank'
+  | 'Utility marksman' | 'Carry marksman'
+  | 'Enchanter'
+  | '';
 
 // Position info
 export interface PositionInfo {
@@ -142,6 +153,7 @@ export interface ProPlayer {
 
 // Team Roster - 5 players per team
 export interface TeamRoster {
+  teamId?: string;
   teamName: string;
   teamLogo?: string | null;
   players: (ProPlayer | null)[]; // 5 positions: top, jungle, mid, bot, support

@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "runDate": "2026-01-23T15:42:55.004Z",
+    "description": "Evidence trace validation with unit tests and stability analysis"
+  },
+  "unitTests": {
+    "totalTests": 13,
+    "passed": 13,
+    "failed": 0,
+    "results": [
+      {
+        "name": "TEAM_DENIAL score=25 (below moderate)",
+        "input": {
+          "score": 25,
+          "isFlex": false,
+          "roleEntropy": 0
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "TEAM_DENIAL score=35 (moderate)",
+        "input": {
+          "score": 35,
+          "isFlex": false,
+          "roleEntropy": 0
+        },
+        "expected": {
+          "primary": "TEAM_DENIAL",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "TEAM_DENIAL",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "TEAM_DENIAL score=55 (strong)",
+        "input": {
+          "score": 55,
+          "isFlex": false,
+          "roleEntropy": 0
+        },
+        "expected": {
+          "primary": "TEAM_DENIAL",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "TEAM_DENIAL",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "ROLE_FLEX entropy=0.40 (below threshold)",
+        "input": {
+          "isFlex": true,
+          "roleEntropy": 0.4
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "ROLE_FLEX entropy=0.45 (above threshold)",
+        "input": {
+          "isFlex": true,
+          "roleEntropy": 0.45
+        },
+        "expected": {
+          "primary": "ROLE_FLEX_PRESSURE",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "ROLE_FLEX_PRESSURE",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "ROLE_FLEX not flex but high entropy",
+        "input": {
+          "isFlex": false,
+          "roleEntropy": 0.5
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "PLAYER_SPECIALTY pickCount=5 (below moderate)",
+        "input": {
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 5,
+            "pickShare": 0.15,
+            "playerGames": 50
+          }
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "PLAYER_SPECIALTY pickCount=7 (moderate)",
+        "input": {
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 7,
+            "pickShare": 0.08,
+            "playerGames": 50
+          }
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "PLAYER_SPECIALTY pickCount=10, pickShare=0.12 (strong)",
+        "input": {
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 10,
+            "pickShare": 0.12,
+            "playerGames": 50
+          }
+        },
+        "expected": {
+          "primary": "PLAYER_SPECIALTY",
+          "secondary": []
+        },
+        "actual": {
+          "primary": "PLAYER_SPECIALTY",
+          "secondary": []
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "Low-sample player (8 games) with strong metrics",
+        "input": {
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 10,
+            "pickShare": 0.15,
+            "playerGames": 8
+          }
+        },
+        "expected": {
+          "primary": "META_PTS",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "actual": {
+          "primary": "META_PTS",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "STRONG TEAM_DENIAL + MODERATE PLAYER_SPECIALTY",
+        "input": {
+          "score": 55,
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 7,
+            "pickShare": 0.1,
+            "playerGames": 50
+          }
+        },
+        "expected": {
+          "primary": "TEAM_DENIAL",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "actual": {
+          "primary": "TEAM_DENIAL",
+          "secondary": [
+            "PLAYER_SPECIALTY"
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "MODERATE TEAM_DENIAL + STRONG PLAYER_SPECIALTY",
+        "input": {
+          "score": 35,
+          "isFlex": false,
+          "roleEntropy": 0,
+          "playerPoolData": {
+            "pickCount": 10,
+            "pickShare": 0.12,
+            "playerGames": 50
+          }
+        },
+        "expected": {
+          "primary": "PLAYER_SPECIALTY",
+          "secondary": [
+            "TEAM_DENIAL"
+          ]
+        },
+        "actual": {
+          "primary": "PLAYER_SPECIALTY",
+          "secondary": [
+            "TEAM_DENIAL"
+          ]
+        },
+        "status": "PASS"
+      },
+      {
+        "name": "STRONG ROLE_FLEX + MODERATE TEAM_DENIAL",
+        "input": {
+          "score": 35,
+          "isFlex": true,
+          "roleEntropy": 0.5
+        },
+        "expected": {
+          "primary": "ROLE_FLEX_PRESSURE",
+          "secondary": [
+            "TEAM_DENIAL"
+          ]
+        },
+        "actual": {
+          "primary": "ROLE_FLEX_PRESSURE",
+          "secondary": [
+            "TEAM_DENIAL"
+          ]
+        },
+        "status": "PASS"
+      }
+    ]
+  },
+  "explanationStability": {
+    "totalSignals": 4,
+    "stableSignals": 4,
+    "stabilityRate": 1,
+    "primarySwitchRate": 0,
+    "interpretation": "Perfect stability: deterministic function produces consistent outputs"
+  }
+}

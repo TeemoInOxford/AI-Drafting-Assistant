@@ -37,9 +37,13 @@ export default function HomePage() {
             <span className="text-slate-500">Not Strength.</span>
           </h1>
 
-          <h2 className="font-mono text-lg md:text-xl font-medium text-cyan-400 mb-8">
+          <h2 className="font-mono text-lg md:text-xl font-medium text-cyan-400 mb-4">
             "Every Pick Closes a Door. Know Which Ones."
           </h2>
+
+          <p className="text-base text-slate-500 mb-8">
+            Professional-grade Ban/Pick decision support for LoL esports.
+          </p>
 
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto mb-6 leading-relaxed">
             A decision-support system for professional League of Legends drafting.
@@ -67,10 +71,10 @@ export default function HomePage() {
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
             <Link
-              href="/ERD"
+              href="/methodology"
               className="text-sm font-semibold text-slate-300 hover:text-white transition-colors"
             >
-              View Architecture <span aria-hidden="true">→</span>
+              View Methodology & Scope <span aria-hidden="true">→</span>
             </Link>
           </div>
         </motion.section>
@@ -262,65 +266,150 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-6">
 
-            {/* BP Simulator */}
-            <Link href="/bp" className="group">
-              <div className="h-full relative overflow-hidden rounded-2xl p-8 border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-950/40 to-slate-900 transition-all hover:scale-[1.02] hover:border-cyan-500/60 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]">
+            {/* BP Simulator - Primary */}
+            <Link href="/bp" className="group md:col-span-3">
+              <div className="h-full relative overflow-hidden rounded-2xl p-8 border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-950/40 to-slate-900 transition-all hover:scale-[1.01] hover:border-cyan-400 hover:shadow-[0_0_40px_rgba(34,211,238,0.2)]">
+                {/* Recommended Badge */}
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-xs font-semibold text-cyan-300 uppercase tracking-wider">
+                  Recommended
+                </div>
                 <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl" />
-                <div className="relative">
-                  <div className="w-14 h-14 bg-cyan-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/20">
-                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="relative flex items-start gap-6">
+                  <div className="w-16 h-16 bg-cyan-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/30 flex-shrink-0">
+                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Draft Assistant</h3>
-                  <p className="text-cyan-200/70 text-sm mb-6">
-                    Interactive draft sandbox with real-time PTS analysis. Test scenarios. Explore branches. Prepare for stage.
-                  </p>
-                  <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-cyan-300">
-                    <span>Enter System</span>
-                    <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-white mb-2">Draft Assistant</h3>
+                    <p className="text-cyan-200/80 text-sm mb-4 max-w-xl">
+                      Interactive draft sandbox with real-time PTS analysis. Test scenarios, explore branches, and prepare for stage with full situational awareness.
+                    </p>
+                    <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-cyan-300">
+                      <span>Launch Draft Assistant</span>
+                      <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </Link>
 
-            {/* Data Explorer */}
-            <Link href="/data" className="group">
-              <div className="h-full glass-card rounded-2xl p-8 transition-all hover:scale-[1.02] hover:border-purple-500/50">
-                <div className="w-14 h-14 bg-slate-800 group-hover:bg-purple-950 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
-                  <svg className="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">Data Explorer</h3>
-                <p className="text-slate-400 text-sm mb-6">
-                  Browse professional match data by region, league, team, and player. Context for every recommendation.
-                </p>
-                <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-slate-400 group-hover:text-purple-400 transition-colors">
-                  <span>Enter System</span>
-                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                </div>
-              </div>
-            </Link>
+          </div>
 
-            {/* System Architecture */}
-            <Link href="/ERD" className="group">
-              <div className="h-full glass-card rounded-2xl p-8 transition-all hover:scale-[1.02] hover:border-indigo-500/50">
-                <div className="w-14 h-14 bg-slate-800 group-hover:bg-indigo-950 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all">
-                  <svg className="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
+          {/* Secondary Tools */}
+          <div className="mt-6">
+            <p className="text-xs text-slate-600 uppercase tracking-wider mb-4">Supporting Tools</p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {/* Meta Overview */}
+              <Link href="/meta" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-amber-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-amber-950 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Meta Overview</h3>
+                      <p className="text-slate-500 text-xs truncate">Champion presence & pick/ban rates</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">System Architecture</h3>
-                <p className="text-slate-400 text-sm mb-6">
-                  Technical documentation for analysts and developers. Full transparency on data structure and methodology.
-                </p>
-                <div className="flex items-center text-sm font-semibold uppercase tracking-wider text-slate-400 group-hover:text-indigo-400 transition-colors">
-                  <span>Enter System</span>
-                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+              {/* Player Pool */}
+              <Link href="/player-pool" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-emerald-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-emerald-950 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Player Pool</h3>
+                      <p className="text-slate-500 text-xs truncate">Champion proficiency by player</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+              {/* Flex Pick Dashboard */}
+              <Link href="/flex" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-fuchsia-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-fuchsia-950 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Flex Picks</h3>
+                      <p className="text-slate-500 text-xs truncate">Multi-role champion analysis</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-fuchsia-400 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Technical Resources */}
+          <div className="mt-6">
+            <p className="text-xs text-slate-600 uppercase tracking-wider mb-4">Technical Resources</p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {/* Data Source */}
+              <Link href="/data" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-purple-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-purple-950 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Data Source</h3>
+                      <p className="text-slate-500 text-xs truncate">Dataset coverage & hierarchy</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-purple-400 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
+                </div>
+              </Link>
+              {/* Methodology */}
+              <Link href="/methodology" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-slate-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-slate-700 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Methodology</h3>
+                      <p className="text-slate-500 text-xs truncate">System scope & constraints</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-slate-300 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
+                </div>
+              </Link>
+              {/* Data Model */}
+              <Link href="/ERD" className="group">
+                <div className="h-full glass-card rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-indigo-500/40">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-800 group-hover:bg-indigo-950 rounded-lg flex items-center justify-center transition-all">
+                      <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-white">Data Model</h3>
+                      <p className="text-slate-500 text-xs truncate">ERD & API structure</p>
+                    </div>
+                    <span className="text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all">→</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
         </motion.section>
 
@@ -332,7 +421,7 @@ export default function HomePage() {
           className="text-center pt-12 border-t border-slate-800"
         >
           <p className="font-mono text-xs text-slate-600 mb-2">
-            © {new Date().getFullYear()} LOL BP Tool. Designed for Professional Esports Analysis.
+            © {new Date().getFullYear()} lol-draft.com. Designed for Professional Esports Analysis.
           </p>
           <p className="text-slate-700 text-xs">
             Decision support for professional League of Legends coaching staff.

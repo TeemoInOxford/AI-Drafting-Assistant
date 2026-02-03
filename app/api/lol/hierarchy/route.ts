@@ -7,6 +7,7 @@ const DATA_DIR = path.join(process.cwd(), 'data/lol');
 
 // Cache for hierarchy data
 let hierarchyCache: any = null;
+let statesCache: any = null;
 let cacheTimestamp = 0;
 let teamLogosCache: Map<string, string> = new Map();
 const CACHE_DURATION = 60000; // 1 minute
@@ -47,6 +48,65 @@ function loadHierarchy() {
   return hierarchyCache;
 }
 
+function loadStates() {
+  if (statesCache) return statesCache;
+  try {
+    const statesPath = path.join(DATA_DIR, 'states.json');
+    if (fs.existsSync(statesPath)) {
+      statesCache = JSON.parse(fs.readFileSync(statesPath, 'utf-8'));
+      return statesCache;
+    }
+  } catch (e) {
+    console.error('Failed to load states:', e);
+  }
+  return {};
+}
+
+function getTotalGames(): number {
+  const states = loadStates();
+  let total = 0;
+  for (const state of Object.values(states) as any[]) {
+    total += (state.games || []).length;
+  }
+  return total;
+}
+
+// Get player's latest team based on their most recent series
+function getPlayerLatestTeam(playerId: string, hierarchy: any): string | null {
+  const states = loadStates();
+  const player = hierarchy.players?.[playerId];
+  if (!player || !player.teams || player.teams.length === 0) return null;
+
+  // If player only has one team, return it
+  if (player.teams.length === 1) return player.teams[0];
+
+  // Find the latest series this player participated in
+  let latestSeriesId: string | null = null;
+  let latestTeamId: string | null = null;
+
+  for (const [seriesId, state] of Object.entries(states) as [string, any][]) {
+    for (const game of (state.games || [])) {
+      for (const team of (game.teams || [])) {
+        for (const p of (team.players || [])) {
+          if (p.id === playerId) {
+            // Found the player in this game
+            // Use series_id as proxy for time (higher = newer)
+            if (latestSeriesId === null || parseInt(seriesId) > parseInt(latestSeriesId)) {
+              latestSeriesId = seriesId;
+              latestTeamId = team.id;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return latestTeamId;
+}
+
+// Cache for player latest teams
+let playerLatestTeamCache: Map<string, string | null> = new Map();
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const type = searchParams.get('type') || 'summary';
@@ -72,6 +132,8 @@ export async function GET(request: NextRequest) {
           regionCount: hierarchy.stats.totalRegions,
           totalPlayersWithTeams: hierarchy.stats.totalPlayers,
           totalPlayersAll: hierarchy.stats.totalPlayers,
+          totalGames: getTotalGames(),
+          totalSeries: hierarchy.stats.totalSeries || Object.keys(loadStates()).length,
           updatedAt: hierarchy.updatedAt
         });
       }
@@ -158,15 +220,25 @@ export async function GET(request: NextRequest) {
           return NextResponse.json({ error: 'tournament parameter is required' }, { status: 400 });
         }
 
-        // Find the league across all regions
+        // Find the league - if region is specified, search only in that region
         let foundLeague = null;
         let foundRegion = null;
 
-        for (const [regionId, region] of Object.entries(hierarchy.regions) as [string, any][]) {
+        if (regionCode && hierarchy.regions[regionCode]) {
+          // Search in specific region
+          const region = hierarchy.regions[regionCode];
           if (region.leagues[tournamentId]) {
             foundLeague = region.leagues[tournamentId];
             foundRegion = region;
-            break;
+          }
+        } else {
+          // Search across all regions
+          for (const [regionId, region] of Object.entries(hierarchy.regions) as [string, any][]) {
+            if (region.leagues[tournamentId]) {
+              foundLeague = region.leagues[tournamentId];
+              foundRegion = region;
+              break;
+            }
           }
         }
 
@@ -182,7 +254,7 @@ export async function GET(request: NextRequest) {
             id: teamId,
             name: team.name,
             nameShortened: team.name,
-            logoUrl: null,
+            logoUrl: teamLogosCache.get(teamId) || null,
             playerCount: Object.keys(team.players || {}).length,
             seriesCount: team.seriesCount || 0
           };
@@ -220,14 +292,30 @@ export async function GET(request: NextRequest) {
         }
 
         // Get player details from global players index
-        const players = Object.entries(team.players || {}).map(([playerId, playerName]: [string, any]) => {
-          const player = hierarchy.players[playerId];
-          return {
-            id: playerId,
-            nickname: playerName || player?.name || 'Unknown',
-            seriesCount: player?.seriesCount || 0
-          };
-        });
+        // Only include players whose latest team is this team
+        const players = Object.entries(team.players || {})
+          .map(([playerId, playerName]: [string, any]) => {
+            const player = hierarchy.players[playerId];
+
+            // Check if this is the player's latest team
+            let latestTeam = playerLatestTeamCache.get(playerId);
+            if (latestTeam === undefined) {
+              latestTeam = getPlayerLatestTeam(playerId, hierarchy);
+              playerLatestTeamCache.set(playerId, latestTeam);
+            }
+
+            // Only include if this is the player's latest team
+            if (latestTeam && latestTeam !== teamId) {
+              return null; // Player has moved to another team
+            }
+
+            return {
+              id: playerId,
+              nickname: playerName || player?.name || 'Unknown',
+              seriesCount: player?.seriesCount || 0
+            };
+          })
+          .filter(Boolean);
 
         // Sort by series count descending
         players.sort((a: any, b: any) => b.seriesCount - a.seriesCount);
@@ -340,6 +428,7 @@ export async function GET(request: NextRequest) {
           .map(([teamId, team]: [string, any]) => ({
             id: teamId,
             name: team.name,
+            logo: teamLogosCache.get(teamId) || null,
             seriesCount: team.seriesCount
           }))
           .sort((a, b) => (b.seriesCount || 0) - (a.seriesCount || 0));

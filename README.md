@@ -6,161 +6,112 @@
 
 A decision-support system for professional League of Legends drafting. Built for coaches who understand that drafts are won in the margins—and lost in the moments you didn't see coming.
 
-## 🎯 What This Is
+## What This Is
 
 A stage-aware drafting assistant that makes timing, trade-offs, and draft consequences explicit. It surfaces what you're gaining, what you're giving up, and what windows are closing.
 
-## 🚫 What This Is Not
+## What This Is Not
 
 Not an auto-draft bot. Not a winrate optimizer. Not a replacement for strategic judgment. The final call always belongs to the coaching staff. This tool ensures that call is fully informed.
 
-## ✨ Core Features
+## Core Features
 
 ### 1. Stage-Aware Draft Assistant (`/bp`)
 - Interactive draft sandbox with real-time analysis
-- **Flex Champion Support**: Displays role distributions for multi-role champions (e.g., "Sejuani → Jungle (65%) | Top (35%)")
-- **Dynamic Draft State**: Real-time display of enemy picks, our picks, and open roles
-- **Flex-Aware Recommendations**: Strategic reasoning that accounts for role ambiguity
-- Pick Threat Score (PTS) system with weighted aggregation for flex picks
-- Support for all major regions (LPL, LCK, LEC, LCS, etc.)
+- **BP Wizard**: Step-by-step draft setup with team selection, side selection, and league configuration
+- **Ban Phase Assistant**: Threat-based ban recommendations with PTS scoring
+- **Pick Phase Assistant**: Context-aware pick suggestions with synergy/counter analysis
+- **Flex Champion Support**: Displays role distributions for multi-role champions
+- Support for all major leagues (LPL, LCK, LEC, LCS, etc.)
 - Fearless draft mode support
 - Series state management
-- Team roster configuration
 
-### 2. Pick Threat Score (PTS)
+### 2. Pick Threat Score (PTS) System
 Traditional tools ask: "What happens if we pick this?"
 **PTS asks: "What happens if we don't act now?"**
 
-PTS quantifies the cost of inaction. It measures what you lose by waiting—factoring in draft stage, side assignment, opponent trajectory, and denial risk. PTS reveals the difference between a safe delay and a critical window.
+PTS quantifies the cost of inaction. It measures what you lose by waiting—factoring in draft stage, side assignment, opponent trajectory, and denial risk.
 
-**New in v2.3.0**: PTS now handles flex champions by computing weighted aggregates across all plausible roles, reflecting the strategic value of role ambiguity.
+**Features**:
+- Multi-dimensional scoring: Meta, Comfort, Predict, Deny, Flex, Synergy, Counter
+- Percentile-based ranking within candidate pool
+- Real-time recalculation as draft progresses
 
-### 3. Drafting Assistant Panel
-A coach-facing side panel that provides:
-- **Ban Phase**: Threat Overview, Critical/High Risk/Safe to Delay sections, Recommended Ban with flex-aware reasoning
-- **Pick Phase**: Draft State, Best Picks/Conditional Picks/Safe to Delay sections, Primary Recommendation
-- **Visual Indicators**: FLEX badges for multi-role champions, dynamic border colors, staggered animations
-- **Turn-Based Guidance**: Grayed out when not your turn, highlighted when decision is needed
+### 3. Ban Phase Drafting Assistant
+- **Threat Overview**: Critical/High Risk/Safe to Delay sections
+- **Player Pool Analysis**: Team-specific comfort picks and signature champions
+- **Deny Strategy**: Opponent threat signals for strategic denial
+- **Evidence-Based Reasoning**: Full transparency on why each ban is recommended
 
-### 4. Esports Data Explorer (`/data`)
+### 4. Pick Phase Drafting Assistant
+- **Candidate Generation**: Meta picks, comfort picks, predictions, deny picks
+- **Synergy Analysis**: Real-time synergy calculation with already-picked allies
+- **Counter Analysis**: Win rate data against enemy picks
+- **PTS Scoring**: Weighted aggregation across all dimensions
+
+### 5. Esports Data Explorer (`/data`)
 - **Hierarchical Data Display**: Region → League → Team → Player
-- **7 Major Regions**:
-  - LPL (China) - 54 leagues, 17 teams, 222 players
-  - LEC (Europe) - 34 leagues, 11 teams, 97 players
-  - LCK (Korea) - 33 leagues, 10 teams, 128 players
-  - LCS (North America) - 10 leagues, 8 teams, 47 players
-  - LTA North/South/Cross-Conference (Americas)
-- **Data Statistics**:
-  - Total Players: 18,765
-  - Total Teams: 2,160
-  - Total Leagues: 173
+- **7 Major Regions**: LPL, LEC, LCK, LCS, LTA North/South/Cross-Conference
+- **Data Statistics**: 18,765+ players, 2,160+ teams, 173+ leagues
 - **Interactive Browsing**: Click through regions, leagues, teams, and player rosters
 
-### 5. System Architecture (`/ERD`)
-Technical documentation for analysts and developers. Full transparency on data structure and methodology.
+### 6. Meta Analysis (`/meta`)
+- Global champion presence and pick rates
+- League-specific meta filtering
+- Patch-aware statistics
 
-## 🛠 Tech Stack
+### 7. Player Pool Analysis (`/player-pool`)
+- Team-specific player comfort picks
+- Weighted game statistics
+- Role-based filtering
 
-- **Framework**: Next.js 16 (App Router)
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Animations**: Framer Motion
+- **Database**: SQLite (better-sqlite3) for GRID v2 data
 - **Data Source**: GRID Esports API
 - **Deployment**: PM2 + Nginx
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AI-Drafting-Assistant/
 ├── app/
-│   ├── api/
-│   │   └── lol/
-│   │       ├── data/          # Team roster API
-│   │       ├── hierarchy/     # Hierarchical data API
-│   │       ├── recommend/     # AI recommendation API
-│   │       └── series/        # Series state API
-│   ├── components/            # React components
-│   ├── bp/                    # BP simulator page
-│   ├── data/                  # Data explorer page
-│   ├── ERD/                   # System architecture page
-│   ├── lib/                   # Utility libraries
-│   │   ├── grid-api.ts       # GRID API client
-│   │   ├── grid-types.ts     # Type definitions
-│   │   ├── bp-logic.ts       # BP logic engine
-│   │   └── lol-db.ts         # Local database
-│   └── page.tsx              # Homepage
+│   ├── api/                    # API routes
+│   │   ├── ban-prediction/     # Ban prediction API
+│   │   ├── counter/            # Counter matchup API
+│   │   ├── meta/               # Meta statistics API
+│   │   ├── pick-prediction/    # Pick prediction API
+│   │   ├── player-pool/        # Player pool API
+│   │   ├── synergy/            # Synergy analysis API
+│   │   ├── threat-signals/     # Threat signals API
+│   │   └── lol/                # Core LOL data APIs
+│   ├── components/             # React components
+│   │   ├── BanPhaseDraftingAssistant.tsx
+│   │   ├── PickPhaseDraftingAssistant.tsx
+│   │   ├── BPWizard.tsx
+│   │   ├── BPPanel.tsx
+│   │   └── ...
+│   ├── lib/                    # Utility libraries
+│   │   ├── ban-candidate-engine.ts
+│   │   ├── pick-candidate-engine.ts
+│   │   ├── grid-v2-threat-engine.ts
+│   │   └── ...
+│   ├── bp/                     # BP simulator page
+│   ├── data/                   # Data explorer page
+│   ├── meta/                   # Meta analysis page
+│   └── player-pool/            # Player pool page
 ├── data/
-│   └── lol/                  # LOL data files
-│       ├── hierarchy.json    # Hierarchical structure
-│       ├── index.json        # Team rosters
-│       └── series.json       # Series data
-├── scripts/
-│   └── grid-data-fetcher/    # Data fetching scripts
-│       ├── fetch_lol_data.py
-│       ├── build_hierarchy.py
-│       └── data/
-└── docs/                     # Documentation
+│   ├── lol/                    # LOL JSON data files
+│   └── grid_v2/                # GRID v2 SQLite database
+├── scripts/                    # Data processing scripts
+└── docs/                       # Documentation
 ```
 
-## 🔧 Data Scripts
-
-### Fetch LOL Data
-```bash
-cd scripts/grid-data-fetcher
-python3 fetch_lol_data.py
-```
-
-Fetched data:
-- `lol_players.json` - All LOL players
-- `lol_teams.json` - All LOL teams
-- `lol_tournaments.json` - All LOL leagues
-- `lol_player_relationships.json` - Player-team-league relationships
-
-### Build Hierarchical Data
-```bash
-python3 build_hierarchy.py
-```
-
-Generated data:
-- `lol_hierarchy.json` - Region→League→Team→Player hierarchy
-- `lol_all_teams.json` - All teams with player rosters
-- `lol_hierarchy_summary.json` - Data summary
-
-## 🌐 API Endpoints
-
-### Hierarchy API (`/api/lol/hierarchy`)
-
-#### Get Summary
-```
-GET /api/lol/hierarchy?type=summary
-```
-
-#### Get Regions
-```
-GET /api/lol/hierarchy?type=regions
-```
-
-#### Get Region's Leagues
-```
-GET /api/lol/hierarchy?type=region&region=LPL
-```
-
-#### Get League's Teams
-```
-GET /api/lol/hierarchy?type=tournament&tournament=758054
-```
-
-#### Get Team's Players
-```
-GET /api/lol/hierarchy?type=team&team=3586
-```
-
-#### Get All Teams with Players
-```
-GET /api/lol/hierarchy?type=all-teams
-```
-
-## 💻 Local Development
+## Local Development
 
 ### Install Dependencies
 ```bash
@@ -187,7 +138,7 @@ npm run build
 npm start
 ```
 
-## 🚀 Deployment
+## Deployment
 
 Using PM2 for process management:
 ```bash
@@ -195,33 +146,38 @@ pm2 start npm --name "lol-drafting" -- start -- -p 3003
 pm2 save
 ```
 
-## 📊 Data Updates
+## API Endpoints
 
-Data is sourced from GRID Esports API, covering LOL esports data from 2024 to present.
+### Core APIs
+- `/api/meta` - Meta statistics by league
+- `/api/player-pool` - Player comfort picks
+- `/api/threat-signals` - Threat analysis
+- `/api/ban-prediction` - Ban predictions
+- `/api/pick-prediction` - Pick predictions
+- `/api/synergy` - Synergy analysis
+- `/api/counter` - Counter matchup data
 
-Update data:
-```bash
-cd scripts/grid-data-fetcher
-python3 fetch_lol_data.py
-python3 build_hierarchy.py
-```
+### Data APIs
+- `/api/lol/hierarchy` - Hierarchical data (Region/League/Team/Player)
+- `/api/lol/series` - Series state management
+- `/api/lol/data` - Team roster data
 
-## 🌍 Live Site
+## Live Site
 
 - **Production**: https://lol.dreamofdragon.org
-- **BP Simulator**: https://lol.dreamofdragon.org/bp
+- **Draft Assistant**: https://lol.dreamofdragon.org/bp
 - **Data Explorer**: https://lol.dreamofdragon.org/data
-- **Architecture**: https://lol.dreamofdragon.org/ERD
+- **Meta Analysis**: https://lol.dreamofdragon.org/meta
 
-## 📄 License
+## License
 
 MIT License
 
-## 📝 Changelog
+## Changelog
 
 See [CHANGELOG.md](./CHANGELOG.md) for detailed update history.
 
-## 🤝 Contributing
+## Contributing
 
 Issues and Pull Requests are welcome!
 
