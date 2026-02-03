@@ -13,6 +13,8 @@ import {
 } from '../lib/pick-candidate-engine';
 import { type LeagueKey } from '../lib/league-types';
 import OpponentTendenciesDrawer from './OpponentTendenciesDrawer';
+import RoleFlexibilityBar, { computeDisplayPrimaryRole } from './RoleFlexibilityBar';
+import { RoleFlexibilityDistribution, getRoleColor } from '../lib/role-flexibility';
 
 // ============================================================================
 // Types
@@ -157,12 +159,11 @@ export default function PickPhaseDraftingAssistant({
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [showTendencies, setShowTendencies] = useState(false);
 
-  // Enemy picks flex data
+  // Enemy picks flex data - store full flexibility object
   interface EnemyFlexInfo {
     championId: string;
     championName: string;
-    roles: { role: string; probability: number }[];
-    isFlexPick: boolean;
+    flexibility: RoleFlexibilityDistribution | null;
   }
   const [enemyFlexData, setEnemyFlexData] = useState<EnemyFlexInfo[]>([]);
 
@@ -481,12 +482,10 @@ export default function PickPhaseDraftingAssistant({
 
         const data = await res.json();
         const flexInfos: EnemyFlexInfo[] = data.results
-          .filter((r: any) => r.found && r.flexibility)
           .map((r: any) => ({
             championId: r.championId,
             championName: r.championName,
-            roles: r.flexibility.roleDistribution || [],
-            isFlexPick: r.flexibility.isFlexPick || false,
+            flexibility: r.found && r.flexibility ? r.flexibility : null,
           }));
 
         setEnemyFlexData(flexInfos);
@@ -615,47 +614,61 @@ export default function PickPhaseDraftingAssistant({
                   <span className="text-[10px] font-bold text-slate-400 uppercase">Enemy Picks</span>
                   <span className="text-[9px] text-slate-500">({opponentTeamName || 'Opponent'})</span>
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   {enemyPicksObjects.map((champ) => {
                     const flexInfo = enemyFlexData.find(f => f.championId === champ.id);
+                    const flexibility = flexInfo?.flexibility;
                     return (
-                      <div key={champ.id} className="flex items-center justify-between bg-slate-900/50 rounded px-2 py-1.5">
-                        <div className="flex items-center gap-2">
-                          <img
-                            src={champ.image}
-                            alt={champ.name}
-                            className="w-6 h-6 rounded"
-                          />
-                          <span className="text-white text-xs font-medium">{champ.name}</span>
-                          {flexInfo?.isFlexPick && (
-                            <span className="text-[8px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <div key={champ.id} className="bg-slate-900/50 rounded p-2 border border-slate-700/30">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={champ.image}
+                              alt={champ.name}
+                              className="w-6 h-6 rounded"
+                            />
+                            <span className="text-white text-xs font-medium">{champ.name}</span>
+                            {flexibility && (() => {
+                              const displayPrimary = computeDisplayPrimaryRole(flexibility);
+                              return (
+                                <span
+                                  className="text-[9px] px-1.5 py-0.5 rounded font-bold"
+                                  style={{
+                                    backgroundColor: `${getRoleColor(displayPrimary)}20`,
+                                    color: getRoleColor(displayPrimary),
+                                    borderWidth: 1,
+                                    borderColor: `${getRoleColor(displayPrimary)}40`,
+                                  }}
+                                >
+                                  {({ top: 'Top', jungle: 'Jng', mid: 'Mid', bot: 'Bot', support: 'Sup' } as Record<string, string>)[displayPrimary]}
+                                </span>
+                              );
+                            })()}
+                          </div>
+                          {flexibility?.isFlexPick && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
                               FLEX
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-1">
-                          {flexInfo?.roles && flexInfo.roles.length > 0 ? (
-                            flexInfo.roles
-                              .filter(r => r.probability > 0.1)
-                              .slice(0, 2)
-                              .map((r, i) => (
-                                <span
-                                  key={r.role}
-                                  className={`text-[9px] px-1.5 py-0.5 rounded ${
-                                    i === 0
-                                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                                      : 'bg-slate-700/50 text-slate-400 border border-slate-600/30'
-                                  }`}
-                                >
-                                  {r.role.charAt(0).toUpperCase() + r.role.slice(1, 3)} {(r.probability * 100).toFixed(0)}%
-                                </span>
-                              ))
-                          ) : (
-                            <span className="text-[9px] text-slate-500">
-                              {champ.positions[0] ? champ.positions[0].charAt(0).toUpperCase() + champ.positions[0].slice(1) : '?'}
-                            </span>
-                          )}
-                        </div>
+                        {flexibility ? (
+                          <>
+                            <RoleFlexibilityBar
+                              flexibility={flexibility}
+                              showInterpretation={false}
+                              compact={true}
+                            />
+                            {/* Flex stats row */}
+                            <div className="flex items-center gap-3 mt-1.5 text-[10px] text-slate-500">
+                              <span>Score: <span className="text-slate-400">{flexibility.flexibilityScore.toFixed(3)}</span></span>
+                              <span>ESS: <span className="text-slate-400">{flexibility.effectiveSampleSize.toFixed(1)}</span></span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-[10px] text-slate-600 py-1">
+                            {champ.positions[0] ? champ.positions[0].charAt(0).toUpperCase() + champ.positions[0].slice(1) : 'No flex data'}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
