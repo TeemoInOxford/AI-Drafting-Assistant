@@ -928,8 +928,8 @@ export default function LOLBPPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              {/* Ban Phase: Use BanPhaseDraftingAssistant (steps 0-5) */}
-              {bpState.currentStep <= 5 ? (
+              {/* Ban Phase: Use BanPhaseDraftingAssistant (steps 0-5 and 12-15) */}
+              {(bpState.currentStep <= 5 || (bpState.currentStep >= 12 && bpState.currentStep <= 15)) ? (
                 <BanPhaseDraftingAssistant
                   key={`ban-assistant-${opponentTeamInfo.teamId}-${selectedLeague}`}
                   ourSide={userSide}
@@ -958,7 +958,7 @@ export default function LOLBPPage() {
                   additionalDisabled={Array.from(fearlessBannedChampions)}
                 />
               ) : (
-                /* Pick Phase: Use PickPhaseDraftingAssistant (steps 6+) */
+                /* Pick Phase: Use PickPhaseDraftingAssistant (steps 6-11 and 16-19) */
                 <PickPhaseDraftingAssistant
                   key={`pick-assistant-${ourTeamInfo.teamId}-${opponentTeamInfo.teamId}-${selectedLeague}`}
                   ourSide={userSide}
